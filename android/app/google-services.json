@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "792370583323",
+    "project_id": "sicherr-7176f",
+    "storage_bucket": "sicherr-7176f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:792370583323:android:dad0db7c1f6fedcf86e5be",
+        "android_client_info": {
+          "package_name": "com.pandascode.sicherr"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHg2D9N2245D49EPkdWZ8T1GaQAG2QWcA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
