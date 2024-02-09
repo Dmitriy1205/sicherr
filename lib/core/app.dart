@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:sicherr/core/providers.dart';
 import 'package:sicherr/core/theme/theme.dart';
 import 'package:sicherr/presentation/screens/auth/sign_in.dart';
-import 'package:sicherr/presentation/screens/home.dart';
+import 'package:sicherr/presentation/screens/home/home.dart';
+import 'package:sicherr/presentation/screens/initial.dart';
 import 'package:sicherr/presentation/widgets/loading_indicator.dart';
 
 import '../presentation/bloc/auth/auth_bloc.dart';
