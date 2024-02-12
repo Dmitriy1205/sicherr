@@ -22,7 +22,7 @@ class App extends StatelessWidget {
         home: BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
           return state.maybeMap(
               authenticated: (s) => const HomeScreen(),
-              unauthenticated: (_) => const SigninScreen(),
+              unauthenticated: (_) => const InitialScreen(),
               orElse: () => const Material(child: LoadingIndicator()));
         }),
       ),

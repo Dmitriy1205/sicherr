@@ -6,6 +6,7 @@ class AppTheme {
   static ThemeData themeData = ThemeData(
     scaffoldBackgroundColor: const Color(0xFFFFFFFF),
     useMaterial3: true,
+    primaryColor: AppColors.mainAccent,
     fontFamily: 'Inter',
     textTheme: const TextTheme(
       headlineLarge: TextStyle(
