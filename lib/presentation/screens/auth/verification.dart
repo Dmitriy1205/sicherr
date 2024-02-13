@@ -29,7 +29,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
   final _formKey = GlobalKey<FormState>();
   final _focusNode = FocusNode();
   int _counter = 30;
-  late Timer _timer;
+  Timer? _timer;
   late String veriId;
   late String code;
 
@@ -45,7 +45,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
         if (_counter > 0) {
           _counter--;
         } else {
-          _timer.cancel();
+          _timer!.cancel();
         }
       });
     });
@@ -61,8 +61,21 @@ class _VerificationScreenState extends State<VerificationScreen> {
         listener: (context, state) {
           state.maybeMap(
               loaded: (_) => context.read<SignInBloc>().add(SignInEvent.init()),
-              wait: (_) => _startTimer(),
-              error: (e) => AppToast.showError(context, e.error),
+              // wait: (_) {
+              //   if(_counter == 0){
+              //     setState(() {
+              //       _counter = 30;
+              //     });
+              //   }
+              //
+              //
+              //     _startTimer();
+              //
+              // },
+              error: (e) {
+                AppToast.showError(context, e.error);
+                context.read<OtpBloc>().add(const OtpEvent.reset());
+              },
               orElse: () {});
         },
         builder: (context, state) {
@@ -79,7 +92,10 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   children: [
                     InkWell(
                       onTap: () {
-                        context.read<SignInBloc>().add(SignInEvent.init());
+                        context
+                            .read<SignInBloc>()
+                            .add(const SignInEvent.init());
+                        context.read<OtpBloc>().add(const OtpEvent.reset());
                         // Navigator.pop(context);
                       },
                       borderRadius: BorderRadius.circular(20),
@@ -172,15 +188,23 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       wait: (_) => _counter > 0
                           ? Text(
                               '$_counter',
-                              style: TextStyle(fontSize: 36.0),
+                              style: const TextStyle(fontSize: 36.0),
                             )
                           : InkWell(
                               onTap: () {
+                                if(_counter == 0){
+                                  setState(() {
+                                    _counter = 30;
+
+                                  });
+                                }
+                                _startTimer();
                                 context.read<OtpBloc>().add(OtpEvent.resendCode(
                                     phoneNumber: widget.phoneNumber,
                                     verifyId: (id) {
                                       veriId = id;
                                     }));
+
                               },
                               borderRadius: BorderRadius.circular(5),
                               child: Padding(
@@ -198,11 +222,19 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       verification: (_) => const LoadingIndicator(),
                       orElse: () => InkWell(
                         onTap: () {
+                          if(_counter == 0){
+                            setState(() {
+                              _counter = 30;
+
+                            });
+                          }
+                          _startTimer();
                           context.read<OtpBloc>().add(OtpEvent.resendCode(
                               phoneNumber: widget.phoneNumber,
                               verifyId: (id) {
                                 veriId = id;
                               }));
+
                         },
                         borderRadius: BorderRadius.circular(5),
                         child: Padding(
@@ -228,7 +260,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
 
   @override
   void dispose() {
-    _timer.cancel();
+    _timer?.cancel();
     super.dispose();
   }
 }

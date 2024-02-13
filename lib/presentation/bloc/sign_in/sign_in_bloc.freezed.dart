@@ -31,6 +31,7 @@ mixin _$SignInEvent {
     required TResult Function(
             String verificationId, int? token, String phoneNumber)
         otpSent,
+    required TResult Function(String exception) catchFail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -44,6 +45,7 @@ mixin _$SignInEvent {
     TResult? Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult? Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
+    TResult? Function(String exception)? catchFail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -56,6 +58,7 @@ mixin _$SignInEvent {
     TResult Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
+    TResult Function(String exception)? catchFail,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -68,6 +71,7 @@ mixin _$SignInEvent {
     required TResult Function(_PhoneAuthVerificationComplete value)
         phoneAuthVerificationComplete,
     required TResult Function(_OtpSent value) otpSent,
+    required TResult Function(_CatchFail value) catchFail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -79,6 +83,7 @@ mixin _$SignInEvent {
     TResult? Function(_PhoneAuthVerificationComplete value)?
         phoneAuthVerificationComplete,
     TResult? Function(_OtpSent value)? otpSent,
+    TResult? Function(_CatchFail value)? catchFail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -90,6 +95,7 @@ mixin _$SignInEvent {
     TResult Function(_PhoneAuthVerificationComplete value)?
         phoneAuthVerificationComplete,
     TResult Function(_OtpSent value)? otpSent,
+    TResult Function(_CatchFail value)? catchFail,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -163,6 +169,7 @@ class _$InitImpl implements _Init {
     required TResult Function(
             String verificationId, int? token, String phoneNumber)
         otpSent,
+    required TResult Function(String exception) catchFail,
   }) {
     return init();
   }
@@ -179,6 +186,7 @@ class _$InitImpl implements _Init {
     TResult? Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult? Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
+    TResult? Function(String exception)? catchFail,
   }) {
     return init?.call();
   }
@@ -194,6 +202,7 @@ class _$InitImpl implements _Init {
     TResult Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
+    TResult Function(String exception)? catchFail,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -212,6 +221,7 @@ class _$InitImpl implements _Init {
     required TResult Function(_PhoneAuthVerificationComplete value)
         phoneAuthVerificationComplete,
     required TResult Function(_OtpSent value) otpSent,
+    required TResult Function(_CatchFail value) catchFail,
   }) {
     return init(this);
   }
@@ -226,6 +236,7 @@ class _$InitImpl implements _Init {
     TResult? Function(_PhoneAuthVerificationComplete value)?
         phoneAuthVerificationComplete,
     TResult? Function(_OtpSent value)? otpSent,
+    TResult? Function(_CatchFail value)? catchFail,
   }) {
     return init?.call(this);
   }
@@ -240,6 +251,7 @@ class _$InitImpl implements _Init {
     TResult Function(_PhoneAuthVerificationComplete value)?
         phoneAuthVerificationComplete,
     TResult Function(_OtpSent value)? otpSent,
+    TResult Function(_CatchFail value)? catchFail,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -340,6 +352,7 @@ class _$LoginImpl implements _Login {
     required TResult Function(
             String verificationId, int? token, String phoneNumber)
         otpSent,
+    required TResult Function(String exception) catchFail,
   }) {
     return login(phoneNumber, verifyId);
   }
@@ -356,6 +369,7 @@ class _$LoginImpl implements _Login {
     TResult? Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult? Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
+    TResult? Function(String exception)? catchFail,
   }) {
     return login?.call(phoneNumber, verifyId);
   }
@@ -371,6 +385,7 @@ class _$LoginImpl implements _Login {
     TResult Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
+    TResult Function(String exception)? catchFail,
     required TResult orElse(),
   }) {
     if (login != null) {
@@ -389,6 +404,7 @@ class _$LoginImpl implements _Login {
     required TResult Function(_PhoneAuthVerificationComplete value)
         phoneAuthVerificationComplete,
     required TResult Function(_OtpSent value) otpSent,
+    required TResult Function(_CatchFail value) catchFail,
   }) {
     return login(this);
   }
@@ -403,6 +419,7 @@ class _$LoginImpl implements _Login {
     TResult? Function(_PhoneAuthVerificationComplete value)?
         phoneAuthVerificationComplete,
     TResult? Function(_OtpSent value)? otpSent,
+    TResult? Function(_CatchFail value)? catchFail,
   }) {
     return login?.call(this);
   }
@@ -417,6 +434,7 @@ class _$LoginImpl implements _Login {
     TResult Function(_PhoneAuthVerificationComplete value)?
         phoneAuthVerificationComplete,
     TResult Function(_OtpSent value)? otpSent,
+    TResult Function(_CatchFail value)? catchFail,
     required TResult orElse(),
   }) {
     if (login != null) {
@@ -525,6 +543,7 @@ class _$ResendCodeImpl implements _ResendCode {
     required TResult Function(
             String verificationId, int? token, String phoneNumber)
         otpSent,
+    required TResult Function(String exception) catchFail,
   }) {
     return resendCode(phoneNumber, verifyId);
   }
@@ -541,6 +560,7 @@ class _$ResendCodeImpl implements _ResendCode {
     TResult? Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult? Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
+    TResult? Function(String exception)? catchFail,
   }) {
     return resendCode?.call(phoneNumber, verifyId);
   }
@@ -556,6 +576,7 @@ class _$ResendCodeImpl implements _ResendCode {
     TResult Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
+    TResult Function(String exception)? catchFail,
     required TResult orElse(),
   }) {
     if (resendCode != null) {
@@ -574,6 +595,7 @@ class _$ResendCodeImpl implements _ResendCode {
     required TResult Function(_PhoneAuthVerificationComplete value)
         phoneAuthVerificationComplete,
     required TResult Function(_OtpSent value) otpSent,
+    required TResult Function(_CatchFail value) catchFail,
   }) {
     return resendCode(this);
   }
@@ -588,6 +610,7 @@ class _$ResendCodeImpl implements _ResendCode {
     TResult? Function(_PhoneAuthVerificationComplete value)?
         phoneAuthVerificationComplete,
     TResult? Function(_OtpSent value)? otpSent,
+    TResult? Function(_CatchFail value)? catchFail,
   }) {
     return resendCode?.call(this);
   }
@@ -602,6 +625,7 @@ class _$ResendCodeImpl implements _ResendCode {
     TResult Function(_PhoneAuthVerificationComplete value)?
         phoneAuthVerificationComplete,
     TResult Function(_OtpSent value)? otpSent,
+    TResult Function(_CatchFail value)? catchFail,
     required TResult orElse(),
   }) {
     if (resendCode != null) {
@@ -709,6 +733,7 @@ class _$VerifyImpl implements _Verify {
     required TResult Function(
             String verificationId, int? token, String phoneNumber)
         otpSent,
+    required TResult Function(String exception) catchFail,
   }) {
     return verify(verificationId, smsCode);
   }
@@ -725,6 +750,7 @@ class _$VerifyImpl implements _Verify {
     TResult? Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult? Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
+    TResult? Function(String exception)? catchFail,
   }) {
     return verify?.call(verificationId, smsCode);
   }
@@ -740,6 +766,7 @@ class _$VerifyImpl implements _Verify {
     TResult Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
+    TResult Function(String exception)? catchFail,
     required TResult orElse(),
   }) {
     if (verify != null) {
@@ -758,6 +785,7 @@ class _$VerifyImpl implements _Verify {
     required TResult Function(_PhoneAuthVerificationComplete value)
         phoneAuthVerificationComplete,
     required TResult Function(_OtpSent value) otpSent,
+    required TResult Function(_CatchFail value) catchFail,
   }) {
     return verify(this);
   }
@@ -772,6 +800,7 @@ class _$VerifyImpl implements _Verify {
     TResult? Function(_PhoneAuthVerificationComplete value)?
         phoneAuthVerificationComplete,
     TResult? Function(_OtpSent value)? otpSent,
+    TResult? Function(_CatchFail value)? catchFail,
   }) {
     return verify?.call(this);
   }
@@ -786,6 +815,7 @@ class _$VerifyImpl implements _Verify {
     TResult Function(_PhoneAuthVerificationComplete value)?
         phoneAuthVerificationComplete,
     TResult Function(_OtpSent value)? otpSent,
+    TResult Function(_CatchFail value)? catchFail,
     required TResult orElse(),
   }) {
     if (verify != null) {
@@ -890,6 +920,7 @@ class _$PhoneAuthVerificationCompleteImpl
     required TResult Function(
             String verificationId, int? token, String phoneNumber)
         otpSent,
+    required TResult Function(String exception) catchFail,
   }) {
     return phoneAuthVerificationComplete(credential);
   }
@@ -906,6 +937,7 @@ class _$PhoneAuthVerificationCompleteImpl
     TResult? Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult? Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
+    TResult? Function(String exception)? catchFail,
   }) {
     return phoneAuthVerificationComplete?.call(credential);
   }
@@ -921,6 +953,7 @@ class _$PhoneAuthVerificationCompleteImpl
     TResult Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
+    TResult Function(String exception)? catchFail,
     required TResult orElse(),
   }) {
     if (phoneAuthVerificationComplete != null) {
@@ -939,6 +972,7 @@ class _$PhoneAuthVerificationCompleteImpl
     required TResult Function(_PhoneAuthVerificationComplete value)
         phoneAuthVerificationComplete,
     required TResult Function(_OtpSent value) otpSent,
+    required TResult Function(_CatchFail value) catchFail,
   }) {
     return phoneAuthVerificationComplete(this);
   }
@@ -953,6 +987,7 @@ class _$PhoneAuthVerificationCompleteImpl
     TResult? Function(_PhoneAuthVerificationComplete value)?
         phoneAuthVerificationComplete,
     TResult? Function(_OtpSent value)? otpSent,
+    TResult? Function(_CatchFail value)? catchFail,
   }) {
     return phoneAuthVerificationComplete?.call(this);
   }
@@ -967,6 +1002,7 @@ class _$PhoneAuthVerificationCompleteImpl
     TResult Function(_PhoneAuthVerificationComplete value)?
         phoneAuthVerificationComplete,
     TResult Function(_OtpSent value)? otpSent,
+    TResult Function(_CatchFail value)? catchFail,
     required TResult orElse(),
   }) {
     if (phoneAuthVerificationComplete != null) {
@@ -1087,6 +1123,7 @@ class _$OtpSentImpl implements _OtpSent {
     required TResult Function(
             String verificationId, int? token, String phoneNumber)
         otpSent,
+    required TResult Function(String exception) catchFail,
   }) {
     return otpSent(verificationId, token, phoneNumber);
   }
@@ -1103,6 +1140,7 @@ class _$OtpSentImpl implements _OtpSent {
     TResult? Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult? Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
+    TResult? Function(String exception)? catchFail,
   }) {
     return otpSent?.call(verificationId, token, phoneNumber);
   }
@@ -1118,6 +1156,7 @@ class _$OtpSentImpl implements _OtpSent {
     TResult Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
+    TResult Function(String exception)? catchFail,
     required TResult orElse(),
   }) {
     if (otpSent != null) {
@@ -1136,6 +1175,7 @@ class _$OtpSentImpl implements _OtpSent {
     required TResult Function(_PhoneAuthVerificationComplete value)
         phoneAuthVerificationComplete,
     required TResult Function(_OtpSent value) otpSent,
+    required TResult Function(_CatchFail value) catchFail,
   }) {
     return otpSent(this);
   }
@@ -1150,6 +1190,7 @@ class _$OtpSentImpl implements _OtpSent {
     TResult? Function(_PhoneAuthVerificationComplete value)?
         phoneAuthVerificationComplete,
     TResult? Function(_OtpSent value)? otpSent,
+    TResult? Function(_CatchFail value)? catchFail,
   }) {
     return otpSent?.call(this);
   }
@@ -1164,6 +1205,7 @@ class _$OtpSentImpl implements _OtpSent {
     TResult Function(_PhoneAuthVerificationComplete value)?
         phoneAuthVerificationComplete,
     TResult Function(_OtpSent value)? otpSent,
+    TResult Function(_CatchFail value)? catchFail,
     required TResult orElse(),
   }) {
     if (otpSent != null) {
@@ -1184,6 +1226,185 @@ abstract class _OtpSent implements SignInEvent {
   String get phoneNumber;
   @JsonKey(ignore: true)
   _$$OtpSentImplCopyWith<_$OtpSentImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$CatchFailImplCopyWith<$Res> {
+  factory _$$CatchFailImplCopyWith(
+          _$CatchFailImpl value, $Res Function(_$CatchFailImpl) then) =
+      __$$CatchFailImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String exception});
+}
+
+/// @nodoc
+class __$$CatchFailImplCopyWithImpl<$Res>
+    extends _$SignInEventCopyWithImpl<$Res, _$CatchFailImpl>
+    implements _$$CatchFailImplCopyWith<$Res> {
+  __$$CatchFailImplCopyWithImpl(
+      _$CatchFailImpl _value, $Res Function(_$CatchFailImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? exception = null,
+  }) {
+    return _then(_$CatchFailImpl(
+      exception: null == exception
+          ? _value.exception
+          : exception // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CatchFailImpl implements _CatchFail {
+  const _$CatchFailImpl({required this.exception});
+
+  @override
+  final String exception;
+
+  @override
+  String toString() {
+    return 'SignInEvent.catchFail(exception: $exception)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CatchFailImpl &&
+            (identical(other.exception, exception) ||
+                other.exception == exception));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, exception);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CatchFailImplCopyWith<_$CatchFailImpl> get copyWith =>
+      __$$CatchFailImplCopyWithImpl<_$CatchFailImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function(
+            String phoneNumber, void Function(String) verifyId)
+        login,
+    required TResult Function(
+            String phoneNumber, void Function(String) verifyId)
+        resendCode,
+    required TResult Function(String verificationId, String smsCode) verify,
+    required TResult Function(AuthCredential credential)
+        phoneAuthVerificationComplete,
+    required TResult Function(
+            String verificationId, int? token, String phoneNumber)
+        otpSent,
+    required TResult Function(String exception) catchFail,
+  }) {
+    return catchFail(exception);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? init,
+    TResult? Function(String phoneNumber, void Function(String) verifyId)?
+        login,
+    TResult? Function(String phoneNumber, void Function(String) verifyId)?
+        resendCode,
+    TResult? Function(String verificationId, String smsCode)? verify,
+    TResult? Function(AuthCredential credential)? phoneAuthVerificationComplete,
+    TResult? Function(String verificationId, int? token, String phoneNumber)?
+        otpSent,
+    TResult? Function(String exception)? catchFail,
+  }) {
+    return catchFail?.call(exception);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function(String phoneNumber, void Function(String) verifyId)? login,
+    TResult Function(String phoneNumber, void Function(String) verifyId)?
+        resendCode,
+    TResult Function(String verificationId, String smsCode)? verify,
+    TResult Function(AuthCredential credential)? phoneAuthVerificationComplete,
+    TResult Function(String verificationId, int? token, String phoneNumber)?
+        otpSent,
+    TResult Function(String exception)? catchFail,
+    required TResult orElse(),
+  }) {
+    if (catchFail != null) {
+      return catchFail(exception);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Init value) init,
+    required TResult Function(_Login value) login,
+    required TResult Function(_ResendCode value) resendCode,
+    required TResult Function(_Verify value) verify,
+    required TResult Function(_PhoneAuthVerificationComplete value)
+        phoneAuthVerificationComplete,
+    required TResult Function(_OtpSent value) otpSent,
+    required TResult Function(_CatchFail value) catchFail,
+  }) {
+    return catchFail(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Init value)? init,
+    TResult? Function(_Login value)? login,
+    TResult? Function(_ResendCode value)? resendCode,
+    TResult? Function(_Verify value)? verify,
+    TResult? Function(_PhoneAuthVerificationComplete value)?
+        phoneAuthVerificationComplete,
+    TResult? Function(_OtpSent value)? otpSent,
+    TResult? Function(_CatchFail value)? catchFail,
+  }) {
+    return catchFail?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_Login value)? login,
+    TResult Function(_ResendCode value)? resendCode,
+    TResult Function(_Verify value)? verify,
+    TResult Function(_PhoneAuthVerificationComplete value)?
+        phoneAuthVerificationComplete,
+    TResult Function(_OtpSent value)? otpSent,
+    TResult Function(_CatchFail value)? catchFail,
+    required TResult orElse(),
+  }) {
+    if (catchFail != null) {
+      return catchFail(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CatchFail implements SignInEvent {
+  const factory _CatchFail({required final String exception}) = _$CatchFailImpl;
+
+  String get exception;
+  @JsonKey(ignore: true)
+  _$$CatchFailImplCopyWith<_$CatchFailImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

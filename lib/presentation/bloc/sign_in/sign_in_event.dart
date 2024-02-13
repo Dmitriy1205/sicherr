@@ -8,4 +8,5 @@ class SignInEvent with _$SignInEvent {
   const factory SignInEvent.verify({required String verificationId, required String smsCode}) = _Verify;
   const factory SignInEvent.phoneAuthVerificationComplete({required AuthCredential credential}) = _PhoneAuthVerificationComplete;
   const factory SignInEvent.otpSent({required String verificationId, required int? token,required String phoneNumber}) = _OtpSent;
+  const factory SignInEvent.catchFail({required String exception}) = _CatchFail;
 }

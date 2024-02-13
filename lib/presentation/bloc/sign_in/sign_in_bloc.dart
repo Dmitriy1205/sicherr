@@ -27,10 +27,11 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         verify: (e) => _verify(e, emit),
         phoneAuthVerificationComplete: (e) =>
             emit(const SignInState.verified()),
-        otpSent: (e) =>
-            emit(SignInState.unVerified(verificationId: e.verificationId, phoneNumber:e.phoneNumber )),
+        otpSent: (e) => emit(SignInState.unVerified(
+            verificationId: e.verificationId, phoneNumber: e.phoneNumber)),
         init: (e) => _initial(e, emit),
         resendCode: (e) => _resendCode(e, emit),
+        catchFail: (e) => emit(SignInState.error(error: e.exception)),
       );
 
   Future<void> _login(_Login event, Emitter<SignInState> emit) async {
@@ -42,10 +43,14 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
           add(SignInEvent.phoneAuthVerificationComplete(
               credential: credential));
         },
-        verificationFailed: (exception) {},
+        verificationFailed: (exception) {
+          add(SignInEvent.catchFail(exception: exception.message!));
+        },
         codeSent: (verificationId, token) {
           add(SignInEvent.otpSent(
-              verificationId: verificationId, token: token, phoneNumber:event.phoneNumber ));
+              verificationId: verificationId,
+              token: token,
+              phoneNumber: event.phoneNumber));
         },
         codeAutoRetrievalTimeout: (String) {},
       );
@@ -67,7 +72,6 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   }
 
   Future<void> _resendCode(_ResendCode event, Emitter<SignInState> emit) async {
-
     try {
       await _authRepository.loginWithPhone(
         phoneNumber: event.phoneNumber,

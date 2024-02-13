@@ -63,6 +63,8 @@ class _SigninScreenState extends State<SigninScreen> {
               AppToast.showSuccess(context,
                   'Verification code sent');
             },
+            error: (e)=>AppToast.showError(context,
+                e.error),
             orElse: () {});
       },
       builder: (context, state) {
@@ -150,6 +152,10 @@ class _SigninScreenState extends State<SigninScreen> {
                                           fontWeight: FontWeight.w400),
                                       showDropDownButton: true,
                                       padding: EdgeInsets.zero,
+                                      searchDecoration: const InputDecoration(
+                                        contentPadding: EdgeInsets.symmetric(
+                                            vertical: 0),
+                                      ),
                                       onChanged: (v) {
                                         dialCode = v.dialCode!;
                                         isoCode = v.code!;
@@ -204,11 +210,12 @@ class _SigninScreenState extends State<SigninScreen> {
                                         .themeData.textTheme.labelMedium,
                                   )),
                               text: AppStrings.singIn,
-                              onPressed: _phoneController.text.isEmpty
+                              onPressed: countryCodes.isNotEmpty && countryCodes
+                                  .firstWhere(
+                                      (element) => element.code == isoCode)
+                                  .phoneLength != _phoneController.text.length
                                   ? null
                                   : () {
-                                print(
-                                    '$dialCode${_phoneController.text}');
                                 context.read<SignInBloc>().add(
                                     SignInEvent.login(
                                         phoneNumber:
