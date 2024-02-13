@@ -66,10 +66,12 @@ class ContactListDisplayed extends StatelessWidget {
               const SizedBox(height: 10),
               if (isPermissionDenied)
                 GestureDetector(
-                  onTap: () => showPermissionAlertDialog(
-                    context,
-                    content: 'Allow access to contacts',
-                  ),
+                  onTap: () => showPermissionAlertDialog(context,
+                      content: 'Allow access to contacts', onClosed: (_) {
+                    context
+                        .read<ContactsBloc>()
+                        .add(const ContactsEvent.checkPermission());
+                  }),
                   child: SizedBox(
                     width: 300,
                     child: Text(

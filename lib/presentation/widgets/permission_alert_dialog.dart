@@ -6,12 +6,12 @@ import 'package:permission_handler/permission_handler.dart';
 
 void showPermissionAlertDialog(
   BuildContext context, {
+  required Function(void) onClosed,
   String content = '',
 }) {
   if (Platform.isIOS) {
     showCupertinoDialog<void>(
       context: context,
-      barrierDismissible: false,
       builder: (BuildContext context) => CupertinoAlertDialog(
         title: const Text('Permission Denied'),
         content: Text(content),
@@ -27,11 +27,10 @@ void showPermissionAlertDialog(
           ),
         ],
       ),
-    );
+    ).then(onClosed);
   } else if (Platform.isAndroid) {
     showDialog<void>(
       context: context,
-      barrierDismissible: false,
       builder: (BuildContext context) => AlertDialog(
         title: const Text('Permission Denied'),
         content: Text(content),
@@ -46,6 +45,6 @@ void showPermissionAlertDialog(
           ),
         ],
       ),
-    );
+    ).then(onClosed);
   }
 }

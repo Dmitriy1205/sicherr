@@ -19,19 +19,24 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
   List<ContactEntity> _contactsToDisplay = [];
 
   final ContactsInterface contactsManager;
-  bool _isPermissionDenied = true;
+
+  PermissionStatus _permissionStatus = PermissionStatus.denied;
+  bool get _isPermissionDenied =>
+      _permissionStatus == PermissionStatus.denied ||
+      _permissionStatus == PermissionStatus.permanentlyDenied;
 
   void _mapEventToState(ContactsEvent event, Emitter<ContactsState> emit) =>
       event.map(
         initial: (e) => _initialEvent(e, emit),
         searchByPhone: (e) => _searchByPhone(e, emit),
+        checkPermission: (e) => _checkPermission(e, emit),
       );
 
   Future<void> _initialEvent(
       _InitialEvent event, Emitter<ContactsState> emit) async {
     _contactsList = await contactsManager.getContacts();
     _contactsToDisplay = [..._contactsList];
-    _isPermissionDenied = await Permission.contacts.status.isPermanentlyDenied;
+    _permissionStatus = await Permission.contacts.status;
 
     emit(ContactsState.loaded(
       categorizedContacts:
@@ -54,5 +59,12 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
           ContactsManager.categorizeContacts(_contactsToDisplay),
       isPermissionDenied: _isPermissionDenied,
     ));
+  }
+
+  Future<void> _checkPermission(
+      _CheckPermission event, Emitter<ContactsState> emit) async {
+    if (await Permission.contacts.status == PermissionStatus.granted) {
+      add(const ContactsEvent.initial());
+    }
   }
 }
