@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:sicherr/core/const/icons.dart';
 import 'package:sicherr/core/const/images.dart';
 import 'package:sicherr/presentation/screens/contact_detail/contact_detail.dart';
@@ -25,13 +24,13 @@ class ContactCard extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 8),
         child: Row(
           children: [
-            Container(
-                decoration: const BoxDecoration(shape: BoxShape.circle),
-                child: Image.asset(
-                  AppImages.userPlaceholder,
-                  height: 42,
-                  width: 42,
-                )),
+            ClipOval(
+              child: Image.asset(
+                AppImages.userPlaceholder,
+                height: 42,
+                width: 42,
+              ),
+            ),
             const SizedBox(
               width: 25,
             ),
