@@ -32,8 +32,10 @@ class _AppState extends State<App> {
         theme: AppTheme.themeData,
         home: BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
           return state.maybeMap(
+
               authenticated: (_) => const InitialScreen(),
               unauthenticated: (_) => const SigninScreen(),
+
               orElse: () => const Material(child: LoadingIndicator()));
         }),
       ),

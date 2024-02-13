@@ -35,6 +35,7 @@ class AppTheme {
           )),
     ),
     useMaterial3: true,
+    primaryColor: AppColors.mainAccent,
     fontFamily: 'Inter',
     textTheme: const TextTheme(
       displayLarge: TextStyle(

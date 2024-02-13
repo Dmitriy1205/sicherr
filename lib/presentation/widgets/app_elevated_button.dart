@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../core/const/colors.dart';
@@ -24,31 +23,31 @@ class AppElevatedButton extends StatelessWidget {
     this.showPrefix = false,
     this.borderRadius,
     this.widget,
-    this.color, this.borderColor,
+    this.color,
+    this.borderColor,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 44,
+      height: 46,
       width: MediaQuery.of(context).size.width,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           surfaceTintColor: Colors.white,
           foregroundColor: Colors.white,
-          backgroundColor: color ?? AppColors.mainAccent,
+          backgroundColor: color ?? Theme.of(context).primaryColor,
           shape: RoundedRectangleBorder(
               side: BorderSide(color: borderColor ?? Colors.transparent),
               borderRadius: borderRadius == null
-                  ? BorderRadius.circular(10)
+                  ? BorderRadius.circular(17)
                   : BorderRadius.circular(borderRadius!)),
         ),
         child: widget ??
             Text(
               text,
-              style: style ??
-                  AppTheme.themeData.textTheme.labelMedium,
+              style: style ?? AppTheme.themeData.textTheme.labelMedium,
             ),
       ),
     );
