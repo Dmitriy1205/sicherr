@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sicherr/core/service_locator/service_locator.dart';
 
 import '../presentation/bloc/auth/auth_bloc.dart';
+import '../presentation/bloc/otp/otp_bloc.dart';
+import '../presentation/bloc/sign_in/sign_in_bloc.dart';
 
 class Providers extends StatelessWidget {
   final Widget child;
@@ -15,6 +17,14 @@ class Providers extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => sl<AuthBloc>(),
+          lazy: false,
+        ),
+        BlocProvider(
+          create: (context) => sl<SignInBloc>(),
+          lazy: false,
+        ),
+        BlocProvider(
+          create: (context) => sl<OtpBloc>(),
           lazy: false,
         ),
       ],
