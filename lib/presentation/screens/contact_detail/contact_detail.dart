@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:sicherr/core/const/colors.dart';
 import 'package:sicherr/core/const/icons.dart';
+import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
+import 'package:sicherr/domain/managers/contacts_manager.dart';
 import 'package:sicherr/presentation/screens/contact_detail/widgets/additional_content.dart';
 import 'package:sicherr/presentation/screens/contact_detail/widgets/contact_info.dart';
 import 'package:sicherr/presentation/widgets/core_widgets.dart';
 
 class ContactDetailScreen extends StatelessWidget {
-  const ContactDetailScreen({super.key});
+  const ContactDetailScreen({super.key, required this.contact});
+  final ContactEntity contact;
 
   @override
   Widget build(BuildContext context) {
@@ -26,22 +29,28 @@ class ContactDetailScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const ContactInfo(),
+                    ContactInfo(contact: contact),
                     const SizedBox(height: 30),
                     Padding(
                       padding: const EdgeInsets.only(left: 20),
-                      child: Column(
-                        children: [
-                          const RoundWrapperIcon(svgPath: AppIcons.phone),
-                          const SizedBox(height: 10),
-                          Text(
-                            'Call',
-                            style: TextStyle(
-                              color: Theme.of(context).primaryColor,
-                              fontSize: 16,
-                            ),
-                          )
-                        ],
+                      child: GestureDetector(
+                        onTap: () {
+                          ContactsManager.launchCall(
+                              phoneNumber: contact.phoneNumber);
+                        },
+                        child: Column(
+                          children: [
+                            const RoundWrapperIcon(svgPath: AppIcons.phone),
+                            const SizedBox(height: 10),
+                            Text(
+                              'Call',
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontSize: 16,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -64,7 +73,7 @@ class ContactDetailScreen extends StatelessWidget {
                   style: const TextStyle(
                       fontSize: 14, fontWeight: FontWeight.w400),
                   onPressed: () {
-                    print('TODO Subscribe');
+                    print('TODO: Subscribe');
                   },
                 ),
               )

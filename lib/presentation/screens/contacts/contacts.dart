@@ -5,6 +5,7 @@ import 'package:sicherr/domain/managers/contacts_manager.dart';
 import 'package:sicherr/presentation/screens/contacts/bloc/contacts_bloc.dart';
 import 'package:sicherr/presentation/screens/contacts/widgets/contact_card.dart';
 import 'package:sicherr/presentation/widgets/loading_indicator.dart';
+import 'package:sicherr/presentation/widgets/permission_alert_dialog.dart';
 import 'package:sicherr/presentation/widgets/search_phone_field.dart';
 
 class ContactsScreen extends StatelessWidget {
@@ -23,11 +24,17 @@ class ContactsScreen extends StatelessWidget {
                     children: [
                       SearchPhoneField(
                         hintText: 'Search by number',
-                        onChanged: (text) {},
+                        onChanged: (text) {
+                          context
+                              .read<ContactsBloc>()
+                              .add(ContactsEvent.searchByPhone(text));
+                        },
                       ),
                       const SizedBox(height: 10),
                       ContactListDisplayed(
-                          groupedContacts: state.categorizedContacts)
+                        groupedContacts: state.categorizedContacts,
+                        isPermissionDenied: state.isPermissionDenied,
+                      )
                     ],
                   ));
         },
@@ -37,14 +44,46 @@ class ContactsScreen extends StatelessWidget {
 }
 
 class ContactListDisplayed extends StatelessWidget {
-  const ContactListDisplayed({Key? key, required this.groupedContacts})
+  const ContactListDisplayed(
+      {Key? key,
+      required this.groupedContacts,
+      required this.isPermissionDenied})
       : super(key: key);
   final Map<String, List<ContactEntity>> groupedContacts;
+  final bool isPermissionDenied;
 
   @override
   Widget build(BuildContext context) {
     return groupedContacts.isEmpty
-        ? const Expanded(child: Center(child: Text('No contacts to display')))
+        ? Expanded(
+            child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'No contacts to display',
+                style: TextStyle(fontSize: 18),
+              ),
+              const SizedBox(height: 10),
+              if (isPermissionDenied)
+                GestureDetector(
+                  onTap: () => showPermissionAlertDialog(
+                    context,
+                    content: 'Allow access to contacts',
+                  ),
+                  child: SizedBox(
+                    width: 300,
+                    child: Text(
+                      'Give permission to synchronize your contact list',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          ))
         : Expanded(
             child: ListView.builder(
               itemCount: groupedContacts.length,
@@ -71,9 +110,8 @@ class ContactListDisplayed extends StatelessWidget {
                       physics: const ClampingScrollPhysics(),
                       itemCount: itemsInCategory.length,
                       itemBuilder: (BuildContext context, int index) {
-                        String itemName = itemsInCategory[index].name;
-                        // Return a widget representing the item
-                        return ContactCard(title: itemName);
+                        final item = itemsInCategory[index];
+                        return ContactCard(contact: item);
                       },
                     ),
                   ],
@@ -83,47 +121,3 @@ class ContactListDisplayed extends StatelessWidget {
           );
   }
 }
-
-// final contacts1 = [
-//   'Artem B.',
-//   'Artem A.',
-//   'Bob',
-//   'Bad',
-//   'Some Long Name With A lot of words',
-//   'QWERTY',
-//   'ZZZZ'
-// ];
-// final contacts = [
-//   ContactEntity(
-//     id: 'TestID_1',
-//     name: 'Artem B.',
-//     phoneNumber: '+380660741636',
-//   ),
-//   ContactEntity(
-//     id: 'TestID_2',
-//     name: 'Bob.',
-//     phoneNumber: '+380660741637',
-//   ),
-//   ContactEntity(
-//     id: 'TestID_3',
-//     name: 'Artem A.',
-//     phoneNumber: '+380660741638',
-//   ),
-//   ContactEntity(
-//     id: 'TestID_4',
-//     name: 'Bad',
-//     phoneNumber: '+380660741639',
-//   ),
-//   ContactEntity(
-//     id: 'TestID_5',
-//     name: 'Some Long Name With A lot of words',
-//     phoneNumber: '+380660741640',
-//   ),
-//   ContactEntity(
-//     id: 'TestID_6',
-//     name: 'QWERTY',
-//     phoneNumber: '+380660741641',
-//   ),
-// ];
-
-

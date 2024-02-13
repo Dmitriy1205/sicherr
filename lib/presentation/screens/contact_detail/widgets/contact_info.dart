@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_libphonenumber/flutter_libphonenumber.dart';
 import 'package:sicherr/core/const/images.dart';
+import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
 
 class ContactInfo extends StatelessWidget {
   const ContactInfo({
     super.key,
+    required this.contact,
   });
+
+  final ContactEntity contact;
 
   @override
   Widget build(BuildContext context) {
@@ -15,25 +20,27 @@ class ContactInfo extends StatelessWidget {
             border: Border.all(),
             shape: BoxShape.circle,
           ),
-          child: Image.asset(
-            AppImages.fakeUser,
-            width: 70,
-            height: 70,
-            fit: BoxFit.fill,
+          child: ClipOval(
+            child: Image.asset(
+              AppImages.userPlaceholder,
+              width: 70,
+              height: 70,
+              fit: BoxFit.fill,
+            ),
           ),
         ),
         const SizedBox(width: 15),
-        const Column(
+        Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Artem Y.',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+              contact.name,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
             ),
-            //Todo: check if we need formating this number
+            //Todo: check if we need formatting this number
             Text(
-              '+38 066 074 1636',
-              style: TextStyle(fontSize: 16),
+              formatNumberSync(contact.phoneNumber),
+              style: const TextStyle(fontSize: 16),
             )
           ],
         )
