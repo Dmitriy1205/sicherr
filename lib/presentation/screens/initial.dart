@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:sicherr/core/const/colors.dart';
+import 'package:sicherr/core/const/icons.dart';
 import 'package:sicherr/core/const/strings.dart';
 import 'package:sicherr/presentation/screens/contacts/contacts.dart';
 import 'package:sicherr/presentation/screens/home/home.dart';
@@ -33,15 +35,24 @@ class _InitialScreenState extends State<InitialScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(titles[_selectedPage])),
-      body: screens[_selectedPage],
+      appBar: AppBar(
+        title: Text(titles[_selectedPage]),
+        backgroundColor: AppColors.lightGrey,
+      ),
+      body: GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        behavior: HitTestBehavior.opaque,
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: screens[_selectedPage],
+        ),
+      ),
       bottomNavigationBar: _MyBottomNavigationBar(
         selectedIndex: _selectedPage,
         onItemTapped: (index) {
           setState(() => _selectedPage = index);
         },
       ),
-      
     );
   }
 }
@@ -59,30 +70,71 @@ class _MyBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      items: const <BottomNavigationBarItem>[
+      items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: Icon(Icons.people),
+          icon: Padding(
+            padding: const EdgeInsets.only(bottom: 6, top: 10),
+            child: SvgPicture.asset(
+              AppIcons.contacts,
+              color: selectedIndex == 0
+                  ? Theme.of(context).primaryColor
+                  : AppColors.grey,
+              width: 22,
+              height: 22,
+            ),
+          ),
           label: 'Contacts',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
+          icon: Padding(
+            padding: const EdgeInsets.only(bottom: 6, top: 10),
+            child: SvgPicture.asset(
+              AppIcons.home,
+              color: selectedIndex == 1
+                  ? Theme.of(context).primaryColor
+                  : AppColors.grey,
+              width: 20.5,
+              height: 22,
+            ),
+          ),
           label: 'Home',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.location_on),
+          icon: Padding(
+            padding: const EdgeInsets.only(bottom: 6, top: 10),
+            child: SvgPicture.asset(
+              AppIcons.map,
+              color: selectedIndex == 2
+                  ? Theme.of(context).primaryColor
+                  : AppColors.grey,
+              width: 16.5,
+              height: 22,
+            ),
+          ),
           label: 'Map',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person),
+          icon: Padding(
+            padding: const EdgeInsets.only(bottom: 6, top: 10),
+            child: SvgPicture.asset(
+              AppIcons.profile,
+              color: selectedIndex == 3
+                  ? Theme.of(context).primaryColor
+                  : AppColors.grey,
+              width: 22,
+              height: 22,
+            ),
+          ),
           label: 'Profile',
         ),
       ],
+      backgroundColor: AppColors.lightGrey,
       currentIndex: selectedIndex,
       showUnselectedLabels: true,
       unselectedLabelStyle: const TextStyle(color: AppColors.grey),
       unselectedItemColor: AppColors.grey,
       unselectedFontSize: 14,
-      selectedItemColor: AppColors.mainAccent,
+      selectedItemColor: Theme.of(context).primaryColor,
       type: BottomNavigationBarType.fixed,
       onTap: onItemTapped,
     );
