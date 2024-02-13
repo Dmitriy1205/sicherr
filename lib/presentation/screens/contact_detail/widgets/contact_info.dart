@@ -37,7 +37,6 @@ class ContactInfo extends StatelessWidget {
               contact.name,
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
             ),
-            //Todo: check if we need formatting this number
             Text(
               formatNumberSync(contact.phoneNumber),
               style: const TextStyle(fontSize: 16),
