@@ -23,7 +23,7 @@ mixin _$CountryCodes {
   String get code => throw _privateConstructorUsedError;
   String get label => throw _privateConstructorUsedError;
   String get phone => throw _privateConstructorUsedError;
-  int get phoneLength => throw _privateConstructorUsedError;
+  dynamic get phoneLength => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +37,7 @@ abstract class $CountryCodesCopyWith<$Res> {
           CountryCodes value, $Res Function(CountryCodes) then) =
       _$CountryCodesCopyWithImpl<$Res, CountryCodes>;
   @useResult
-  $Res call({String code, String label, String phone, int phoneLength});
+  $Res call({String code, String label, String phone, dynamic phoneLength});
 }
 
 /// @nodoc
@@ -56,7 +56,7 @@ class _$CountryCodesCopyWithImpl<$Res, $Val extends CountryCodes>
     Object? code = null,
     Object? label = null,
     Object? phone = null,
-    Object? phoneLength = null,
+    Object? phoneLength = freezed,
   }) {
     return _then(_value.copyWith(
       code: null == code
@@ -71,10 +71,10 @@ class _$CountryCodesCopyWithImpl<$Res, $Val extends CountryCodes>
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String,
-      phoneLength: null == phoneLength
+      phoneLength: freezed == phoneLength
           ? _value.phoneLength
           : phoneLength // ignore: cast_nullable_to_non_nullable
-              as int,
+              as dynamic,
     ) as $Val);
   }
 }
@@ -87,7 +87,7 @@ abstract class _$$CountryCodesImplCopyWith<$Res>
       __$$CountryCodesImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String code, String label, String phone, int phoneLength});
+  $Res call({String code, String label, String phone, dynamic phoneLength});
 }
 
 /// @nodoc
@@ -104,7 +104,7 @@ class __$$CountryCodesImplCopyWithImpl<$Res>
     Object? code = null,
     Object? label = null,
     Object? phone = null,
-    Object? phoneLength = null,
+    Object? phoneLength = freezed,
   }) {
     return _then(_$CountryCodesImpl(
       code: null == code
@@ -119,10 +119,10 @@ class __$$CountryCodesImplCopyWithImpl<$Res>
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String,
-      phoneLength: null == phoneLength
+      phoneLength: freezed == phoneLength
           ? _value.phoneLength
           : phoneLength // ignore: cast_nullable_to_non_nullable
-              as int,
+              as dynamic,
     ));
   }
 }
@@ -134,7 +134,7 @@ class _$CountryCodesImpl implements _CountryCodes {
       {required this.code,
       required this.label,
       required this.phone,
-      required this.phoneLength});
+      this.phoneLength = const []});
 
   factory _$CountryCodesImpl.fromJson(Map<String, dynamic> json) =>
       _$$CountryCodesImplFromJson(json);
@@ -146,7 +146,8 @@ class _$CountryCodesImpl implements _CountryCodes {
   @override
   final String phone;
   @override
-  final int phoneLength;
+  @JsonKey()
+  final dynamic phoneLength;
 
   @override
   String toString() {
@@ -161,13 +162,14 @@ class _$CountryCodesImpl implements _CountryCodes {
             (identical(other.code, code) || other.code == code) &&
             (identical(other.label, label) || other.label == label) &&
             (identical(other.phone, phone) || other.phone == phone) &&
-            (identical(other.phoneLength, phoneLength) ||
-                other.phoneLength == phoneLength));
+            const DeepCollectionEquality()
+                .equals(other.phoneLength, phoneLength));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, code, label, phone, phoneLength);
+  int get hashCode => Object.hash(runtimeType, code, label, phone,
+      const DeepCollectionEquality().hash(phoneLength));
 
   @JsonKey(ignore: true)
   @override
@@ -188,7 +190,7 @@ abstract class _CountryCodes implements CountryCodes {
       {required final String code,
       required final String label,
       required final String phone,
-      required final int phoneLength}) = _$CountryCodesImpl;
+      final dynamic phoneLength}) = _$CountryCodesImpl;
 
   factory _CountryCodes.fromJson(Map<String, dynamic> json) =
       _$CountryCodesImpl.fromJson;
@@ -200,7 +202,7 @@ abstract class _CountryCodes implements CountryCodes {
   @override
   String get phone;
   @override
-  int get phoneLength;
+  dynamic get phoneLength;
   @override
   @JsonKey(ignore: true)
   _$$CountryCodesImplCopyWith<_$CountryCodesImpl> get copyWith =>

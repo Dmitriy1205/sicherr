@@ -23,6 +23,8 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
       event.map(
         verify: (e) => _verify(e, emit),
         resendCode: (e) => _resendCode(e, emit),
+        catchFail: (e) => emit(OtpState.error(error: e.exception)),
+        reset: (e) => _reset(e, emit), otpSent: (e) => emit(const OtpState.wait()),
       );
 
   Future<void> _verify(_Verify event, Emitter<OtpState> emit) async {
@@ -38,18 +40,26 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
 
   Future<void> _resendCode(_ResendCode event, Emitter<OtpState> emit) async {
     try {
+      emit(const OtpState.verification());
       await _authRepository.loginWithPhone(
         phoneNumber: event.phoneNumber,
         verificationCompleted: (credential) async {},
-        verificationFailed: (exception) {},
+        verificationFailed: (exception) {
+          add(OtpEvent.catchFail(exception: exception.message!));
+        },
         codeSent: (verificationId, token) {
           event.verifyId(verificationId);
+          add(const OtpEvent.otpSent());
         },
         codeAutoRetrievalTimeout: (string) {},
       );
-      emit(const OtpState.wait());
+      // emit(const OtpState.wait());
     } on BadRequestException catch (e) {
       emit(OtpState.error(error: e.message));
     }
+  }
+
+  Future<void> _reset(_Reset event, Emitter<OtpState> emit) async {
+    emit(const OtpState.initial());
   }
 }

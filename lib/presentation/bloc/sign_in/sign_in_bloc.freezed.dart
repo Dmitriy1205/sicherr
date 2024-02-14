@@ -22,15 +22,12 @@ mixin _$SignInEvent {
     required TResult Function(
             String phoneNumber, void Function(String) verifyId)
         login,
-    required TResult Function(
-            String phoneNumber, void Function(String) verifyId)
-        resendCode,
-    required TResult Function(String verificationId, String smsCode) verify,
     required TResult Function(AuthCredential credential)
         phoneAuthVerificationComplete,
     required TResult Function(
             String verificationId, int? token, String phoneNumber)
         otpSent,
+    required TResult Function(String exception) catchFail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,24 +35,20 @@ mixin _$SignInEvent {
     TResult? Function()? init,
     TResult? Function(String phoneNumber, void Function(String) verifyId)?
         login,
-    TResult? Function(String phoneNumber, void Function(String) verifyId)?
-        resendCode,
-    TResult? Function(String verificationId, String smsCode)? verify,
     TResult? Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult? Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
+    TResult? Function(String exception)? catchFail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function(String phoneNumber, void Function(String) verifyId)? login,
-    TResult Function(String phoneNumber, void Function(String) verifyId)?
-        resendCode,
-    TResult Function(String verificationId, String smsCode)? verify,
     TResult Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
+    TResult Function(String exception)? catchFail,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -63,33 +56,30 @@ mixin _$SignInEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Init value) init,
     required TResult Function(_Login value) login,
-    required TResult Function(_ResendCode value) resendCode,
-    required TResult Function(_Verify value) verify,
     required TResult Function(_PhoneAuthVerificationComplete value)
         phoneAuthVerificationComplete,
     required TResult Function(_OtpSent value) otpSent,
+    required TResult Function(_CatchFail value) catchFail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Init value)? init,
     TResult? Function(_Login value)? login,
-    TResult? Function(_ResendCode value)? resendCode,
-    TResult? Function(_Verify value)? verify,
     TResult? Function(_PhoneAuthVerificationComplete value)?
         phoneAuthVerificationComplete,
     TResult? Function(_OtpSent value)? otpSent,
+    TResult? Function(_CatchFail value)? catchFail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Init value)? init,
     TResult Function(_Login value)? login,
-    TResult Function(_ResendCode value)? resendCode,
-    TResult Function(_Verify value)? verify,
     TResult Function(_PhoneAuthVerificationComplete value)?
         phoneAuthVerificationComplete,
     TResult Function(_OtpSent value)? otpSent,
+    TResult Function(_CatchFail value)? catchFail,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -154,15 +144,12 @@ class _$InitImpl implements _Init {
     required TResult Function(
             String phoneNumber, void Function(String) verifyId)
         login,
-    required TResult Function(
-            String phoneNumber, void Function(String) verifyId)
-        resendCode,
-    required TResult Function(String verificationId, String smsCode) verify,
     required TResult Function(AuthCredential credential)
         phoneAuthVerificationComplete,
     required TResult Function(
             String verificationId, int? token, String phoneNumber)
         otpSent,
+    required TResult Function(String exception) catchFail,
   }) {
     return init();
   }
@@ -173,12 +160,10 @@ class _$InitImpl implements _Init {
     TResult? Function()? init,
     TResult? Function(String phoneNumber, void Function(String) verifyId)?
         login,
-    TResult? Function(String phoneNumber, void Function(String) verifyId)?
-        resendCode,
-    TResult? Function(String verificationId, String smsCode)? verify,
     TResult? Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult? Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
+    TResult? Function(String exception)? catchFail,
   }) {
     return init?.call();
   }
@@ -188,12 +173,10 @@ class _$InitImpl implements _Init {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function(String phoneNumber, void Function(String) verifyId)? login,
-    TResult Function(String phoneNumber, void Function(String) verifyId)?
-        resendCode,
-    TResult Function(String verificationId, String smsCode)? verify,
     TResult Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
+    TResult Function(String exception)? catchFail,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -207,11 +190,10 @@ class _$InitImpl implements _Init {
   TResult map<TResult extends Object?>({
     required TResult Function(_Init value) init,
     required TResult Function(_Login value) login,
-    required TResult Function(_ResendCode value) resendCode,
-    required TResult Function(_Verify value) verify,
     required TResult Function(_PhoneAuthVerificationComplete value)
         phoneAuthVerificationComplete,
     required TResult Function(_OtpSent value) otpSent,
+    required TResult Function(_CatchFail value) catchFail,
   }) {
     return init(this);
   }
@@ -221,11 +203,10 @@ class _$InitImpl implements _Init {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Init value)? init,
     TResult? Function(_Login value)? login,
-    TResult? Function(_ResendCode value)? resendCode,
-    TResult? Function(_Verify value)? verify,
     TResult? Function(_PhoneAuthVerificationComplete value)?
         phoneAuthVerificationComplete,
     TResult? Function(_OtpSent value)? otpSent,
+    TResult? Function(_CatchFail value)? catchFail,
   }) {
     return init?.call(this);
   }
@@ -235,11 +216,10 @@ class _$InitImpl implements _Init {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Init value)? init,
     TResult Function(_Login value)? login,
-    TResult Function(_ResendCode value)? resendCode,
-    TResult Function(_Verify value)? verify,
     TResult Function(_PhoneAuthVerificationComplete value)?
         phoneAuthVerificationComplete,
     TResult Function(_OtpSent value)? otpSent,
+    TResult Function(_CatchFail value)? catchFail,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -331,15 +311,12 @@ class _$LoginImpl implements _Login {
     required TResult Function(
             String phoneNumber, void Function(String) verifyId)
         login,
-    required TResult Function(
-            String phoneNumber, void Function(String) verifyId)
-        resendCode,
-    required TResult Function(String verificationId, String smsCode) verify,
     required TResult Function(AuthCredential credential)
         phoneAuthVerificationComplete,
     required TResult Function(
             String verificationId, int? token, String phoneNumber)
         otpSent,
+    required TResult Function(String exception) catchFail,
   }) {
     return login(phoneNumber, verifyId);
   }
@@ -350,12 +327,10 @@ class _$LoginImpl implements _Login {
     TResult? Function()? init,
     TResult? Function(String phoneNumber, void Function(String) verifyId)?
         login,
-    TResult? Function(String phoneNumber, void Function(String) verifyId)?
-        resendCode,
-    TResult? Function(String verificationId, String smsCode)? verify,
     TResult? Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult? Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
+    TResult? Function(String exception)? catchFail,
   }) {
     return login?.call(phoneNumber, verifyId);
   }
@@ -365,12 +340,10 @@ class _$LoginImpl implements _Login {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function(String phoneNumber, void Function(String) verifyId)? login,
-    TResult Function(String phoneNumber, void Function(String) verifyId)?
-        resendCode,
-    TResult Function(String verificationId, String smsCode)? verify,
     TResult Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
+    TResult Function(String exception)? catchFail,
     required TResult orElse(),
   }) {
     if (login != null) {
@@ -384,11 +357,10 @@ class _$LoginImpl implements _Login {
   TResult map<TResult extends Object?>({
     required TResult Function(_Init value) init,
     required TResult Function(_Login value) login,
-    required TResult Function(_ResendCode value) resendCode,
-    required TResult Function(_Verify value) verify,
     required TResult Function(_PhoneAuthVerificationComplete value)
         phoneAuthVerificationComplete,
     required TResult Function(_OtpSent value) otpSent,
+    required TResult Function(_CatchFail value) catchFail,
   }) {
     return login(this);
   }
@@ -398,11 +370,10 @@ class _$LoginImpl implements _Login {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Init value)? init,
     TResult? Function(_Login value)? login,
-    TResult? Function(_ResendCode value)? resendCode,
-    TResult? Function(_Verify value)? verify,
     TResult? Function(_PhoneAuthVerificationComplete value)?
         phoneAuthVerificationComplete,
     TResult? Function(_OtpSent value)? otpSent,
+    TResult? Function(_CatchFail value)? catchFail,
   }) {
     return login?.call(this);
   }
@@ -412,11 +383,10 @@ class _$LoginImpl implements _Login {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Init value)? init,
     TResult Function(_Login value)? login,
-    TResult Function(_ResendCode value)? resendCode,
-    TResult Function(_Verify value)? verify,
     TResult Function(_PhoneAuthVerificationComplete value)?
         phoneAuthVerificationComplete,
     TResult Function(_OtpSent value)? otpSent,
+    TResult Function(_CatchFail value)? catchFail,
     required TResult orElse(),
   }) {
     if (login != null) {
@@ -435,375 +405,6 @@ abstract class _Login implements SignInEvent {
   void Function(String) get verifyId;
   @JsonKey(ignore: true)
   _$$LoginImplCopyWith<_$LoginImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$ResendCodeImplCopyWith<$Res> {
-  factory _$$ResendCodeImplCopyWith(
-          _$ResendCodeImpl value, $Res Function(_$ResendCodeImpl) then) =
-      __$$ResendCodeImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String phoneNumber, void Function(String) verifyId});
-}
-
-/// @nodoc
-class __$$ResendCodeImplCopyWithImpl<$Res>
-    extends _$SignInEventCopyWithImpl<$Res, _$ResendCodeImpl>
-    implements _$$ResendCodeImplCopyWith<$Res> {
-  __$$ResendCodeImplCopyWithImpl(
-      _$ResendCodeImpl _value, $Res Function(_$ResendCodeImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? phoneNumber = null,
-    Object? verifyId = null,
-  }) {
-    return _then(_$ResendCodeImpl(
-      phoneNumber: null == phoneNumber
-          ? _value.phoneNumber
-          : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      verifyId: null == verifyId
-          ? _value.verifyId
-          : verifyId // ignore: cast_nullable_to_non_nullable
-              as void Function(String),
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$ResendCodeImpl implements _ResendCode {
-  const _$ResendCodeImpl({required this.phoneNumber, required this.verifyId});
-
-  @override
-  final String phoneNumber;
-  @override
-  final void Function(String) verifyId;
-
-  @override
-  String toString() {
-    return 'SignInEvent.resendCode(phoneNumber: $phoneNumber, verifyId: $verifyId)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ResendCodeImpl &&
-            (identical(other.phoneNumber, phoneNumber) ||
-                other.phoneNumber == phoneNumber) &&
-            (identical(other.verifyId, verifyId) ||
-                other.verifyId == verifyId));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, phoneNumber, verifyId);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ResendCodeImplCopyWith<_$ResendCodeImpl> get copyWith =>
-      __$$ResendCodeImplCopyWithImpl<_$ResendCodeImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() init,
-    required TResult Function(
-            String phoneNumber, void Function(String) verifyId)
-        login,
-    required TResult Function(
-            String phoneNumber, void Function(String) verifyId)
-        resendCode,
-    required TResult Function(String verificationId, String smsCode) verify,
-    required TResult Function(AuthCredential credential)
-        phoneAuthVerificationComplete,
-    required TResult Function(
-            String verificationId, int? token, String phoneNumber)
-        otpSent,
-  }) {
-    return resendCode(phoneNumber, verifyId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
-    TResult? Function(String phoneNumber, void Function(String) verifyId)?
-        login,
-    TResult? Function(String phoneNumber, void Function(String) verifyId)?
-        resendCode,
-    TResult? Function(String verificationId, String smsCode)? verify,
-    TResult? Function(AuthCredential credential)? phoneAuthVerificationComplete,
-    TResult? Function(String verificationId, int? token, String phoneNumber)?
-        otpSent,
-  }) {
-    return resendCode?.call(phoneNumber, verifyId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
-    TResult Function(String phoneNumber, void Function(String) verifyId)? login,
-    TResult Function(String phoneNumber, void Function(String) verifyId)?
-        resendCode,
-    TResult Function(String verificationId, String smsCode)? verify,
-    TResult Function(AuthCredential credential)? phoneAuthVerificationComplete,
-    TResult Function(String verificationId, int? token, String phoneNumber)?
-        otpSent,
-    required TResult orElse(),
-  }) {
-    if (resendCode != null) {
-      return resendCode(phoneNumber, verifyId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Init value) init,
-    required TResult Function(_Login value) login,
-    required TResult Function(_ResendCode value) resendCode,
-    required TResult Function(_Verify value) verify,
-    required TResult Function(_PhoneAuthVerificationComplete value)
-        phoneAuthVerificationComplete,
-    required TResult Function(_OtpSent value) otpSent,
-  }) {
-    return resendCode(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Init value)? init,
-    TResult? Function(_Login value)? login,
-    TResult? Function(_ResendCode value)? resendCode,
-    TResult? Function(_Verify value)? verify,
-    TResult? Function(_PhoneAuthVerificationComplete value)?
-        phoneAuthVerificationComplete,
-    TResult? Function(_OtpSent value)? otpSent,
-  }) {
-    return resendCode?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Init value)? init,
-    TResult Function(_Login value)? login,
-    TResult Function(_ResendCode value)? resendCode,
-    TResult Function(_Verify value)? verify,
-    TResult Function(_PhoneAuthVerificationComplete value)?
-        phoneAuthVerificationComplete,
-    TResult Function(_OtpSent value)? otpSent,
-    required TResult orElse(),
-  }) {
-    if (resendCode != null) {
-      return resendCode(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _ResendCode implements SignInEvent {
-  const factory _ResendCode(
-      {required final String phoneNumber,
-      required final void Function(String) verifyId}) = _$ResendCodeImpl;
-
-  String get phoneNumber;
-  void Function(String) get verifyId;
-  @JsonKey(ignore: true)
-  _$$ResendCodeImplCopyWith<_$ResendCodeImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$VerifyImplCopyWith<$Res> {
-  factory _$$VerifyImplCopyWith(
-          _$VerifyImpl value, $Res Function(_$VerifyImpl) then) =
-      __$$VerifyImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String verificationId, String smsCode});
-}
-
-/// @nodoc
-class __$$VerifyImplCopyWithImpl<$Res>
-    extends _$SignInEventCopyWithImpl<$Res, _$VerifyImpl>
-    implements _$$VerifyImplCopyWith<$Res> {
-  __$$VerifyImplCopyWithImpl(
-      _$VerifyImpl _value, $Res Function(_$VerifyImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? verificationId = null,
-    Object? smsCode = null,
-  }) {
-    return _then(_$VerifyImpl(
-      verificationId: null == verificationId
-          ? _value.verificationId
-          : verificationId // ignore: cast_nullable_to_non_nullable
-              as String,
-      smsCode: null == smsCode
-          ? _value.smsCode
-          : smsCode // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$VerifyImpl implements _Verify {
-  const _$VerifyImpl({required this.verificationId, required this.smsCode});
-
-  @override
-  final String verificationId;
-  @override
-  final String smsCode;
-
-  @override
-  String toString() {
-    return 'SignInEvent.verify(verificationId: $verificationId, smsCode: $smsCode)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$VerifyImpl &&
-            (identical(other.verificationId, verificationId) ||
-                other.verificationId == verificationId) &&
-            (identical(other.smsCode, smsCode) || other.smsCode == smsCode));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, verificationId, smsCode);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$VerifyImplCopyWith<_$VerifyImpl> get copyWith =>
-      __$$VerifyImplCopyWithImpl<_$VerifyImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() init,
-    required TResult Function(
-            String phoneNumber, void Function(String) verifyId)
-        login,
-    required TResult Function(
-            String phoneNumber, void Function(String) verifyId)
-        resendCode,
-    required TResult Function(String verificationId, String smsCode) verify,
-    required TResult Function(AuthCredential credential)
-        phoneAuthVerificationComplete,
-    required TResult Function(
-            String verificationId, int? token, String phoneNumber)
-        otpSent,
-  }) {
-    return verify(verificationId, smsCode);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
-    TResult? Function(String phoneNumber, void Function(String) verifyId)?
-        login,
-    TResult? Function(String phoneNumber, void Function(String) verifyId)?
-        resendCode,
-    TResult? Function(String verificationId, String smsCode)? verify,
-    TResult? Function(AuthCredential credential)? phoneAuthVerificationComplete,
-    TResult? Function(String verificationId, int? token, String phoneNumber)?
-        otpSent,
-  }) {
-    return verify?.call(verificationId, smsCode);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
-    TResult Function(String phoneNumber, void Function(String) verifyId)? login,
-    TResult Function(String phoneNumber, void Function(String) verifyId)?
-        resendCode,
-    TResult Function(String verificationId, String smsCode)? verify,
-    TResult Function(AuthCredential credential)? phoneAuthVerificationComplete,
-    TResult Function(String verificationId, int? token, String phoneNumber)?
-        otpSent,
-    required TResult orElse(),
-  }) {
-    if (verify != null) {
-      return verify(verificationId, smsCode);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Init value) init,
-    required TResult Function(_Login value) login,
-    required TResult Function(_ResendCode value) resendCode,
-    required TResult Function(_Verify value) verify,
-    required TResult Function(_PhoneAuthVerificationComplete value)
-        phoneAuthVerificationComplete,
-    required TResult Function(_OtpSent value) otpSent,
-  }) {
-    return verify(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Init value)? init,
-    TResult? Function(_Login value)? login,
-    TResult? Function(_ResendCode value)? resendCode,
-    TResult? Function(_Verify value)? verify,
-    TResult? Function(_PhoneAuthVerificationComplete value)?
-        phoneAuthVerificationComplete,
-    TResult? Function(_OtpSent value)? otpSent,
-  }) {
-    return verify?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Init value)? init,
-    TResult Function(_Login value)? login,
-    TResult Function(_ResendCode value)? resendCode,
-    TResult Function(_Verify value)? verify,
-    TResult Function(_PhoneAuthVerificationComplete value)?
-        phoneAuthVerificationComplete,
-    TResult Function(_OtpSent value)? otpSent,
-    required TResult orElse(),
-  }) {
-    if (verify != null) {
-      return verify(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Verify implements SignInEvent {
-  const factory _Verify(
-      {required final String verificationId,
-      required final String smsCode}) = _$VerifyImpl;
-
-  String get verificationId;
-  String get smsCode;
-  @JsonKey(ignore: true)
-  _$$VerifyImplCopyWith<_$VerifyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -881,15 +482,12 @@ class _$PhoneAuthVerificationCompleteImpl
     required TResult Function(
             String phoneNumber, void Function(String) verifyId)
         login,
-    required TResult Function(
-            String phoneNumber, void Function(String) verifyId)
-        resendCode,
-    required TResult Function(String verificationId, String smsCode) verify,
     required TResult Function(AuthCredential credential)
         phoneAuthVerificationComplete,
     required TResult Function(
             String verificationId, int? token, String phoneNumber)
         otpSent,
+    required TResult Function(String exception) catchFail,
   }) {
     return phoneAuthVerificationComplete(credential);
   }
@@ -900,12 +498,10 @@ class _$PhoneAuthVerificationCompleteImpl
     TResult? Function()? init,
     TResult? Function(String phoneNumber, void Function(String) verifyId)?
         login,
-    TResult? Function(String phoneNumber, void Function(String) verifyId)?
-        resendCode,
-    TResult? Function(String verificationId, String smsCode)? verify,
     TResult? Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult? Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
+    TResult? Function(String exception)? catchFail,
   }) {
     return phoneAuthVerificationComplete?.call(credential);
   }
@@ -915,12 +511,10 @@ class _$PhoneAuthVerificationCompleteImpl
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function(String phoneNumber, void Function(String) verifyId)? login,
-    TResult Function(String phoneNumber, void Function(String) verifyId)?
-        resendCode,
-    TResult Function(String verificationId, String smsCode)? verify,
     TResult Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
+    TResult Function(String exception)? catchFail,
     required TResult orElse(),
   }) {
     if (phoneAuthVerificationComplete != null) {
@@ -934,11 +528,10 @@ class _$PhoneAuthVerificationCompleteImpl
   TResult map<TResult extends Object?>({
     required TResult Function(_Init value) init,
     required TResult Function(_Login value) login,
-    required TResult Function(_ResendCode value) resendCode,
-    required TResult Function(_Verify value) verify,
     required TResult Function(_PhoneAuthVerificationComplete value)
         phoneAuthVerificationComplete,
     required TResult Function(_OtpSent value) otpSent,
+    required TResult Function(_CatchFail value) catchFail,
   }) {
     return phoneAuthVerificationComplete(this);
   }
@@ -948,11 +541,10 @@ class _$PhoneAuthVerificationCompleteImpl
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Init value)? init,
     TResult? Function(_Login value)? login,
-    TResult? Function(_ResendCode value)? resendCode,
-    TResult? Function(_Verify value)? verify,
     TResult? Function(_PhoneAuthVerificationComplete value)?
         phoneAuthVerificationComplete,
     TResult? Function(_OtpSent value)? otpSent,
+    TResult? Function(_CatchFail value)? catchFail,
   }) {
     return phoneAuthVerificationComplete?.call(this);
   }
@@ -962,11 +554,10 @@ class _$PhoneAuthVerificationCompleteImpl
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Init value)? init,
     TResult Function(_Login value)? login,
-    TResult Function(_ResendCode value)? resendCode,
-    TResult Function(_Verify value)? verify,
     TResult Function(_PhoneAuthVerificationComplete value)?
         phoneAuthVerificationComplete,
     TResult Function(_OtpSent value)? otpSent,
+    TResult Function(_CatchFail value)? catchFail,
     required TResult orElse(),
   }) {
     if (phoneAuthVerificationComplete != null) {
@@ -1078,15 +669,12 @@ class _$OtpSentImpl implements _OtpSent {
     required TResult Function(
             String phoneNumber, void Function(String) verifyId)
         login,
-    required TResult Function(
-            String phoneNumber, void Function(String) verifyId)
-        resendCode,
-    required TResult Function(String verificationId, String smsCode) verify,
     required TResult Function(AuthCredential credential)
         phoneAuthVerificationComplete,
     required TResult Function(
             String verificationId, int? token, String phoneNumber)
         otpSent,
+    required TResult Function(String exception) catchFail,
   }) {
     return otpSent(verificationId, token, phoneNumber);
   }
@@ -1097,12 +685,10 @@ class _$OtpSentImpl implements _OtpSent {
     TResult? Function()? init,
     TResult? Function(String phoneNumber, void Function(String) verifyId)?
         login,
-    TResult? Function(String phoneNumber, void Function(String) verifyId)?
-        resendCode,
-    TResult? Function(String verificationId, String smsCode)? verify,
     TResult? Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult? Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
+    TResult? Function(String exception)? catchFail,
   }) {
     return otpSent?.call(verificationId, token, phoneNumber);
   }
@@ -1112,12 +698,10 @@ class _$OtpSentImpl implements _OtpSent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function(String phoneNumber, void Function(String) verifyId)? login,
-    TResult Function(String phoneNumber, void Function(String) verifyId)?
-        resendCode,
-    TResult Function(String verificationId, String smsCode)? verify,
     TResult Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
+    TResult Function(String exception)? catchFail,
     required TResult orElse(),
   }) {
     if (otpSent != null) {
@@ -1131,11 +715,10 @@ class _$OtpSentImpl implements _OtpSent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Init value) init,
     required TResult Function(_Login value) login,
-    required TResult Function(_ResendCode value) resendCode,
-    required TResult Function(_Verify value) verify,
     required TResult Function(_PhoneAuthVerificationComplete value)
         phoneAuthVerificationComplete,
     required TResult Function(_OtpSent value) otpSent,
+    required TResult Function(_CatchFail value) catchFail,
   }) {
     return otpSent(this);
   }
@@ -1145,11 +728,10 @@ class _$OtpSentImpl implements _OtpSent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Init value)? init,
     TResult? Function(_Login value)? login,
-    TResult? Function(_ResendCode value)? resendCode,
-    TResult? Function(_Verify value)? verify,
     TResult? Function(_PhoneAuthVerificationComplete value)?
         phoneAuthVerificationComplete,
     TResult? Function(_OtpSent value)? otpSent,
+    TResult? Function(_CatchFail value)? catchFail,
   }) {
     return otpSent?.call(this);
   }
@@ -1159,11 +741,10 @@ class _$OtpSentImpl implements _OtpSent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Init value)? init,
     TResult Function(_Login value)? login,
-    TResult Function(_ResendCode value)? resendCode,
-    TResult Function(_Verify value)? verify,
     TResult Function(_PhoneAuthVerificationComplete value)?
         phoneAuthVerificationComplete,
     TResult Function(_OtpSent value)? otpSent,
+    TResult Function(_CatchFail value)? catchFail,
     required TResult orElse(),
   }) {
     if (otpSent != null) {
@@ -1188,13 +769,174 @@ abstract class _OtpSent implements SignInEvent {
 }
 
 /// @nodoc
+abstract class _$$CatchFailImplCopyWith<$Res> {
+  factory _$$CatchFailImplCopyWith(
+          _$CatchFailImpl value, $Res Function(_$CatchFailImpl) then) =
+      __$$CatchFailImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String exception});
+}
+
+/// @nodoc
+class __$$CatchFailImplCopyWithImpl<$Res>
+    extends _$SignInEventCopyWithImpl<$Res, _$CatchFailImpl>
+    implements _$$CatchFailImplCopyWith<$Res> {
+  __$$CatchFailImplCopyWithImpl(
+      _$CatchFailImpl _value, $Res Function(_$CatchFailImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? exception = null,
+  }) {
+    return _then(_$CatchFailImpl(
+      exception: null == exception
+          ? _value.exception
+          : exception // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CatchFailImpl implements _CatchFail {
+  const _$CatchFailImpl({required this.exception});
+
+  @override
+  final String exception;
+
+  @override
+  String toString() {
+    return 'SignInEvent.catchFail(exception: $exception)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CatchFailImpl &&
+            (identical(other.exception, exception) ||
+                other.exception == exception));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, exception);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CatchFailImplCopyWith<_$CatchFailImpl> get copyWith =>
+      __$$CatchFailImplCopyWithImpl<_$CatchFailImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function(
+            String phoneNumber, void Function(String) verifyId)
+        login,
+    required TResult Function(AuthCredential credential)
+        phoneAuthVerificationComplete,
+    required TResult Function(
+            String verificationId, int? token, String phoneNumber)
+        otpSent,
+    required TResult Function(String exception) catchFail,
+  }) {
+    return catchFail(exception);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? init,
+    TResult? Function(String phoneNumber, void Function(String) verifyId)?
+        login,
+    TResult? Function(AuthCredential credential)? phoneAuthVerificationComplete,
+    TResult? Function(String verificationId, int? token, String phoneNumber)?
+        otpSent,
+    TResult? Function(String exception)? catchFail,
+  }) {
+    return catchFail?.call(exception);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function(String phoneNumber, void Function(String) verifyId)? login,
+    TResult Function(AuthCredential credential)? phoneAuthVerificationComplete,
+    TResult Function(String verificationId, int? token, String phoneNumber)?
+        otpSent,
+    TResult Function(String exception)? catchFail,
+    required TResult orElse(),
+  }) {
+    if (catchFail != null) {
+      return catchFail(exception);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Init value) init,
+    required TResult Function(_Login value) login,
+    required TResult Function(_PhoneAuthVerificationComplete value)
+        phoneAuthVerificationComplete,
+    required TResult Function(_OtpSent value) otpSent,
+    required TResult Function(_CatchFail value) catchFail,
+  }) {
+    return catchFail(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Init value)? init,
+    TResult? Function(_Login value)? login,
+    TResult? Function(_PhoneAuthVerificationComplete value)?
+        phoneAuthVerificationComplete,
+    TResult? Function(_OtpSent value)? otpSent,
+    TResult? Function(_CatchFail value)? catchFail,
+  }) {
+    return catchFail?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_Login value)? login,
+    TResult Function(_PhoneAuthVerificationComplete value)?
+        phoneAuthVerificationComplete,
+    TResult Function(_OtpSent value)? otpSent,
+    TResult Function(_CatchFail value)? catchFail,
+    required TResult orElse(),
+  }) {
+    if (catchFail != null) {
+      return catchFail(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CatchFail implements SignInEvent {
+  const factory _CatchFail({required final String exception}) = _$CatchFailImpl;
+
+  String get exception;
+  @JsonKey(ignore: true)
+  _$$CatchFailImplCopyWith<_$CatchFailImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$SignInState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() wait,
-    required TResult Function() verification,
     required TResult Function() loaded,
     required TResult Function(String verificationId, String phoneNumber)
         unVerified,
@@ -1206,8 +948,6 @@ mixin _$SignInState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? wait,
-    TResult? Function()? verification,
     TResult? Function()? loaded,
     TResult? Function(String verificationId, String phoneNumber)? unVerified,
     TResult? Function()? verified,
@@ -1218,8 +958,6 @@ mixin _$SignInState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? wait,
-    TResult Function()? verification,
     TResult Function()? loaded,
     TResult Function(String verificationId, String phoneNumber)? unVerified,
     TResult Function()? verified,
@@ -1231,8 +969,6 @@ mixin _$SignInState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Wait value) wait,
-    required TResult Function(_Verification value) verification,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_UnVerified value) unVerified,
     required TResult Function(_Verified value) verified,
@@ -1243,8 +979,6 @@ mixin _$SignInState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_Wait value)? wait,
-    TResult? Function(_Verification value)? verification,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_UnVerified value)? unVerified,
     TResult? Function(_Verified value)? verified,
@@ -1255,8 +989,6 @@ mixin _$SignInState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Wait value)? wait,
-    TResult Function(_Verification value)? verification,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_UnVerified value)? unVerified,
     TResult Function(_Verified value)? verified,
@@ -1324,8 +1056,6 @@ class _$InitialImpl extends _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() wait,
-    required TResult Function() verification,
     required TResult Function() loaded,
     required TResult Function(String verificationId, String phoneNumber)
         unVerified,
@@ -1340,8 +1070,6 @@ class _$InitialImpl extends _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? wait,
-    TResult? Function()? verification,
     TResult? Function()? loaded,
     TResult? Function(String verificationId, String phoneNumber)? unVerified,
     TResult? Function()? verified,
@@ -1355,8 +1083,6 @@ class _$InitialImpl extends _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? wait,
-    TResult Function()? verification,
     TResult Function()? loaded,
     TResult Function(String verificationId, String phoneNumber)? unVerified,
     TResult Function()? verified,
@@ -1374,8 +1100,6 @@ class _$InitialImpl extends _Initial {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Wait value) wait,
-    required TResult Function(_Verification value) verification,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_UnVerified value) unVerified,
     required TResult Function(_Verified value) verified,
@@ -1389,8 +1113,6 @@ class _$InitialImpl extends _Initial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_Wait value)? wait,
-    TResult? Function(_Verification value)? verification,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_UnVerified value)? unVerified,
     TResult? Function(_Verified value)? verified,
@@ -1404,8 +1126,6 @@ class _$InitialImpl extends _Initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Wait value)? wait,
-    TResult Function(_Verification value)? verification,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_UnVerified value)? unVerified,
     TResult Function(_Verified value)? verified,
@@ -1464,8 +1184,6 @@ class _$LoadingImpl extends _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() wait,
-    required TResult Function() verification,
     required TResult Function() loaded,
     required TResult Function(String verificationId, String phoneNumber)
         unVerified,
@@ -1480,8 +1198,6 @@ class _$LoadingImpl extends _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? wait,
-    TResult? Function()? verification,
     TResult? Function()? loaded,
     TResult? Function(String verificationId, String phoneNumber)? unVerified,
     TResult? Function()? verified,
@@ -1495,8 +1211,6 @@ class _$LoadingImpl extends _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? wait,
-    TResult Function()? verification,
     TResult Function()? loaded,
     TResult Function(String verificationId, String phoneNumber)? unVerified,
     TResult Function()? verified,
@@ -1514,8 +1228,6 @@ class _$LoadingImpl extends _Loading {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Wait value) wait,
-    required TResult Function(_Verification value) verification,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_UnVerified value) unVerified,
     required TResult Function(_Verified value) verified,
@@ -1529,8 +1241,6 @@ class _$LoadingImpl extends _Loading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_Wait value)? wait,
-    TResult? Function(_Verification value)? verification,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_UnVerified value)? unVerified,
     TResult? Function(_Verified value)? verified,
@@ -1544,8 +1254,6 @@ class _$LoadingImpl extends _Loading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Wait value)? wait,
-    TResult Function(_Verification value)? verification,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_UnVerified value)? unVerified,
     TResult Function(_Verified value)? verified,
@@ -1562,285 +1270,6 @@ class _$LoadingImpl extends _Loading {
 abstract class _Loading extends SignInState {
   const factory _Loading() = _$LoadingImpl;
   const _Loading._() : super._();
-}
-
-/// @nodoc
-abstract class _$$WaitImplCopyWith<$Res> {
-  factory _$$WaitImplCopyWith(
-          _$WaitImpl value, $Res Function(_$WaitImpl) then) =
-      __$$WaitImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$WaitImplCopyWithImpl<$Res>
-    extends _$SignInStateCopyWithImpl<$Res, _$WaitImpl>
-    implements _$$WaitImplCopyWith<$Res> {
-  __$$WaitImplCopyWithImpl(_$WaitImpl _value, $Res Function(_$WaitImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$WaitImpl extends _Wait {
-  const _$WaitImpl() : super._();
-
-  @override
-  String toString() {
-    return 'SignInState.wait()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$WaitImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function() wait,
-    required TResult Function() verification,
-    required TResult Function() loaded,
-    required TResult Function(String verificationId, String phoneNumber)
-        unVerified,
-    required TResult Function() verified,
-    required TResult Function(String error) error,
-  }) {
-    return wait();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function()? wait,
-    TResult? Function()? verification,
-    TResult? Function()? loaded,
-    TResult? Function(String verificationId, String phoneNumber)? unVerified,
-    TResult? Function()? verified,
-    TResult? Function(String error)? error,
-  }) {
-    return wait?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? wait,
-    TResult Function()? verification,
-    TResult Function()? loaded,
-    TResult Function(String verificationId, String phoneNumber)? unVerified,
-    TResult Function()? verified,
-    TResult Function(String error)? error,
-    required TResult orElse(),
-  }) {
-    if (wait != null) {
-      return wait();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Wait value) wait,
-    required TResult Function(_Verification value) verification,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_UnVerified value) unVerified,
-    required TResult Function(_Verified value) verified,
-    required TResult Function(_Error value) error,
-  }) {
-    return wait(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Wait value)? wait,
-    TResult? Function(_Verification value)? verification,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_UnVerified value)? unVerified,
-    TResult? Function(_Verified value)? verified,
-    TResult? Function(_Error value)? error,
-  }) {
-    return wait?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Wait value)? wait,
-    TResult Function(_Verification value)? verification,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_UnVerified value)? unVerified,
-    TResult Function(_Verified value)? verified,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (wait != null) {
-      return wait(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Wait extends SignInState {
-  const factory _Wait() = _$WaitImpl;
-  const _Wait._() : super._();
-}
-
-/// @nodoc
-abstract class _$$VerificationImplCopyWith<$Res> {
-  factory _$$VerificationImplCopyWith(
-          _$VerificationImpl value, $Res Function(_$VerificationImpl) then) =
-      __$$VerificationImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$VerificationImplCopyWithImpl<$Res>
-    extends _$SignInStateCopyWithImpl<$Res, _$VerificationImpl>
-    implements _$$VerificationImplCopyWith<$Res> {
-  __$$VerificationImplCopyWithImpl(
-      _$VerificationImpl _value, $Res Function(_$VerificationImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$VerificationImpl extends _Verification {
-  const _$VerificationImpl() : super._();
-
-  @override
-  String toString() {
-    return 'SignInState.verification()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$VerificationImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function() wait,
-    required TResult Function() verification,
-    required TResult Function() loaded,
-    required TResult Function(String verificationId, String phoneNumber)
-        unVerified,
-    required TResult Function() verified,
-    required TResult Function(String error) error,
-  }) {
-    return verification();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function()? wait,
-    TResult? Function()? verification,
-    TResult? Function()? loaded,
-    TResult? Function(String verificationId, String phoneNumber)? unVerified,
-    TResult? Function()? verified,
-    TResult? Function(String error)? error,
-  }) {
-    return verification?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? wait,
-    TResult Function()? verification,
-    TResult Function()? loaded,
-    TResult Function(String verificationId, String phoneNumber)? unVerified,
-    TResult Function()? verified,
-    TResult Function(String error)? error,
-    required TResult orElse(),
-  }) {
-    if (verification != null) {
-      return verification();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Wait value) wait,
-    required TResult Function(_Verification value) verification,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_UnVerified value) unVerified,
-    required TResult Function(_Verified value) verified,
-    required TResult Function(_Error value) error,
-  }) {
-    return verification(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Wait value)? wait,
-    TResult? Function(_Verification value)? verification,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_UnVerified value)? unVerified,
-    TResult? Function(_Verified value)? verified,
-    TResult? Function(_Error value)? error,
-  }) {
-    return verification?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Wait value)? wait,
-    TResult Function(_Verification value)? verification,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_UnVerified value)? unVerified,
-    TResult Function(_Verified value)? verified,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (verification != null) {
-      return verification(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Verification extends SignInState {
-  const factory _Verification() = _$VerificationImpl;
-  const _Verification._() : super._();
 }
 
 /// @nodoc
@@ -1883,8 +1312,6 @@ class _$LoadedImpl extends _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() wait,
-    required TResult Function() verification,
     required TResult Function() loaded,
     required TResult Function(String verificationId, String phoneNumber)
         unVerified,
@@ -1899,8 +1326,6 @@ class _$LoadedImpl extends _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? wait,
-    TResult? Function()? verification,
     TResult? Function()? loaded,
     TResult? Function(String verificationId, String phoneNumber)? unVerified,
     TResult? Function()? verified,
@@ -1914,8 +1339,6 @@ class _$LoadedImpl extends _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? wait,
-    TResult Function()? verification,
     TResult Function()? loaded,
     TResult Function(String verificationId, String phoneNumber)? unVerified,
     TResult Function()? verified,
@@ -1933,8 +1356,6 @@ class _$LoadedImpl extends _Loaded {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Wait value) wait,
-    required TResult Function(_Verification value) verification,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_UnVerified value) unVerified,
     required TResult Function(_Verified value) verified,
@@ -1948,8 +1369,6 @@ class _$LoadedImpl extends _Loaded {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_Wait value)? wait,
-    TResult? Function(_Verification value)? verification,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_UnVerified value)? unVerified,
     TResult? Function(_Verified value)? verified,
@@ -1963,8 +1382,6 @@ class _$LoadedImpl extends _Loaded {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Wait value)? wait,
-    TResult Function(_Verification value)? verification,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_UnVerified value)? unVerified,
     TResult Function(_Verified value)? verified,
@@ -2061,8 +1478,6 @@ class _$UnVerifiedImpl extends _UnVerified {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() wait,
-    required TResult Function() verification,
     required TResult Function() loaded,
     required TResult Function(String verificationId, String phoneNumber)
         unVerified,
@@ -2077,8 +1492,6 @@ class _$UnVerifiedImpl extends _UnVerified {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? wait,
-    TResult? Function()? verification,
     TResult? Function()? loaded,
     TResult? Function(String verificationId, String phoneNumber)? unVerified,
     TResult? Function()? verified,
@@ -2092,8 +1505,6 @@ class _$UnVerifiedImpl extends _UnVerified {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? wait,
-    TResult Function()? verification,
     TResult Function()? loaded,
     TResult Function(String verificationId, String phoneNumber)? unVerified,
     TResult Function()? verified,
@@ -2111,8 +1522,6 @@ class _$UnVerifiedImpl extends _UnVerified {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Wait value) wait,
-    required TResult Function(_Verification value) verification,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_UnVerified value) unVerified,
     required TResult Function(_Verified value) verified,
@@ -2126,8 +1535,6 @@ class _$UnVerifiedImpl extends _UnVerified {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_Wait value)? wait,
-    TResult? Function(_Verification value)? verification,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_UnVerified value)? unVerified,
     TResult? Function(_Verified value)? verified,
@@ -2141,8 +1548,6 @@ class _$UnVerifiedImpl extends _UnVerified {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Wait value)? wait,
-    TResult Function(_Verification value)? verification,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_UnVerified value)? unVerified,
     TResult Function(_Verified value)? verified,
@@ -2209,8 +1614,6 @@ class _$VerifiedImpl extends _Verified {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() wait,
-    required TResult Function() verification,
     required TResult Function() loaded,
     required TResult Function(String verificationId, String phoneNumber)
         unVerified,
@@ -2225,8 +1628,6 @@ class _$VerifiedImpl extends _Verified {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? wait,
-    TResult? Function()? verification,
     TResult? Function()? loaded,
     TResult? Function(String verificationId, String phoneNumber)? unVerified,
     TResult? Function()? verified,
@@ -2240,8 +1641,6 @@ class _$VerifiedImpl extends _Verified {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? wait,
-    TResult Function()? verification,
     TResult Function()? loaded,
     TResult Function(String verificationId, String phoneNumber)? unVerified,
     TResult Function()? verified,
@@ -2259,8 +1658,6 @@ class _$VerifiedImpl extends _Verified {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Wait value) wait,
-    required TResult Function(_Verification value) verification,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_UnVerified value) unVerified,
     required TResult Function(_Verified value) verified,
@@ -2274,8 +1671,6 @@ class _$VerifiedImpl extends _Verified {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_Wait value)? wait,
-    TResult? Function(_Verification value)? verification,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_UnVerified value)? unVerified,
     TResult? Function(_Verified value)? verified,
@@ -2289,8 +1684,6 @@ class _$VerifiedImpl extends _Verified {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Wait value)? wait,
-    TResult Function(_Verification value)? verification,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_UnVerified value)? unVerified,
     TResult Function(_Verified value)? verified,
@@ -2375,8 +1768,6 @@ class _$ErrorImpl extends _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() wait,
-    required TResult Function() verification,
     required TResult Function() loaded,
     required TResult Function(String verificationId, String phoneNumber)
         unVerified,
@@ -2391,8 +1782,6 @@ class _$ErrorImpl extends _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? wait,
-    TResult? Function()? verification,
     TResult? Function()? loaded,
     TResult? Function(String verificationId, String phoneNumber)? unVerified,
     TResult? Function()? verified,
@@ -2406,8 +1795,6 @@ class _$ErrorImpl extends _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? wait,
-    TResult Function()? verification,
     TResult Function()? loaded,
     TResult Function(String verificationId, String phoneNumber)? unVerified,
     TResult Function()? verified,
@@ -2425,8 +1812,6 @@ class _$ErrorImpl extends _Error {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Wait value) wait,
-    required TResult Function(_Verification value) verification,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_UnVerified value) unVerified,
     required TResult Function(_Verified value) verified,
@@ -2440,8 +1825,6 @@ class _$ErrorImpl extends _Error {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_Wait value)? wait,
-    TResult? Function(_Verification value)? verification,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_UnVerified value)? unVerified,
     TResult? Function(_Verified value)? verified,
@@ -2455,8 +1838,6 @@ class _$ErrorImpl extends _Error {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Wait value)? wait,
-    TResult Function(_Verification value)? verification,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_UnVerified value)? unVerified,
     TResult Function(_Verified value)? verified,
