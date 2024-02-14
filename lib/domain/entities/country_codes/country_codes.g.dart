@@ -11,7 +11,7 @@ _$CountryCodesImpl _$$CountryCodesImplFromJson(Map<String, dynamic> json) =>
       code: json['code'] as String,
       label: json['label'] as String,
       phone: json['phone'] as String,
-      phoneLength: json['phoneLength'] as int,
+      phoneLength: json['phoneLength'] ?? const [],
     );
 
 Map<String, dynamic> _$$CountryCodesImplToJson(_$CountryCodesImpl instance) =>

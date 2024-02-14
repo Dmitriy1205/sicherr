@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sicherr/core/providers.dart';
@@ -17,25 +19,28 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-
   @override
   void didChangeDependencies() {
     precacheImage(const AssetImage(AppImages.background), context);
     precacheImage(const AssetImage(AppImages.logo), context);
     super.didChangeDependencies();
   }
+
   @override
   Widget build(BuildContext context) {
     return Providers(
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: AppTheme.themeData,
+        scrollBehavior:Platform.isAndroid ? ScrollConfiguration.of(context).copyWith(
+          physics: const BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics(),
+          ),
+        ): null,
         home: BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
           return state.maybeMap(
-
               authenticated: (_) => const InitialScreen(),
               unauthenticated: (_) => const SigninScreen(),
-
               orElse: () => const Material(child: LoadingIndicator()));
         }),
       ),

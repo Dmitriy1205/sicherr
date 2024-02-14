@@ -18,8 +18,6 @@ class SignInState with _$SignInState {
   const factory SignInState.initial() = _Initial;
 
   const factory SignInState.loading() = _Loading;
-  const factory SignInState.wait() = _Wait;
-  const factory SignInState.verification() = _Verification;
   const factory SignInState.loaded() = _Loaded;
 
   const factory SignInState.unVerified({required String verificationId,required String phoneNumber}) =

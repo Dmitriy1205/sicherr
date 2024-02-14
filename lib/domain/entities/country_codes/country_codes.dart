@@ -9,7 +9,7 @@ class CountryCodes with _$CountryCodes {
     required String code,
     required String label,
     required String phone,
-    required int phoneLength,
+    @Default([]) dynamic phoneLength,
   }) = _CountryCodes;
 
   factory CountryCodes.fromJson(Map<String, dynamic> json) => _$CountryCodesFromJson(json);

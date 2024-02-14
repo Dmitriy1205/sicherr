@@ -57,7 +57,11 @@
     "code": "AR",
     "label": "Argentina",
     "phone": "54",
-    "phoneLength": 8
+    "phoneLength": [
+      6,
+      7,
+      8
+    ]
   },
   {
     "code": "AS",
@@ -69,7 +73,10 @@
     "code": "AT",
     "label": "Austria",
     "phone": "43",
-    "phoneLength": 11
+    "phoneLength": [
+      10,
+      11
+    ]
   },
   {
     "code": "AU",
@@ -87,7 +94,10 @@
     "code": "AX",
     "label": "Alland Islands",
     "phone": "358",
-    "phoneLength": 10
+    "phoneLength": [
+      7,
+      10
+    ]
   },
   {
     "code": "AZ",
@@ -225,13 +235,13 @@
     "code": "CC",
     "label": "Cocos (Keeling) Islands",
     "phone": "61",
-    "phoneLength": 10
+    "phoneLength": 9
   },
   {
     "code": "CD",
     "label": "Congo, Democratic Republic of the",
     "phone": "243",
-    "phoneLength": 7
+    "phoneLength": 9
   },
   {
     "code": "CF",
@@ -243,7 +253,7 @@
     "code": "CG",
     "label": "Congo, Republic of the",
     "phone": "242",
-    "phoneLength": 9
+    "phoneLength": 8
   },
   {
     "code": "CH",
@@ -273,7 +283,7 @@
     "code": "CM",
     "label": "Cameroon",
     "phone": "237",
-    "phoneLength": 9
+    "phoneLength": 8
   },
   {
     "code": "CN",
@@ -309,13 +319,13 @@
     "code": "CW",
     "label": "Curacao",
     "phone": "599",
-    "phoneLength": 8
+    "phoneLength": 7
   },
   {
     "code": "CX",
     "label": "Christmas Island",
     "phone": "61",
-    "phoneLength": 10
+    "phoneLength": 9
   },
   {
     "code": "CY",
@@ -333,7 +343,7 @@
     "code": "DE",
     "label": "Germany",
     "phone": "49",
-    "phoneLength": 10
+    "phoneLength": 11
   },
   {
     "code": "DJ",
@@ -375,7 +385,7 @@
     "code": "EE",
     "label": "Estonia",
     "phone": "372",
-    "phoneLength": 9
+    "phoneLength": 7
   },
   {
     "code": "EG",
@@ -411,7 +421,10 @@
     "code": "FI",
     "label": "Finland",
     "phone": "358",
-    "phoneLength": 10
+    "phoneLength": [
+      7,
+      10
+    ]
   },
   {
     "code": "FJ",
@@ -447,7 +460,7 @@
     "code": "GA",
     "label": "Gabon",
     "phone": "241",
-    "phoneLength": 7
+    "phoneLength": 8
   },
   {
     "code": "GB",
@@ -477,7 +490,7 @@
     "code": "GG",
     "label": "Guernsey",
     "phone": "44",
-    "phoneLength": 11
+    "phoneLength": 10
   },
   {
     "code": "GH",
@@ -519,7 +532,7 @@
     "code": "GQ",
     "label": "Equatorial Guinea",
     "phone": "240",
-    "phoneLength": 9
+    "phoneLength": 8
   },
   {
     "code": "GR",
@@ -609,13 +622,13 @@
     "code": "IL",
     "label": "Israel",
     "phone": "972",
-    "phoneLength": 9
+    "phoneLength": 10
   },
   {
     "code": "IM",
     "label": "Isle of Man",
     "phone": "44",
-    "phoneLength": 11
+    "phoneLength": 10
   },
   {
     "code": "IN",
@@ -651,13 +664,13 @@
     "code": "IT",
     "label": "Italy",
     "phone": "39",
-    "phoneLength": 10
+    "phoneLength": 11
   },
   {
     "code": "JE",
     "label": "Jersey",
     "phone": "44",
-    "phoneLength": 11
+    "phoneLength": 10
   },
   {
     "code": "JM",
@@ -699,7 +712,7 @@
     "code": "KI",
     "label": "Kiribati",
     "phone": "686",
-    "phoneLength": 8
+    "phoneLength": 5
   },
   {
     "code": "KM",
@@ -765,7 +778,7 @@
     "code": "LI",
     "label": "Liechtenstein",
     "phone": "423",
-    "phoneLength": 9
+    "phoneLength": 7
   },
   {
     "code": "LK",
@@ -795,7 +808,7 @@
     "code": "LU",
     "label": "Luxembourg",
     "phone": "352",
-    "phoneLength": 9
+    "phoneLength": 8
   },
   {
     "code": "LV",
@@ -831,7 +844,7 @@
     "code": "ME",
     "label": "Montenegro",
     "phone": "382",
-    "phoneLength": 9
+    "phoneLength": 8
   },
   {
     "code": "MF",
@@ -853,7 +866,7 @@
   },
   {
     "code": "MK",
-    "label": "North Macedonia",
+    "label": "Macedonia, the Former Yugoslav Republic of",
     "phone": "389",
     "phoneLength": 8
   },
@@ -867,7 +880,7 @@
     "code": "MM",
     "label": "Myanmar",
     "phone": "95",
-    "phoneLength": 10
+    "phoneLength": 9
   },
   {
     "code": "MN",
@@ -915,7 +928,7 @@
     "code": "MU",
     "label": "Mauritius",
     "phone": "230",
-    "phoneLength": 8
+    "phoneLength": 7
   },
   {
     "code": "MV",
@@ -951,7 +964,7 @@
     "code": "NA",
     "label": "Namibia",
     "phone": "264",
-    "phoneLength": 8
+    "phoneLength": 9
   },
   {
     "code": "NC",
@@ -1005,7 +1018,7 @@
     "code": "NR",
     "label": "Nauru",
     "phone": "674",
-    "phoneLength": 7
+    "phoneLength": 5
   },
   {
     "code": "NU",
@@ -1017,7 +1030,7 @@
     "code": "NZ",
     "label": "New Zealand",
     "phone": "64",
-    "phoneLength": 9
+    "phoneLength": 10
   },
   {
     "code": "OM",
@@ -1077,7 +1090,7 @@
     "code": "PN",
     "label": "Pitcairn",
     "phone": "870",
-    "phoneLength": 5
+    "phoneLength": 7
   },
   {
     "code": "PR",
@@ -1087,7 +1100,7 @@
   },
   {
     "code": "PS",
-    "label": "Palestinian Territory",
+    "label": "Palestinian Territory, Occupied",
     "phone": "970",
     "phoneLength": 9
   },
@@ -1183,7 +1196,7 @@
   },
   {
     "code": "SH",
-    "label": "Saint Helena",
+    "label": "Saint Helena, Ascension and Tristan da Cunha",
     "phone": "290",
     "phoneLength": 4
   },
@@ -1263,11 +1276,11 @@
     "code": "SY",
     "label": "Syrian Arab Republic",
     "phone": "963",
-    "phoneLength": 10
+    "phoneLength": 9
   },
   {
     "code": "SZ",
-    "label": "Eswatini",
+    "label": "Swaziland",
     "phone": "268",
     "phoneLength": 8
   },
@@ -1365,7 +1378,7 @@
     "code": "TZ",
     "label": "Tanzania, United Republic of",
     "phone": "255",
-    "phoneLength": 10
+    "phoneLength": 9
   },
   {
     "code": "UA",
@@ -1395,7 +1408,7 @@
     "code": "UY",
     "label": "Uruguay",
     "phone": "598",
-    "phoneLength": 9
+    "phoneLength": 8
   },
   {
     "code": "UZ",
@@ -1407,7 +1420,7 @@
     "code": "VA",
     "label": "Holy See (Vatican City State)",
     "phone": "379",
-    "phoneLength": 7
+    "phoneLength": 8
   },
   {
     "code": "VC",
@@ -1455,7 +1468,7 @@
     "code": "WS",
     "label": "Samoa",
     "phone": "685",
-    "phoneLength": 7
+    "phoneLength": 5
   },
   {
     "code": "YE",
@@ -1488,4 +1501,3 @@
     "phoneLength": 9
   }
 ]
-

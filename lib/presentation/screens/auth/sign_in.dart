@@ -48,6 +48,35 @@ class _SigninScreenState extends State<SigninScreen> {
     super.initState();
   }
 
+  int? _getMaxLength(CountryCodes country) {
+    final phoneLength = country.phoneLength;
+
+    if (phoneLength is int) {
+      return phoneLength;
+    } else if (phoneLength is List<dynamic>) {
+      return phoneLength
+          .reduce((value, element) => value > element ? value : element);
+    } else {
+      return null;
+    }
+  }
+
+  bool _isLengthValid(String text, List<dynamic> lengths) {
+    return lengths.contains(text.length);
+  }
+
+  List? _getMinLengths(CountryCodes country) {
+    final phoneLength = country.phoneLength;
+
+    if (phoneLength is int) {
+      return [phoneLength];
+    } else if (phoneLength is List<dynamic>) {
+      return phoneLength.isNotEmpty ? phoneLength : null;
+    } else {
+      return null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     if (Platform.isIOS) {
@@ -58,213 +87,220 @@ class _SigninScreenState extends State<SigninScreen> {
     return BlocConsumer<SignInBloc, SignInState>(
       listener: (context, state) {
         state.maybeMap(
-          verified: (_)=>AppToast.showSuccess(context, 'Successfully Authorized'),
+            verified: (_) =>
+                AppToast.showSuccess(context, 'Successfully Authorized'),
             unVerified: (_) {
-              AppToast.showSuccess(context,
-                  'Verification code sent');
+              AppToast.showSuccess(context, 'Verification code sent');
             },
-            error: (e)=>AppToast.showError(context,
-                e.error),
+            error: (e) => AppToast.showError(context, e.error),
             orElse: () {});
       },
       builder: (context, state) {
         return state.maybeMap(
-          unVerified: (_)=>VerificationScreen(
-            verificationId: state.verificationId!, phoneNumber: state.phoneNumber!,
+          unVerified: (_) => VerificationScreen(
+            verificationId: state.verificationId!,
+            phoneNumber: state.phoneNumber!,
           ),
-          verified: (_)=>const InitialScreen(),
-          orElse: ()=>Scaffold(
-          resizeToAvoidBottomInset: true,
-          body: SingleChildScrollView(
-            physics: const ClampingScrollPhysics(),
-            child: Stack(
-              alignment: AlignmentDirectional.topCenter,
-              children: [
-                Image.asset(
-                  AppImages.background,
-                  fit: BoxFit.cover,
-                ),
-                Positioned(
-                  top: 100,
-                  child: Image.asset(
-                    AppImages.logo,
-                    scale: 2,
+          verified: (_) => const InitialScreen(),
+          orElse: () => Scaffold(
+            resizeToAvoidBottomInset: true,
+            body: SingleChildScrollView(
+              physics: const ClampingScrollPhysics(),
+              child: Stack(
+                alignment: AlignmentDirectional.topCenter,
+                children: [
+                  Image.asset(
+                    AppImages.background,
+                    fit: BoxFit.cover,
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 260.0),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    decoration: const BoxDecoration(
-                        color: AppColors.white,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(18),
-                          topRight: Radius.circular(18),
-                        )),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 30),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            AppStrings.singIn,
-                            style: AppTheme.themeData.textTheme.headlineLarge,
-                          ),
-                          Text(
-                            AppStrings.begin,
-                            style: AppTheme.themeData.textTheme.titleLarge,
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          TextFormField(
-                            autovalidateMode:
-                            AutovalidateMode.onUserInteraction,
-                            focusNode: _focusNode,
-                            keyboardType: TextInputType.number,
-                            maxLength: countryCodes.isNotEmpty
-                                ? countryCodes
-                                .firstWhere(
-                                    (element) => element.code == isoCode)
-                                .phoneLength
-                                : null,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                  RegExp(r'^\d+\.?\d{0,1}')),
-                            ],
-                            style: AppTheme.themeData.textTheme.displayLarge!
-                                .copyWith(fontWeight: FontWeight.w400),
-                            // textAlign: TextAlign.center,
-                            controller: _phoneController,
-                            decoration: InputDecoration(
-                              prefixIcon: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 18.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    AppCountryCodePicker(
-                                      flagWidth: 25,
-                                      textStyle: AppTheme
-                                          .themeData.textTheme.displayLarge!
-                                          .copyWith(
-                                          fontWeight: FontWeight.w400),
-                                      showDropDownButton: true,
-                                      padding: EdgeInsets.zero,
-                                      searchDecoration: const InputDecoration(
-                                        contentPadding: EdgeInsets.symmetric(
-                                            vertical: 0),
+                  Positioned(
+                    top: 100,
+                    child: Image.asset(
+                      AppImages.logo,
+                      scale: 2,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 260.0),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      decoration: const BoxDecoration(
+                          color: AppColors.white,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(18),
+                            topRight: Radius.circular(18),
+                          )),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20.0, vertical: 30),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              AppStrings.singIn,
+                              style: AppTheme.themeData.textTheme.headlineLarge,
+                            ),
+                            Text(
+                              AppStrings.begin,
+                              style: AppTheme.themeData.textTheme.titleLarge,
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            TextFormField(
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              focusNode: _focusNode,
+                              keyboardType: TextInputType.number,
+                              maxLength: countryCodes.isNotEmpty
+                                  ? _getMaxLength(countryCodes.firstWhere(
+                                      (element) => element.code == isoCode,
+                                    ))
+                                  : null,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                    RegExp(r'^\d+\.?\d{0,1}')),
+                              ],
+                              style: AppTheme.themeData.textTheme.displayLarge!
+                                  .copyWith(fontWeight: FontWeight.w400),
+                              // textAlign: TextAlign.center,
+                              controller: _phoneController,
+                              decoration: InputDecoration(
+                                prefixIcon: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 18.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      AppCountryCodePicker(
+                                        flagWidth: 25,
+                                        textStyle: AppTheme
+                                            .themeData.textTheme.displayLarge!
+                                            .copyWith(
+                                                fontWeight: FontWeight.w400),
+                                        showDropDownButton: true,
+                                        padding: EdgeInsets.zero,
+                                        searchDecoration: const InputDecoration(
+                                          contentPadding:
+                                              EdgeInsets.symmetric(vertical: 0),
+                                        ),
+                                        onChanged: (v) {
+                                          dialCode = v.dialCode!;
+                                          isoCode = v.code!;
+                                        },
                                       ),
-                                      onChanged: (v) {
-                                        dialCode = v.dialCode!;
-                                        isoCode = v.code!;
-                                      },
-                                    ),
-                                    const SizedBox(
-                                      width: 0,
-                                    ),
-                                    Container(
-                                      width: 0.5,
-                                      height: 50,
-                                      color: Colors.grey,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              contentPadding: const EdgeInsets.symmetric(
-                                vertical: 10,
-                              ),
-                            ),
-                            onSaved: (value) {
-                              setState(() {
-                                _phoneController.text = value!;
-                              });
-                            },
-                            onTapOutside: (v) {
-                              _focusNode.unfocus();
-                            },
-                            onChanged: (value) {
-                              setState(() {
-                                _phoneController.text = value;
-                                print('$dialCode + ${_phoneController.text}');
-                              });
-                            },
-                          ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          SizedBox(
-                            height: 48,
-                            child: AppElevatedButton(
-                              widget: state.maybeMap(
-                                  loading: (_) => const SizedBox(
-                                      width: 20,
-                                      height: 20,
-                                      child: LoadingIndicator(
-                                        color: Colors.white,
-                                      )),
-                                  orElse: () => Text(
-                                    AppStrings.singIn,
-                                    style: AppTheme
-                                        .themeData.textTheme.labelMedium,
-                                  )),
-                              text: AppStrings.singIn,
-                              onPressed: countryCodes.isNotEmpty && countryCodes
-                                  .firstWhere(
-                                      (element) => element.code == isoCode)
-                                  .phoneLength != _phoneController.text.length
-                                  ? null
-                                  : () {
-                                context.read<SignInBloc>().add(
-                                    SignInEvent.login(
-                                        phoneNumber:
-                                        '$dialCode${_phoneController.text}',
-                                        verifyId: (verId) {}));
-                              },
-                              borderRadius: 17,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          Center(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  AppStrings.byContinuing,
-                                  style:
-                                  AppTheme.themeData.textTheme.titleMedium,
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                            const TermsAndConditions()));
-                                  },
-                                  borderRadius: BorderRadius.circular(5),
-                                  child: Text(
-                                    AppStrings.terms,
-                                    style: AppTheme
-                                        .themeData.textTheme.titleMedium!
-                                        .copyWith(color: AppColors.mainAccent),
+                                      const SizedBox(
+                                        width: 0,
+                                      ),
+                                      Container(
+                                        width: 0.5,
+                                        height: 50,
+                                        color: Colors.grey,
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              ],
+                                contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 10,
+                                ),
+                              ),
+                              onSaved: (value) {
+                                setState(() {
+                                  _phoneController.text = value!;
+                                });
+                              },
+                              onTapOutside: (v) {
+                                _focusNode.unfocus();
+                              },
+                              onChanged: (value) {
+                                setState(() {
+                                  _phoneController.text = value;
+                                  print('$dialCode + ${_phoneController.text}');
+                                });
+                              },
                             ),
-                          ),
-                        ],
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            SizedBox(
+                              height: 48,
+                              child: AppElevatedButton(
+                                widget: state.maybeMap(
+                                    loading: (_) => const SizedBox(
+                                        width: 20,
+                                        height: 20,
+                                        child: LoadingIndicator(
+                                          color: Colors.white,
+                                        )),
+                                    orElse: () => Text(
+                                          AppStrings.singIn,
+                                          style: AppTheme
+                                              .themeData.textTheme.labelMedium,
+                                        )),
+                                text: AppStrings.singIn,
+                                onPressed: countryCodes.isNotEmpty &&
+                                        !_isLengthValid(
+                                          _phoneController.text,
+                                          _getMinLengths(
+                                                  countryCodes.firstWhere(
+                                                (element) =>
+                                                    element.code == isoCode,
+                                              )) ??
+                                              [],
+                                        )
+                                    ? null
+                                    : () {
+                                        context.read<SignInBloc>().add(
+                                            SignInEvent.login(
+                                                phoneNumber:
+                                                    '$dialCode${_phoneController.text}',
+                                                verifyId: (verId) {}));
+                                      },
+                                borderRadius: 17,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            Center(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    AppStrings.byContinuing,
+                                    style: AppTheme
+                                        .themeData.textTheme.titleMedium,
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const TermsAndConditions()));
+                                    },
+                                    borderRadius: BorderRadius.circular(5),
+                                    child: Text(
+                                      AppStrings.terms,
+                                      style: AppTheme
+                                          .themeData.textTheme.titleMedium!
+                                          .copyWith(
+                                              color: AppColors.mainAccent),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        ),);
+        );
       },
     );
   }

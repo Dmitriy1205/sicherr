@@ -22,6 +22,7 @@ mixin _$OtpEvent {
             String phoneNumber, void Function(String) verifyId)
         resendCode,
     required TResult Function(String verificationId, String smsCode) verify,
+    required TResult Function() otpSent,
     required TResult Function(String exception) catchFail,
     required TResult Function() reset,
   }) =>
@@ -31,6 +32,7 @@ mixin _$OtpEvent {
     TResult? Function(String phoneNumber, void Function(String) verifyId)?
         resendCode,
     TResult? Function(String verificationId, String smsCode)? verify,
+    TResult? Function()? otpSent,
     TResult? Function(String exception)? catchFail,
     TResult? Function()? reset,
   }) =>
@@ -40,6 +42,7 @@ mixin _$OtpEvent {
     TResult Function(String phoneNumber, void Function(String) verifyId)?
         resendCode,
     TResult Function(String verificationId, String smsCode)? verify,
+    TResult Function()? otpSent,
     TResult Function(String exception)? catchFail,
     TResult Function()? reset,
     required TResult orElse(),
@@ -49,6 +52,7 @@ mixin _$OtpEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_ResendCode value) resendCode,
     required TResult Function(_Verify value) verify,
+    required TResult Function(_OtpSent value) otpSent,
     required TResult Function(_CatchFail value) catchFail,
     required TResult Function(_Reset value) reset,
   }) =>
@@ -57,6 +61,7 @@ mixin _$OtpEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ResendCode value)? resendCode,
     TResult? Function(_Verify value)? verify,
+    TResult? Function(_OtpSent value)? otpSent,
     TResult? Function(_CatchFail value)? catchFail,
     TResult? Function(_Reset value)? reset,
   }) =>
@@ -65,6 +70,7 @@ mixin _$OtpEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ResendCode value)? resendCode,
     TResult Function(_Verify value)? verify,
+    TResult Function(_OtpSent value)? otpSent,
     TResult Function(_CatchFail value)? catchFail,
     TResult Function(_Reset value)? reset,
     required TResult orElse(),
@@ -167,6 +173,7 @@ class _$ResendCodeImpl implements _ResendCode {
             String phoneNumber, void Function(String) verifyId)
         resendCode,
     required TResult Function(String verificationId, String smsCode) verify,
+    required TResult Function() otpSent,
     required TResult Function(String exception) catchFail,
     required TResult Function() reset,
   }) {
@@ -179,6 +186,7 @@ class _$ResendCodeImpl implements _ResendCode {
     TResult? Function(String phoneNumber, void Function(String) verifyId)?
         resendCode,
     TResult? Function(String verificationId, String smsCode)? verify,
+    TResult? Function()? otpSent,
     TResult? Function(String exception)? catchFail,
     TResult? Function()? reset,
   }) {
@@ -191,6 +199,7 @@ class _$ResendCodeImpl implements _ResendCode {
     TResult Function(String phoneNumber, void Function(String) verifyId)?
         resendCode,
     TResult Function(String verificationId, String smsCode)? verify,
+    TResult Function()? otpSent,
     TResult Function(String exception)? catchFail,
     TResult Function()? reset,
     required TResult orElse(),
@@ -206,6 +215,7 @@ class _$ResendCodeImpl implements _ResendCode {
   TResult map<TResult extends Object?>({
     required TResult Function(_ResendCode value) resendCode,
     required TResult Function(_Verify value) verify,
+    required TResult Function(_OtpSent value) otpSent,
     required TResult Function(_CatchFail value) catchFail,
     required TResult Function(_Reset value) reset,
   }) {
@@ -217,6 +227,7 @@ class _$ResendCodeImpl implements _ResendCode {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ResendCode value)? resendCode,
     TResult? Function(_Verify value)? verify,
+    TResult? Function(_OtpSent value)? otpSent,
     TResult? Function(_CatchFail value)? catchFail,
     TResult? Function(_Reset value)? reset,
   }) {
@@ -228,6 +239,7 @@ class _$ResendCodeImpl implements _ResendCode {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ResendCode value)? resendCode,
     TResult Function(_Verify value)? verify,
+    TResult Function(_OtpSent value)? otpSent,
     TResult Function(_CatchFail value)? catchFail,
     TResult Function(_Reset value)? reset,
     required TResult orElse(),
@@ -328,6 +340,7 @@ class _$VerifyImpl implements _Verify {
             String phoneNumber, void Function(String) verifyId)
         resendCode,
     required TResult Function(String verificationId, String smsCode) verify,
+    required TResult Function() otpSent,
     required TResult Function(String exception) catchFail,
     required TResult Function() reset,
   }) {
@@ -340,6 +353,7 @@ class _$VerifyImpl implements _Verify {
     TResult? Function(String phoneNumber, void Function(String) verifyId)?
         resendCode,
     TResult? Function(String verificationId, String smsCode)? verify,
+    TResult? Function()? otpSent,
     TResult? Function(String exception)? catchFail,
     TResult? Function()? reset,
   }) {
@@ -352,6 +366,7 @@ class _$VerifyImpl implements _Verify {
     TResult Function(String phoneNumber, void Function(String) verifyId)?
         resendCode,
     TResult Function(String verificationId, String smsCode)? verify,
+    TResult Function()? otpSent,
     TResult Function(String exception)? catchFail,
     TResult Function()? reset,
     required TResult orElse(),
@@ -367,6 +382,7 @@ class _$VerifyImpl implements _Verify {
   TResult map<TResult extends Object?>({
     required TResult Function(_ResendCode value) resendCode,
     required TResult Function(_Verify value) verify,
+    required TResult Function(_OtpSent value) otpSent,
     required TResult Function(_CatchFail value) catchFail,
     required TResult Function(_Reset value) reset,
   }) {
@@ -378,6 +394,7 @@ class _$VerifyImpl implements _Verify {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ResendCode value)? resendCode,
     TResult? Function(_Verify value)? verify,
+    TResult? Function(_OtpSent value)? otpSent,
     TResult? Function(_CatchFail value)? catchFail,
     TResult? Function(_Reset value)? reset,
   }) {
@@ -389,6 +406,7 @@ class _$VerifyImpl implements _Verify {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ResendCode value)? resendCode,
     TResult Function(_Verify value)? verify,
+    TResult Function(_OtpSent value)? otpSent,
     TResult Function(_CatchFail value)? catchFail,
     TResult Function(_Reset value)? reset,
     required TResult orElse(),
@@ -410,6 +428,130 @@ abstract class _Verify implements OtpEvent {
   @JsonKey(ignore: true)
   _$$VerifyImplCopyWith<_$VerifyImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$OtpSentImplCopyWith<$Res> {
+  factory _$$OtpSentImplCopyWith(
+          _$OtpSentImpl value, $Res Function(_$OtpSentImpl) then) =
+      __$$OtpSentImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$OtpSentImplCopyWithImpl<$Res>
+    extends _$OtpEventCopyWithImpl<$Res, _$OtpSentImpl>
+    implements _$$OtpSentImplCopyWith<$Res> {
+  __$$OtpSentImplCopyWithImpl(
+      _$OtpSentImpl _value, $Res Function(_$OtpSentImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$OtpSentImpl implements _OtpSent {
+  const _$OtpSentImpl();
+
+  @override
+  String toString() {
+    return 'OtpEvent.otpSent()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$OtpSentImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String phoneNumber, void Function(String) verifyId)
+        resendCode,
+    required TResult Function(String verificationId, String smsCode) verify,
+    required TResult Function() otpSent,
+    required TResult Function(String exception) catchFail,
+    required TResult Function() reset,
+  }) {
+    return otpSent();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String phoneNumber, void Function(String) verifyId)?
+        resendCode,
+    TResult? Function(String verificationId, String smsCode)? verify,
+    TResult? Function()? otpSent,
+    TResult? Function(String exception)? catchFail,
+    TResult? Function()? reset,
+  }) {
+    return otpSent?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String phoneNumber, void Function(String) verifyId)?
+        resendCode,
+    TResult Function(String verificationId, String smsCode)? verify,
+    TResult Function()? otpSent,
+    TResult Function(String exception)? catchFail,
+    TResult Function()? reset,
+    required TResult orElse(),
+  }) {
+    if (otpSent != null) {
+      return otpSent();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ResendCode value) resendCode,
+    required TResult Function(_Verify value) verify,
+    required TResult Function(_OtpSent value) otpSent,
+    required TResult Function(_CatchFail value) catchFail,
+    required TResult Function(_Reset value) reset,
+  }) {
+    return otpSent(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ResendCode value)? resendCode,
+    TResult? Function(_Verify value)? verify,
+    TResult? Function(_OtpSent value)? otpSent,
+    TResult? Function(_CatchFail value)? catchFail,
+    TResult? Function(_Reset value)? reset,
+  }) {
+    return otpSent?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ResendCode value)? resendCode,
+    TResult Function(_Verify value)? verify,
+    TResult Function(_OtpSent value)? otpSent,
+    TResult Function(_CatchFail value)? catchFail,
+    TResult Function(_Reset value)? reset,
+    required TResult orElse(),
+  }) {
+    if (otpSent != null) {
+      return otpSent(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _OtpSent implements OtpEvent {
+  const factory _OtpSent() = _$OtpSentImpl;
 }
 
 /// @nodoc
@@ -481,6 +623,7 @@ class _$CatchFailImpl implements _CatchFail {
             String phoneNumber, void Function(String) verifyId)
         resendCode,
     required TResult Function(String verificationId, String smsCode) verify,
+    required TResult Function() otpSent,
     required TResult Function(String exception) catchFail,
     required TResult Function() reset,
   }) {
@@ -493,6 +636,7 @@ class _$CatchFailImpl implements _CatchFail {
     TResult? Function(String phoneNumber, void Function(String) verifyId)?
         resendCode,
     TResult? Function(String verificationId, String smsCode)? verify,
+    TResult? Function()? otpSent,
     TResult? Function(String exception)? catchFail,
     TResult? Function()? reset,
   }) {
@@ -505,6 +649,7 @@ class _$CatchFailImpl implements _CatchFail {
     TResult Function(String phoneNumber, void Function(String) verifyId)?
         resendCode,
     TResult Function(String verificationId, String smsCode)? verify,
+    TResult Function()? otpSent,
     TResult Function(String exception)? catchFail,
     TResult Function()? reset,
     required TResult orElse(),
@@ -520,6 +665,7 @@ class _$CatchFailImpl implements _CatchFail {
   TResult map<TResult extends Object?>({
     required TResult Function(_ResendCode value) resendCode,
     required TResult Function(_Verify value) verify,
+    required TResult Function(_OtpSent value) otpSent,
     required TResult Function(_CatchFail value) catchFail,
     required TResult Function(_Reset value) reset,
   }) {
@@ -531,6 +677,7 @@ class _$CatchFailImpl implements _CatchFail {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ResendCode value)? resendCode,
     TResult? Function(_Verify value)? verify,
+    TResult? Function(_OtpSent value)? otpSent,
     TResult? Function(_CatchFail value)? catchFail,
     TResult? Function(_Reset value)? reset,
   }) {
@@ -542,6 +689,7 @@ class _$CatchFailImpl implements _CatchFail {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ResendCode value)? resendCode,
     TResult Function(_Verify value)? verify,
+    TResult Function(_OtpSent value)? otpSent,
     TResult Function(_CatchFail value)? catchFail,
     TResult Function(_Reset value)? reset,
     required TResult orElse(),
@@ -604,6 +752,7 @@ class _$ResetImpl implements _Reset {
             String phoneNumber, void Function(String) verifyId)
         resendCode,
     required TResult Function(String verificationId, String smsCode) verify,
+    required TResult Function() otpSent,
     required TResult Function(String exception) catchFail,
     required TResult Function() reset,
   }) {
@@ -616,6 +765,7 @@ class _$ResetImpl implements _Reset {
     TResult? Function(String phoneNumber, void Function(String) verifyId)?
         resendCode,
     TResult? Function(String verificationId, String smsCode)? verify,
+    TResult? Function()? otpSent,
     TResult? Function(String exception)? catchFail,
     TResult? Function()? reset,
   }) {
@@ -628,6 +778,7 @@ class _$ResetImpl implements _Reset {
     TResult Function(String phoneNumber, void Function(String) verifyId)?
         resendCode,
     TResult Function(String verificationId, String smsCode)? verify,
+    TResult Function()? otpSent,
     TResult Function(String exception)? catchFail,
     TResult Function()? reset,
     required TResult orElse(),
@@ -643,6 +794,7 @@ class _$ResetImpl implements _Reset {
   TResult map<TResult extends Object?>({
     required TResult Function(_ResendCode value) resendCode,
     required TResult Function(_Verify value) verify,
+    required TResult Function(_OtpSent value) otpSent,
     required TResult Function(_CatchFail value) catchFail,
     required TResult Function(_Reset value) reset,
   }) {
@@ -654,6 +806,7 @@ class _$ResetImpl implements _Reset {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ResendCode value)? resendCode,
     TResult? Function(_Verify value)? verify,
+    TResult? Function(_OtpSent value)? otpSent,
     TResult? Function(_CatchFail value)? catchFail,
     TResult? Function(_Reset value)? reset,
   }) {
@@ -665,6 +818,7 @@ class _$ResetImpl implements _Reset {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ResendCode value)? resendCode,
     TResult Function(_Verify value)? verify,
+    TResult Function(_OtpSent value)? otpSent,
     TResult Function(_CatchFail value)? catchFail,
     TResult Function(_Reset value)? reset,
     required TResult orElse(),

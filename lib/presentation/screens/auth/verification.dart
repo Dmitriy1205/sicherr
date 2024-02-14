@@ -61,17 +61,17 @@ class _VerificationScreenState extends State<VerificationScreen> {
         listener: (context, state) {
           state.maybeMap(
               loaded: (_) => context.read<SignInBloc>().add(SignInEvent.init()),
-              // wait: (_) {
-              //   if(_counter == 0){
-              //     setState(() {
-              //       _counter = 30;
-              //     });
-              //   }
-              //
-              //
-              //     _startTimer();
-              //
-              // },
+              wait: (_) {
+                if(_counter == 0){
+                  setState(() {
+                    _counter = 30;
+                  });
+                }
+
+
+                  _startTimer();
+
+              },
               error: (e) {
                 AppToast.showError(context, e.error);
                 context.read<OtpBloc>().add(const OtpEvent.reset());
@@ -192,13 +192,13 @@ class _VerificationScreenState extends State<VerificationScreen> {
                             )
                           : InkWell(
                               onTap: () {
-                                if(_counter == 0){
-                                  setState(() {
-                                    _counter = 30;
-
-                                  });
-                                }
-                                _startTimer();
+                                // if(_counter == 0){
+                                //   setState(() {
+                                //     _counter = 30;
+                                //
+                                //   });
+                                // }
+                                // _startTimer();
                                 context.read<OtpBloc>().add(OtpEvent.resendCode(
                                     phoneNumber: widget.phoneNumber,
                                     verifyId: (id) {
@@ -222,13 +222,13 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       verification: (_) => const LoadingIndicator(),
                       orElse: () => InkWell(
                         onTap: () {
-                          if(_counter == 0){
-                            setState(() {
-                              _counter = 30;
-
-                            });
-                          }
-                          _startTimer();
+                          // if(_counter == 0){
+                          //   setState(() {
+                          //     _counter = 30;
+                          //
+                          //   });
+                          // }
+                          // _startTimer();
                           context.read<OtpBloc>().add(OtpEvent.resendCode(
                               phoneNumber: widget.phoneNumber,
                               verifyId: (id) {

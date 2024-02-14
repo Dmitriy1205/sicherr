@@ -24,13 +24,11 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
           SignInEvent event, Emitter<SignInState> emit) async =>
       event.map(
         login: (e) => _login(e, emit),
-        verify: (e) => _verify(e, emit),
         phoneAuthVerificationComplete: (e) =>
             emit(const SignInState.verified()),
         otpSent: (e) => emit(SignInState.unVerified(
             verificationId: e.verificationId, phoneNumber: e.phoneNumber)),
         init: (e) => _initial(e, emit),
-        resendCode: (e) => _resendCode(e, emit),
         catchFail: (e) => emit(SignInState.error(error: e.exception)),
       );
 
@@ -54,35 +52,6 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         },
         codeAutoRetrievalTimeout: (String) {},
       );
-      // emit(const SignInState.verified());
-    } on BadRequestException catch (e) {
-      emit(SignInState.error(error: e.message));
-    }
-  }
-
-  Future<void> _verify(_Verify event, Emitter<SignInState> emit) async {
-    try {
-      emit(const SignInState.verification());
-      await _authRepository.verification(
-          verificationId: event.verificationId, code: event.smsCode);
-      emit(const SignInState.loaded());
-    } on BadRequestException catch (e) {
-      emit(SignInState.error(error: e.message));
-    }
-  }
-
-  Future<void> _resendCode(_ResendCode event, Emitter<SignInState> emit) async {
-    try {
-      await _authRepository.loginWithPhone(
-        phoneNumber: event.phoneNumber,
-        verificationCompleted: (credential) async {},
-        verificationFailed: (exception) {},
-        codeSent: (verificationId, token) {
-          event.verifyId(verificationId);
-        },
-        codeAutoRetrievalTimeout: (string) {},
-      );
-      emit(const SignInState.wait());
     } on BadRequestException catch (e) {
       emit(SignInState.error(error: e.message));
     }
