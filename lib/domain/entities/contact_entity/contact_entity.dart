@@ -22,7 +22,13 @@ class ContactEntity with _$ContactEntity {
     return ContactEntity(
       id: contact.identifier ?? '',
       name: contact.displayName ?? '',
-      phoneNumber: contact.phones?.first.value ?? '',
+      phoneNumber: () {
+        if (contact.phones != null && contact.phones!.isNotEmpty) {
+          return contact.phones!.first.value ?? '';
+        } else {
+          return '';
+        }
+      }(),
     );
   }
 }
