@@ -1,6 +1,7 @@
 import 'package:contacts_service/contacts_service.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 abstract interface class ContactsInterface {
   Future<List<ContactEntity>> getContacts();
@@ -32,13 +33,31 @@ class ContactsManager implements ContactsInterface {
     // Iterate over the sorted contacts list
     for (ContactEntity contact in contacts) {
       // Get the first letter of the contact name
-      String firstLetter = contact.name.substring(0, 1).toUpperCase();
+      String firstLetter = contact.name.isNotEmpty
+          ? contact.name.substring(0, 1).toUpperCase()
+          : '';
       // Create a new list if the category doesn't exist
       categorizedContacts[firstLetter] ??= [];
       // Add the contact to its corresponding category
       categorizedContacts[firstLetter]!.add(contact);
     }
 
+    if (categorizedContacts.isNotEmpty &&
+        categorizedContacts.entries.first.key == '') {
+      final firstEntry =
+          categorizedContacts.remove(categorizedContacts.keys.first);
+      categorizedContacts[''] = firstEntry ?? [];
+    }
+
     return categorizedContacts;
+  }
+
+  static Future<void> launchCall({required String phoneNumber}) async {
+    final url = Uri(scheme: 'tel', path: phoneNumber);
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      print('Can not make phone call');
+    }
   }
 }
