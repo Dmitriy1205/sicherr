@@ -23,9 +23,9 @@ class ContactsScreen extends StatelessWidget {
               loaded: (state) => Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+                        padding: const EdgeInsets.only(left: 20, right: 20, top: 18),
                         child: SearchPhoneField(
-                          hintText: 'Search by number',
+                          hintText: 'Search',
                           onChanged: (text) {
                             context
                                 .read<ContactsBloc>()
@@ -93,7 +93,7 @@ class ContactListDisplayed extends StatelessWidget {
           )
         : Expanded(
             child: ListView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.only(left: 20, right: 20, top: 18),
               itemCount: groupedContacts.length,
               itemBuilder: (BuildContext context, int index) {
                 String category = groupedContacts.keys.elementAt(index);
