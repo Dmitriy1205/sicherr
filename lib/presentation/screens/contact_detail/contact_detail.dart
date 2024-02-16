@@ -36,7 +36,7 @@ class ContactDetailScreen extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () {
                           ContactsManager.launchCall(
-                              phoneNumber: contact.phoneNumber);
+                              phoneNumber: contact.getMainPhoneNumber);
                         },
                         child: Column(
                           children: [

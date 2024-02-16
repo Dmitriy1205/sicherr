@@ -4,7 +4,7 @@ class PhoneFormatter {
       return phoneNumber;
     }
     bool isFirstPlus = phoneNumber.startsWith('+');
-    final formattedPhone = phoneNumber.replaceAll(RegExp(r"\D"), "");
+    final formattedPhone = phoneNumber.replaceAll(RegExp(r'\D'), '');
 
     return isFirstPlus ? '+$formattedPhone' : formattedPhone;
   }
