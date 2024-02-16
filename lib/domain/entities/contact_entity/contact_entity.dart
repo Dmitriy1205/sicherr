@@ -1,5 +1,6 @@
 import 'package:contacts_service/contacts_service.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:sicherr/core/utils/phone_formatter.dart';
 
 part 'contact_entity.freezed.dart';
 part 'contact_entity.g.dart';
@@ -24,7 +25,8 @@ class ContactEntity with _$ContactEntity {
       name: contact.displayName ?? '',
       phoneNumber: () {
         if (contact.phones != null && contact.phones!.isNotEmpty) {
-          return contact.phones!.first.value ?? '';
+          final phoneNumber = contact.phones!.first.value ?? '';
+          return PhoneFormatter.formatPhone(phoneNumber);
         } else {
           return '';
         }
