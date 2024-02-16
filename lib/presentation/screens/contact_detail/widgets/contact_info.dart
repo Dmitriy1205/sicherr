@@ -17,7 +17,7 @@ class ContactInfo extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(
-            border: Border.all(),
+            border: Border.all(color: const Color(0xFF646464)),
             shape: BoxShape.circle,
           ),
           child: ClipOval(
@@ -39,7 +39,7 @@ class ContactInfo extends StatelessWidget {
             ),
             Text(
               formatNumberSync(contact.phoneNumber),
-              style: const TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16, color: Color(0xFF838383)),
             )
           ],
         )

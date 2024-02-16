@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
 import 'package:sicherr/domain/managers/contacts_manager.dart';
-import 'package:sicherr/presentation/screens/contacts/bloc/contacts_bloc.dart';
+import 'package:sicherr/presentation/bloc/contacts/contacts_bloc.dart';
 import 'package:sicherr/presentation/screens/contacts/widgets/contact_card.dart';
 import 'package:sicherr/presentation/widgets/loading_indicator.dart';
 import 'package:sicherr/presentation/widgets/permission_alert_dialog.dart';
@@ -18,19 +18,21 @@ class ContactsScreen extends StatelessWidget {
       child: BlocBuilder<ContactsBloc, ContactsState>(
         builder: (context, state) {
           return state.maybeMap(
-              loadInProgress: (_) => const Material(child: LoadingIndicator()),
-              orElse: () => const Material(child: LoadingIndicator()),
+              loadInProgress: (_) => const Center(child: LoadingIndicator()),
+              orElse: () => const Center(child: LoadingIndicator()),
               loaded: (state) => Column(
                     children: [
-                      SearchPhoneField(
-                        hintText: 'Search by number',
-                        onChanged: (text) {
-                          context
-                              .read<ContactsBloc>()
-                              .add(ContactsEvent.searchByPhone(text));
-                        },
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+                        child: SearchPhoneField(
+                          hintText: 'Search by number',
+                          onChanged: (text) {
+                            context
+                                .read<ContactsBloc>()
+                                .add(ContactsEvent.searchByPhone(text));
+                          },
+                        ),
                       ),
-                      const SizedBox(height: 10),
                       ContactListDisplayed(
                         groupedContacts: state.categorizedContacts,
                         isPermissionDenied: state.isPermissionDenied,
@@ -55,39 +57,43 @@ class ContactListDisplayed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return groupedContacts.isEmpty
-        ? Expanded(
-            child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                'No contacts to display',
-                style: TextStyle(fontSize: 18),
-              ),
-              const SizedBox(height: 10),
-              if (isPermissionDenied)
-                GestureDetector(
-                  onTap: () => showPermissionAlertDialog(context,
-                      content: 'Allow access to contacts', onClosed: (_) {
-                    context
-                        .read<ContactsBloc>()
-                        .add(const ContactsEvent.checkPermission());
-                  }),
-                  child: SizedBox(
-                    width: 300,
-                    child: Text(
-                      'Give permission to synchronize your contact list',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontWeight: FontWeight.w500,
+        ? Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Expanded(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'No contacts to display',
+                  style: TextStyle(fontSize: 18),
+                ),
+                const SizedBox(height: 10),
+                if (isPermissionDenied)
+                  GestureDetector(
+                    onTap: () => showPermissionAlertDialog(context,
+                        content: 'Allow access to contacts', onClosed: (_) {
+                      context
+                          .read<ContactsBloc>()
+                          .add(const ContactsEvent.checkPermission());
+                    }),
+                    child: SizedBox(
+                      width: 300,
+                      child: Text(
+                        'Give permission to synchronize your contact list',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                   ),
-                ),
-            ],
-          ))
+              ],
+            )),
+          )
         : Expanded(
             child: ListView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               itemCount: groupedContacts.length,
               itemBuilder: (BuildContext context, int index) {
                 String category = groupedContacts.keys.elementAt(index);
@@ -109,7 +115,7 @@ class ContactListDisplayed extends StatelessWidget {
                     ),
                     ListView.builder(
                       shrinkWrap: true,
-                      physics: const ClampingScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       itemCount: itemsInCategory.length,
                       itemBuilder: (BuildContext context, int index) {
                         final item = itemsInCategory[index];

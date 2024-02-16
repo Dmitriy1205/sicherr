@@ -76,7 +76,8 @@ class ContactDetailScreen extends StatelessWidget {
                     print('TODO: Subscribe');
                   },
                 ),
-              )
+              ),
+              const SizedBox(height: 10),
             ],
           ),
         ));

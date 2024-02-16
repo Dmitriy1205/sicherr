@@ -36,15 +36,18 @@ class _InitialScreenState extends State<InitialScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(titles[_selectedPage]),
+        title: Text(
+          titles[_selectedPage],
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+        ),
         backgroundColor: AppColors.lightGrey,
       ),
       body: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         behavior: HitTestBehavior.opaque,
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: screens[_selectedPage],
+        child: IndexedStack(
+          index: _selectedPage,
+          children: screens,
         ),
       ),
       bottomNavigationBar: _MyBottomNavigationBar(
@@ -69,74 +72,84 @@ class _MyBottomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      items: <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Padding(
-            padding: const EdgeInsets.only(bottom: 6, top: 10),
-            child: SvgPicture.asset(
-              AppIcons.contacts,
-              color: selectedIndex == 0
-                  ? Theme.of(context).primaryColor
-                  : AppColors.grey,
-              width: 22,
-              height: 22,
-            ),
+    return Container(
+      decoration: const BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.mediumGrey,
+            blurRadius: 1,
           ),
-          label: 'Contacts',
-        ),
-        BottomNavigationBarItem(
-          icon: Padding(
-            padding: const EdgeInsets.only(bottom: 6, top: 10),
-            child: SvgPicture.asset(
-              AppIcons.home,
-              color: selectedIndex == 1
-                  ? Theme.of(context).primaryColor
-                  : AppColors.grey,
-              width: 20.5,
-              height: 22,
+        ],
+      ),
+      child: BottomNavigationBar(
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Padding(
+              padding: const EdgeInsets.only(bottom: 6, top: 10),
+              child: SvgPicture.asset(
+                AppIcons.contacts,
+                color: selectedIndex == 0
+                    ? Theme.of(context).primaryColor
+                    : AppColors.grey,
+                width: 22,
+                height: 22,
+              ),
             ),
+            label: 'Contacts',
           ),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Padding(
-            padding: const EdgeInsets.only(bottom: 6, top: 10),
-            child: SvgPicture.asset(
-              AppIcons.map,
-              color: selectedIndex == 2
-                  ? Theme.of(context).primaryColor
-                  : AppColors.grey,
-              width: 16.5,
-              height: 22,
+          BottomNavigationBarItem(
+            icon: Padding(
+              padding: const EdgeInsets.only(bottom: 6, top: 10),
+              child: SvgPicture.asset(
+                AppIcons.home,
+                color: selectedIndex == 1
+                    ? Theme.of(context).primaryColor
+                    : AppColors.grey,
+                width: 20.5,
+                height: 22,
+              ),
             ),
+            label: 'Home',
           ),
-          label: 'Map',
-        ),
-        BottomNavigationBarItem(
-          icon: Padding(
-            padding: const EdgeInsets.only(bottom: 6, top: 10),
-            child: SvgPicture.asset(
-              AppIcons.profile,
-              color: selectedIndex == 3
-                  ? Theme.of(context).primaryColor
-                  : AppColors.grey,
-              width: 22,
-              height: 22,
+          BottomNavigationBarItem(
+            icon: Padding(
+              padding: const EdgeInsets.only(bottom: 6, top: 10),
+              child: SvgPicture.asset(
+                AppIcons.map,
+                color: selectedIndex == 2
+                    ? Theme.of(context).primaryColor
+                    : AppColors.grey,
+                width: 16.5,
+                height: 22,
+              ),
             ),
+            label: 'Map',
           ),
-          label: 'Profile',
-        ),
-      ],
-      backgroundColor: AppColors.lightGrey,
-      currentIndex: selectedIndex,
-      showUnselectedLabels: true,
-      unselectedLabelStyle: const TextStyle(color: AppColors.grey),
-      unselectedItemColor: AppColors.grey,
-      unselectedFontSize: 14,
-      selectedItemColor: Theme.of(context).primaryColor,
-      type: BottomNavigationBarType.fixed,
-      onTap: onItemTapped,
+          BottomNavigationBarItem(
+            icon: Padding(
+              padding: const EdgeInsets.only(bottom: 6, top: 10),
+              child: SvgPicture.asset(
+                AppIcons.profile,
+                color: selectedIndex == 3
+                    ? Theme.of(context).primaryColor
+                    : AppColors.grey,
+                width: 22,
+                height: 22,
+              ),
+            ),
+            label: 'Profile',
+          ),
+        ],
+        backgroundColor: AppColors.lightGrey,
+        currentIndex: selectedIndex,
+        showUnselectedLabels: true,
+        unselectedLabelStyle: const TextStyle(color: AppColors.grey),
+        unselectedItemColor: AppColors.grey,
+        unselectedFontSize: 14,
+        selectedItemColor: Theme.of(context).primaryColor,
+        type: BottomNavigationBarType.fixed,
+        onTap: onItemTapped,
+      ),
     );
   }
 }
