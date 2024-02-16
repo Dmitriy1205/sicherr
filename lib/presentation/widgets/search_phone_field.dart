@@ -27,7 +27,7 @@ class SearchPhoneField extends StatelessWidget {
       height: height,
       child: TextField(
         maxLength: 13,
-        keyboardType: TextInputType.number,
+        keyboardType: TextInputType.text,
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: const TextStyle(color: AppColors.grey),

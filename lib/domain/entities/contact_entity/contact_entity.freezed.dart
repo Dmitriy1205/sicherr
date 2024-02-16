@@ -22,7 +22,7 @@ ContactEntity _$ContactEntityFromJson(Map<String, dynamic> json) {
 mixin _$ContactEntity {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String get phoneNumber => throw _privateConstructorUsedError;
+  List<String> get phones => throw _privateConstructorUsedError;
   double? get rate => throw _privateConstructorUsedError;
   List<String>? get tags => throw _privateConstructorUsedError;
   String? get image => throw _privateConstructorUsedError;
@@ -42,7 +42,7 @@ abstract class $ContactEntityCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      String phoneNumber,
+      List<String> phones,
       double? rate,
       List<String>? tags,
       String? image});
@@ -63,7 +63,7 @@ class _$ContactEntityCopyWithImpl<$Res, $Val extends ContactEntity>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? phoneNumber = null,
+    Object? phones = null,
     Object? rate = freezed,
     Object? tags = freezed,
     Object? image = freezed,
@@ -77,10 +77,10 @@ class _$ContactEntityCopyWithImpl<$Res, $Val extends ContactEntity>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      phoneNumber: null == phoneNumber
-          ? _value.phoneNumber
-          : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+      phones: null == phones
+          ? _value.phones
+          : phones // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       rate: freezed == rate
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
@@ -108,7 +108,7 @@ abstract class _$$ContactEntityImplCopyWith<$Res>
   $Res call(
       {String id,
       String name,
-      String phoneNumber,
+      List<String> phones,
       double? rate,
       List<String>? tags,
       String? image});
@@ -127,7 +127,7 @@ class __$$ContactEntityImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? phoneNumber = null,
+    Object? phones = null,
     Object? rate = freezed,
     Object? tags = freezed,
     Object? image = freezed,
@@ -141,10 +141,10 @@ class __$$ContactEntityImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      phoneNumber: null == phoneNumber
-          ? _value.phoneNumber
-          : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+      phones: null == phones
+          ? _value._phones
+          : phones // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       rate: freezed == rate
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
@@ -163,15 +163,17 @@ class __$$ContactEntityImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ContactEntityImpl implements _ContactEntity {
+class _$ContactEntityImpl extends _ContactEntity {
   _$ContactEntityImpl(
       {required this.id,
       required this.name,
-      required this.phoneNumber,
+      required final List<String> phones,
       this.rate,
       final List<String>? tags,
       this.image})
-      : _tags = tags;
+      : _phones = phones,
+        _tags = tags,
+        super._();
 
   factory _$ContactEntityImpl.fromJson(Map<String, dynamic> json) =>
       _$$ContactEntityImplFromJson(json);
@@ -180,8 +182,14 @@ class _$ContactEntityImpl implements _ContactEntity {
   final String id;
   @override
   final String name;
+  final List<String> _phones;
   @override
-  final String phoneNumber;
+  List<String> get phones {
+    if (_phones is EqualUnmodifiableListView) return _phones;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_phones);
+  }
+
   @override
   final double? rate;
   final List<String>? _tags;
@@ -199,7 +207,7 @@ class _$ContactEntityImpl implements _ContactEntity {
 
   @override
   String toString() {
-    return 'ContactEntity(id: $id, name: $name, phoneNumber: $phoneNumber, rate: $rate, tags: $tags, image: $image)';
+    return 'ContactEntity(id: $id, name: $name, phones: $phones, rate: $rate, tags: $tags, image: $image)';
   }
 
   @override
@@ -209,8 +217,7 @@ class _$ContactEntityImpl implements _ContactEntity {
             other is _$ContactEntityImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.phoneNumber, phoneNumber) ||
-                other.phoneNumber == phoneNumber) &&
+            const DeepCollectionEquality().equals(other._phones, _phones) &&
             (identical(other.rate, rate) || other.rate == rate) &&
             const DeepCollectionEquality().equals(other._tags, _tags) &&
             (identical(other.image, image) || other.image == image));
@@ -218,8 +225,14 @@ class _$ContactEntityImpl implements _ContactEntity {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, phoneNumber, rate,
-      const DeepCollectionEquality().hash(_tags), image);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      const DeepCollectionEquality().hash(_phones),
+      rate,
+      const DeepCollectionEquality().hash(_tags),
+      image);
 
   @JsonKey(ignore: true)
   @override
@@ -235,14 +248,15 @@ class _$ContactEntityImpl implements _ContactEntity {
   }
 }
 
-abstract class _ContactEntity implements ContactEntity {
+abstract class _ContactEntity extends ContactEntity {
   factory _ContactEntity(
       {required final String id,
       required final String name,
-      required final String phoneNumber,
+      required final List<String> phones,
       final double? rate,
       final List<String>? tags,
       final String? image}) = _$ContactEntityImpl;
+  _ContactEntity._() : super._();
 
   factory _ContactEntity.fromJson(Map<String, dynamic> json) =
       _$ContactEntityImpl.fromJson;
@@ -252,7 +266,7 @@ abstract class _ContactEntity implements ContactEntity {
   @override
   String get name;
   @override
-  String get phoneNumber;
+  List<String> get phones;
   @override
   double? get rate;
   @override

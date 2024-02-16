@@ -40,7 +40,9 @@ class ContactCard extends StatelessWidget {
             ),
             Expanded(
               child: Text(
-                contact.name.isNotEmpty ? contact.name : contact.phoneNumber,
+                contact.name.isNotEmpty
+                    ? contact.name
+                    : contact.getMainPhoneNumber,
                 style:
                     const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                 overflow: TextOverflow.ellipsis,
@@ -51,7 +53,8 @@ class ContactCard extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                ContactsManager.launchCall(phoneNumber: contact.phoneNumber);
+                ContactsManager.launchCall(
+                    phoneNumber: contact.getMainPhoneNumber);
               },
               child: const RoundWrapperIcon(svgPath: AppIcons.phone),
             ),

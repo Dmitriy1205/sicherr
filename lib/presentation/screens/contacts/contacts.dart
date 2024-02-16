@@ -29,7 +29,7 @@ class ContactsScreen extends StatelessWidget {
                           onChanged: (text) {
                             context
                                 .read<ContactsBloc>()
-                                .add(ContactsEvent.searchByPhone(text));
+                                .add(ContactsEvent.searchContact(text));
                           },
                         ),
                       ),

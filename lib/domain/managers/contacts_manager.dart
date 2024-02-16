@@ -19,7 +19,7 @@ class ContactsManager implements ContactsInterface {
 
       for (var element in localContacts) {
         final contact = ContactEntity.fromLocalContact(element);
-        if (contact.phoneNumber.isNotEmpty) {
+        if (contact.phones.isNotEmpty) {
           contacts.add(contact);
         }
       }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_libphonenumber/flutter_libphonenumber.dart';
 import 'package:sicherr/core/const/images.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
 
@@ -38,7 +37,7 @@ class ContactInfo extends StatelessWidget {
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
             ),
             Text(
-              formatNumberSync(contact.phoneNumber),
+              contact.getMainPhoneNumber,
               style: const TextStyle(fontSize: 16, color: Color(0xFF838383)),
             )
           ],
