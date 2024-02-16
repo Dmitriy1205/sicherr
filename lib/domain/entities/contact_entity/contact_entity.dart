@@ -10,11 +10,15 @@ class ContactEntity with _$ContactEntity {
   factory ContactEntity({
     required String id,
     required String name,
-    required String phoneNumber,
+    required List<String> phones,
     double? rate,
     List<String>? tags,
     String? image,
   }) = _ContactEntity;
+
+  ContactEntity._();
+
+  String get getMainPhoneNumber => phones.isNotEmpty ? phones.first : '';
 
   factory ContactEntity.fromJson(Map<String, dynamic> json) =>
       _$ContactEntityFromJson(json);
@@ -23,14 +27,23 @@ class ContactEntity with _$ContactEntity {
     return ContactEntity(
       id: contact.identifier ?? '',
       name: contact.displayName ?? '',
-      phoneNumber: () {
-        if (contact.phones != null && contact.phones!.isNotEmpty) {
-          final phoneNumber = contact.phones!.first.value ?? '';
-          return PhoneFormatter.formatPhone(phoneNumber);
-        } else {
-          return '';
-        }
-      }(),
+      phones: _parsePhoneNumbers(contact.phones),
     );
+  }
+
+  static List<String> _parsePhoneNumbers(List<Item>? phones) {
+    if (phones != null && phones.isNotEmpty) {
+      final formattedNumbers = <String>[];
+      for (var element in phones) {
+        if (element.value != null) {
+          formattedNumbers.add(
+            PhoneFormatter.formatPhone(element.value!),
+          );
+        }
+      }
+      return formattedNumbers;
+    } else {
+      return [];
+    }
   }
 }

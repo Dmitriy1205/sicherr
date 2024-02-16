@@ -12,16 +12,16 @@ void main() {
 
     test('categorizeContacts categorizes contacts correctly', () {
       final contactsTest = [
-        ContactEntity(id: '1', name: 'John', phoneNumber: '123456'),
-        ContactEntity(id: '2', name: '123', phoneNumber: '456789'),
-        ContactEntity(id: '3', name: 'Bob', phoneNumber: '789012'),
-        ContactEntity(id: '4', name: 'Alice', phoneNumber: '012345'),
-        ContactEntity(id: '5', name: 'Michael', phoneNumber: '234567'),
-        ContactEntity(id: '6', name: 'Peter', phoneNumber: '345678'),
-        ContactEntity(id: '7', name: 'Іван', phoneNumber: '456789'),
-        ContactEntity(id: '8', name: 'Анна', phoneNumber: '567890'),
-        ContactEntity(id: '9', name: 'Петро', phoneNumber: '678901'),
-        ContactEntity(id: '10', name: '', phoneNumber: ''),
+        ContactEntity(id: '1', name: 'John', phones: ['123456']),
+        ContactEntity(id: '2', name: '123', phones: ['456789']),
+        ContactEntity(id: '3', name: 'Bob', phones: ['789012']),
+        ContactEntity(id: '4', name: 'Alice', phones: ['012345']),
+        ContactEntity(id: '5', name: 'Michael', phones: ['234567']),
+        ContactEntity(id: '6', name: 'Peter', phones: ['345678']),
+        ContactEntity(id: '7', name: 'Іван', phones: ['456789']),
+        ContactEntity(id: '8', name: 'Анна', phones: ['567890']),
+        ContactEntity(id: '9', name: 'Петро', phones: ['678901']),
+        ContactEntity(id: '10', name: '', phones: []),
       ];
       final result = ContactsManager.categorizeContacts(contactsTest);
 
@@ -40,13 +40,13 @@ void main() {
 
     test('categorizeContacts handles contacts with no names', () {
       final contactsTest = [
-        ContactEntity(id: '1', name: '', phoneNumber: '123'),
-        ContactEntity(id: '2', name: '123', phoneNumber: '456'),
-        ContactEntity(id: '3', name: '', phoneNumber: '789'),
-        ContactEntity(id: '4', name: '456', phoneNumber: '012'),
-        ContactEntity(id: '5', name: '@', phoneNumber: '015'),
-        ContactEntity(id: '6', name: '\$', phoneNumber: '012123'),
-        ContactEntity(id: '7', name: '', phoneNumber: ''),
+        ContactEntity(id: '1', name: '', phones: ['123']),
+        ContactEntity(id: '2', name: '123', phones: ['456']),
+        ContactEntity(id: '3', name: '', phones: ['789']),
+        ContactEntity(id: '4', name: '456', phones: ['012']),
+        ContactEntity(id: '5', name: '@', phones: ['015']),
+        ContactEntity(id: '6', name: '\$', phones: ['012123']),
+        ContactEntity(id: '7', name: '', phones: []),
       ];
       final result = ContactsManager.categorizeContacts(contactsTest);
       expect(result.keys, contains('#'));
@@ -56,10 +56,10 @@ void main() {
     test('categorizeContacts categorizes contacts with Arabic names correctly',
         () {
       final contacts = [
-        ContactEntity(id: '1', name: 'علي', phoneNumber: '123456'),
-        ContactEntity(id: '2', name: 'محمد', phoneNumber: '456789'),
-        ContactEntity(id: '3', name: 'فاطمة', phoneNumber: '789012'),
-        ContactEntity(id: '4', name: 'نور', phoneNumber: '012345'),
+        ContactEntity(id: '1', name: 'علي', phones: ['123456']),
+        ContactEntity(id: '2', name: 'محمد', phones: ['456789']),
+        ContactEntity(id: '3', name: 'فاطمة', phones: ['789012']),
+        ContactEntity(id: '4', name: 'نور', phones: ['012345']),
       ];
       final result = ContactsManager.categorizeContacts(contacts);
 

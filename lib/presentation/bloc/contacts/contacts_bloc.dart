@@ -29,7 +29,7 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
   void _mapEventToState(ContactsEvent event, Emitter<ContactsState> emit) =>
       event.map(
         initial: (e) => _initialEvent(e, emit),
-        searchByPhone: (e) => _searchByPhone(e, emit),
+        searchContact: (e) => _searchContact(e, emit),
         checkPermission: (e) => _checkPermission(e, emit),
       );
 
@@ -46,15 +46,18 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
     ));
   }
 
-  void _searchByPhone(_SearchByPhone event, Emitter<ContactsState> emit) {
+  void _searchContact(_SearchContact event, Emitter<ContactsState> emit) {
     emit(const ContactsState.loadInProgress());
-    if (event.phoneNumber.isEmpty) {
+    if (event.text.isEmpty) {
       _contactsToDisplay = [..._contactsList];
     } else {
-      _contactsToDisplay = _contactsList
-          .where((contact) => PhoneFormatter.formatPhone(contact.phoneNumber)
-              .contains(event.phoneNumber))
-          .toList();
+      _contactsToDisplay = _contactsList.where((contact) {
+        final name = contact.name.toLowerCase().replaceAll(RegExp(r'\s'), '');
+        final phone = PhoneFormatter.formatPhone(contact.getMainPhoneNumber);
+        final input = event.text.toLowerCase().replaceAll(RegExp(r'\s'), '');
+
+        return name.contains(input) || phone.contains(input);
+      }).toList();
     }
     emit(ContactsState.loaded(
       categorizedContacts:

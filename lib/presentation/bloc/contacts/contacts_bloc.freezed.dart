@@ -363,21 +363,21 @@ mixin _$ContactsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(String phoneNumber) searchByPhone,
+    required TResult Function(String text) searchContact,
     required TResult Function() checkPermission,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(String phoneNumber)? searchByPhone,
+    TResult? Function(String text)? searchContact,
     TResult? Function()? checkPermission,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String phoneNumber)? searchByPhone,
+    TResult Function(String text)? searchContact,
     TResult Function()? checkPermission,
     required TResult orElse(),
   }) =>
@@ -385,21 +385,21 @@ mixin _$ContactsEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_InitialEvent value) initial,
-    required TResult Function(_SearchByPhone value) searchByPhone,
+    required TResult Function(_SearchContact value) searchContact,
     required TResult Function(_CheckPermission value) checkPermission,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitialEvent value)? initial,
-    TResult? Function(_SearchByPhone value)? searchByPhone,
+    TResult? Function(_SearchContact value)? searchContact,
     TResult? Function(_CheckPermission value)? checkPermission,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitialEvent value)? initial,
-    TResult Function(_SearchByPhone value)? searchByPhone,
+    TResult Function(_SearchContact value)? searchContact,
     TResult Function(_CheckPermission value)? checkPermission,
     required TResult orElse(),
   }) =>
@@ -463,7 +463,7 @@ class _$InitialEventImpl implements _InitialEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(String phoneNumber) searchByPhone,
+    required TResult Function(String text) searchContact,
     required TResult Function() checkPermission,
   }) {
     return initial();
@@ -473,7 +473,7 @@ class _$InitialEventImpl implements _InitialEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(String phoneNumber)? searchByPhone,
+    TResult? Function(String text)? searchContact,
     TResult? Function()? checkPermission,
   }) {
     return initial?.call();
@@ -483,7 +483,7 @@ class _$InitialEventImpl implements _InitialEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String phoneNumber)? searchByPhone,
+    TResult Function(String text)? searchContact,
     TResult Function()? checkPermission,
     required TResult orElse(),
   }) {
@@ -497,7 +497,7 @@ class _$InitialEventImpl implements _InitialEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_InitialEvent value) initial,
-    required TResult Function(_SearchByPhone value) searchByPhone,
+    required TResult Function(_SearchContact value) searchContact,
     required TResult Function(_CheckPermission value) checkPermission,
   }) {
     return initial(this);
@@ -507,7 +507,7 @@ class _$InitialEventImpl implements _InitialEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitialEvent value)? initial,
-    TResult? Function(_SearchByPhone value)? searchByPhone,
+    TResult? Function(_SearchContact value)? searchContact,
     TResult? Function(_CheckPermission value)? checkPermission,
   }) {
     return initial?.call(this);
@@ -517,7 +517,7 @@ class _$InitialEventImpl implements _InitialEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitialEvent value)? initial,
-    TResult Function(_SearchByPhone value)? searchByPhone,
+    TResult Function(_SearchContact value)? searchContact,
     TResult Function(_CheckPermission value)? checkPermission,
     required TResult orElse(),
   }) {
@@ -533,31 +533,31 @@ abstract class _InitialEvent implements ContactsEvent {
 }
 
 /// @nodoc
-abstract class _$$SearchByPhoneImplCopyWith<$Res> {
-  factory _$$SearchByPhoneImplCopyWith(
-          _$SearchByPhoneImpl value, $Res Function(_$SearchByPhoneImpl) then) =
-      __$$SearchByPhoneImplCopyWithImpl<$Res>;
+abstract class _$$SearchContactImplCopyWith<$Res> {
+  factory _$$SearchContactImplCopyWith(
+          _$SearchContactImpl value, $Res Function(_$SearchContactImpl) then) =
+      __$$SearchContactImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String phoneNumber});
+  $Res call({String text});
 }
 
 /// @nodoc
-class __$$SearchByPhoneImplCopyWithImpl<$Res>
-    extends _$ContactsEventCopyWithImpl<$Res, _$SearchByPhoneImpl>
-    implements _$$SearchByPhoneImplCopyWith<$Res> {
-  __$$SearchByPhoneImplCopyWithImpl(
-      _$SearchByPhoneImpl _value, $Res Function(_$SearchByPhoneImpl) _then)
+class __$$SearchContactImplCopyWithImpl<$Res>
+    extends _$ContactsEventCopyWithImpl<$Res, _$SearchContactImpl>
+    implements _$$SearchContactImplCopyWith<$Res> {
+  __$$SearchContactImplCopyWithImpl(
+      _$SearchContactImpl _value, $Res Function(_$SearchContactImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? phoneNumber = null,
+    Object? text = null,
   }) {
-    return _then(_$SearchByPhoneImpl(
-      null == phoneNumber
-          ? _value.phoneNumber
-          : phoneNumber // ignore: cast_nullable_to_non_nullable
+    return _then(_$SearchContactImpl(
+      null == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -565,65 +565,64 @@ class __$$SearchByPhoneImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SearchByPhoneImpl implements _SearchByPhone {
-  const _$SearchByPhoneImpl(this.phoneNumber);
+class _$SearchContactImpl implements _SearchContact {
+  const _$SearchContactImpl(this.text);
 
   @override
-  final String phoneNumber;
+  final String text;
 
   @override
   String toString() {
-    return 'ContactsEvent.searchByPhone(phoneNumber: $phoneNumber)';
+    return 'ContactsEvent.searchContact(text: $text)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SearchByPhoneImpl &&
-            (identical(other.phoneNumber, phoneNumber) ||
-                other.phoneNumber == phoneNumber));
+            other is _$SearchContactImpl &&
+            (identical(other.text, text) || other.text == text));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, phoneNumber);
+  int get hashCode => Object.hash(runtimeType, text);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SearchByPhoneImplCopyWith<_$SearchByPhoneImpl> get copyWith =>
-      __$$SearchByPhoneImplCopyWithImpl<_$SearchByPhoneImpl>(this, _$identity);
+  _$$SearchContactImplCopyWith<_$SearchContactImpl> get copyWith =>
+      __$$SearchContactImplCopyWithImpl<_$SearchContactImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(String phoneNumber) searchByPhone,
+    required TResult Function(String text) searchContact,
     required TResult Function() checkPermission,
   }) {
-    return searchByPhone(phoneNumber);
+    return searchContact(text);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(String phoneNumber)? searchByPhone,
+    TResult? Function(String text)? searchContact,
     TResult? Function()? checkPermission,
   }) {
-    return searchByPhone?.call(phoneNumber);
+    return searchContact?.call(text);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String phoneNumber)? searchByPhone,
+    TResult Function(String text)? searchContact,
     TResult Function()? checkPermission,
     required TResult orElse(),
   }) {
-    if (searchByPhone != null) {
-      return searchByPhone(phoneNumber);
+    if (searchContact != null) {
+      return searchContact(text);
     }
     return orElse();
   }
@@ -632,43 +631,43 @@ class _$SearchByPhoneImpl implements _SearchByPhone {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_InitialEvent value) initial,
-    required TResult Function(_SearchByPhone value) searchByPhone,
+    required TResult Function(_SearchContact value) searchContact,
     required TResult Function(_CheckPermission value) checkPermission,
   }) {
-    return searchByPhone(this);
+    return searchContact(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitialEvent value)? initial,
-    TResult? Function(_SearchByPhone value)? searchByPhone,
+    TResult? Function(_SearchContact value)? searchContact,
     TResult? Function(_CheckPermission value)? checkPermission,
   }) {
-    return searchByPhone?.call(this);
+    return searchContact?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitialEvent value)? initial,
-    TResult Function(_SearchByPhone value)? searchByPhone,
+    TResult Function(_SearchContact value)? searchContact,
     TResult Function(_CheckPermission value)? checkPermission,
     required TResult orElse(),
   }) {
-    if (searchByPhone != null) {
-      return searchByPhone(this);
+    if (searchContact != null) {
+      return searchContact(this);
     }
     return orElse();
   }
 }
 
-abstract class _SearchByPhone implements ContactsEvent {
-  const factory _SearchByPhone(final String phoneNumber) = _$SearchByPhoneImpl;
+abstract class _SearchContact implements ContactsEvent {
+  const factory _SearchContact(final String text) = _$SearchContactImpl;
 
-  String get phoneNumber;
+  String get text;
   @JsonKey(ignore: true)
-  _$$SearchByPhoneImplCopyWith<_$SearchByPhoneImpl> get copyWith =>
+  _$$SearchContactImplCopyWith<_$SearchContactImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -711,7 +710,7 @@ class _$CheckPermissionImpl implements _CheckPermission {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(String phoneNumber) searchByPhone,
+    required TResult Function(String text) searchContact,
     required TResult Function() checkPermission,
   }) {
     return checkPermission();
@@ -721,7 +720,7 @@ class _$CheckPermissionImpl implements _CheckPermission {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(String phoneNumber)? searchByPhone,
+    TResult? Function(String text)? searchContact,
     TResult? Function()? checkPermission,
   }) {
     return checkPermission?.call();
@@ -731,7 +730,7 @@ class _$CheckPermissionImpl implements _CheckPermission {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String phoneNumber)? searchByPhone,
+    TResult Function(String text)? searchContact,
     TResult Function()? checkPermission,
     required TResult orElse(),
   }) {
@@ -745,7 +744,7 @@ class _$CheckPermissionImpl implements _CheckPermission {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_InitialEvent value) initial,
-    required TResult Function(_SearchByPhone value) searchByPhone,
+    required TResult Function(_SearchContact value) searchContact,
     required TResult Function(_CheckPermission value) checkPermission,
   }) {
     return checkPermission(this);
@@ -755,7 +754,7 @@ class _$CheckPermissionImpl implements _CheckPermission {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitialEvent value)? initial,
-    TResult? Function(_SearchByPhone value)? searchByPhone,
+    TResult? Function(_SearchContact value)? searchContact,
     TResult? Function(_CheckPermission value)? checkPermission,
   }) {
     return checkPermission?.call(this);
@@ -765,7 +764,7 @@ class _$CheckPermissionImpl implements _CheckPermission {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitialEvent value)? initial,
-    TResult Function(_SearchByPhone value)? searchByPhone,
+    TResult Function(_SearchContact value)? searchContact,
     TResult Function(_CheckPermission value)? checkPermission,
     required TResult orElse(),
   }) {
