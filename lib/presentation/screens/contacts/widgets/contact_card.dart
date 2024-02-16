@@ -29,11 +29,17 @@ class ContactCard extends StatelessWidget {
         child: Row(
           children: [
             ClipOval(
-              child: Image.asset(
-                AppImages.userPlaceholder,
-                height: 42,
-                width: 42,
-              ),
+              child: contact.image != null && contact.image!.isNotEmpty
+                  ? Image.memory(
+                      contact.image!,
+                      height: 42,
+                      width: 42,
+                    )
+                  : Image.asset(
+                      AppImages.userPlaceholder,
+                      height: 42,
+                      width: 42,
+                    ),
             ),
             const SizedBox(
               width: 25,

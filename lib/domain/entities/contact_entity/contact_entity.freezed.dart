@@ -14,10 +14,6 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-ContactEntity _$ContactEntityFromJson(Map<String, dynamic> json) {
-  return _ContactEntity.fromJson(json);
-}
-
 /// @nodoc
 mixin _$ContactEntity {
   String get id => throw _privateConstructorUsedError;
@@ -25,9 +21,8 @@ mixin _$ContactEntity {
   List<String> get phones => throw _privateConstructorUsedError;
   double? get rate => throw _privateConstructorUsedError;
   List<String>? get tags => throw _privateConstructorUsedError;
-  String? get image => throw _privateConstructorUsedError;
+  Uint8List? get image => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $ContactEntityCopyWith<ContactEntity> get copyWith =>
       throw _privateConstructorUsedError;
@@ -45,7 +40,7 @@ abstract class $ContactEntityCopyWith<$Res> {
       List<String> phones,
       double? rate,
       List<String>? tags,
-      String? image});
+      Uint8List? image});
 }
 
 /// @nodoc
@@ -92,7 +87,7 @@ class _$ContactEntityCopyWithImpl<$Res, $Val extends ContactEntity>
       image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as Uint8List?,
     ) as $Val);
   }
 }
@@ -111,7 +106,7 @@ abstract class _$$ContactEntityImplCopyWith<$Res>
       List<String> phones,
       double? rate,
       List<String>? tags,
-      String? image});
+      Uint8List? image});
 }
 
 /// @nodoc
@@ -156,13 +151,13 @@ class __$$ContactEntityImplCopyWithImpl<$Res>
       image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as Uint8List?,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$ContactEntityImpl extends _ContactEntity {
   _$ContactEntityImpl(
       {required this.id,
@@ -174,9 +169,6 @@ class _$ContactEntityImpl extends _ContactEntity {
       : _phones = phones,
         _tags = tags,
         super._();
-
-  factory _$ContactEntityImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ContactEntityImplFromJson(json);
 
   @override
   final String id;
@@ -203,7 +195,7 @@ class _$ContactEntityImpl extends _ContactEntity {
   }
 
   @override
-  final String? image;
+  final Uint8List? image;
 
   @override
   String toString() {
@@ -220,10 +212,9 @@ class _$ContactEntityImpl extends _ContactEntity {
             const DeepCollectionEquality().equals(other._phones, _phones) &&
             (identical(other.rate, rate) || other.rate == rate) &&
             const DeepCollectionEquality().equals(other._tags, _tags) &&
-            (identical(other.image, image) || other.image == image));
+            const DeepCollectionEquality().equals(other.image, image));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -232,20 +223,13 @@ class _$ContactEntityImpl extends _ContactEntity {
       const DeepCollectionEquality().hash(_phones),
       rate,
       const DeepCollectionEquality().hash(_tags),
-      image);
+      const DeepCollectionEquality().hash(image));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ContactEntityImplCopyWith<_$ContactEntityImpl> get copyWith =>
       __$$ContactEntityImplCopyWithImpl<_$ContactEntityImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ContactEntityImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class _ContactEntity extends ContactEntity {
@@ -255,11 +239,8 @@ abstract class _ContactEntity extends ContactEntity {
       required final List<String> phones,
       final double? rate,
       final List<String>? tags,
-      final String? image}) = _$ContactEntityImpl;
+      final Uint8List? image}) = _$ContactEntityImpl;
   _ContactEntity._() : super._();
-
-  factory _ContactEntity.fromJson(Map<String, dynamic> json) =
-      _$ContactEntityImpl.fromJson;
 
   @override
   String get id;
@@ -272,7 +253,7 @@ abstract class _ContactEntity extends ContactEntity {
   @override
   List<String>? get tags;
   @override
-  String? get image;
+  Uint8List? get image;
   @override
   @JsonKey(ignore: true)
   _$$ContactEntityImplCopyWith<_$ContactEntityImpl> get copyWith =>

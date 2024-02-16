@@ -1,9 +1,10 @@
+import 'dart:typed_data';
+
 import 'package:contacts_service/contacts_service.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sicherr/core/utils/phone_formatter.dart';
 
 part 'contact_entity.freezed.dart';
-part 'contact_entity.g.dart';
 
 @freezed
 class ContactEntity with _$ContactEntity {
@@ -13,21 +14,19 @@ class ContactEntity with _$ContactEntity {
     required List<String> phones,
     double? rate,
     List<String>? tags,
-    String? image,
+    Uint8List? image,
   }) = _ContactEntity;
 
   ContactEntity._();
 
   String get getMainPhoneNumber => phones.isNotEmpty ? phones.first : '';
 
-  factory ContactEntity.fromJson(Map<String, dynamic> json) =>
-      _$ContactEntityFromJson(json);
-
   factory ContactEntity.fromLocalContact(Contact contact) {
     return ContactEntity(
       id: contact.identifier ?? '',
       name: contact.displayName ?? '',
       phones: _parsePhoneNumbers(contact.phones),
+      image: contact.avatar,
     );
   }
 
