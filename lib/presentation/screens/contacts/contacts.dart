@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
 import 'package:sicherr/domain/managers/contacts_manager.dart';
-import 'package:sicherr/presentation/screens/contacts/bloc/contacts_bloc.dart';
+import 'package:sicherr/presentation/bloc/contacts/contacts_bloc.dart';
 import 'package:sicherr/presentation/screens/contacts/widgets/contact_card.dart';
 import 'package:sicherr/presentation/widgets/loading_indicator.dart';
 import 'package:sicherr/presentation/widgets/permission_alert_dialog.dart';
