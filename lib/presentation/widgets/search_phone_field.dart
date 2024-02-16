@@ -16,6 +16,11 @@ class SearchPhoneField extends StatelessWidget {
   final Function(String)? onChanged;
   final Function(String)? onSubmitted;
 
+  final _border = const OutlineInputBorder(
+    borderRadius: BorderRadius.all(Radius.circular(8)),
+    borderSide: BorderSide.none,
+  );
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -33,14 +38,15 @@ class SearchPhoneField extends StatelessWidget {
               AppIcons.search,
             ),
           ),
-          prefixIconConstraints: const BoxConstraints(minHeight: 16, maxHeight: 16),
+          prefixIconConstraints:
+              const BoxConstraints(minHeight: 16, maxHeight: 16),
           filled: true,
           fillColor: AppColors.lightGrey,
           contentPadding: EdgeInsets.zero,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.0),
-            borderSide: BorderSide.none,
-          ),
+          border: _border,
+          focusedBorder: _border,
+          enabledBorder: _border,
+          disabledBorder: _border,
         ),
         onSubmitted: onSubmitted,
         onChanged: onChanged,

@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:sicherr/core/utils/phone_formatter.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
 import 'package:sicherr/domain/managers/contacts_manager.dart';
 
@@ -51,7 +52,8 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
       _contactsToDisplay = [..._contactsList];
     } else {
       _contactsToDisplay = _contactsList
-          .where((contact) => contact.phoneNumber.contains(event.phoneNumber))
+          .where((contact) => PhoneFormatter.formatPhone(contact.phoneNumber)
+              .contains(event.phoneNumber))
           .toList();
     }
     emit(ContactsState.loaded(
