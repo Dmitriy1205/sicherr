@@ -27,21 +27,31 @@ class _SearchPhoneFieldState extends State<SearchPhoneField> {
   );
 
   final _focus = FocusNode();
+  final _controller = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     _focus.addListener(_onFocusChange);
+    _controller.addListener(_onTextChange);
   }
 
   @override
   void dispose() {
     _focus.dispose();
+    _controller.dispose();
+
     super.dispose();
   }
 
   void _onFocusChange() {
     setState(() {});
+  }
+
+  void _onTextChange() {
+    if (widget.onChanged != null) {
+      widget.onChanged!(_controller.text);
+    }
   }
 
   @override
@@ -53,6 +63,7 @@ class _SearchPhoneFieldState extends State<SearchPhoneField> {
           Expanded(
             child: TextField(
               keyboardType: TextInputType.text,
+              controller: _controller,
               focusNode: _focus,
               decoration: InputDecoration(
                 hintText: widget.hintText,
@@ -75,12 +86,14 @@ class _SearchPhoneFieldState extends State<SearchPhoneField> {
                 disabledBorder: _border,
               ),
               onSubmitted: widget.onSubmitted,
-              onChanged: widget.onChanged,
             ),
           ),
           if (_focus.hasFocus)
             GestureDetector(
-              onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+              onTap: () {
+                FocusManager.instance.primaryFocus?.unfocus();
+                _controller.text = '';
+              },
               child: Padding(
                 padding: const EdgeInsets.only(left: 15),
                 child: Text(
