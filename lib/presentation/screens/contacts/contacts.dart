@@ -23,9 +23,10 @@ class ContactsScreen extends StatelessWidget {
               loaded: (state) => Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+                        padding:
+                            const EdgeInsets.only(left: 20, right: 20, top: 18),
                         child: SearchPhoneField(
-                          hintText: 'Search by number',
+                          hintText: 'Search',
                           onChanged: (text) {
                             context
                                 .read<ContactsBloc>()
@@ -57,43 +58,44 @@ class ContactListDisplayed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return groupedContacts.isEmpty
-        ? Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Expanded(
-                child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  'No contacts to display',
-                  style: TextStyle(fontSize: 18),
-                ),
-                const SizedBox(height: 10),
-                if (isPermissionDenied)
-                  GestureDetector(
-                    onTap: () => showPermissionAlertDialog(context,
-                        content: 'Allow access to contacts', onClosed: (_) {
-                      context
-                          .read<ContactsBloc>()
-                          .add(const ContactsEvent.checkPermission());
-                    }),
-                    child: SizedBox(
-                      width: 300,
-                      child: Text(
-                        'Give permission to synchronize your contact list',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontWeight: FontWeight.w500,
+        ? Expanded(
+          child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'No contacts to display',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  const SizedBox(height: 10),
+                  if (isPermissionDenied)
+                    GestureDetector(
+                      onTap: () => showPermissionAlertDialog(context,
+                          content: 'Allow access to contacts', onClosed: (_) {
+                        context
+                            .read<ContactsBloc>()
+                            .add(const ContactsEvent.checkPermission());
+                      }),
+                      child: SizedBox(
+                        width: 300,
+                        child: Text(
+                          'Give permission to synchronize your contact list',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-              ],
-            )),
-          )
+                ],
+              ),
+            ),
+        )
         : Expanded(
             child: ListView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.only(left: 20, right: 20, top: 18),
               itemCount: groupedContacts.length,
               itemBuilder: (BuildContext context, int index) {
                 String category = groupedContacts.keys.elementAt(index);

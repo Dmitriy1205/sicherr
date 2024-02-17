@@ -20,12 +20,19 @@ class ContactInfo extends StatelessWidget {
             shape: BoxShape.circle,
           ),
           child: ClipOval(
-            child: Image.asset(
-              AppImages.userPlaceholder,
-              width: 70,
-              height: 70,
-              fit: BoxFit.fill,
-            ),
+            child: contact.image != null && contact.image!.isNotEmpty
+                ? Image.memory(
+                    contact.image!,
+                    height: 70,
+                    width: 70,
+                    fit: BoxFit.fill,
+                  )
+                : Image.asset(
+                    AppImages.userPlaceholder,
+                    width: 70,
+                    height: 70,
+                    fit: BoxFit.fill,
+                  ),
           ),
         ),
         const SizedBox(width: 15),
