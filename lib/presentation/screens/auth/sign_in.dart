@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sicherr/core/const/images.dart';
-import 'package:sicherr/core/const/strings.dart';
+import 'package:sicherr/core/functions/firebase_exc_localizer.dart';
 import 'package:sicherr/core/theme/theme.dart';
 import 'package:sicherr/domain/entities/country_codes/country_codes.dart';
 import 'package:sicherr/presentation/screens/auth/verification.dart';
@@ -17,6 +17,7 @@ import '../../../core/const/colors.dart';
 import '../../bloc/sign_in/sign_in_bloc.dart';
 import '../../widgets/app_country_code_picker/country_code_picker.dart';
 import '../../widgets/app_toast.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SigninScreen extends StatefulWidget {
   const SigninScreen({super.key});
@@ -88,11 +89,14 @@ class _SigninScreenState extends State<SigninScreen> {
       listener: (context, state) {
         state.maybeMap(
             verified: (_) =>
-                AppToast.showSuccess(context, 'Successfully Authorized'),
+                AppToast.showSuccess(context, AppLocalizations.of(context)!.successfullyAuthorized),
             unVerified: (_) {
-              AppToast.showSuccess(context, 'Verification code sent');
+              AppToast.showSuccess(context, AppLocalizations.of(context)!.verificationCodeSent);
             },
-            error: (e) => AppToast.showError(context, e.error),
+            error: (e) => AppToast.showError(
+                context,
+                FirebaseExceptionLocalizer.localize(context,
+                    exceptionCode: e.code, exceptionMessage: e.message)),
             orElse: () {});
       },
       builder: (context, state) {
@@ -137,11 +141,11 @@ class _SigninScreenState extends State<SigninScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              AppStrings.singIn,
+                              AppLocalizations.of(context)!.singIn,
                               style: AppTheme.themeData.textTheme.headlineLarge,
                             ),
                             Text(
-                              AppStrings.begin,
+                              AppLocalizations.of(context)!.begin,
                               style: AppTheme.themeData.textTheme.titleLarge,
                             ),
                             const SizedBox(
@@ -233,11 +237,11 @@ class _SigninScreenState extends State<SigninScreen> {
                                           color: Colors.white,
                                         )),
                                     orElse: () => Text(
-                                          AppStrings.singIn,
+                                          AppLocalizations.of(context)!.singIn,
                                           style: AppTheme
                                               .themeData.textTheme.labelMedium,
                                         )),
-                                text: AppStrings.singIn,
+                                text: AppLocalizations.of(context)!.singIn,
                                 onPressed: countryCodes.isNotEmpty &&
                                         !_isLengthValid(
                                           _phoneController.text,
@@ -267,7 +271,7 @@ class _SigninScreenState extends State<SigninScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
-                                    AppStrings.byContinuing,
+                                    AppLocalizations.of(context)!.byContinuing,
                                     style: AppTheme
                                         .themeData.textTheme.titleMedium,
                                   ),
@@ -281,7 +285,7 @@ class _SigninScreenState extends State<SigninScreen> {
                                     },
                                     borderRadius: BorderRadius.circular(5),
                                     child: Text(
-                                      AppStrings.terms,
+                                      AppLocalizations.of(context)!.terms,
                                       style: AppTheme
                                           .themeData.textTheme.titleMedium!
                                           .copyWith(

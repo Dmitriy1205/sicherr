@@ -27,7 +27,7 @@ mixin _$SignInEvent {
     required TResult Function(
             String verificationId, int? token, String phoneNumber)
         otpSent,
-    required TResult Function(String exception) catchFail,
+    required TResult Function(String message, String code) catchFail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,7 +38,7 @@ mixin _$SignInEvent {
     TResult? Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult? Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
-    TResult? Function(String exception)? catchFail,
+    TResult? Function(String message, String code)? catchFail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -48,7 +48,7 @@ mixin _$SignInEvent {
     TResult Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
-    TResult Function(String exception)? catchFail,
+    TResult Function(String message, String code)? catchFail,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -149,7 +149,7 @@ class _$InitImpl implements _Init {
     required TResult Function(
             String verificationId, int? token, String phoneNumber)
         otpSent,
-    required TResult Function(String exception) catchFail,
+    required TResult Function(String message, String code) catchFail,
   }) {
     return init();
   }
@@ -163,7 +163,7 @@ class _$InitImpl implements _Init {
     TResult? Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult? Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
-    TResult? Function(String exception)? catchFail,
+    TResult? Function(String message, String code)? catchFail,
   }) {
     return init?.call();
   }
@@ -176,7 +176,7 @@ class _$InitImpl implements _Init {
     TResult Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
-    TResult Function(String exception)? catchFail,
+    TResult Function(String message, String code)? catchFail,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -316,7 +316,7 @@ class _$LoginImpl implements _Login {
     required TResult Function(
             String verificationId, int? token, String phoneNumber)
         otpSent,
-    required TResult Function(String exception) catchFail,
+    required TResult Function(String message, String code) catchFail,
   }) {
     return login(phoneNumber, verifyId);
   }
@@ -330,7 +330,7 @@ class _$LoginImpl implements _Login {
     TResult? Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult? Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
-    TResult? Function(String exception)? catchFail,
+    TResult? Function(String message, String code)? catchFail,
   }) {
     return login?.call(phoneNumber, verifyId);
   }
@@ -343,7 +343,7 @@ class _$LoginImpl implements _Login {
     TResult Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
-    TResult Function(String exception)? catchFail,
+    TResult Function(String message, String code)? catchFail,
     required TResult orElse(),
   }) {
     if (login != null) {
@@ -487,7 +487,7 @@ class _$PhoneAuthVerificationCompleteImpl
     required TResult Function(
             String verificationId, int? token, String phoneNumber)
         otpSent,
-    required TResult Function(String exception) catchFail,
+    required TResult Function(String message, String code) catchFail,
   }) {
     return phoneAuthVerificationComplete(credential);
   }
@@ -501,7 +501,7 @@ class _$PhoneAuthVerificationCompleteImpl
     TResult? Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult? Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
-    TResult? Function(String exception)? catchFail,
+    TResult? Function(String message, String code)? catchFail,
   }) {
     return phoneAuthVerificationComplete?.call(credential);
   }
@@ -514,7 +514,7 @@ class _$PhoneAuthVerificationCompleteImpl
     TResult Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
-    TResult Function(String exception)? catchFail,
+    TResult Function(String message, String code)? catchFail,
     required TResult orElse(),
   }) {
     if (phoneAuthVerificationComplete != null) {
@@ -674,7 +674,7 @@ class _$OtpSentImpl implements _OtpSent {
     required TResult Function(
             String verificationId, int? token, String phoneNumber)
         otpSent,
-    required TResult Function(String exception) catchFail,
+    required TResult Function(String message, String code) catchFail,
   }) {
     return otpSent(verificationId, token, phoneNumber);
   }
@@ -688,7 +688,7 @@ class _$OtpSentImpl implements _OtpSent {
     TResult? Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult? Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
-    TResult? Function(String exception)? catchFail,
+    TResult? Function(String message, String code)? catchFail,
   }) {
     return otpSent?.call(verificationId, token, phoneNumber);
   }
@@ -701,7 +701,7 @@ class _$OtpSentImpl implements _OtpSent {
     TResult Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
-    TResult Function(String exception)? catchFail,
+    TResult Function(String message, String code)? catchFail,
     required TResult orElse(),
   }) {
     if (otpSent != null) {
@@ -774,7 +774,7 @@ abstract class _$$CatchFailImplCopyWith<$Res> {
           _$CatchFailImpl value, $Res Function(_$CatchFailImpl) then) =
       __$$CatchFailImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String exception});
+  $Res call({String message, String code});
 }
 
 /// @nodoc
@@ -788,12 +788,17 @@ class __$$CatchFailImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? exception = null,
+    Object? message = null,
+    Object? code = null,
   }) {
     return _then(_$CatchFailImpl(
-      exception: null == exception
-          ? _value.exception
-          : exception // ignore: cast_nullable_to_non_nullable
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      code: null == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -802,14 +807,16 @@ class __$$CatchFailImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$CatchFailImpl implements _CatchFail {
-  const _$CatchFailImpl({required this.exception});
+  const _$CatchFailImpl({required this.message, required this.code});
 
   @override
-  final String exception;
+  final String message;
+  @override
+  final String code;
 
   @override
   String toString() {
-    return 'SignInEvent.catchFail(exception: $exception)';
+    return 'SignInEvent.catchFail(message: $message, code: $code)';
   }
 
   @override
@@ -817,12 +824,12 @@ class _$CatchFailImpl implements _CatchFail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CatchFailImpl &&
-            (identical(other.exception, exception) ||
-                other.exception == exception));
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.code, code) || other.code == code));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, exception);
+  int get hashCode => Object.hash(runtimeType, message, code);
 
   @JsonKey(ignore: true)
   @override
@@ -842,9 +849,9 @@ class _$CatchFailImpl implements _CatchFail {
     required TResult Function(
             String verificationId, int? token, String phoneNumber)
         otpSent,
-    required TResult Function(String exception) catchFail,
+    required TResult Function(String message, String code) catchFail,
   }) {
-    return catchFail(exception);
+    return catchFail(message, code);
   }
 
   @override
@@ -856,9 +863,9 @@ class _$CatchFailImpl implements _CatchFail {
     TResult? Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult? Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
-    TResult? Function(String exception)? catchFail,
+    TResult? Function(String message, String code)? catchFail,
   }) {
-    return catchFail?.call(exception);
+    return catchFail?.call(message, code);
   }
 
   @override
@@ -869,11 +876,11 @@ class _$CatchFailImpl implements _CatchFail {
     TResult Function(AuthCredential credential)? phoneAuthVerificationComplete,
     TResult Function(String verificationId, int? token, String phoneNumber)?
         otpSent,
-    TResult Function(String exception)? catchFail,
+    TResult Function(String message, String code)? catchFail,
     required TResult orElse(),
   }) {
     if (catchFail != null) {
-      return catchFail(exception);
+      return catchFail(message, code);
     }
     return orElse();
   }
@@ -923,9 +930,12 @@ class _$CatchFailImpl implements _CatchFail {
 }
 
 abstract class _CatchFail implements SignInEvent {
-  const factory _CatchFail({required final String exception}) = _$CatchFailImpl;
+  const factory _CatchFail(
+      {required final String message,
+      required final String code}) = _$CatchFailImpl;
 
-  String get exception;
+  String get message;
+  String get code;
   @JsonKey(ignore: true)
   _$$CatchFailImplCopyWith<_$CatchFailImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -941,7 +951,7 @@ mixin _$SignInState {
     required TResult Function(String verificationId, String phoneNumber)
         unVerified,
     required TResult Function() verified,
-    required TResult Function(String error) error,
+    required TResult Function(String message, String? code) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -951,7 +961,7 @@ mixin _$SignInState {
     TResult? Function()? loaded,
     TResult? Function(String verificationId, String phoneNumber)? unVerified,
     TResult? Function()? verified,
-    TResult? Function(String error)? error,
+    TResult? Function(String message, String? code)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -961,7 +971,7 @@ mixin _$SignInState {
     TResult Function()? loaded,
     TResult Function(String verificationId, String phoneNumber)? unVerified,
     TResult Function()? verified,
-    TResult Function(String error)? error,
+    TResult Function(String message, String? code)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -1060,7 +1070,7 @@ class _$InitialImpl extends _Initial {
     required TResult Function(String verificationId, String phoneNumber)
         unVerified,
     required TResult Function() verified,
-    required TResult Function(String error) error,
+    required TResult Function(String message, String? code) error,
   }) {
     return initial();
   }
@@ -1073,7 +1083,7 @@ class _$InitialImpl extends _Initial {
     TResult? Function()? loaded,
     TResult? Function(String verificationId, String phoneNumber)? unVerified,
     TResult? Function()? verified,
-    TResult? Function(String error)? error,
+    TResult? Function(String message, String? code)? error,
   }) {
     return initial?.call();
   }
@@ -1086,7 +1096,7 @@ class _$InitialImpl extends _Initial {
     TResult Function()? loaded,
     TResult Function(String verificationId, String phoneNumber)? unVerified,
     TResult Function()? verified,
-    TResult Function(String error)? error,
+    TResult Function(String message, String? code)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -1188,7 +1198,7 @@ class _$LoadingImpl extends _Loading {
     required TResult Function(String verificationId, String phoneNumber)
         unVerified,
     required TResult Function() verified,
-    required TResult Function(String error) error,
+    required TResult Function(String message, String? code) error,
   }) {
     return loading();
   }
@@ -1201,7 +1211,7 @@ class _$LoadingImpl extends _Loading {
     TResult? Function()? loaded,
     TResult? Function(String verificationId, String phoneNumber)? unVerified,
     TResult? Function()? verified,
-    TResult? Function(String error)? error,
+    TResult? Function(String message, String? code)? error,
   }) {
     return loading?.call();
   }
@@ -1214,7 +1224,7 @@ class _$LoadingImpl extends _Loading {
     TResult Function()? loaded,
     TResult Function(String verificationId, String phoneNumber)? unVerified,
     TResult Function()? verified,
-    TResult Function(String error)? error,
+    TResult Function(String message, String? code)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -1316,7 +1326,7 @@ class _$LoadedImpl extends _Loaded {
     required TResult Function(String verificationId, String phoneNumber)
         unVerified,
     required TResult Function() verified,
-    required TResult Function(String error) error,
+    required TResult Function(String message, String? code) error,
   }) {
     return loaded();
   }
@@ -1329,7 +1339,7 @@ class _$LoadedImpl extends _Loaded {
     TResult? Function()? loaded,
     TResult? Function(String verificationId, String phoneNumber)? unVerified,
     TResult? Function()? verified,
-    TResult? Function(String error)? error,
+    TResult? Function(String message, String? code)? error,
   }) {
     return loaded?.call();
   }
@@ -1342,7 +1352,7 @@ class _$LoadedImpl extends _Loaded {
     TResult Function()? loaded,
     TResult Function(String verificationId, String phoneNumber)? unVerified,
     TResult Function()? verified,
-    TResult Function(String error)? error,
+    TResult Function(String message, String? code)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -1482,7 +1492,7 @@ class _$UnVerifiedImpl extends _UnVerified {
     required TResult Function(String verificationId, String phoneNumber)
         unVerified,
     required TResult Function() verified,
-    required TResult Function(String error) error,
+    required TResult Function(String message, String? code) error,
   }) {
     return unVerified(verificationId, phoneNumber);
   }
@@ -1495,7 +1505,7 @@ class _$UnVerifiedImpl extends _UnVerified {
     TResult? Function()? loaded,
     TResult? Function(String verificationId, String phoneNumber)? unVerified,
     TResult? Function()? verified,
-    TResult? Function(String error)? error,
+    TResult? Function(String message, String? code)? error,
   }) {
     return unVerified?.call(verificationId, phoneNumber);
   }
@@ -1508,7 +1518,7 @@ class _$UnVerifiedImpl extends _UnVerified {
     TResult Function()? loaded,
     TResult Function(String verificationId, String phoneNumber)? unVerified,
     TResult Function()? verified,
-    TResult Function(String error)? error,
+    TResult Function(String message, String? code)? error,
     required TResult orElse(),
   }) {
     if (unVerified != null) {
@@ -1618,7 +1628,7 @@ class _$VerifiedImpl extends _Verified {
     required TResult Function(String verificationId, String phoneNumber)
         unVerified,
     required TResult Function() verified,
-    required TResult Function(String error) error,
+    required TResult Function(String message, String? code) error,
   }) {
     return verified();
   }
@@ -1631,7 +1641,7 @@ class _$VerifiedImpl extends _Verified {
     TResult? Function()? loaded,
     TResult? Function(String verificationId, String phoneNumber)? unVerified,
     TResult? Function()? verified,
-    TResult? Function(String error)? error,
+    TResult? Function(String message, String? code)? error,
   }) {
     return verified?.call();
   }
@@ -1644,7 +1654,7 @@ class _$VerifiedImpl extends _Verified {
     TResult Function()? loaded,
     TResult Function(String verificationId, String phoneNumber)? unVerified,
     TResult Function()? verified,
-    TResult Function(String error)? error,
+    TResult Function(String message, String? code)? error,
     required TResult orElse(),
   }) {
     if (verified != null) {
@@ -1708,7 +1718,7 @@ abstract class _$$ErrorImplCopyWith<$Res> {
           _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
       __$$ErrorImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String error});
+  $Res call({String message, String? code});
 }
 
 /// @nodoc
@@ -1722,13 +1732,18 @@ class __$$ErrorImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? error = null,
+    Object? message = null,
+    Object? code = freezed,
   }) {
     return _then(_$ErrorImpl(
-      error: null == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
               as String,
+      code: freezed == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -1736,14 +1751,16 @@ class __$$ErrorImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ErrorImpl extends _Error {
-  const _$ErrorImpl({required this.error}) : super._();
+  const _$ErrorImpl({required this.message, this.code}) : super._();
 
   @override
-  final String error;
+  final String message;
+  @override
+  final String? code;
 
   @override
   String toString() {
-    return 'SignInState.error(error: $error)';
+    return 'SignInState.error(message: $message, code: $code)';
   }
 
   @override
@@ -1751,11 +1768,12 @@ class _$ErrorImpl extends _Error {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ErrorImpl &&
-            (identical(other.error, error) || other.error == error));
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.code, code) || other.code == code));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, error);
+  int get hashCode => Object.hash(runtimeType, message, code);
 
   @JsonKey(ignore: true)
   @override
@@ -1772,9 +1790,9 @@ class _$ErrorImpl extends _Error {
     required TResult Function(String verificationId, String phoneNumber)
         unVerified,
     required TResult Function() verified,
-    required TResult Function(String error) error,
+    required TResult Function(String message, String? code) error,
   }) {
-    return error(this.error);
+    return error(message, code);
   }
 
   @override
@@ -1785,9 +1803,9 @@ class _$ErrorImpl extends _Error {
     TResult? Function()? loaded,
     TResult? Function(String verificationId, String phoneNumber)? unVerified,
     TResult? Function()? verified,
-    TResult? Function(String error)? error,
+    TResult? Function(String message, String? code)? error,
   }) {
-    return error?.call(this.error);
+    return error?.call(message, code);
   }
 
   @override
@@ -1798,11 +1816,11 @@ class _$ErrorImpl extends _Error {
     TResult Function()? loaded,
     TResult Function(String verificationId, String phoneNumber)? unVerified,
     TResult Function()? verified,
-    TResult Function(String error)? error,
+    TResult Function(String message, String? code)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(this.error);
+      return error(message, code);
     }
     return orElse();
   }
@@ -1852,10 +1870,12 @@ class _$ErrorImpl extends _Error {
 }
 
 abstract class _Error extends SignInState {
-  const factory _Error({required final String error}) = _$ErrorImpl;
+  const factory _Error({required final String message, final String? code}) =
+      _$ErrorImpl;
   const _Error._() : super._();
 
-  String get error;
+  String get message;
+  String? get code;
   @JsonKey(ignore: true)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;

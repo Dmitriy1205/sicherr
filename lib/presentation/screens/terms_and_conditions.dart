@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sicherr/core/const/strings.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TermsAndConditions extends StatelessWidget {
   const TermsAndConditions({super.key});
@@ -8,7 +8,7 @@ class TermsAndConditions extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: const Center(child: Text(AppStrings.terms)),
+      body:  Center(child: Text(AppLocalizations.of(context)!.terms)),
     );
   }
 }

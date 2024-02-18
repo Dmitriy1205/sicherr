@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 void showPermissionAlertDialog(
   BuildContext context, {
@@ -13,17 +15,17 @@ void showPermissionAlertDialog(
     showCupertinoDialog<void>(
       context: context,
       builder: (BuildContext context) => CupertinoAlertDialog(
-        title: const Text('Permission Denied'),
+        title: Text(AppLocalizations.of(context)!.permissionDenied,),
         content: Text(content),
         actions: <CupertinoDialogAction>[
           CupertinoDialogAction(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Cancel'),
+            child:  Text(AppLocalizations.of(context)!.cancel,),
           ),
           CupertinoDialogAction(
             isDefaultAction: true,
             onPressed: () => openAppSettings(),
-            child: const Text('Settings'),
+            child:  Text(AppLocalizations.of(context)!.settings,),
           ),
         ],
       ),
@@ -32,16 +34,16 @@ void showPermissionAlertDialog(
     showDialog<void>(
       context: context,
       builder: (BuildContext context) => AlertDialog(
-        title: const Text('Permission Denied'),
+        title:  Text(AppLocalizations.of(context)!.permissionDenied,),
         content: Text(content),
         actions: <Widget>[
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Cancel'),
+            child:  Text(AppLocalizations.of(context)!.cancel,),
           ),
           TextButton(
             onPressed: () => openAppSettings(),
-            child: const Text('Settings'),
+            child:  Text(AppLocalizations.of(context)!.settings,),
           ),
         ],
       ),

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sicherr/core/const/colors.dart';
 import 'package:sicherr/core/const/icons.dart';
-import 'package:sicherr/core/const/strings.dart';
 import 'package:sicherr/presentation/screens/contacts/contacts.dart';
 import 'package:sicherr/presentation/screens/home/home.dart';
 import 'package:sicherr/presentation/screens/map/map.dart';
 import 'package:sicherr/presentation/screens/profile/profile.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class InitialScreen extends StatefulWidget {
   const InitialScreen({super.key});
@@ -25,15 +25,16 @@ class _InitialScreenState extends State<InitialScreen> {
     ProfileScreen(),
   ];
 
-  final titles = [
-    AppStrings.contacts,
-    AppStrings.home,
-    AppStrings.map,
-    AppStrings.profile,
-  ];
+
 
   @override
   Widget build(BuildContext context) {
+    final titles = [
+      AppLocalizations.of(context)!.contacts,
+      AppLocalizations.of(context)!.home,
+      AppLocalizations.of(context)!.map,
+      AppLocalizations.of(context)!.profile,
+    ];
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -95,7 +96,7 @@ class _MyBottomNavigationBar extends StatelessWidget {
                 height: 22,
               ),
             ),
-            label: 'Contacts',
+            label: AppLocalizations.of(context)!.contacts,
           ),
           BottomNavigationBarItem(
             icon: Padding(
@@ -109,7 +110,8 @@ class _MyBottomNavigationBar extends StatelessWidget {
                 height: 22,
               ),
             ),
-            label: 'Home',
+            label:
+              AppLocalizations.of(context)!.home,
           ),
           BottomNavigationBarItem(
             icon: Padding(
@@ -123,7 +125,8 @@ class _MyBottomNavigationBar extends StatelessWidget {
                 height: 22,
               ),
             ),
-            label: 'Map',
+            label:
+              AppLocalizations.of(context)!.map,
           ),
           BottomNavigationBarItem(
             icon: Padding(
@@ -137,7 +140,8 @@ class _MyBottomNavigationBar extends StatelessWidget {
                 height: 22,
               ),
             ),
-            label: 'Profile',
+            label:
+              AppLocalizations.of(context)!.profile,
           ),
         ],
         backgroundColor: AppColors.lightGrey,

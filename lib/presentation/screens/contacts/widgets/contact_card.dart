@@ -6,6 +6,7 @@ import 'package:sicherr/domain/managers/contacts_manager.dart';
 import 'package:sicherr/presentation/screens/contact_detail/contact_detail.dart';
 import 'package:sicherr/presentation/widgets/round_wrapper_icon.dart';
 
+
 class ContactCard extends StatelessWidget {
   const ContactCard({super.key, required this.contact});
   final ContactEntity contact;

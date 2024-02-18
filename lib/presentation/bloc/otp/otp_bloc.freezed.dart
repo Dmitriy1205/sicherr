@@ -23,7 +23,7 @@ mixin _$OtpEvent {
         resendCode,
     required TResult Function(String verificationId, String smsCode) verify,
     required TResult Function() otpSent,
-    required TResult Function(String exception) catchFail,
+    required TResult Function(String message, String code) catchFail,
     required TResult Function() reset,
   }) =>
       throw _privateConstructorUsedError;
@@ -33,7 +33,7 @@ mixin _$OtpEvent {
         resendCode,
     TResult? Function(String verificationId, String smsCode)? verify,
     TResult? Function()? otpSent,
-    TResult? Function(String exception)? catchFail,
+    TResult? Function(String message, String code)? catchFail,
     TResult? Function()? reset,
   }) =>
       throw _privateConstructorUsedError;
@@ -43,7 +43,7 @@ mixin _$OtpEvent {
         resendCode,
     TResult Function(String verificationId, String smsCode)? verify,
     TResult Function()? otpSent,
-    TResult Function(String exception)? catchFail,
+    TResult Function(String message, String code)? catchFail,
     TResult Function()? reset,
     required TResult orElse(),
   }) =>
@@ -174,7 +174,7 @@ class _$ResendCodeImpl implements _ResendCode {
         resendCode,
     required TResult Function(String verificationId, String smsCode) verify,
     required TResult Function() otpSent,
-    required TResult Function(String exception) catchFail,
+    required TResult Function(String message, String code) catchFail,
     required TResult Function() reset,
   }) {
     return resendCode(phoneNumber, verifyId);
@@ -187,7 +187,7 @@ class _$ResendCodeImpl implements _ResendCode {
         resendCode,
     TResult? Function(String verificationId, String smsCode)? verify,
     TResult? Function()? otpSent,
-    TResult? Function(String exception)? catchFail,
+    TResult? Function(String message, String code)? catchFail,
     TResult? Function()? reset,
   }) {
     return resendCode?.call(phoneNumber, verifyId);
@@ -200,7 +200,7 @@ class _$ResendCodeImpl implements _ResendCode {
         resendCode,
     TResult Function(String verificationId, String smsCode)? verify,
     TResult Function()? otpSent,
-    TResult Function(String exception)? catchFail,
+    TResult Function(String message, String code)? catchFail,
     TResult Function()? reset,
     required TResult orElse(),
   }) {
@@ -341,7 +341,7 @@ class _$VerifyImpl implements _Verify {
         resendCode,
     required TResult Function(String verificationId, String smsCode) verify,
     required TResult Function() otpSent,
-    required TResult Function(String exception) catchFail,
+    required TResult Function(String message, String code) catchFail,
     required TResult Function() reset,
   }) {
     return verify(verificationId, smsCode);
@@ -354,7 +354,7 @@ class _$VerifyImpl implements _Verify {
         resendCode,
     TResult? Function(String verificationId, String smsCode)? verify,
     TResult? Function()? otpSent,
-    TResult? Function(String exception)? catchFail,
+    TResult? Function(String message, String code)? catchFail,
     TResult? Function()? reset,
   }) {
     return verify?.call(verificationId, smsCode);
@@ -367,7 +367,7 @@ class _$VerifyImpl implements _Verify {
         resendCode,
     TResult Function(String verificationId, String smsCode)? verify,
     TResult Function()? otpSent,
-    TResult Function(String exception)? catchFail,
+    TResult Function(String message, String code)? catchFail,
     TResult Function()? reset,
     required TResult orElse(),
   }) {
@@ -473,7 +473,7 @@ class _$OtpSentImpl implements _OtpSent {
         resendCode,
     required TResult Function(String verificationId, String smsCode) verify,
     required TResult Function() otpSent,
-    required TResult Function(String exception) catchFail,
+    required TResult Function(String message, String code) catchFail,
     required TResult Function() reset,
   }) {
     return otpSent();
@@ -486,7 +486,7 @@ class _$OtpSentImpl implements _OtpSent {
         resendCode,
     TResult? Function(String verificationId, String smsCode)? verify,
     TResult? Function()? otpSent,
-    TResult? Function(String exception)? catchFail,
+    TResult? Function(String message, String code)? catchFail,
     TResult? Function()? reset,
   }) {
     return otpSent?.call();
@@ -499,7 +499,7 @@ class _$OtpSentImpl implements _OtpSent {
         resendCode,
     TResult Function(String verificationId, String smsCode)? verify,
     TResult Function()? otpSent,
-    TResult Function(String exception)? catchFail,
+    TResult Function(String message, String code)? catchFail,
     TResult Function()? reset,
     required TResult orElse(),
   }) {
@@ -560,7 +560,7 @@ abstract class _$$CatchFailImplCopyWith<$Res> {
           _$CatchFailImpl value, $Res Function(_$CatchFailImpl) then) =
       __$$CatchFailImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String exception});
+  $Res call({String message, String code});
 }
 
 /// @nodoc
@@ -574,12 +574,17 @@ class __$$CatchFailImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? exception = null,
+    Object? message = null,
+    Object? code = null,
   }) {
     return _then(_$CatchFailImpl(
-      exception: null == exception
-          ? _value.exception
-          : exception // ignore: cast_nullable_to_non_nullable
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      code: null == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -588,14 +593,16 @@ class __$$CatchFailImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$CatchFailImpl implements _CatchFail {
-  const _$CatchFailImpl({required this.exception});
+  const _$CatchFailImpl({required this.message, required this.code});
 
   @override
-  final String exception;
+  final String message;
+  @override
+  final String code;
 
   @override
   String toString() {
-    return 'OtpEvent.catchFail(exception: $exception)';
+    return 'OtpEvent.catchFail(message: $message, code: $code)';
   }
 
   @override
@@ -603,12 +610,12 @@ class _$CatchFailImpl implements _CatchFail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CatchFailImpl &&
-            (identical(other.exception, exception) ||
-                other.exception == exception));
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.code, code) || other.code == code));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, exception);
+  int get hashCode => Object.hash(runtimeType, message, code);
 
   @JsonKey(ignore: true)
   @override
@@ -624,10 +631,10 @@ class _$CatchFailImpl implements _CatchFail {
         resendCode,
     required TResult Function(String verificationId, String smsCode) verify,
     required TResult Function() otpSent,
-    required TResult Function(String exception) catchFail,
+    required TResult Function(String message, String code) catchFail,
     required TResult Function() reset,
   }) {
-    return catchFail(exception);
+    return catchFail(message, code);
   }
 
   @override
@@ -637,10 +644,10 @@ class _$CatchFailImpl implements _CatchFail {
         resendCode,
     TResult? Function(String verificationId, String smsCode)? verify,
     TResult? Function()? otpSent,
-    TResult? Function(String exception)? catchFail,
+    TResult? Function(String message, String code)? catchFail,
     TResult? Function()? reset,
   }) {
-    return catchFail?.call(exception);
+    return catchFail?.call(message, code);
   }
 
   @override
@@ -650,12 +657,12 @@ class _$CatchFailImpl implements _CatchFail {
         resendCode,
     TResult Function(String verificationId, String smsCode)? verify,
     TResult Function()? otpSent,
-    TResult Function(String exception)? catchFail,
+    TResult Function(String message, String code)? catchFail,
     TResult Function()? reset,
     required TResult orElse(),
   }) {
     if (catchFail != null) {
-      return catchFail(exception);
+      return catchFail(message, code);
     }
     return orElse();
   }
@@ -702,9 +709,12 @@ class _$CatchFailImpl implements _CatchFail {
 }
 
 abstract class _CatchFail implements OtpEvent {
-  const factory _CatchFail({required final String exception}) = _$CatchFailImpl;
+  const factory _CatchFail(
+      {required final String message,
+      required final String code}) = _$CatchFailImpl;
 
-  String get exception;
+  String get message;
+  String get code;
   @JsonKey(ignore: true)
   _$$CatchFailImplCopyWith<_$CatchFailImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -753,7 +763,7 @@ class _$ResetImpl implements _Reset {
         resendCode,
     required TResult Function(String verificationId, String smsCode) verify,
     required TResult Function() otpSent,
-    required TResult Function(String exception) catchFail,
+    required TResult Function(String message, String code) catchFail,
     required TResult Function() reset,
   }) {
     return reset();
@@ -766,7 +776,7 @@ class _$ResetImpl implements _Reset {
         resendCode,
     TResult? Function(String verificationId, String smsCode)? verify,
     TResult? Function()? otpSent,
-    TResult? Function(String exception)? catchFail,
+    TResult? Function(String message, String code)? catchFail,
     TResult? Function()? reset,
   }) {
     return reset?.call();
@@ -779,7 +789,7 @@ class _$ResetImpl implements _Reset {
         resendCode,
     TResult Function(String verificationId, String smsCode)? verify,
     TResult Function()? otpSent,
-    TResult Function(String exception)? catchFail,
+    TResult Function(String message, String code)? catchFail,
     TResult Function()? reset,
     required TResult orElse(),
   }) {
@@ -842,7 +852,7 @@ mixin _$OtpState {
     required TResult Function() wait,
     required TResult Function() verification,
     required TResult Function() loaded,
-    required TResult Function(String error) error,
+    required TResult Function(String message, String? code) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -851,7 +861,7 @@ mixin _$OtpState {
     TResult? Function()? wait,
     TResult? Function()? verification,
     TResult? Function()? loaded,
-    TResult? Function(String error)? error,
+    TResult? Function(String message, String? code)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -860,7 +870,7 @@ mixin _$OtpState {
     TResult Function()? wait,
     TResult Function()? verification,
     TResult Function()? loaded,
-    TResult Function(String error)? error,
+    TResult Function(String message, String? code)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -953,7 +963,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function() wait,
     required TResult Function() verification,
     required TResult Function() loaded,
-    required TResult Function(String error) error,
+    required TResult Function(String message, String? code) error,
   }) {
     return initial();
   }
@@ -965,7 +975,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? wait,
     TResult? Function()? verification,
     TResult? Function()? loaded,
-    TResult? Function(String error)? error,
+    TResult? Function(String message, String? code)? error,
   }) {
     return initial?.call();
   }
@@ -977,7 +987,7 @@ class _$InitialImpl implements _Initial {
     TResult Function()? wait,
     TResult Function()? verification,
     TResult Function()? loaded,
-    TResult Function(String error)? error,
+    TResult Function(String message, String? code)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -1072,7 +1082,7 @@ class _$WaitImpl implements _Wait {
     required TResult Function() wait,
     required TResult Function() verification,
     required TResult Function() loaded,
-    required TResult Function(String error) error,
+    required TResult Function(String message, String? code) error,
   }) {
     return wait();
   }
@@ -1084,7 +1094,7 @@ class _$WaitImpl implements _Wait {
     TResult? Function()? wait,
     TResult? Function()? verification,
     TResult? Function()? loaded,
-    TResult? Function(String error)? error,
+    TResult? Function(String message, String? code)? error,
   }) {
     return wait?.call();
   }
@@ -1096,7 +1106,7 @@ class _$WaitImpl implements _Wait {
     TResult Function()? wait,
     TResult Function()? verification,
     TResult Function()? loaded,
-    TResult Function(String error)? error,
+    TResult Function(String message, String? code)? error,
     required TResult orElse(),
   }) {
     if (wait != null) {
@@ -1192,7 +1202,7 @@ class _$VerificationImpl implements _Verification {
     required TResult Function() wait,
     required TResult Function() verification,
     required TResult Function() loaded,
-    required TResult Function(String error) error,
+    required TResult Function(String message, String? code) error,
   }) {
     return verification();
   }
@@ -1204,7 +1214,7 @@ class _$VerificationImpl implements _Verification {
     TResult? Function()? wait,
     TResult? Function()? verification,
     TResult? Function()? loaded,
-    TResult? Function(String error)? error,
+    TResult? Function(String message, String? code)? error,
   }) {
     return verification?.call();
   }
@@ -1216,7 +1226,7 @@ class _$VerificationImpl implements _Verification {
     TResult Function()? wait,
     TResult Function()? verification,
     TResult Function()? loaded,
-    TResult Function(String error)? error,
+    TResult Function(String message, String? code)? error,
     required TResult orElse(),
   }) {
     if (verification != null) {
@@ -1312,7 +1322,7 @@ class _$LoadedImpl implements _Loaded {
     required TResult Function() wait,
     required TResult Function() verification,
     required TResult Function() loaded,
-    required TResult Function(String error) error,
+    required TResult Function(String message, String? code) error,
   }) {
     return loaded();
   }
@@ -1324,7 +1334,7 @@ class _$LoadedImpl implements _Loaded {
     TResult? Function()? wait,
     TResult? Function()? verification,
     TResult? Function()? loaded,
-    TResult? Function(String error)? error,
+    TResult? Function(String message, String? code)? error,
   }) {
     return loaded?.call();
   }
@@ -1336,7 +1346,7 @@ class _$LoadedImpl implements _Loaded {
     TResult Function()? wait,
     TResult Function()? verification,
     TResult Function()? loaded,
-    TResult Function(String error)? error,
+    TResult Function(String message, String? code)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -1396,7 +1406,7 @@ abstract class _$$ErrorImplCopyWith<$Res> {
           _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
       __$$ErrorImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String error});
+  $Res call({String message, String? code});
 }
 
 /// @nodoc
@@ -1410,13 +1420,18 @@ class __$$ErrorImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? error = null,
+    Object? message = null,
+    Object? code = freezed,
   }) {
     return _then(_$ErrorImpl(
-      error: null == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
               as String,
+      code: freezed == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -1424,14 +1439,16 @@ class __$$ErrorImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ErrorImpl implements _Error {
-  const _$ErrorImpl({required this.error});
+  const _$ErrorImpl({required this.message, this.code});
 
   @override
-  final String error;
+  final String message;
+  @override
+  final String? code;
 
   @override
   String toString() {
-    return 'OtpState.error(error: $error)';
+    return 'OtpState.error(message: $message, code: $code)';
   }
 
   @override
@@ -1439,11 +1456,12 @@ class _$ErrorImpl implements _Error {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ErrorImpl &&
-            (identical(other.error, error) || other.error == error));
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.code, code) || other.code == code));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, error);
+  int get hashCode => Object.hash(runtimeType, message, code);
 
   @JsonKey(ignore: true)
   @override
@@ -1458,9 +1476,9 @@ class _$ErrorImpl implements _Error {
     required TResult Function() wait,
     required TResult Function() verification,
     required TResult Function() loaded,
-    required TResult Function(String error) error,
+    required TResult Function(String message, String? code) error,
   }) {
-    return error(this.error);
+    return error(message, code);
   }
 
   @override
@@ -1470,9 +1488,9 @@ class _$ErrorImpl implements _Error {
     TResult? Function()? wait,
     TResult? Function()? verification,
     TResult? Function()? loaded,
-    TResult? Function(String error)? error,
+    TResult? Function(String message, String? code)? error,
   }) {
-    return error?.call(this.error);
+    return error?.call(message, code);
   }
 
   @override
@@ -1482,11 +1500,11 @@ class _$ErrorImpl implements _Error {
     TResult Function()? wait,
     TResult Function()? verification,
     TResult Function()? loaded,
-    TResult Function(String error)? error,
+    TResult Function(String message, String? code)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(this.error);
+      return error(message, code);
     }
     return orElse();
   }
@@ -1533,9 +1551,11 @@ class _$ErrorImpl implements _Error {
 }
 
 abstract class _Error implements OtpState {
-  const factory _Error({required final String error}) = _$ErrorImpl;
+  const factory _Error({required final String message, final String? code}) =
+      _$ErrorImpl;
 
-  String get error;
+  String get message;
+  String? get code;
   @JsonKey(ignore: true)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;

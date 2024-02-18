@@ -29,7 +29,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         otpSent: (e) => emit(SignInState.unVerified(
             verificationId: e.verificationId, phoneNumber: e.phoneNumber)),
         init: (e) => _initial(e, emit),
-        catchFail: (e) => emit(SignInState.error(error: e.exception)),
+        catchFail: (e) => emit(SignInState.error(message: e.message,code: e.code)),
       );
 
   Future<void> _login(_Login event, Emitter<SignInState> emit) async {
@@ -42,7 +42,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
               credential: credential));
         },
         verificationFailed: (exception) {
-          add(SignInEvent.catchFail(exception: exception.message!));
+          add(SignInEvent.catchFail(message: exception.message!, code: exception.code));
         },
         codeSent: (verificationId, token) {
           add(SignInEvent.otpSent(
@@ -53,7 +53,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         codeAutoRetrievalTimeout: (String) {},
       );
     } on BadRequestException catch (e) {
-      emit(SignInState.error(error: e.message));
+      emit(SignInState.error(message: e.message,code: e.code));
     }
   }
 

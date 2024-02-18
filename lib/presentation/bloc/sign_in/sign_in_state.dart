@@ -25,5 +25,5 @@ class SignInState with _$SignInState {
 
   const factory SignInState.verified() = _Verified;
 
-  const factory SignInState.error({required String error}) = _Error;
+  const factory SignInState.error({required String message, String? code}) = _Error;
 }
