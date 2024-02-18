@@ -1,12 +1,17 @@
+import 'package:alert_dialog/alert_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sicherr/core/const/colors.dart';
 import 'package:sicherr/core/const/icons.dart';
+import 'package:sicherr/core/theme/theme.dart';
 import 'package:sicherr/presentation/screens/contacts/contacts.dart';
 import 'package:sicherr/presentation/screens/home/home.dart';
 import 'package:sicherr/presentation/screens/map/map.dart';
 import 'package:sicherr/presentation/screens/profile/profile.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../bloc/onboarding/onboarding_bloc.dart';
 
 class InitialScreen extends StatefulWidget {
   const InitialScreen({super.key});
@@ -25,6 +30,13 @@ class _InitialScreenState extends State<InitialScreen> {
     ProfileScreen(),
   ];
 
+  @override
+  void initState() {
+    context.read<OnboardingBloc>().add(const OnboardingEvent.get());
+
+
+    super.initState();
+  }
 
 
   @override
@@ -35,7 +47,27 @@ class _InitialScreenState extends State<InitialScreen> {
       AppLocalizations.of(context)!.map,
       AppLocalizations.of(context)!.profile,
     ];
-    return Scaffold(
+    return BlocListener<OnboardingBloc, OnboardingState>(
+  listener: (context, state) {
+   state.maybeMap(
+       loaded: (_)async{
+         if (context.read<OnboardingBloc>().state.onboarding!.isWelcome!) {
+           await alert(
+           context,
+           title: Text(AppLocalizations.of(context)!.welcome),
+           content: Text(AppLocalizations.of(context)!.enjoy),
+           textOK: InkWell(
+               onTap: (){
+                 context.read<OnboardingBloc>().add(const OnboardingEvent.update(data: {"isWelcome": false}));
+                 Navigator.pop(context);
+               },
+               child:  Text('OK',style: AppTheme.themeData.textTheme.titleMedium!.copyWith(color: Colors.black),)),
+           );
+         }
+       },
+       orElse: (){});
+  },
+  child: Scaffold(
       appBar: AppBar(
         title: Text(
           titles[_selectedPage],
@@ -57,7 +89,8 @@ class _InitialScreenState extends State<InitialScreen> {
           setState(() => _selectedPage = index);
         },
       ),
-    );
+    ),
+);
   }
 }
 
@@ -110,8 +143,7 @@ class _MyBottomNavigationBar extends StatelessWidget {
                 height: 22,
               ),
             ),
-            label:
-              AppLocalizations.of(context)!.home,
+            label: AppLocalizations.of(context)!.home,
           ),
           BottomNavigationBarItem(
             icon: Padding(
@@ -125,8 +157,7 @@ class _MyBottomNavigationBar extends StatelessWidget {
                 height: 22,
               ),
             ),
-            label:
-              AppLocalizations.of(context)!.map,
+            label: AppLocalizations.of(context)!.map,
           ),
           BottomNavigationBarItem(
             icon: Padding(
@@ -140,8 +171,7 @@ class _MyBottomNavigationBar extends StatelessWidget {
                 height: 22,
               ),
             ),
-            label:
-              AppLocalizations.of(context)!.profile,
+            label: AppLocalizations.of(context)!.profile,
           ),
         ],
         backgroundColor: AppColors.lightGrey,

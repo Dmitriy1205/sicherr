@@ -1,3 +1,4 @@
+import 'package:alert_dialog/alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
@@ -9,9 +10,18 @@ import 'package:sicherr/presentation/widgets/permission_alert_dialog.dart';
 import 'package:sicherr/presentation/widgets/search_phone_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../bloc/onboarding/onboarding_bloc.dart';
 
-class ContactsScreen extends StatelessWidget {
+
+class ContactsScreen extends StatefulWidget {
   const ContactsScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ContactsScreen> createState() => _ContactsScreenState();
+}
+
+class _ContactsScreenState extends State<ContactsScreen> {
+
 
   @override
   Widget build(BuildContext context) {

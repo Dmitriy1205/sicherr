@@ -8,6 +8,7 @@ import 'package:sicherr/core/const/images.dart';
 import 'package:sicherr/core/functions/firebase_exc_localizer.dart';
 import 'package:sicherr/core/theme/theme.dart';
 import 'package:sicherr/domain/entities/country_codes/country_codes.dart';
+import 'package:sicherr/presentation/bloc/onboarding/onboarding_bloc.dart';
 import 'package:sicherr/presentation/screens/auth/verification.dart';
 import 'package:sicherr/presentation/screens/initial.dart';
 import 'package:sicherr/presentation/screens/terms_and_conditions.dart';
@@ -88,10 +89,13 @@ class _SigninScreenState extends State<SigninScreen> {
     return BlocConsumer<SignInBloc, SignInState>(
       listener: (context, state) {
         state.maybeMap(
-            verified: (_) =>
-                AppToast.showSuccess(context, AppLocalizations.of(context)!.successfullyAuthorized),
+            verified: (_) {
+              return AppToast.showSuccess(context,
+                  AppLocalizations.of(context)!.successfullyAuthorized);
+            },
             unVerified: (_) {
-              AppToast.showSuccess(context, AppLocalizations.of(context)!.verificationCodeSent);
+              return AppToast.showSuccess(
+                  context, AppLocalizations.of(context)!.verificationCodeSent);
             },
             error: (e) => AppToast.showError(
                 context,

@@ -30,5 +30,8 @@
     "givePermissionSynchronize": "Erlauben Sie die Synchronisierung Ihrer Kontaktliste",
     "permissionDenied": "Zugriff verweigert",
     "cancel": "Abbrechen",
-    "settings": "Einstellungen"
+    "settings": "Einstellungen",
+
+    "welcome": "Willkommen",
+      "enjoy": "Genießen Sie die Nutzung dieser App und fühlen Sie sich auf jedem Schritt sicher!"
 }

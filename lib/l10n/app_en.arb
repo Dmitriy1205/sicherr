@@ -30,5 +30,8 @@
   "givePermissionSynchronize": "Give permission to synchronize your contact list",
   "permissionDenied": "Permission Denied",
   "cancel": "Cancel",
-  "settings": "Settings"
+  "settings": "Settings",
+
+  "welcome": "Welcome",
+  "enjoy": "Enjoy using that app and feel safe on every step!"
 }

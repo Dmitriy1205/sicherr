@@ -16,7 +16,6 @@ class L10n {
 
   static final locales = [
     const Locale('en', 'US'),
-    const Locale('uk', 'UA'),
     const Locale('de', 'DE'),
   ];
 
