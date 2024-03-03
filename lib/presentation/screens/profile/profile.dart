@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sicherr/core/const/colors.dart';
+import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
+import 'package:sicherr/presentation/screens/contact_detail/widgets/contact_info.dart';
+import 'package:sicherr/presentation/screens/profile/model/models.dart';
+import 'package:sicherr/presentation/screens/profile/widgets/profile_category_item.dart';
+import 'package:sicherr/presentation/screens/profile/widgets/profile_category_label.dart';
 
 import '../../bloc/auth/auth_bloc.dart';
 
@@ -9,26 +15,99 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('Profile'),
-            InkWell(
-              onTap: () {
-                BlocProvider.of<AuthBloc>(context).add(const AuthEvent.logout());
-                // context.read<AuthBloc>().add(AuthEvent.logout());
-              },
-              child: Container(
-                  color: Colors.purple,
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text('logout'),
-                  )),
-            )
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              ContactInfo(
+                contact: ContactEntity(
+                  id: '1',
+                  name: 'Test name',
+                  phones: ['+380962474532'],
+                ),
+              ),
+              const SizedBox(height: 30),
+              ProfileSection(
+                items: [
+                  ProfileSectionModel(
+                    category: 'Features',
+                    items: [
+                      ProfileSectionItem(
+                        text: 'Alarm tone',
+                        action: () => print('Alarm tone'),
+                      ),
+                      ProfileSectionItem(
+                        text: 'SOS',
+                        action: () => print('SOS'),
+                      ),
+                      ProfileSectionItem(
+                        text: 'Quick Warning',
+                        action: () => print('Quick Warning'),
+                      ),
+                    ],
+                  ),
+                  ProfileSectionModel(
+                    category: 'Account',
+                    items: [
+                      ProfileSectionItem(
+                          text: 'Logout',
+                          action: () => BlocProvider.of<AuthBloc>(context)
+                              .add(const AuthEvent.logout()))
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
+    );
+  }
+}
+
+class ProfileSection extends StatelessWidget {
+  const ProfileSection({
+    super.key,
+    required this.items,
+  });
+
+  final List<ProfileSectionModel> items;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: items
+          .map(
+            (section) => Column(
+              children: [
+                ProfileCategoryLabel(text: section.category),
+                const SizedBox(height: 12),
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      border: Border.all(width: 0.5, color: AppColors.grey),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Column(
+                    children: section.items.asMap().entries.map((entry) {
+                      final int itemIndex = entry.key;
+                      final item = entry.value;
+                      return Column(
+                        children: [
+                          ProfileCategoryItem(item: item),
+                          if (itemIndex < section.items.length - 1)
+                            const Divider(height: 0.5),
+                        ],
+                      );
+                    }).toList(),
+                  ),
+                ),
+                const SizedBox(height: 30),
+              ],
+            ),
+          )
+          .toList(),
     );
   }
 }
