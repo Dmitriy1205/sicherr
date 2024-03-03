@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sicherr/core/const/colors.dart';
@@ -9,9 +10,30 @@ import 'package:sicherr/presentation/screens/profile/widgets/profile_category_la
 
 import '../../bloc/auth/auth_bloc.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  @override
+  void initState() {
+    //TODO: need to refactor, user dont have name in firebase
+    //come up with displaying name and image in profile page
+
+    // final firebaseUser = FirebaseAuth.instance.currentUser;
+    // user = firebaseUser != null
+    //     ? ContactEntity.fromFirebaseUser(firebaseUser)
+    //     : ContactEntity(id: '1', name: 'Test Name', phones: ['-']);
+
+    //TODO: Refactore when we'll have user data
+    user = ContactEntity(id: '1', name: 'Test Name', phones: ['+360765643556']);
+    super.initState();
+  }
+
+  late final ContactEntity user;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,13 +43,7 @@ class ProfileScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              ContactInfo(
-                contact: ContactEntity(
-                  id: '1',
-                  name: 'Test name',
-                  phones: ['+380962474532'],
-                ),
-              ),
+              ContactInfo(contact: user),
               const SizedBox(height: 30),
               ProfileSection(
                 items: [
