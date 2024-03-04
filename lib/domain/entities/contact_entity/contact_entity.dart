@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:contacts_service/contacts_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sicherr/core/utils/phone_formatter.dart';
 
@@ -27,6 +28,14 @@ class ContactEntity with _$ContactEntity {
       name: contact.displayName ?? '',
       phones: _parsePhoneNumbers(contact.phones),
       image: contact.avatar,
+    );
+  }
+
+  factory ContactEntity.fromFirebaseUser(User user) {
+    return ContactEntity(
+      id: user.uid,
+      name: user.displayName ?? 'Account',
+      phones: [if (user.phoneNumber != null) user.phoneNumber!],
     );
   }
 
