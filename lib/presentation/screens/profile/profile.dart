@@ -20,17 +20,13 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
-    //TODO: need to refactor, user dont have name in firebase
-    //come up with displaying name and image in profile page
-
-    // final firebaseUser = FirebaseAuth.instance.currentUser;
-    // user = firebaseUser != null
-    //     ? ContactEntity.fromFirebaseUser(firebaseUser)
-    //     : ContactEntity(id: '1', name: 'Test Name', phones: ['-']);
-
-    //TODO: Refactore when we'll have user data
-    user = ContactEntity(id: '1', name: 'Test Name', phones: ['+360765643556']);
     super.initState();
+
+    //TODO: need to refactor when we'll have some user repo
+    final firebaseUser = FirebaseAuth.instance.currentUser;
+    user = firebaseUser != null
+        ? ContactEntity.fromFirebaseUser(firebaseUser)
+        : ContactEntity(id: '-1', name: 'Account', phones: ['-']);
   }
 
   late final ContactEntity user;
