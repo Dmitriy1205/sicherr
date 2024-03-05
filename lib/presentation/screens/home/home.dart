@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:sicherr/presentation/screens/home/widgets/circle_action_button.dart';
+import 'package:sicherr/presentation/widgets/sos_confirmation_popup.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -51,8 +52,7 @@ class _HomeButtonsSliderState extends State<HomeButtonsSlider> {
                   text: 'SOS',
                   onTap: () {
                     if (selectedIndex == 0) {
-                      //TODO:
-                      print('SOS');
+                      sosConfirmationPopup(context);
                     } else {
                       _goToNextButton(0);
                     }

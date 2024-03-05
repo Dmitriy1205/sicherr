@@ -11,4 +11,5 @@ class AppIcons {
   static const hashtag = 'assets/icons/hashtag.svg';
   static const personPlus = 'assets/icons/person_plus.svg';
   static const phoneShake = 'assets/icons/phone_shake.svg';
+  static const message = 'assets/icons/message.svg';
 }

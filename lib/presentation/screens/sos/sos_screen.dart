@@ -5,6 +5,7 @@ import 'package:sicherr/core/const/icons.dart';
 import 'package:sicherr/core/const/strings.dart';
 import 'package:sicherr/core/theme/theme.dart';
 import 'package:sicherr/presentation/widgets/app_elevated_button.dart';
+import 'package:sicherr/presentation/widgets/sos_confirmation_popup.dart';
 
 import '../../../core/const/colors.dart';
 import '../../widgets/app_switch.dart';
@@ -154,7 +155,11 @@ class _SosScreenState extends State<SosScreen> {
               const SizedBox(
                 height: 37,
               ),
-              const ScrollableContactList(),
+              SizedBox(
+                height: 135,
+                width: MediaQuery.of(context).size.width,
+                child: const ScrollableContactList(),
+              ),
               const SizedBox(
                 height: 22,
               ),
@@ -226,7 +231,9 @@ class _SosScreenState extends State<SosScreen> {
               const SizedBox(
                 height: 21,
               ),
-              AppElevatedButton(text: AppStrings.send, onPressed: () {}),
+              AppElevatedButton(text: AppStrings.send, onPressed: () {
+                sosConfirmationPopup(context);
+              }),
               const SizedBox(
                 height: 40,
               ),
