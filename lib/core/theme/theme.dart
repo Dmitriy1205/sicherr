@@ -9,6 +9,7 @@ class AppTheme {
       primary: const Color(0xFFF2F2F2),
       surfaceTint: const Color(0xFFF2F2F2),
     ),
+
     textSelectionTheme: TextSelectionThemeData(
         selectionColor: AppColors.mainAccent.withOpacity(0.25),
         cursorColor: AppColors.mainAccent),
