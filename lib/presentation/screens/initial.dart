@@ -24,11 +24,12 @@ class _InitialScreenState extends State<InitialScreen> {
   int _selectedPage = 0;
 
   final screens = const [
-    ContactsScreen(),
     HomeScreen(),
+    ContactsScreen(),
     MapScreen(),
     ProfileScreen(),
   ];
+
 
   @override
   void initState() {
@@ -39,11 +40,12 @@ class _InitialScreenState extends State<InitialScreen> {
   }
 
 
+
   @override
   Widget build(BuildContext context) {
     final titles = [
-      AppLocalizations.of(context)!.contacts,
       AppLocalizations.of(context)!.home,
+      AppLocalizations.of(context)!.contacts,      
       AppLocalizations.of(context)!.map,
       AppLocalizations.of(context)!.profile,
     ];
@@ -84,6 +86,7 @@ class _InitialScreenState extends State<InitialScreen> {
         ),
       ),
       bottomNavigationBar: _MyBottomNavigationBar(
+        itemsLabel: titles,
         selectedIndex: _selectedPage,
         onItemTapped: (index) {
           setState(() => _selectedPage = index);
@@ -97,11 +100,13 @@ class _InitialScreenState extends State<InitialScreen> {
 class _MyBottomNavigationBar extends StatelessWidget {
   final int selectedIndex;
   final Function(int) onItemTapped;
+  final List<String> itemsLabel;
 
   const _MyBottomNavigationBar({
     Key? key,
     required this.selectedIndex,
     required this.onItemTapped,
+    required this.itemsLabel,
   }) : super(key: key);
 
   @override
@@ -117,62 +122,27 @@ class _MyBottomNavigationBar extends StatelessWidget {
       ),
       child: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Padding(
-              padding: const EdgeInsets.only(bottom: 6, top: 10),
-              child: SvgPicture.asset(
-                AppIcons.contacts,
-                color: selectedIndex == 0
-                    ? Theme.of(context).primaryColor
-                    : AppColors.grey,
-                width: 22,
-                height: 22,
+
+          ...BottomNavBarItems.values 
+          .asMap().entries.map(
+                (item) => BottomNavigationBarItem(
+                  icon: Padding(
+                    padding: const EdgeInsets.only(bottom: 6, top: 10),
+                    child: SvgPicture.asset(
+                      item.value.getIconPath,
+                      colorFilter: ColorFilter.mode(
+                          selectedIndex == item.key
+                              ? Theme.of(context).primaryColor
+                              : AppColors.grey,
+                          BlendMode.srcIn),
+                      width: 20.5,
+                      height: 22,
+                    ),
+                  ),
+                  label: item.value.getLabel,
+                ),
               ),
-            ),
-            label: AppLocalizations.of(context)!.contacts,
-          ),
-          BottomNavigationBarItem(
-            icon: Padding(
-              padding: const EdgeInsets.only(bottom: 6, top: 10),
-              child: SvgPicture.asset(
-                AppIcons.home,
-                color: selectedIndex == 1
-                    ? Theme.of(context).primaryColor
-                    : AppColors.grey,
-                width: 20.5,
-                height: 22,
-              ),
-            ),
-            label: AppLocalizations.of(context)!.home,
-          ),
-          BottomNavigationBarItem(
-            icon: Padding(
-              padding: const EdgeInsets.only(bottom: 6, top: 10),
-              child: SvgPicture.asset(
-                AppIcons.map,
-                color: selectedIndex == 2
-                    ? Theme.of(context).primaryColor
-                    : AppColors.grey,
-                width: 16.5,
-                height: 22,
-              ),
-            ),
-            label: AppLocalizations.of(context)!.map,
-          ),
-          BottomNavigationBarItem(
-            icon: Padding(
-              padding: const EdgeInsets.only(bottom: 6, top: 10),
-              child: SvgPicture.asset(
-                AppIcons.profile,
-                color: selectedIndex == 3
-                    ? Theme.of(context).primaryColor
-                    : AppColors.grey,
-                width: 22,
-                height: 22,
-              ),
-            ),
-            label: AppLocalizations.of(context)!.profile,
-          ),
+
         ],
         backgroundColor: AppColors.lightGrey,
         currentIndex: selectedIndex,
@@ -185,5 +155,29 @@ class _MyBottomNavigationBar extends StatelessWidget {
         onTap: onItemTapped,
       ),
     );
+  }
+}
+
+enum BottomNavBarItems {
+  home,
+  contacts,
+  map,
+  profile;
+
+   String get getLabel {
+   return switch (this) {
+     BottomNavBarItems.home => AppStrings.home,
+     BottomNavBarItems.contacts => AppStrings.contacts,
+     BottomNavBarItems.map => AppStrings.map,
+     BottomNavBarItems.profile => AppStrings.profile,
+   };
+  }
+   String get getIconPath {
+   return switch (this) {
+     BottomNavBarItems.home => AppIcons.home,
+     BottomNavBarItems.contacts => AppIcons.contacts,
+     BottomNavBarItems.map => AppIcons.map,
+     BottomNavBarItems.profile => AppIcons.profile,
+   };
   }
 }
