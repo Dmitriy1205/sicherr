@@ -6,11 +6,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:sicherr/core/const/colors.dart';
-import 'package:sicherr/core/const/strings.dart';
 import 'package:sicherr/core/theme/theme.dart';
 import 'package:sicherr/presentation/bloc/sign_in/sign_in_bloc.dart';
 import 'package:sicherr/presentation/widgets/loading_indicator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../core/functions/firebase_exc_localizer.dart';
 import '../../bloc/otp/otp_bloc.dart';
 import '../../widgets/app_toast.dart';
 
@@ -60,7 +61,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
       child: BlocConsumer<OtpBloc, OtpState>(
         listener: (context, state) {
           state.maybeMap(
-              loaded: (_) => context.read<SignInBloc>().add(SignInEvent.init()),
+              loaded: (_) => context.read<SignInBloc>().add(const SignInEvent.init()),
               wait: (_) {
                 if(_counter == 0){
                   setState(() {
@@ -73,7 +74,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
 
               },
               error: (e) {
-                AppToast.showError(context, e.error);
+                AppToast.showError(context, FirebaseExceptionLocalizer.localize(context,
+                    exceptionCode: e.code, exceptionMessage: e.message));
                 context.read<OtpBloc>().add(const OtpEvent.reset());
               },
               orElse: () {});
@@ -118,7 +120,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       ),
                     ),
                     Text(
-                      AppStrings.phoneVerification,
+                      AppLocalizations.of(context)!.phoneVerification,
                       style: AppTheme.themeData.textTheme.displayLarge,
                     ),
                     const SizedBox(
@@ -138,7 +140,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       height: 140,
                     ),
                     Text(
-                      AppStrings.enterSixDigits,
+                      AppLocalizations.of(context)!.enterSixDigits,
                       style: AppTheme.themeData.textTheme.headlineMedium,
                     ),
                     const SizedBox(
@@ -210,7 +212,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                               child: Padding(
                                 padding: const EdgeInsets.all(3.0),
                                 child: Text(
-                                  AppStrings.resend,
+                                  AppLocalizations.of(context)!.resend,
                                   style: AppTheme
                                       .themeData.textTheme.headlineMedium!
                                       .copyWith(
@@ -240,7 +242,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                         child: Padding(
                           padding: const EdgeInsets.all(3.0),
                           child: Text(
-                            AppStrings.resend,
+                            AppLocalizations.of(context)!.resend,
                             style: AppTheme.themeData.textTheme.headlineMedium!
                                 .copyWith(
                                     color: AppColors.mainAccent, fontSize: 14),

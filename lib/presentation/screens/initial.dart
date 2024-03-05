@@ -1,12 +1,17 @@
+import 'package:alert_dialog/alert_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sicherr/core/const/colors.dart';
 import 'package:sicherr/core/const/icons.dart';
-import 'package:sicherr/core/const/strings.dart';
+import 'package:sicherr/core/theme/theme.dart';
 import 'package:sicherr/presentation/screens/contacts/contacts.dart';
 import 'package:sicherr/presentation/screens/home/home.dart';
 import 'package:sicherr/presentation/screens/map/map.dart';
 import 'package:sicherr/presentation/screens/profile/profile.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../bloc/onboarding/onboarding_bloc.dart';
 
 class InitialScreen extends StatefulWidget {
   const InitialScreen({super.key});
@@ -25,16 +30,46 @@ class _InitialScreenState extends State<InitialScreen> {
     ProfileScreen(),
   ];
 
-  final titles = [
-    AppStrings.home,
-    AppStrings.contacts,
-    AppStrings.map,
-    AppStrings.profile,
-  ];
+
+  @override
+  void initState() {
+    context.read<OnboardingBloc>().add(const OnboardingEvent.get());
+
+
+    super.initState();
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    final titles = [
+      AppLocalizations.of(context)!.home,
+      AppLocalizations.of(context)!.contacts,      
+      AppLocalizations.of(context)!.map,
+      AppLocalizations.of(context)!.profile,
+    ];
+    return BlocListener<OnboardingBloc, OnboardingState>(
+  listener: (context, state) {
+   state.maybeMap(
+       loaded: (_)async{
+         if (context.read<OnboardingBloc>().state.onboarding!.isWelcome!) {
+           await alert(
+           context,
+           title: Text(AppLocalizations.of(context)!.welcome),
+           content: Text(AppLocalizations.of(context)!.enjoy),
+           textOK: InkWell(
+               onTap: (){
+                 context.read<OnboardingBloc>().add(const OnboardingEvent.update(data: {"isWelcome": false}));
+                 Navigator.pop(context);
+               },
+               child:  Text('OK',style: AppTheme.themeData.textTheme.titleMedium!.copyWith(color: Colors.black),)),
+           );
+         }
+       },
+       orElse: (){});
+  },
+  child: Scaffold(
       appBar: AppBar(
         title: Text(
           titles[_selectedPage],
@@ -57,7 +92,8 @@ class _InitialScreenState extends State<InitialScreen> {
           setState(() => _selectedPage = index);
         },
       ),
-    );
+    ),
+);
   }
 }
 
@@ -86,6 +122,7 @@ class _MyBottomNavigationBar extends StatelessWidget {
       ),
       child: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
+
           ...BottomNavBarItems.values 
           .asMap().entries.map(
                 (item) => BottomNavigationBarItem(
@@ -105,6 +142,7 @@ class _MyBottomNavigationBar extends StatelessWidget {
                   label: item.value.getLabel,
                 ),
               ),
+
         ],
         backgroundColor: AppColors.lightGrey,
         currentIndex: selectedIndex,

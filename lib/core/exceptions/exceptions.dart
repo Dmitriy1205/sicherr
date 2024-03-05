@@ -1,9 +1,9 @@
 class BadRequestException implements Exception {
   final String message;
-  final String? attribute;
+  final String? code;
 
   BadRequestException({
     required this.message,
-    this.attribute,
+    this.code,
   });
 }

@@ -6,6 +6,6 @@ class OtpEvent with _$OtpEvent {
   const factory OtpEvent.verify({required String verificationId, required String smsCode}) = _Verify;
   const factory OtpEvent.otpSent() = _OtpSent;
 
-  const factory OtpEvent.catchFail({required String exception}) = _CatchFail;
+  const factory OtpEvent.catchFail({required String message, required String code}) = _CatchFail;
   const factory OtpEvent.reset() = _Reset;
 }

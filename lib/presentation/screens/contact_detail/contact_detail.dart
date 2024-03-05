@@ -6,6 +6,8 @@ import 'package:sicherr/domain/managers/contacts_manager.dart';
 import 'package:sicherr/presentation/screens/contact_detail/widgets/additional_content.dart';
 import 'package:sicherr/presentation/screens/contact_detail/widgets/contact_info.dart';
 import 'package:sicherr/presentation/widgets/core_widgets.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class ContactDetailScreen extends StatelessWidget {
   const ContactDetailScreen({super.key, required this.contact});
@@ -43,7 +45,7 @@ class ContactDetailScreen extends StatelessWidget {
                             const RoundWrapperIcon(svgPath: AppIcons.phone),
                             const SizedBox(height: 10),
                             Text(
-                              'Call',
+                              AppLocalizations.of(context)!.call,
                               style: TextStyle(
                                 color: Theme.of(context).primaryColor,
                                 fontSize: 16,
@@ -59,17 +61,17 @@ class ContactDetailScreen extends StatelessWidget {
               const Divider(height: 1),
               const AdditionalContentBlock(),
               const Spacer(),
-              const Padding(
-                padding: EdgeInsets.all(10.0),
+               Padding(
+                padding: const EdgeInsets.all(10.0),
                 child: Text(
-                  'Subscribe only',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                    AppLocalizations.of(context)!.subscribeOnly,
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: AppElevatedButton(
-                  text: 'Subscribe',
+                  text: AppLocalizations.of(context)!.subscribe,
                   style: const TextStyle(
                       fontSize: 14, fontWeight: FontWeight.w400),
                   onPressed: () {

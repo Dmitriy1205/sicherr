@@ -5,6 +5,11 @@ import '../const/colors.dart';
 class AppTheme {
   static ThemeData themeData = ThemeData(
     scaffoldBackgroundColor: const Color(0xFFFFFFFF),
+    colorScheme: ThemeData().colorScheme.copyWith(
+      primary: const Color(0xFFF2F2F2),
+      surfaceTint: const Color(0xFFF2F2F2),
+    ),
+
     textSelectionTheme: TextSelectionThemeData(
         selectionColor: AppColors.mainAccent.withOpacity(0.25),
         cursorColor: AppColors.mainAccent),

@@ -1,3 +1,4 @@
+import 'package:alert_dialog/alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
@@ -7,9 +8,20 @@ import 'package:sicherr/presentation/screens/contacts/widgets/contact_card.dart'
 import 'package:sicherr/presentation/widgets/loading_indicator.dart';
 import 'package:sicherr/presentation/widgets/permission_alert_dialog.dart';
 import 'package:sicherr/presentation/widgets/search_phone_field.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ContactsScreen extends StatelessWidget {
+import '../../bloc/onboarding/onboarding_bloc.dart';
+
+
+class ContactsScreen extends StatefulWidget {
   const ContactsScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ContactsScreen> createState() => _ContactsScreenState();
+}
+
+class _ContactsScreenState extends State<ContactsScreen> {
+
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +38,7 @@ class ContactsScreen extends StatelessWidget {
                         padding:
                             const EdgeInsets.only(left: 20, right: 20, top: 18),
                         child: SearchPhoneField(
-                          hintText: 'Search',
+                          hintText: AppLocalizations.of(context)!.search,
                           onChanged: (text) {
                             context
                                 .read<ContactsBloc>()
@@ -64,15 +76,15 @@ class ContactListDisplayed extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
-                    'No contacts to display',
-                    style: TextStyle(fontSize: 18),
+                   Text(
+                    AppLocalizations.of(context)!.noContacts,
+                    style: const TextStyle(fontSize: 18),
                   ),
                   const SizedBox(height: 10),
                   if (isPermissionDenied)
                     GestureDetector(
                       onTap: () => showPermissionAlertDialog(context,
-                          content: 'Allow access to contacts', onClosed: (_) {
+                          content: AppLocalizations.of(context)!.allowAccess, onClosed: (_) {
                         context
                             .read<ContactsBloc>()
                             .add(const ContactsEvent.checkPermission());
@@ -80,7 +92,7 @@ class ContactListDisplayed extends StatelessWidget {
                       child: SizedBox(
                         width: 300,
                         child: Text(
-                          'Give permission to synchronize your contact list',
+                          AppLocalizations.of(context)!.givePermissionSynchronize,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Theme.of(context).primaryColor,

@@ -13,8 +13,9 @@ part 'otp_bloc.freezed.dart';
 class OtpBloc extends Bloc<OtpEvent, OtpState> {
   final AuthRepository _authRepository;
 
-  OtpBloc({required AuthRepository authRepository})
-      : _authRepository = authRepository,
+  OtpBloc({
+    required AuthRepository authRepository,
+  })  : _authRepository = authRepository,
         super(const OtpState.initial()) {
     on<OtpEvent>(_mapBlocToState);
   }
@@ -23,8 +24,10 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
       event.map(
         verify: (e) => _verify(e, emit),
         resendCode: (e) => _resendCode(e, emit),
-        catchFail: (e) => emit(OtpState.error(error: e.exception)),
-        reset: (e) => _reset(e, emit), otpSent: (e) => emit(const OtpState.wait()),
+        catchFail: (e) =>
+            emit(OtpState.error(message: e.message, code: e.code)),
+        reset: (e) => _reset(e, emit),
+        otpSent: (e) => emit(const OtpState.wait()),
       );
 
   Future<void> _verify(_Verify event, Emitter<OtpState> emit) async {
@@ -32,9 +35,10 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
       emit(const OtpState.verification());
       await _authRepository.verification(
           verificationId: event.verificationId, code: event.smsCode);
+
       emit(const OtpState.loaded());
     } on BadRequestException catch (e) {
-      emit(OtpState.error(error: e.message));
+      emit(OtpState.error(message: e.message, code: e.code));
     }
   }
 
@@ -45,7 +49,8 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
         phoneNumber: event.phoneNumber,
         verificationCompleted: (credential) async {},
         verificationFailed: (exception) {
-          add(OtpEvent.catchFail(exception: exception.message!));
+          add(OtpEvent.catchFail(
+              message: exception.message!, code: exception.code));
         },
         codeSent: (verificationId, token) {
           event.verifyId(verificationId);
@@ -55,7 +60,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
       );
       // emit(const OtpState.wait());
     } on BadRequestException catch (e) {
-      emit(OtpState.error(error: e.message));
+      emit(OtpState.error(message: e.message, code: e.code));
     }
   }
 

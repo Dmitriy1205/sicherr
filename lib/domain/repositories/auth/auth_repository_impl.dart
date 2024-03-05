@@ -28,9 +28,9 @@ class AuthRepositoryImpl extends AuthRepository {
         codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
       );
     } on FirebaseAuthException catch (e) {
-      throw BadRequestException(message: e.message!);
+      throw BadRequestException(message: e.message!,code: e.code);
     } catch (e) {
-      throw BadRequestException(message: e.toString());
+      throw BadRequestException(message: e.toString(),code: e.toString());
     }
   }
 
@@ -43,9 +43,9 @@ class AuthRepositoryImpl extends AuthRepository {
 
       await _auth.signInWithCredential(credential);
     } on FirebaseAuthException catch (e) {
-      throw BadRequestException(message: e.message!);
+      throw BadRequestException(message: e.message!,code: e.code);
     } catch (e) {
-      throw BadRequestException(message: e.toString());
+      throw BadRequestException(message: e.toString(),code: e.toString());
     }
   }
 

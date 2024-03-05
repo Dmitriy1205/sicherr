@@ -8,10 +8,12 @@ import 'package:sicherr/presentation/screens/auth/sign_in.dart';
 import 'package:sicherr/presentation/screens/initial.dart';
 import 'package:sicherr/presentation/widgets/loading_indicator.dart';
 
+import '../l10n/l10n.dart';
 import '../presentation/bloc/auth/auth_bloc.dart';
 import 'const/images.dart';
 
 class App extends StatefulWidget {
+
   const App({super.key});
 
   @override
@@ -19,17 +21,23 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
+
   @override
   void didChangeDependencies() {
     precacheImage(const AssetImage(AppImages.background), context);
     precacheImage(const AssetImage(AppImages.logo), context);
+
     super.didChangeDependencies();
+
   }
 
   @override
   Widget build(BuildContext context) {
+    // final currentLocale = L10n.getCurrentLocale(context);
     return Providers(
       child: MaterialApp(
+        localizationsDelegates: L10n.localizationsDelegates,
+        supportedLocales: L10n.locales,
         debugShowCheckedModeBanner: false,
         theme: AppTheme.themeData,
         scrollBehavior:Platform.isAndroid ? ScrollConfiguration.of(context).copyWith(

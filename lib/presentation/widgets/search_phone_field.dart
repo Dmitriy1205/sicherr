@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sicherr/core/const/colors.dart';
 import 'package:sicherr/core/const/icons.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SearchPhoneField extends StatefulWidget {
   const SearchPhoneField({
@@ -11,6 +12,7 @@ class SearchPhoneField extends StatefulWidget {
     this.onChanged,
     this.onSubmitted,
   });
+
   final double height;
   final String hintText;
   final Function(String)? onChanged;
@@ -97,7 +99,7 @@ class _SearchPhoneFieldState extends State<SearchPhoneField> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 15),
                 child: Text(
-                  'Cancel',
+                  AppLocalizations.of(context)!.cancel,
                   style: TextStyle(
                       color: Theme.of(context).primaryColor, fontSize: 16),
                 ),
