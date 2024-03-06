@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sicherr/core/service_locator/service_locator.dart';
+import 'package:sicherr/presentation/bloc/emergency_contact/emergency_contact_bloc.dart';
 import 'package:sicherr/presentation/bloc/onboarding/onboarding_bloc.dart';
+import 'package:sicherr/presentation/bloc/profile/profile_bloc.dart';
 
 import '../presentation/bloc/auth/auth_bloc.dart';
 import '../presentation/bloc/otp/otp_bloc.dart';
@@ -32,6 +34,14 @@ class Providers extends StatelessWidget {
           create: (context) => sl<OnboardingBloc>(),
           lazy: false,
         ),
+        BlocProvider(
+          create: (context) => sl<ProfileBloc>(),
+          lazy: false,
+        ),BlocProvider(
+          create: (context) => sl<EmergencyContactBloc>(),
+          lazy: false,
+        ),
+
       ],
       child: child,
     );

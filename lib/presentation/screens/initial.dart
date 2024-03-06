@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:sicherr/core/const/colors.dart';
 import 'package:sicherr/core/const/icons.dart';
 import 'package:sicherr/core/theme/theme.dart';
+import 'package:sicherr/presentation/bloc/profile/profile_bloc.dart';
 import 'package:sicherr/presentation/screens/contacts/contacts.dart';
 import 'package:sicherr/presentation/screens/home/home.dart';
 import 'package:sicherr/presentation/screens/map/map.dart';
@@ -33,6 +34,8 @@ class _InitialScreenState extends State<InitialScreen> {
   @override
   void initState() {
     context.read<OnboardingBloc>().add(const OnboardingEvent.get());
+    context.read<ProfileBloc>().add(const ProfileEvent.getProfileFields());
+
 
     super.initState();
   }

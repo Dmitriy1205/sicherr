@@ -41,7 +41,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              ContactInfo(contact: user),
+              ContactInfo(contact: user, isEmergency: false,),
               const SizedBox(height: 30),
               ProfileSection(
                 items: [

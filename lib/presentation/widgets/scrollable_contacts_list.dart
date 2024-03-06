@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sicherr/presentation/bloc/emergency_contact/emergency_contact_bloc.dart';
 
 import '../../core/const/colors.dart';
 import '../../core/theme/theme.dart';
@@ -32,30 +34,35 @@ class _ScrollableContactListState extends State<ScrollableContactList> {
             borderRadius: BorderRadius.circular(11),
             border: Border.all(color: AppColors.grey),
           ),
-          child: ListView.separated(
+          child: ListView.builder(
             controller: _scrollController,
             shrinkWrap: true,
             padding: EdgeInsets.zero,
             physics: const ClampingScrollPhysics(),
-            itemCount: 6,
+            itemCount: context.read<EmergencyContactBloc>().state.emContacts!.length,
             itemBuilder: (context, index) {
-              return SizedBox(
-                height: 45,
-                child: ListTile(
-                  leading: Padding(
-                    padding: const EdgeInsets.only(bottom: 10.0),
-                    child: Text(
-                      'Name',
-                      style: AppTheme.themeData.textTheme.titleMedium!
-                          .copyWith(color: AppColors.black),
+              return Column(
+                children: [
+                  SizedBox(
+                    height: 45,
+                    child: ListTile(
+                      leading: Padding(
+                        padding: const EdgeInsets.only(bottom: 10.0),
+                        child: Text(
+                          context.read<EmergencyContactBloc>().state.emContacts![index].name,
+                          style: AppTheme.themeData.textTheme.titleMedium!
+                              .copyWith(color: AppColors.black),
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                  const Divider(height: 0.5)
+                ],
               );
             },
-            separatorBuilder: (BuildContext context, int index) {
-              return const Divider(height: 0.5);
-            },
+            // separatorBuilder: (BuildContext context, int index) {
+            //   return const Divider(height: 0.5);
+            // },
           ),
         ),
       ),
