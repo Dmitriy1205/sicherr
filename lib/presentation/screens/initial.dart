@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:sicherr/core/const/colors.dart';
 import 'package:sicherr/core/const/icons.dart';
 import 'package:sicherr/core/theme/theme.dart';
+import 'package:sicherr/presentation/bloc/profile/profile_bloc.dart';
 import 'package:sicherr/presentation/screens/contacts/contacts.dart';
 import 'package:sicherr/presentation/screens/home/home.dart';
 import 'package:sicherr/presentation/screens/map/map.dart';
@@ -30,70 +31,74 @@ class _InitialScreenState extends State<InitialScreen> {
     ProfileScreen(),
   ];
 
-
   @override
   void initState() {
     context.read<OnboardingBloc>().add(const OnboardingEvent.get());
+    context.read<ProfileBloc>().add(const ProfileEvent.getProfileFields());
 
 
     super.initState();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     final titles = [
       AppLocalizations.of(context)!.home,
-      AppLocalizations.of(context)!.contacts,      
+      AppLocalizations.of(context)!.contacts,
       AppLocalizations.of(context)!.map,
       AppLocalizations.of(context)!.profile,
     ];
     return BlocListener<OnboardingBloc, OnboardingState>(
-  listener: (context, state) {
-   state.maybeMap(
-       loaded: (_)async{
-         if (context.read<OnboardingBloc>().state.onboarding!.isWelcome!) {
-           await alert(
-           context,
-           title: Text(AppLocalizations.of(context)!.welcome),
-           content: Text(AppLocalizations.of(context)!.enjoy),
-           textOK: InkWell(
-               onTap: (){
-                 context.read<OnboardingBloc>().add(const OnboardingEvent.update(data: {"isWelcome": false}));
-                 Navigator.pop(context);
-               },
-               child:  Text('OK',style: AppTheme.themeData.textTheme.titleMedium!.copyWith(color: Colors.black),)),
-           );
-         }
-       },
-       orElse: (){});
-  },
-  child: Scaffold(
-      appBar: AppBar(
-        title: Text(
-          titles[_selectedPage],
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+      listener: (context, state) {
+        state.maybeMap(
+            loaded: (_) async {
+              if (context.read<OnboardingBloc>().state.onboarding!.isWelcome!) {
+                await alert(
+                  context,
+                  title: Text(AppLocalizations.of(context)!.welcome),
+                  content: Text(AppLocalizations.of(context)!.enjoy),
+                  textOK: InkWell(
+                      onTap: () {
+                        context.read<OnboardingBloc>().add(
+                            const OnboardingEvent.update(
+                                data: {"isWelcome": false}));
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        'OK',
+                        style: AppTheme.themeData.textTheme.titleMedium!
+                            .copyWith(color: Colors.black),
+                      )),
+                );
+              }
+            },
+            orElse: () {});
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            titles[_selectedPage],
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+          ),
+          backgroundColor: AppColors.lightGrey,
         ),
-        backgroundColor: AppColors.lightGrey,
-      ),
-      body: GestureDetector(
-        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-        behavior: HitTestBehavior.opaque,
-        child: IndexedStack(
-          index: _selectedPage,
-          children: screens,
+        body: GestureDetector(
+          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+          behavior: HitTestBehavior.opaque,
+          child: IndexedStack(
+            index: _selectedPage,
+            children: screens,
+          ),
+        ),
+        bottomNavigationBar: _MyBottomNavigationBar(
+          itemsLabel: titles,
+          selectedIndex: _selectedPage,
+          onItemTapped: (index) {
+            setState(() => _selectedPage = index);
+          },
         ),
       ),
-      bottomNavigationBar: _MyBottomNavigationBar(
-        itemsLabel: titles,
-        selectedIndex: _selectedPage,
-        onItemTapped: (index) {
-          setState(() => _selectedPage = index);
-        },
-      ),
-    ),
-);
+    );
   }
 }
 
@@ -122,9 +127,7 @@ class _MyBottomNavigationBar extends StatelessWidget {
       ),
       child: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
-
-          ...BottomNavBarItems.values 
-          .asMap().entries.map(
+          ...BottomNavBarItems.values.asMap().entries.map(
                 (item) => BottomNavigationBarItem(
                   icon: Padding(
                     padding: const EdgeInsets.only(bottom: 6, top: 10),
@@ -139,10 +142,9 @@ class _MyBottomNavigationBar extends StatelessWidget {
                       height: 22,
                     ),
                   ),
-                  label: item.value.getLabel,
+                  label: item.value.getLabel(context),
                 ),
               ),
-
         ],
         backgroundColor: AppColors.lightGrey,
         currentIndex: selectedIndex,
@@ -164,20 +166,21 @@ enum BottomNavBarItems {
   map,
   profile;
 
-   String get getLabel {
-   return switch (this) {
-     BottomNavBarItems.home => AppStrings.home,
-     BottomNavBarItems.contacts => AppStrings.contacts,
-     BottomNavBarItems.map => AppStrings.map,
-     BottomNavBarItems.profile => AppStrings.profile,
-   };
+  String getLabel(BuildContext context) {
+    return switch (this) {
+      BottomNavBarItems.home => AppLocalizations.of(context)!.home,
+      BottomNavBarItems.contacts => AppLocalizations.of(context)!.contacts,
+      BottomNavBarItems.map => AppLocalizations.of(context)!.map,
+      BottomNavBarItems.profile => AppLocalizations.of(context)!.profile,
+    };
   }
-   String get getIconPath {
-   return switch (this) {
-     BottomNavBarItems.home => AppIcons.home,
-     BottomNavBarItems.contacts => AppIcons.contacts,
-     BottomNavBarItems.map => AppIcons.map,
-     BottomNavBarItems.profile => AppIcons.profile,
-   };
+
+  String get getIconPath {
+    return switch (this) {
+      BottomNavBarItems.home => AppIcons.home,
+      BottomNavBarItems.contacts => AppIcons.contacts,
+      BottomNavBarItems.map => AppIcons.map,
+      BottomNavBarItems.profile => AppIcons.profile,
+    };
   }
 }

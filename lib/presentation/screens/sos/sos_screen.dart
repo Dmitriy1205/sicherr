@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sicherr/core/const/icons.dart';
 import 'package:sicherr/core/const/strings.dart';
 import 'package:sicherr/core/theme/theme.dart';
+import 'package:sicherr/presentation/bloc/profile/profile_bloc.dart';
 import 'package:sicherr/presentation/widgets/app_elevated_button.dart';
+import 'package:sicherr/presentation/widgets/sos_confirmation_popup.dart';
 
 import '../../../core/const/colors.dart';
+import '../../bloc/emergency_contact/emergency_contact_bloc.dart';
 import '../../widgets/app_switch.dart';
 import '../../widgets/scrollable_contacts_list.dart';
 
@@ -18,12 +22,24 @@ class SosScreen extends StatefulWidget {
 }
 
 class _SosScreenState extends State<SosScreen> {
-
-  final messageController = TextEditingController();
+  late TextEditingController messageController;
   final focusNode = FocusNode();
 
-  bool isQuickBinding = false;
-  bool isSendLocation = false;
+  late bool isQuickBinding;
+
+  late bool isSendLocation;
+
+  @override
+  void initState() {
+    isQuickBinding =
+        context.read<ProfileBloc>().state.profileInfo?.enabledSosQB ?? false;
+    isSendLocation =
+        context.read<ProfileBloc>().state.profileInfo?.sendSosGeolocation ??
+            false;
+    messageController = TextEditingController(
+        text: context.read<ProfileBloc>().state.profileInfo?.sosMessage ?? '');
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,6 +111,11 @@ class _SosScreenState extends State<SosScreen> {
                       onChanged: (v) {
                         setState(() {
                           isQuickBinding = v;
+                          context.read<ProfileBloc>().add(
+                                  ProfileEvent.updateSpecificProfileField(
+                                      data: {
+                                    "enabledSosQB": v,
+                                  }));
                         });
                       }),
                 ],
@@ -132,7 +153,7 @@ class _SosScreenState extends State<SosScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${AppStrings.emergencyContacts} (6)',
+                      '${AppStrings.emergencyContacts} (${context.read<EmergencyContactBloc>().state.emContacts?.length ?? 0})',
                       style: AppTheme.themeData.textTheme.displayLarge,
                     ),
                     InkWell(
@@ -151,10 +172,25 @@ class _SosScreenState extends State<SosScreen> {
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 37,
-              ),
-              const ScrollableContactList(),
+              context.read<EmergencyContactBloc>().state.emContacts == null ||
+                      context
+                          .read<EmergencyContactBloc>()
+                          .state
+                          .emContacts!
+                          .isEmpty
+                  ? const SizedBox()
+                  : Column(
+                      children: [
+                        const SizedBox(
+                          height: 37,
+                        ),
+                        SizedBox(
+                          height: 135,
+                          width: MediaQuery.of(context).size.width,
+                          child: const ScrollableContactList(),
+                        ),
+                      ],
+                    ),
               const SizedBox(
                 height: 22,
               ),
@@ -180,6 +216,11 @@ class _SosScreenState extends State<SosScreen> {
                           horizontal: 19, vertical: 10)),
                   onTapOutside: (v) {
                     focusNode.unfocus();
+                    context
+                        .read<ProfileBloc>()
+                        .add(ProfileEvent.updateSpecificProfileField(data: {
+                          "sosMessage": messageController.text,
+                        }));
                   },
                 ),
               ),
@@ -198,11 +239,14 @@ class _SosScreenState extends State<SosScreen> {
                     ),
                     AppSwitch(
                         value: isSendLocation,
-                        // activeColor: AppColors.mainAccent,
-                        // inactiveThumbColor: AppColors.mainAccent,
                         onChanged: (v) {
                           setState(() {
                             isSendLocation = v;
+                            context.read<ProfileBloc>().add(
+                                    ProfileEvent.updateSpecificProfileField(
+                                        data: {
+                                      "sendSosGeolocation": v,
+                                    }));
                           });
                         }),
                   ],
@@ -226,7 +270,11 @@ class _SosScreenState extends State<SosScreen> {
               const SizedBox(
                 height: 21,
               ),
-              AppElevatedButton(text: AppStrings.send, onPressed: () {}),
+              AppElevatedButton(
+                  text: AppStrings.send,
+                  onPressed: () {
+                    sosConfirmationPopup(context);
+                  }),
               const SizedBox(
                 height: 40,
               ),
@@ -244,5 +292,3 @@ class _SosScreenState extends State<SosScreen> {
     super.dispose();
   }
 }
-
-
