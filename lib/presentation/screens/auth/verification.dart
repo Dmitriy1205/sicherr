@@ -12,6 +12,7 @@ import 'package:sicherr/presentation/widgets/loading_indicator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/functions/firebase_exc_localizer.dart';
+import '../../bloc/notification/notification_bloc.dart';
 import '../../bloc/otp/otp_bloc.dart';
 import '../../widgets/app_toast.dart';
 
@@ -61,7 +62,10 @@ class _VerificationScreenState extends State<VerificationScreen> {
       child: BlocConsumer<OtpBloc, OtpState>(
         listener: (context, state) {
           state.maybeMap(
-              loaded: (_) => context.read<SignInBloc>().add(const SignInEvent.init()),
+              loaded: (_) {
+                context.read<NotificationBloc>().add(const NotificationEvent.saveToken());
+                context.read<SignInBloc>().add(const SignInEvent.init());
+              },
               wait: (_) {
                 if(_counter == 0){
                   setState(() {

@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import '../../core/const/colors.dart';
 
 class AppSwitch extends StatefulWidget {
-  final bool value;
+   bool value;
   final ValueChanged<bool> onChanged;
 
-  const AppSwitch({
+   AppSwitch({
     Key? key,
-    required this.value,
+    this.value = false,
     required this.onChanged,
   }) : super(key: key);
 
@@ -17,21 +17,13 @@ class AppSwitch extends StatefulWidget {
 }
 
 class _AppSwitchState extends State<AppSwitch> {
-  late bool _value;
-
-  @override
-  void initState() {
-    super.initState();
-    _value = widget.value;
-  }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         setState(() {
-          _value = !_value;
-          widget.onChanged(_value);
+          widget.value = !widget.value;
+          widget.onChanged(widget.value);
         });
       },
       child: AnimatedContainer(
@@ -40,7 +32,7 @@ class _AppSwitchState extends State<AppSwitch> {
         height: 20.0,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15.0),
-          color: _value
+          color: widget.value
               ? AppColors.mainAccent.withOpacity(0.5)
               : AppColors.mediumGrey.withOpacity(0.3),
         ),
@@ -48,13 +40,13 @@ class _AppSwitchState extends State<AppSwitch> {
           children: [
             AnimatedPositioned(
               duration: const Duration(milliseconds: 300),
-              left: _value ? 20.0 : 0.0,
+              left: widget.value ? 20.0 : 0.0,
               child: Container(
                 width: 20.0,
                 height: 20.0,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: _value
+                  color: widget.value
                       ? AppColors.mainAccent
                       : AppColors.mainAccent.withOpacity(0.4),
                 ),

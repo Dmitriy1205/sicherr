@@ -1,4 +1,6 @@
 class AppStrings {
+
+
   static const String contacts = 'Contacts';
   static const String home = 'Home';
   static const String map = 'Map';
@@ -27,7 +29,9 @@ class AppStrings {
   static const String activateDescription  = '''Alternatively you can just press the button to\nactivate.''';
   static const String send  = 'Send';
   static const String phoneShake  = 'Phone shake';
-  static const String sosDescription  = 'an SOS signal will be sent to your three contacts';
+  static const String sosDescription  = 'an SOS signal will be sent to your contacts';
   static const String message  = 'Message';
   static const String geolocation  = 'geolocation';
+  static const String noEmContacts  = 'No emergency contacts selected';
+  static const String sosSent  = 'SOS has been sent!';
 }
