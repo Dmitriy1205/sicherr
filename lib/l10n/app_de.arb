@@ -33,5 +33,30 @@
     "settings": "Einstellungen",
 
     "welcome": "Willkommen",
-      "enjoy": "Genießen Sie die Nutzung dieser App und fühlen Sie sich auf jedem Schritt sicher!"
+      "enjoy": "Genießen Sie die Nutzung dieser App und fühlen Sie sich auf jedem Schritt sicher!",
+
+    "overview": "Überblick",
+    "overviewDescription": "SOS sendet eine Push-Benachrichtigung an alle Ihre\nNotfallkontakte mit oder ohne Standortangabe\nin einer benutzerdefinierten Nachricht. Außerdem teilt es\nIhren Standort.",
+    "quickBinding": "Schnelle Bindung",
+    "quickBindingDescription": "Aktivieren Sie die schnelle Bindung, um sie zu verwenden. Ein SOS-Signal\nwird ausgelöst, sobald Sie die folgende\nAktion ausführen.",
+    "emergencyContacts": "Notfallkontakte",
+    "emergency": "Notfall",
+    "sosMessage": "Nachricht...",
+    "sendYourGeolocation": "Senden Sie Ihren Standort?",
+    "activate": "Aktivieren",
+    "activateDescription": "Alternativ können Sie einfach die Schaltfläche drücken, um\nzu aktivieren.",
+    "send": "Senden",
+    "phoneShake": "Handy schütteln",
+    "sosDescription": "Ein SOS-Signal wird an Ihre Kontakte gesendet.",
+    "message": "Nachricht",
+    "geolocation": "Standort",
+    "noEmContacts": "Keine Notfallkontakte ausgewählt",
+    "sosSent": "SOS wurde gesendet!",
+
+    "logout": "Abmelden",
+    "account": "Konto",
+    "features": "Funktionen",
+    "alarmTone": "Alarmton",
+    "quickAlarm": "Schnelle Warnung",
+    "startAlarm": "ALARM STARTEN"
 }

@@ -33,5 +33,30 @@
   "settings": "Settings",
 
   "welcome": "Welcome",
-  "enjoy": "Enjoy using that app and feel safe on every step!"
+  "enjoy": "Enjoy using that app and feel safe on every step!",
+
+  "overview": "Overview",
+  "overviewDescription": "SOS sends push notification to all your\nemergency contacts with geolocation included\nor not in a custom message. Additionally shares\nyour geolocation.",
+  "quickBinding": "Quick binding",
+  "quickBindingDescription": "Activate in order to use quick binding. SOS signal\nwill be triggered once you execute the following\naction.",
+  "emergencyContacts": "Emergency contacts",
+  "emergency": "Emergency",
+  "sosMessage": "Message...",
+  "sendYourGeolocation": "Send your geolocation?",
+  "activate": "Activate",
+  "activateDescription": "Alternatively you can just press the button to\nactivate.",
+  "send": "Send",
+  "phoneShake": "Phone shake",
+  "sosDescription": "an SOS signal will be sent to your contacts",
+  "message": "Message",
+  "geolocation": "geolocation",
+  "noEmContacts": "No emergency contacts selected",
+  "sosSent": "SOS has been sent!",
+
+  "logout": "Logout",
+  "account": "Account",
+  "features": "Features",
+  "alarmTone": "Alarmton",
+  "quickAlarm": "Schnelle Warnung",
+  "startAlarm": "START ALARM"
 }

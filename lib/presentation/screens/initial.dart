@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sicherr/core/const/colors.dart';
 import 'package:sicherr/core/const/icons.dart';
-import 'package:sicherr/core/const/strings.dart';
 import 'package:sicherr/core/theme/theme.dart';
 import 'package:sicherr/presentation/bloc/emergency_contact/emergency_contact_bloc.dart';
 import 'package:sicherr/presentation/bloc/profile/profile_bloc.dart';
@@ -90,7 +89,7 @@ class _InitialScreenState extends State<InitialScreen> {
           listener: (context, state) {
             state.maybeMap(
                 success: (_) =>
-                    AppToast.showSuccess(context, AppStrings.sosSent),
+                    AppToast.showSuccess(context, AppLocalizations.of(context)!.sosSent),
                 error: (error) => AppToast.showError(context, error.message),
                 orElse: () {});
           },

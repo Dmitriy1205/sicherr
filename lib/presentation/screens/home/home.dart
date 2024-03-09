@@ -2,6 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:sicherr/presentation/screens/home/widgets/circle_action_button.dart';
 import 'package:sicherr/presentation/widgets/sos_confirmation_popup.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -62,7 +64,7 @@ class _HomeButtonsSliderState extends State<HomeButtonsSlider> {
               opacity: selectedIndex == 1 ? 1 : 0.4,
               duration: const Duration(milliseconds: 200),
               child: CircleActionButton(
-                text: 'START ALARM',
+                text: AppLocalizations.of(context)!.startAlarm,
                 onTap: () {
                   if (selectedIndex == 1) {
                     //TODO:

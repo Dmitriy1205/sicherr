@@ -34,4 +34,11 @@ class AppStrings {
   static const String geolocation  = 'geolocation';
   static const String noEmContacts  = 'No emergency contacts selected';
   static const String sosSent  = 'SOS has been sent!';
+
+  static const String logout = 'Logout';
+  static const String account = 'Account';
+  static const String features = 'Features';
+  static const String alarmTone = 'Alarm tone';
+  static const String quickAlarm = 'Quick Warning';
+  static const String startAlarm = 'START ALARM';
 }

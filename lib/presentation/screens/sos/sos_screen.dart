@@ -5,7 +5,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sicherr/core/const/icons.dart';
-import 'package:sicherr/core/const/strings.dart';
 import 'package:sicherr/core/theme/theme.dart';
 import 'package:sicherr/presentation/bloc/profile/profile_bloc.dart';
 import 'package:sicherr/presentation/widgets/app_elevated_button.dart';
@@ -15,6 +14,8 @@ import '../../../core/const/colors.dart';
 import '../../bloc/emergency_contact/emergency_contact_bloc.dart';
 import '../../widgets/app_switch.dart';
 import '../../widgets/scrollable_contacts_list.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class SosScreen extends StatefulWidget {
   const SosScreen({super.key});
@@ -124,14 +125,14 @@ class _SosScreenState extends State<SosScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  AppStrings.overview,
+                  AppLocalizations.of(context)!.overview,
                   style: AppTheme.themeData.textTheme.displayLarge,
                 ),
                 const SizedBox(
                   height: 12,
                 ),
                 Text(
-                  AppStrings.overviewDescription,
+                  AppLocalizations.of(context)!.overviewDescription,
                   style: AppTheme.themeData.textTheme.titleMedium!
                       .copyWith(color: AppColors.greyDark),
                 ),
@@ -142,7 +143,7 @@ class _SosScreenState extends State<SosScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      AppStrings.quickBinding,
+                      AppLocalizations.of(context)!.quickBinding,
                       style: AppTheme.themeData.textTheme.displayLarge,
                     ),
                     AppSwitch(
@@ -163,7 +164,7 @@ class _SosScreenState extends State<SosScreen> {
                   height: 12,
                 ),
                 Text(
-                  AppStrings.quickBindingDescription,
+                  AppLocalizations.of(context)!.quickBindingDescription,
                   style: AppTheme.themeData.textTheme.titleMedium!
                       .copyWith(color: AppColors.greyDark),
                 ),
@@ -177,7 +178,7 @@ class _SosScreenState extends State<SosScreen> {
                       width: 36,
                     ),
                     Text(
-                      AppStrings.phoneShake,
+                      AppLocalizations.of(context)!.phoneShake,
                       style: AppTheme.themeData.textTheme.titleMedium!.copyWith(
                           fontWeight: FontWeight.w500,
                           color: AppColors.greyDark),
@@ -193,7 +194,7 @@ class _SosScreenState extends State<SosScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '${AppStrings.emergencyContacts} (${context.read<EmergencyContactBloc>().state.emContacts?.length ?? 0})',
+                        '${AppLocalizations.of(context)!.emergencyContacts} (${context.read<EmergencyContactBloc>().state.emContacts?.length ?? 0})',
                         style: AppTheme.themeData.textTheme.displayLarge,
                       ),
                       InkWell(
@@ -248,7 +249,7 @@ class _SosScreenState extends State<SosScreen> {
                               const BorderSide(color: AppColors.mainAccent),
                           borderRadius: BorderRadius.circular(11),
                         ),
-                        hintText: AppStrings.sosMessage,
+                        hintText: AppLocalizations.of(context)!.sosMessage,
                         hintStyle: AppTheme.themeData.textTheme.titleMedium,
                         contentPadding: const EdgeInsets.symmetric(
                             horizontal: 19, vertical: 10)),
@@ -282,7 +283,7 @@ class _SosScreenState extends State<SosScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        AppStrings.sendYourGeolocation,
+                        AppLocalizations.of(context)!.sendYourGeolocation,
                         style: AppTheme.themeData.textTheme.titleMedium!
                             .copyWith(color: AppColors.black),
                       ),
@@ -336,14 +337,14 @@ class _SosScreenState extends State<SosScreen> {
                   height: 39,
                 ),
                 Text(
-                  AppStrings.activate,
+                  AppLocalizations.of(context)!.activate,
                   style: AppTheme.themeData.textTheme.displayLarge,
                 ),
                 const SizedBox(
                   height: 12,
                 ),
                 Text(
-                  AppStrings.activateDescription,
+                  AppLocalizations.of(context)!.activateDescription,
                   style: AppTheme.themeData.textTheme.titleMedium!
                       .copyWith(color: AppColors.greyDark),
                 ),
@@ -351,7 +352,7 @@ class _SosScreenState extends State<SosScreen> {
                   height: 21,
                 ),
                 AppElevatedButton(
-                    text: AppStrings.send,
+                    text: AppLocalizations.of(context)!.send,
                     onPressed: () {
                       sosConfirmationPopup(context);
                     }),

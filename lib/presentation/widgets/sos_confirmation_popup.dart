@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sicherr/core/const/icons.dart';
-import 'package:sicherr/core/const/strings.dart';
 import 'package:sicherr/presentation/bloc/send_sos/send_sos_bloc.dart';
 import 'package:sicherr/presentation/widgets/app_elevated_button.dart';
 import 'package:sicherr/presentation/widgets/scrollable_contacts_list.dart';
@@ -11,6 +10,8 @@ import '../../core/const/colors.dart';
 import '../../core/theme/theme.dart';
 import '../bloc/emergency_contact/emergency_contact_bloc.dart';
 import '../bloc/profile/profile_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 void sosConfirmationPopup(BuildContext context) {
   showDialog<void>(
@@ -34,7 +35,7 @@ void sosConfirmationPopup(BuildContext context) {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  AppStrings.sosDescription,
+                  AppLocalizations.of(context)!.sosDescription,
                   textAlign: TextAlign.center,
                   style: AppTheme.themeData.textTheme.titleMedium!
                       .copyWith(color: AppColors.greyDark),
@@ -50,7 +51,7 @@ void sosConfirmationPopup(BuildContext context) {
                         .isEmpty
                     ? Padding(
                   padding: const EdgeInsets.symmetric(vertical: 12.0),
-                  child: Text(AppStrings.noEmContacts,
+                  child: Text(AppLocalizations.of(context)!.noEmContacts,
                       style: AppTheme.themeData.textTheme.labelSmall!
                           .copyWith(color: Colors.red)),
                 )
@@ -85,7 +86,7 @@ void sosConfirmationPopup(BuildContext context) {
                                 width: 10,
                               ),
                               Text(
-                                AppStrings.message,
+                                AppLocalizations.of(context)!.message,
                                 style: AppTheme.themeData.textTheme.labelSmall!
                                     .copyWith(color: AppColors.black),
                               ),
@@ -112,7 +113,7 @@ void sosConfirmationPopup(BuildContext context) {
                                 width: 10,
                               ),
                               Text(
-                                AppStrings.geolocation,
+                                AppLocalizations.of(context)!.geolocation,
                                 style: AppTheme.themeData.textTheme.titleSmall!
                                     .copyWith(
                                     fontWeight: FontWeight.w400,
@@ -161,7 +162,7 @@ void sosConfirmationPopup(BuildContext context) {
           ),
           actions: <Widget>[
             AppElevatedButton(
-                text: '${AppStrings.send} SOS',
+                text: '${AppLocalizations.of(context)!.send} SOS',
                 style: AppTheme.themeData.textTheme.labelSmall,
                 onPressed: context
                     .read<EmergencyContactBloc>()
