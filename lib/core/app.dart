@@ -38,7 +38,6 @@ class _AppState extends State<App> {
       child: MaterialApp(
         localizationsDelegates: L10n.localizationsDelegates,
         supportedLocales: L10n.locales,
-        locale: Locale('de', 'DE' ),
         debugShowCheckedModeBanner: false,
         theme: AppTheme.themeData,
         scrollBehavior:Platform.isAndroid ? ScrollConfiguration.of(context).copyWith(
