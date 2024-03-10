@@ -4,7 +4,7 @@ import 'package:sicherr/core/const/colors.dart';
 import 'package:sicherr/core/const/icons.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
 import 'package:sicherr/domain/entities/emergency_contact/emergency_contact.dart';
-import 'package:sicherr/domain/managers/contacts_manager.dart';
+import 'package:sicherr/core/managers/contacts_manager.dart';
 import 'package:sicherr/presentation/screens/contact_detail/widgets/additional_content.dart';
 import 'package:sicherr/presentation/screens/contact_detail/widgets/contact_info.dart';
 import 'package:sicherr/presentation/widgets/core_widgets.dart';

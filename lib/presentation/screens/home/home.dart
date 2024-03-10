@@ -1,9 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sicherr/core/service_locator/service_locator.dart';
+import 'package:sicherr/presentation/bloc/alarm/alarm_bloc.dart';
 import 'package:sicherr/presentation/screens/home/widgets/circle_action_button.dart';
 import 'package:sicherr/presentation/widgets/sos_confirmation_popup.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -47,35 +49,14 @@ class _HomeButtonsSliderState extends State<HomeButtonsSlider> {
             scrollPhysics: const ClampingScrollPhysics(),
           ),
           items: [
-            AnimatedOpacity(
-              opacity: selectedIndex == 0 ? 1 : 0.4,
-              duration: const Duration(milliseconds: 200),
-              child: CircleActionButton(
-                  text: 'SOS',
-                  onTap: () {
-                    if (selectedIndex == 0) {
-                      sosConfirmationPopup(context);
-                    } else {
-                      _goToNextButton(0);
-                    }
-                  }),
+            _SOSWidget(
+              isSelected: selectedIndex == 0,
+              goToNextItem: _goToNextButton,
             ),
-            AnimatedOpacity(
-              opacity: selectedIndex == 1 ? 1 : 0.4,
-              duration: const Duration(milliseconds: 200),
-              child: CircleActionButton(
-                text: AppLocalizations.of(context)!.startAlarm,
-                onTap: () {
-                  if (selectedIndex == 1) {
-                    //TODO:
-                    print('START ALARM');
-                  } else {
-                    _goToNextButton(1);
-                  }
-                },
-                gradientColors: const [Color(0xFFE4E4E4), Color(0xFF9B9B9B)],
-              ),
-            ),
+            _StartAlarm(
+              isSelected: selectedIndex == 1,
+              goToNextItem: _goToNextButton,
+            )
           ]),
     );
   }
@@ -86,5 +67,59 @@ class _HomeButtonsSliderState extends State<HomeButtonsSlider> {
       page,
       duration: const Duration(milliseconds: 100),
     );
+  }
+}
+
+class _StartAlarm extends StatelessWidget {
+  const _StartAlarm({required this.isSelected, required this.goToNextItem});
+  final bool isSelected;
+  final void Function(int) goToNextItem;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<AlarmBloc, AlarmState>(
+      builder: (context, state) => state.maybeMap(
+        loaded: (loadedState) => CircleActionButton(
+          text: loadedState.isAlarmPlaying
+              ? '${AppLocalizations.of(context)!.stop.toUpperCase()} ${AppLocalizations.of(context)!.alarm.toUpperCase()}'
+              : '${AppLocalizations.of(context)!.start.toUpperCase()} ${AppLocalizations.of(context)!.alarm.toUpperCase()}',
+          onTap: () {
+            if (isSelected) {
+              if (loadedState.isAlarmPlaying) {
+                sl<AlarmBloc>().add(const AlarmEvent.stopAlarm());
+              } else {
+                sl<AlarmBloc>().add(const AlarmEvent.playAlarm());
+              }
+            } else {
+              goToNextItem(1);
+            }
+          },
+          gradientColors: const [Color(0xFFE4E4E4), Color(0xFF9B9B9B)],
+          isSelected: isSelected,
+          isActive: loadedState.isAlarmPlaying,
+        ),
+        orElse: () => const SizedBox.shrink(),
+      ),
+    );
+  }
+}
+
+class _SOSWidget extends StatelessWidget {
+  const _SOSWidget({required this.isSelected, required this.goToNextItem});
+  final bool isSelected;
+  final void Function(int) goToNextItem;
+
+  @override
+  Widget build(BuildContext context) {
+    return CircleActionButton(
+        text: 'SOS',
+        onTap: () {
+          if (isSelected) {
+            sosConfirmationPopup(context);
+          } else {
+            goToNextItem(0);
+          }
+        },
+        isSelected: isSelected);
   }
 }

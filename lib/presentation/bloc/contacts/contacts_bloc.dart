@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sicherr/core/utils/phone_formatter.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
-import 'package:sicherr/domain/managers/contacts_manager.dart';
+import 'package:sicherr/core/managers/contacts_manager.dart';
 
 part 'contacts_state.dart';
 part 'contacts_event.dart';

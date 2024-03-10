@@ -33,8 +33,24 @@
     "settings": "Einstellungen",
 
     "welcome": "Willkommen",
-      "enjoy": "Genießen Sie die Nutzung dieser App und fühlen Sie sich auf jedem Schritt sicher!",
+    "enjoy": "Genießen Sie die Nutzung dieser App und fühlen Sie sich auf jedem Schritt sicher!",
 
+
+  "alarmTone": "Alarmton",
+  "overview": "Übersicht",
+  "alarmDesc": "Die Alarmton-Funktion aktiviert einen lauten Signalton, um andere Personen anzulocken.",
+  "quickBinding": "Schnellbindung",
+  "quickBindingDesc": "Aktivieren Sie die Schnellbindung, um sie zu verwenden. Der Alarmton wird ausgelöst, sobald Sie die folgende Sequenz drücken.",
+  "volumeButton": "Lautstärketaste",
+  "up": "Hoch",
+  "down": "Runter",
+  "activate": "Aktivieren",
+  "alternativeActivateDesc": "Alternativ können Sie einfach die Taste drücken, um zu aktivieren.",
+  "start": "Start",
+  "stop": "Stop",
+  "alarm": "Alarm",
+  
+  "enjoy": "Genießen Sie die Nutzung dieser App und fühlen Sie sich auf jedem Schritt sicher!",
     "overview": "Überblick",
     "overviewDescription": "SOS sendet eine Push-Benachrichtigung an alle Ihre\nNotfallkontakte mit oder ohne Standortangabe\nin einer benutzerdefinierten Nachricht. Außerdem teilt es\nIhren Standort.",
     "quickBinding": "Schnelle Bindung",
@@ -56,7 +72,6 @@
     "logout": "Abmelden",
     "account": "Konto",
     "features": "Funktionen",
-    "alarmTone": "Alarmton",
     "quickAlarm": "Schnelle Warnung",
     "startAlarm": "ALARM STARTEN"
 }
