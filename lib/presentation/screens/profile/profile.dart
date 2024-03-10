@@ -11,6 +11,8 @@ import 'package:sicherr/presentation/screens/profile/widgets/profile_category_it
 import 'package:sicherr/presentation/screens/profile/widgets/profile_category_label.dart';
 import 'package:sicherr/presentation/screens/sos/sos_screen.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -28,7 +30,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final firebaseUser = FirebaseAuth.instance.currentUser;
     user = firebaseUser != null
         ? ContactEntity.fromFirebaseUser(firebaseUser)
-        : ContactEntity(id: '-1', name: 'Account', phones: ['-']);
+        : ContactEntity(id: '-1', name: AppLocalizations.of(context)!.account, phones: ['-']);
   }
 
   late final ContactEntity user;
@@ -47,10 +49,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ProfileSection(
                 items: [
                   ProfileSectionModel(
-                    category: 'Features',
+                    category: AppLocalizations.of(context)!.features,
                     items: [
                       ProfileSectionItem(
-                        text: 'Alarm tone',
+                        text: AppLocalizations.of(context)!.alarmTone,
                         action: () => Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -64,16 +66,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 builder: (context) => const SosScreen())),
                       ),
                       ProfileSectionItem(
-                        text: 'Quick Warning',
+                        text: AppLocalizations.of(context)!.quickAlarm,
                         action: () => print('Quick Warning'),
                       ),
                     ],
                   ),
                   ProfileSectionModel(
-                    category: 'Account',
+                    category: AppLocalizations.of(context)!.account,
                     items: [
                       ProfileSectionItem(
-                          text: 'Logout',
+                          text: AppLocalizations.of(context)!.logout,
                           action: () => BlocProvider.of<AuthBloc>(context)
                               .add(const AuthEvent.logout()))
                     ],

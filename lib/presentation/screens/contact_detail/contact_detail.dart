@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sicherr/core/const/colors.dart';
 import 'package:sicherr/core/const/icons.dart';
-import 'package:sicherr/core/const/strings.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
 import 'package:sicherr/domain/entities/emergency_contact/emergency_contact.dart';
 import 'package:sicherr/core/managers/contacts_manager.dart';
@@ -148,8 +147,8 @@ class _ContactDetailScreenState extends State<ContactDetailScreen> {
                                                 .any((element) =>
                                                     element.id ==
                                                     widget.contact.id)
-                                        ? '- ${AppStrings.emergency}'
-                                        : '+ ${AppStrings.emergency}',
+                                        ? '- ${AppLocalizations.of(context)!.emergency}'
+                                        : '+ ${AppLocalizations.of(context)!.emergency}',
                                     style: TextStyle(
                                       color: Theme.of(context).primaryColor,
                                       fontSize: 16,

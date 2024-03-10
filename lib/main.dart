@@ -14,5 +14,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await sl.init();
+  await sl.initNotifications();
+
   runApp(const App());
 }

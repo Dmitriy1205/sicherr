@@ -5,7 +5,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:sicherr/core/const/colors.dart';
 import 'package:sicherr/core/const/icons.dart';
 import 'package:sicherr/core/theme/theme.dart';
+import 'package:sicherr/presentation/bloc/emergency_contact/emergency_contact_bloc.dart';
 import 'package:sicherr/presentation/bloc/profile/profile_bloc.dart';
+import 'package:sicherr/presentation/bloc/send_sos/send_sos_bloc.dart';
 import 'package:sicherr/presentation/screens/contacts/contacts.dart';
 import 'package:sicherr/presentation/screens/home/home.dart';
 import 'package:sicherr/presentation/screens/map/map.dart';
@@ -13,6 +15,7 @@ import 'package:sicherr/presentation/screens/profile/profile.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../bloc/onboarding/onboarding_bloc.dart';
+import '../widgets/app_toast.dart';
 
 class InitialScreen extends StatefulWidget {
   const InitialScreen({super.key});
@@ -33,9 +36,10 @@ class _InitialScreenState extends State<InitialScreen> {
 
   @override
   void initState() {
-    context.read<OnboardingBloc>().add(const OnboardingEvent.get());
-    context.read<ProfileBloc>().add(const ProfileEvent.getProfileFields());
 
+    context.read<ProfileBloc>().add(const ProfileEvent.getProfileFields());
+    context.read<EmergencyContactBloc>().add(const EmergencyContactEvent.getAllEmContacts());
+    context.read<OnboardingBloc>().add(const OnboardingEvent.get());
 
     super.initState();
   }
@@ -48,32 +52,49 @@ class _InitialScreenState extends State<InitialScreen> {
       AppLocalizations.of(context)!.map,
       AppLocalizations.of(context)!.profile,
     ];
-    return BlocListener<OnboardingBloc, OnboardingState>(
-      listener: (context, state) {
-        state.maybeMap(
-            loaded: (_) async {
-              if (context.read<OnboardingBloc>().state.onboarding!.isWelcome!) {
-                await alert(
-                  context,
-                  title: Text(AppLocalizations.of(context)!.welcome),
-                  content: Text(AppLocalizations.of(context)!.enjoy),
-                  textOK: InkWell(
-                      onTap: () {
-                        context.read<OnboardingBloc>().add(
-                            const OnboardingEvent.update(
-                                data: {"isWelcome": false}));
-                        Navigator.pop(context);
-                      },
-                      child: Text(
-                        'OK',
-                        style: AppTheme.themeData.textTheme.titleMedium!
-                            .copyWith(color: Colors.black),
-                      )),
-                );
-              }
-            },
-            orElse: () {});
-      },
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<OnboardingBloc, OnboardingState>(
+          listener: (context, state) {
+            state.maybeMap(
+                loaded: (_) async {
+                  if (context
+                      .read<OnboardingBloc>()
+                      .state
+                      .onboarding!
+                      .isWelcome!) {
+                    await alert(
+                      context,
+                      title: Text(AppLocalizations.of(context)!.welcome),
+                      content: Text(AppLocalizations.of(context)!.enjoy),
+                      textOK: InkWell(
+                          onTap: () {
+                            context.read<OnboardingBloc>().add(
+                                const OnboardingEvent.update(
+                                    data: {"isWelcome": false}));
+                            Navigator.pop(context);
+                          },
+                          child: Text(
+                            'OK',
+                            style: AppTheme.themeData.textTheme.titleMedium!
+                                .copyWith(color: Colors.black),
+                          )),
+                    );
+                  }
+                },
+                orElse: () {});
+          },
+        ),
+        BlocListener<SendSosBloc, SendSosState>(
+          listener: (context, state) {
+            state.maybeMap(
+                success: (_) =>
+                    AppToast.showSuccess(context, AppLocalizations.of(context)!.sosSent),
+                error: (error) => AppToast.showError(context, error.message),
+                orElse: () {});
+          },
+        ),
+      ],
       child: Scaffold(
         appBar: AppBar(
           title: Text(
