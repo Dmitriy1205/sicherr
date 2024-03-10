@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sicherr/core/const/icons.dart';
 import 'package:sicherr/core/const/images.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
-import 'package:sicherr/domain/managers/contacts_manager.dart';
+import 'package:sicherr/core/managers/contacts_manager.dart';
 import 'package:sicherr/presentation/bloc/emergency_contact/emergency_contact_bloc.dart';
 import 'package:sicherr/presentation/screens/contact_detail/contact_detail.dart';
 import 'package:sicherr/presentation/widgets/round_sos_icon.dart';

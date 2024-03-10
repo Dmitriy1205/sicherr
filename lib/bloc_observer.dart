@@ -12,13 +12,19 @@ class GlobalObserver extends BlocObserver {
   @override
   void onChange(BlocBase bloc, Change change) {
     super.onChange(bloc, change);
-    log('${bloc.runtimeType} $change');
+    final changeMessage = change.toString().length > 250
+        ? '${change.toString().substring(0, 250)}...'
+        : change.toString();
+    log('${bloc.runtimeType} $changeMessage');
   }
 
   @override
   void onTransition(Bloc bloc, Transition transition) {
     super.onTransition(bloc, transition);
-    log('${bloc.runtimeType} $transition');
+    final transitionMessage = transition.toString().length > 250
+        ? '${transition.toString().substring(0, 250)}...'
+        : transition.toString();
+    log('${bloc.runtimeType} $transitionMessage');
   }
 
   @override

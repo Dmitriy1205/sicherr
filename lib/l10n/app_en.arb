@@ -33,5 +33,19 @@
   "settings": "Settings",
 
   "welcome": "Welcome",
-  "enjoy": "Enjoy using that app and feel safe on every step!"
+  "enjoy": "Enjoy using that app and feel safe on every step!",
+
+  "alarmTone": "Alarm tone",
+  "overview": "Overview",
+  "alarmDesc": "Alarm tone feature activates alarm tone that emits loud signal to attract other people",
+  "quickBinding": "Quick binding",
+  "quickBindingDesc": "Activate in order to use quick binding. Alarm tone will be triggered once you press following sequence.",
+  "volumeButton": "Volume button" ,
+  "up": "Up",
+  "down": "Down",
+  "activate": "Activate",
+  "alternativeActivateDesc": "Alternatively you can just press the button to activate.",
+  "start": "Start",
+  "stop": "Stop",
+  "alarm": "Alarm"
 }

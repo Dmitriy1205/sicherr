@@ -12,4 +12,5 @@ class AppIcons {
   static const personPlus = 'assets/icons/person_plus.svg';
   static const phoneShake = 'assets/icons/phone_shake.svg';
   static const message = 'assets/icons/message.svg';
+  static const device = 'assets/icons/device.svg';
 }

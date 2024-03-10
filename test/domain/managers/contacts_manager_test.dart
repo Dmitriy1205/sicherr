@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
-import 'package:sicherr/domain/managers/contacts_manager.dart';
+import 'package:sicherr/core/managers/contacts_manager.dart';
 
 void main() {
   group('categorizeContacts tests', () {
