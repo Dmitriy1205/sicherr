@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sicherr/core/const/images.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../widgets/round_sos_icon.dart';
 
@@ -8,14 +9,14 @@ class ContactInfo extends StatelessWidget {
   final bool isEmergency;
   const ContactInfo({
     super.key,
-    required this.contact, required this.isEmergency,
+    required this.contact,
+    required this.isEmergency,
   });
 
   final ContactEntity contact;
 
   @override
   Widget build(BuildContext context) {
-
     return Row(
       children: [
         Container(
@@ -48,13 +49,15 @@ class ContactInfo extends StatelessWidget {
               spacing: 10,
               children: [
                 Text(
-                  contact.name,
+                  contact.name.isNotEmpty
+                      ? contact.name
+                      : AppLocalizations.of(context)!.account,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.w600),
                 ),
-
-                  !isEmergency  ? const SizedBox()
+                !isEmergency
+                    ? const SizedBox()
                     : const RoundSosIcon(
                         height: 20,
                         width: 20,
