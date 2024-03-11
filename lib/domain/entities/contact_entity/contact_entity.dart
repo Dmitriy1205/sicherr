@@ -34,7 +34,7 @@ class ContactEntity with _$ContactEntity {
   factory ContactEntity.fromFirebaseUser(User user) {
     return ContactEntity(
       id: user.uid,
-      name: user.displayName ?? 'Account',
+      name: user.displayName ?? '',
       phones: [if (user.phoneNumber != null) user.phoneNumber!],
     );
   }

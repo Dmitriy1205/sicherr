@@ -71,5 +71,6 @@
   "account": "Account",
   "features": "Features",
   "quickAlarm": "Schnelle Warnung",
-  "startAlarm": "START ALARM"
+  "startAlarm": "START ALARM",
+  "account": "Account"
 }

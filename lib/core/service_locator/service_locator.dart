@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get_it/get_it.dart';
 import 'package:sicherr/core/managers/alarm_manager.dart';
+import 'package:sicherr/core/managers/quick_binding_handler.dart';
 import 'package:sicherr/data/remote/client.dart';
 import 'package:sicherr/data/remote/fcm_service.dart';
 import 'package:sicherr/domain/repositories/emeregency_contacts/em_contacts_repository.dart';
@@ -40,6 +41,7 @@ Future<void> init() async {
   final userRepository = UserRepositoryImpl(firestore: firestore);
   final emContactRepository = EmContactsRepositoryImpl(firestore: firestore);
   final alarmManager = AlarmManager();
+  final quickBindingListener = QuickBindingListener(userRepo: userRepository);
   final notificationRepository = NotificationRepositoryImpl(
       fcmService: sl(), firebaseFirestore: firestore);
 
@@ -50,6 +52,7 @@ Future<void> init() async {
   sl.registerSingleton<AlarmManager>(alarmManager);
   sl.registerSingleton<NotificationRepository>(notificationRepository);
   sl.registerSingleton<HttpClient>(httpClient);
+  sl.registerSingleton<QuickBindingListener>(quickBindingListener);
 
   //Blocs
   sl.registerLazySingleton(() => AuthBloc(
@@ -73,7 +76,8 @@ Future<void> init() async {
         authBloc: sl(),
         emContactsRepository: sl(),
       ));
-  sl.registerLazySingleton(() => AlarmBloc(player: alarmManager));
+  sl.registerLazySingleton(() => AlarmBloc(
+      player: alarmManager, quickBindingListener: quickBindingListener));
   sl.registerLazySingleton(() => SendSosBloc(httpClient: sl(), authBloc: sl()));
   sl.registerLazySingleton(
       () => NotificationBloc(notificationRepository: sl(), authBloc: sl()));

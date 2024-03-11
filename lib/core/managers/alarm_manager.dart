@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:flutter_volume_controller/flutter_volume_controller.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:volume_controller/volume_controller.dart';
 
 abstract interface class BaseStrategy {
   void execute();
@@ -45,7 +45,7 @@ base class AlarmManager implements SimplePlayer {
   Future<void> play() async {
     try {
       assetsAudioPlayer.setAsset('assets/sounds/alarm.mp3');
-      FlutterVolumeController.setVolume(1);
+      VolumeController().setVolume(1);
       await assetsAudioPlayer.play();
     } catch (e) {
       log('Error playing alarm');
