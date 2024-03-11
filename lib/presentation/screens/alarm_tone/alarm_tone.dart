@@ -6,6 +6,7 @@ import 'package:sicherr/core/const/icons.dart';
 import 'package:sicherr/core/service_locator/service_locator.dart';
 import 'package:sicherr/core/theme/theme.dart';
 import 'package:sicherr/presentation/bloc/alarm/alarm_bloc.dart';
+import 'package:sicherr/presentation/bloc/profile/profile_bloc.dart';
 import 'package:sicherr/presentation/widgets/app_elevated_button.dart';
 import 'package:sicherr/presentation/widgets/app_switch.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -71,7 +72,20 @@ class _PlayButton extends StatelessWidget {
   }
 }
 
-class _QuickBindingSection extends StatelessWidget {
+class _QuickBindingSection extends StatefulWidget {
+  @override
+  State<_QuickBindingSection> createState() => _QuickBindingSectionState();
+}
+
+class _QuickBindingSectionState extends State<_QuickBindingSection> {
+  bool isQuickBinding = false;
+  @override
+  void initState() {
+    super.initState();
+    isQuickBinding =
+        context.read<ProfileBloc>().state.profileInfo?.alarmToneQB ?? false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -84,7 +98,15 @@ class _QuickBindingSection extends StatelessWidget {
               AppLocalizations.of(context)!.quickBinding,
               style: AppTheme.themeData.textTheme.displayLarge,
             ),
-            AppSwitch(value: false, onChanged: (v) {}),
+            AppSwitch(
+                value: isQuickBinding,
+                onChanged: (value) {
+                  context
+                      .read<ProfileBloc>()
+                      .add(ProfileEvent.updateSpecificProfileField(data: {
+                        "alarmToneQB": value,
+                      }));
+                }),
           ],
         ),
         const SizedBox(height: 12),
