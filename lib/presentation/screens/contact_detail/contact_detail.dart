@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sicherr/core/const/colors.dart';
 import 'package:sicherr/core/const/icons.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
 import 'package:sicherr/domain/entities/emergency_contact/emergency_contact.dart';
@@ -9,12 +8,13 @@ import 'package:sicherr/presentation/screens/contact_detail/widgets/additional_c
 import 'package:sicherr/presentation/screens/contact_detail/widgets/contact_info.dart';
 import 'package:sicherr/presentation/widgets/core_widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:sicherr/presentation/widgets/default_app_bar.dart';
 
 import '../../bloc/emergency_contact/emergency_contact_bloc.dart';
 import '../../widgets/round_sos_icon.dart';
 
 class ContactDetailScreen extends StatefulWidget {
-  ContactDetailScreen({super.key, required this.contact});
+  const ContactDetailScreen({super.key, required this.contact});
 
   final ContactEntity contact;
 
@@ -23,7 +23,7 @@ class ContactDetailScreen extends StatefulWidget {
 }
 
 class _ContactDetailScreenState extends State<ContactDetailScreen> {
-   bool? isEmergency;
+  bool? isEmergency;
 
   @override
   void initState() {
@@ -40,15 +40,7 @@ class _ContactDetailScreenState extends State<ContactDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: AppColors.lightGrey,
-          leading: GestureDetector(
-            child: const Icon(Icons.arrow_back_ios),
-            onTap: () {
-              Navigator.pop(context);
-              },
-          ),
-        ),
+        appBar: const DefaultAppBar(),
         body: SafeArea(
           child: Column(
             children: [

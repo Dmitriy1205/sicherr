@@ -27,7 +27,7 @@ class _AlarmToneState extends State<AlarmTone> {
         title: AppLocalizations.of(context)!.alarmTone,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
         child: SingleChildScrollView(
           physics: const ClampingScrollPhysics(),
           child: Column(
