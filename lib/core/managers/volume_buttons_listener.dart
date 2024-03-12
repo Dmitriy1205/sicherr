@@ -4,7 +4,7 @@ import 'package:sicherr/core/utils/prevent_concurrent_execution.dart';
 import 'package:sicherr/domain/entities/quick_binding/binding_actions.dart';
 import 'package:volume_controller/volume_controller.dart';
 
-class VolumeButtonsListener {
+final class VolumeButtonsListener {
   static double _volume = 1.0;
   VolumeButtonsListener() {
     VolumeController().getVolume().then((value) {
