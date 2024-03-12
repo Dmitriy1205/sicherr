@@ -7,7 +7,14 @@ import 'package:sicherr/domain/entities/quick_binding/binding_actions.dart';
 import 'package:sicherr/domain/entities/user_profile/user_profile.dart';
 import 'package:sicherr/domain/repositories/user/user_repository.dart';
 
-final class QuickBindingListener {
+abstract interface class QuickBindingInterface {
+  Stream<ActivateBinding> get triggerActionStream;
+
+  ///implement add action to stream
+  void addAction(BindingActions action);
+}
+
+final class QuickBindingListener implements QuickBindingInterface {
   final UserRepository userRepo;
 
   late final StreamController<ActivateBinding> _actionsStreamController;
@@ -16,6 +23,7 @@ final class QuickBindingListener {
   Timer? _clearActionsTimer;
   UserProfile? _userProfile;
 
+  @override
   Stream<ActivateBinding> get triggerActionStream =>
       _actionsStreamController.stream;
 
@@ -53,7 +61,7 @@ final class QuickBindingListener {
 
   void _startListenVolumeBtn() {
     _volumeButtonsSubscription =
-        VolumeButtonsListener.listenActions((action) => _addAction(action));
+        VolumeButtonsListener.listenActions((action) => addAction(action));
     Future.delayed(const Duration(milliseconds: 500))
         .then((_) => _clearActionSequence());
   }
@@ -81,7 +89,8 @@ final class QuickBindingListener {
     }
   }
 
-  void _addAction(BindingActions action) {
+  @override
+  void addAction(BindingActions action) {
     log('Added catch action: $action');
     _actionsSequence.add(action);
     _clearActionsTimer?.cancel();
