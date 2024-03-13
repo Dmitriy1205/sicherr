@@ -7,6 +7,7 @@ import 'package:sicherr/presentation/bloc/notification/notification_bloc.dart';
 import 'package:sicherr/presentation/bloc/onboarding/onboarding_bloc.dart';
 import 'package:sicherr/presentation/bloc/profile/profile_bloc.dart';
 import 'package:sicherr/presentation/bloc/send_sos/send_sos_bloc.dart';
+import 'package:sicherr/presentation/bloc/shake_detector/shake_detector_bloc.dart';
 
 import '../presentation/bloc/auth/auth_bloc.dart';
 import '../presentation/bloc/contacts/contacts_bloc.dart';
@@ -59,6 +60,10 @@ class Providers extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => ContactsBloc(ContactsManager()),
+        ),
+        BlocProvider(
+          create: (context) => sl<ShakeDetectorBloc>(),
+          lazy: true,
         ),
       ],
       child: child,

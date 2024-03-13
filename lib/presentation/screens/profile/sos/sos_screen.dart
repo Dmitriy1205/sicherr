@@ -368,7 +368,7 @@ class _SosScreenState extends State<SosScreen> {
                 AppElevatedButton(
                     text: AppLocalizations.of(context)!.send,
                     onPressed: () {
-                      sosConfirmationPopup(context, latitude: position!.latitude.toString(), longitude: position!.longitude.toString());
+                      sosConfirmationPopup(context, latitude: position?.latitude.toString(), longitude: position?.longitude.toString());
                     }),
                 const SizedBox(
                   height: 40,

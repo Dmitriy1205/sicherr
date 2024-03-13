@@ -8,11 +8,13 @@ import 'package:sicherr/core/managers/quick_binding_handler.dart';
 import 'package:sicherr/core/theme/theme.dart';
 import 'package:sicherr/presentation/bloc/profile/profile_bloc.dart';
 import 'package:sicherr/presentation/bloc/send_sos/send_sos_bloc.dart';
+import 'package:sicherr/presentation/bloc/shake_detector/shake_detector_bloc.dart';
 import 'package:sicherr/presentation/screens/contacts/contacts.dart';
 import 'package:sicherr/presentation/screens/home/home.dart';
 import 'package:sicherr/presentation/screens/map/map.dart';
 import 'package:sicherr/presentation/screens/profile/profile.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:sicherr/presentation/widgets/sos_confirmation_popup.dart';
 
 import '../../core/service_locator/service_locator.dart';
 import '../bloc/onboarding/onboarding_bloc.dart';
@@ -91,6 +93,17 @@ class _InitialScreenState extends State<InitialScreen> {
                 success: (_) => AppToast.showSuccess(
                     context, AppLocalizations.of(context)!.sosSent),
                 error: (error) => AppToast.showError(context, error.message),
+                orElse: () {});
+          },
+        ),
+        BlocListener<ShakeDetectorBloc, ShakeDetectorState>(
+          listener: (context, state) {
+            state.maybeMap(
+                success: (_) {
+                  sosConfirmationPopup(context).then((value) => context
+                      .read<ShakeDetectorBloc>()
+                      .add(const ShakeDetectorEvent.resetDetection()));
+                },
                 orElse: () {});
           },
         ),
