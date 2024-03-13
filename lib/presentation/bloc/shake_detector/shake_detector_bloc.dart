@@ -22,9 +22,8 @@ class ShakeDetectorBloc extends Bloc<ShakeDetectorEvent, ShakeDetectorState> {
         super(const ShakeDetectorState.initial()) {
     on<ShakeDetectorEvent>(_mapBlocToState);
     _profileStreamSubscription = _profileBloc.stream.listen((profile) {
-
       if (profile.profileInfo!.enabledSosQB) {
-        add(const ShakeDetectorEvent.resetDetection());
+
         _accelerometerSubscription =
             accelerometerEventStream().listen((AccelerometerEvent event) {
           if (event.x.abs() > 12 || event.y.abs() > 12 || event.z.abs() > 12) {

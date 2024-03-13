@@ -68,9 +68,6 @@ class ContactCard extends StatelessWidget {
                                 fontSize: 14, fontWeight: FontWeight.w500),
                             overflow: TextOverflow.ellipsis,
                           ),
-                          const SizedBox(
-                            height: 5,
-                          ),
                           Text(
                             contact.getMainPhoneNumber,
                             style: const TextStyle(
