@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sicherr/core/const/colors.dart';
 import 'package:sicherr/core/const/icons.dart';
+import 'package:sicherr/core/managers/quick_binding_handler.dart';
 import 'package:sicherr/core/theme/theme.dart';
 import 'package:sicherr/presentation/bloc/emergency_contact/emergency_contact_bloc.dart';
 import 'package:sicherr/presentation/bloc/profile/profile_bloc.dart';
@@ -14,6 +15,7 @@ import 'package:sicherr/presentation/screens/map/map.dart';
 import 'package:sicherr/presentation/screens/profile/profile.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../core/service_locator/service_locator.dart';
 import '../bloc/onboarding/onboarding_bloc.dart';
 import '../widgets/app_toast.dart';
 
@@ -36,11 +38,12 @@ class _InitialScreenState extends State<InitialScreen> {
 
   @override
   void initState() {
-
     context.read<ProfileBloc>().add(const ProfileEvent.getProfileFields());
-    context.read<EmergencyContactBloc>().add(const EmergencyContactEvent.getAllEmContacts());
+    context
+        .read<EmergencyContactBloc>()
+        .add(const EmergencyContactEvent.getAllEmContacts());
     context.read<OnboardingBloc>().add(const OnboardingEvent.get());
-
+    sl<QuickBindingListener>().initListeners();
     super.initState();
   }
 
@@ -88,8 +91,8 @@ class _InitialScreenState extends State<InitialScreen> {
         BlocListener<SendSosBloc, SendSosState>(
           listener: (context, state) {
             state.maybeMap(
-                success: (_) =>
-                    AppToast.showSuccess(context, AppLocalizations.of(context)!.sosSent),
+                success: (_) => AppToast.showSuccess(
+                    context, AppLocalizations.of(context)!.sosSent),
                 error: (error) => AppToast.showError(context, error.message),
                 orElse: () {});
           },

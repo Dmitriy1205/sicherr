@@ -13,6 +13,8 @@ import 'package:sicherr/presentation/screens/sos/sos_screen.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../bloc/notification/notification_bloc.dart';
+
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -76,8 +78,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     items: [
                       ProfileSectionItem(
                           text: AppLocalizations.of(context)!.logout,
-                          action: () => BlocProvider.of<AuthBloc>(context)
-                              .add(const AuthEvent.logout()))
+                          action: () {
+                            context.read<NotificationBloc>().add(const NotificationEvent.removeToken());
+                            BlocProvider.of<AuthBloc>(context)
+                                .add(const AuthEvent.logout());
+                          })
                     ],
                   ),
                 ],
