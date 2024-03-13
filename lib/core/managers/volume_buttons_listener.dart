@@ -47,8 +47,6 @@ mixin VolumeListenerMixin {
 
   void startListenVolumeBtn({required void Function(BindingActions) callback}) {
     _volumeButtonsSubscription = VolumeButtonsListener.listenActions(callback);
-    // Future.delayed(const Duration(milliseconds: 500))
-    //     .then((_) => _clearActionSequence());
   }
 
   void stopListenVolumeBtn() {
