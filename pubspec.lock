@@ -933,6 +933,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.27.7"
+
   sensors_plus:
     dependency: "direct main"
     description:
@@ -949,6 +950,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+
   shelf:
     dependency: transitive
     description:
