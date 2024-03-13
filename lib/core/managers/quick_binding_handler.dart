@@ -14,11 +14,12 @@ abstract interface class QuickBindingInterface {
   void addAction(BindingActions action);
 }
 
-final class QuickBindingListener implements QuickBindingInterface {
+final class QuickBindingListener
+    with VolumeListenerMixin
+    implements QuickBindingInterface {
   final UserRepository userRepo;
 
   late final StreamController<ActivateBinding> _actionsStreamController;
-  StreamSubscription<BindingActions>? _volumeButtonsSubscription;
   final List<BindingActions> _actionsSequence = [];
   Timer? _clearActionsTimer;
   UserProfile? _userProfile;
@@ -32,7 +33,7 @@ final class QuickBindingListener implements QuickBindingInterface {
     _initListeners();
   }
 
-  //Initialization part -------------------->
+  //Initialization part start -------------------->
   void _initListeners() {
     userRepo
         .getUserFieldsStream(
@@ -47,9 +48,14 @@ final class QuickBindingListener implements QuickBindingInterface {
 
   void _startsStopListeners() {
     if (_userProfile!.alarmToneQB) {
-      _startListenVolumeBtn();
-    } else if (_volumeButtonsSubscription != null) {
-      _stopListenVolumeBtn();
+      startListenVolumeBtn(callback: addAction);
+      // This delay has been added to clear the _actionsSequence after we subscribe 
+      // to the volume listener, because it's triggers already as we subscribe,
+      // as result unwanted actions being added.
+      Future.delayed(const Duration(milliseconds: 500))
+          .then((_) => _clearActionSequence());
+    } else {
+      stopListenVolumeBtn();
     }
 
     if (_userProfile!.enabledSosQB) {
@@ -59,19 +65,7 @@ final class QuickBindingListener implements QuickBindingInterface {
     }
   }
 
-  void _startListenVolumeBtn() {
-    _volumeButtonsSubscription =
-        VolumeButtonsListener.listenActions((action) => addAction(action));
-    Future.delayed(const Duration(milliseconds: 500))
-        .then((_) => _clearActionSequence());
-  }
-
-  void _stopListenVolumeBtn() {
-    _volumeButtonsSubscription?.cancel();
-    VolumeButtonsListener.removeListener();
-  }
-
-  //Initialization part <--------------------
+  //Initialization part end <--------------------
 
   // Only general logic for quick binding
   bool _checkIfTriggered() {
