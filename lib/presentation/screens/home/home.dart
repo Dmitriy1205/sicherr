@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:sicherr/core/service_locator/service_locator.dart';
 import 'package:sicherr/presentation/bloc/alarm/alarm_bloc.dart';
 import 'package:sicherr/presentation/screens/home/widgets/circle_action_button.dart';
@@ -30,6 +31,23 @@ class HomeButtonsSlider extends StatefulWidget {
 class _HomeButtonsSliderState extends State<HomeButtonsSlider> {
   int selectedIndex = 0;
   final controller = CarouselController();
+  Position? position;
+
+  @override
+  void initState() {
+    getCurrentPosition();
+    super.initState();
+  }
+
+
+  getCurrentPosition() async {
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.whileInUse) {
+      position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +68,7 @@ class _HomeButtonsSliderState extends State<HomeButtonsSlider> {
           ),
           items: [
             _SOSWidget(
+              position: position,
               isSelected: selectedIndex == 0,
               goToNextItem: _goToNextButton,
             ),
@@ -105,17 +124,20 @@ class _StartAlarm extends StatelessWidget {
 }
 
 class _SOSWidget extends StatelessWidget {
-  const _SOSWidget({required this.isSelected, required this.goToNextItem});
+  const _SOSWidget({required this.isSelected, required this.goToNextItem, this.position});
   final bool isSelected;
   final void Function(int) goToNextItem;
+  final Position? position;
 
   @override
   Widget build(BuildContext context) {
     return CircleActionButton(
         text: 'SOS',
         onTap: () {
+
           if (isSelected) {
-            sosConfirmationPopup(context);
+
+            sosConfirmationPopup(context, latitude: position?.latitude.toString(), longitude: position?.longitude.toString());
           } else {
             goToNextItem(0);
           }

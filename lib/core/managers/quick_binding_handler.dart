@@ -30,11 +30,11 @@ final class QuickBindingListener
 
   QuickBindingListener({required this.userRepo}) {
     _actionsStreamController = StreamController<ActivateBinding>.broadcast();
-    _initListeners();
+    // _initListeners();
   }
 
   //Initialization part start -------------------->
-  void _initListeners() {
+  void initListeners() {
     userRepo
         .getUserFieldsStream(
             currentUserId: FirebaseAuth.instance.currentUser?.uid ?? '')

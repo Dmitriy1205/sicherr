@@ -54,6 +54,7 @@
   "quickBinding": "Quick binding",
   "quickBindingDescription": "Activate in order to use quick binding. SOS signal\nwill be triggered once you execute the following\naction.",
   "emergencyContacts": "Emergency contacts",
+  "addEmergencyContacts": "Add emergency contacts",
   "emergency": "Emergency",
   "sosMessage": "Message...",
   "sendYourGeolocation": "Send your geolocation?",

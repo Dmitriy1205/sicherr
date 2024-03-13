@@ -43,4 +43,5 @@ class SendSosBloc extends Bloc<SendSosEvent, SendSosState> {
       emit(SendSosState.error(message: e.message, code: e.code));
     }
   }
+
 }

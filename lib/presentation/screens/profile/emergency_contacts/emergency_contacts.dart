@@ -1,58 +1,70 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sicherr/core/theme/theme.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
-import 'package:sicherr/core/managers/contacts_manager.dart';
 import 'package:sicherr/presentation/bloc/contacts/contacts_bloc.dart';
-import 'package:sicherr/presentation/screens/contacts/widgets/contact_card.dart';
 import 'package:sicherr/presentation/widgets/loading_indicator.dart';
 import 'package:sicherr/presentation/widgets/permission_alert_dialog.dart';
 import 'package:sicherr/presentation/widgets/search_phone_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../bloc/emergency_contact/emergency_contact_bloc.dart';
+import '../../../bloc/emergency_contact/emergency_contact_bloc.dart';
+import '../../../widgets/default_app_bar.dart';
+import 'em_contact_card.dart';
 
-
-class ContactsScreen extends StatefulWidget {
-  const ContactsScreen({Key? key}) : super(key: key);
+class EmergencyContactsScreen extends StatefulWidget {
+  const EmergencyContactsScreen({Key? key}) : super(key: key);
 
   @override
-  State<ContactsScreen> createState() => _ContactsScreenState();
+  State<EmergencyContactsScreen> createState() =>
+      _EmergencyContactsScreenState();
 }
 
-class _ContactsScreenState extends State<ContactsScreen> {
-@override
+class _EmergencyContactsScreenState extends State<EmergencyContactsScreen> {
+  @override
   void initState() {
-  context
-      .read<EmergencyContactBloc>()
-      .add(const EmergencyContactEvent.getAllEmContacts());    super.initState();
+    context
+        .read<EmergencyContactBloc>()
+        .add(const EmergencyContactEvent.getAllEmContacts());
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ContactsBloc(ContactsManager()),
-      lazy: true,
-      child: BlocBuilder<ContactsBloc, ContactsState>(
+    return Scaffold(
+      appBar: DefaultAppBar(
+        title: AppLocalizations.of(context)!.emergencyContacts,
+      ),
+      body: BlocBuilder<ContactsBloc, ContactsState>(
         builder: (context, state) {
           return state.maybeMap(
               loadInProgress: (_) => const Center(child: LoadingIndicator()),
               orElse: () => const Center(child: LoadingIndicator()),
               loaded: (state) => Column(
                     children: [
+                      Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                left: 20, right: 20, top: 18),
+                            child: Text(
+                              AppLocalizations.of(context)!
+                                  .addEmergencyContacts,
+                              style: AppTheme.themeData.textTheme.titleLarge,
+                            ),
+                          )),
                       Padding(
                         padding:
                             const EdgeInsets.only(left: 20, right: 20, top: 18),
                         child: SearchPhoneField(
                           hintText: AppLocalizations.of(context)!.search,
                           onChanged: (text) {
-                            context
-                              .read<EmergencyContactBloc>()
-                              .add(const EmergencyContactEvent.getAllEmContacts());
+                            context.read<EmergencyContactBloc>().add(
+                                const EmergencyContactEvent.getAllEmContacts());
 
                             context
                                 .read<ContactsBloc>()
                                 .add(ContactsEvent.searchContact(text));
-
                           },
                         ),
                       ),
@@ -81,12 +93,12 @@ class ContactListDisplayed extends StatelessWidget {
   Widget build(BuildContext context) {
     return groupedContacts.isEmpty
         ? Expanded(
-          child: Padding(
+            child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                   Text(
+                  Text(
                     AppLocalizations.of(context)!.noContacts,
                     style: const TextStyle(fontSize: 18),
                   ),
@@ -94,7 +106,8 @@ class ContactListDisplayed extends StatelessWidget {
                   if (isPermissionDenied)
                     GestureDetector(
                       onTap: () => showPermissionAlertDialog(context,
-                          content: AppLocalizations.of(context)!.allowAccess, onClosed: (_) {
+                          content: AppLocalizations.of(context)!.allowAccess,
+                          onClosed: (_) {
                         context
                             .read<ContactsBloc>()
                             .add(const ContactsEvent.checkPermission());
@@ -102,7 +115,8 @@ class ContactListDisplayed extends StatelessWidget {
                       child: SizedBox(
                         width: 300,
                         child: Text(
-                          AppLocalizations.of(context)!.givePermissionSynchronize,
+                          AppLocalizations.of(context)!
+                              .givePermissionSynchronize,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Theme.of(context).primaryColor,
@@ -114,17 +128,15 @@ class ContactListDisplayed extends StatelessWidget {
                 ],
               ),
             ),
-        )
+          )
         : Expanded(
             child: ListView.builder(
-              padding: const EdgeInsets.only(left: 20, right: 20, top: 18),
+              padding: const EdgeInsets.only(left: 20, right: 32, top: 18),
               itemCount: groupedContacts.length,
               itemBuilder: (BuildContext context, int index) {
                 String category = groupedContacts.keys.elementAt(index);
                 List<ContactEntity> itemsInCategory =
                     groupedContacts[category]!;
-
-                // Return a widget representing the category and its items
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -142,16 +154,22 @@ class ContactListDisplayed extends StatelessWidget {
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: itemsInCategory.length,
                       itemBuilder: (BuildContext context, int index) {
-
                         final item = itemsInCategory[index];
-                     bool isEmergency =  context.read<EmergencyContactBloc>().state.emContacts == null
+                        bool isEmergency = context
+                                    .read<EmergencyContactBloc>()
+                                    .state
+                                    .emContacts ==
+                                null
                             ? false
                             : context
-                            .read<EmergencyContactBloc>()
-                            .state
-                            .emContacts!
-                            .any((element) => element.id == item.id);
-                        return ContactCard(contact: item, isEmergency: isEmergency,);
+                                .read<EmergencyContactBloc>()
+                                .state
+                                .emContacts!
+                                .any((element) => element.id == item.id);
+                        return EmContactCard(
+                          contact: item,
+                          isEmergency: isEmergency,
+                        );
                       },
                     ),
                   ],

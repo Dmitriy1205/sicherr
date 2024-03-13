@@ -7,14 +7,16 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:sicherr/core/const/icons.dart';
 import 'package:sicherr/core/theme/theme.dart';
 import 'package:sicherr/presentation/bloc/profile/profile_bloc.dart';
+import 'package:sicherr/presentation/screens/profile/emergency_contacts/emergency_contacts.dart';
 import 'package:sicherr/presentation/widgets/app_elevated_button.dart';
+import 'package:sicherr/presentation/widgets/default_app_bar.dart';
 import 'package:sicherr/presentation/widgets/sos_confirmation_popup.dart';
-
-import '../../../core/const/colors.dart';
-import '../../bloc/emergency_contact/emergency_contact_bloc.dart';
-import '../../widgets/app_switch.dart';
-import '../../widgets/scrollable_contacts_list.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../../core/const/colors.dart';
+import '../../../bloc/emergency_contact/emergency_contact_bloc.dart';
+import '../../../widgets/app_switch.dart';
+import '../../../widgets/scrollable_contacts_list.dart';
 
 
 class SosScreen extends StatefulWidget {
@@ -58,39 +60,40 @@ class _SosScreenState extends State<SosScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: AppBar(
-        surfaceTintColor: AppColors.white,
-        backgroundColor: AppColors.lightGrey,
-        automaticallyImplyLeading: false,
-        title: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 8.0),
-                  child: FaIcon(
-                    FontAwesomeIcons.chevronLeft,
-                    color: AppColors.black,
-                    size: 20,
-                  ),
-                ),
-              ),
-              Text(
-                'SOS',
-                style: AppTheme.themeData.textTheme.displayLarge,
-              ),
-              const SizedBox(
-                width: 20,
-              ),
-            ],
-          ),
-        ),
-      ),
+      appBar: const DefaultAppBar(title:'SOS' ,),
+      // AppBar(
+      //   surfaceTintColor: AppColors.white,
+      //   backgroundColor: AppColors.lightGrey,
+      //   automaticallyImplyLeading: false,
+      //   title: Padding(
+      //     padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      //     child: Row(
+      //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //       children: [
+      //         InkWell(
+      //           onTap: () {
+      //             Navigator.pop(context);
+      //           },
+      //           child: const Padding(
+      //             padding: EdgeInsets.symmetric(vertical: 8.0),
+      //             child: FaIcon(
+      //               FontAwesomeIcons.chevronLeft,
+      //               color: AppColors.black,
+      //               size: 20,
+      //             ),
+      //           ),
+      //         ),
+      //         Text(
+      //           'SOS',
+      //           style: AppTheme.themeData.textTheme.displayLarge,
+      //         ),
+      //         const SizedBox(
+      //           width: 20,
+      //         ),
+      //       ],
+      //     ),
+      //   ),
+      // ),
       body: BlocListener<EmergencyContactBloc, EmergencyContactState>(
         listener: (context, state) {
           state.maybeMap(
@@ -119,11 +122,12 @@ class _SosScreenState extends State<SosScreen> {
               orElse: () {});
         },
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 18.0,),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(height: 15,),
                 Text(
                   AppLocalizations.of(context)!.overview,
                   style: AppTheme.themeData.textTheme.displayLarge,
@@ -198,13 +202,23 @@ class _SosScreenState extends State<SosScreen> {
                         style: AppTheme.themeData.textTheme.displayLarge,
                       ),
                       InkWell(
-                        onTap: () {},
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 8.0),
-                          child: FaIcon(
-                            FontAwesomeIcons.chevronRight,
-                            color: AppColors.black,
-                            size: 20,
+                        highlightColor: Colors.transparent,
+                        splashColor: Colors.transparent,
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const EmergencyContactsScreen(),
+                              ));
+                        },
+                        child: const Center(
+                          child: Padding(
+                            padding: EdgeInsets.all( 3),
+                            child: FaIcon(
+                              FontAwesomeIcons.chevronRight,
+                              color: AppColors.black,
+                              size: 18,
+                            ),
                           ),
                         ),
                       ),
@@ -354,7 +368,7 @@ class _SosScreenState extends State<SosScreen> {
                 AppElevatedButton(
                     text: AppLocalizations.of(context)!.send,
                     onPressed: () {
-                      sosConfirmationPopup(context);
+                      sosConfirmationPopup(context, latitude: position?.latitude.toString(), longitude: position?.longitude.toString());
                     }),
                 const SizedBox(
                   height: 40,

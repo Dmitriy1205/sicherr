@@ -56,6 +56,7 @@
     "quickBinding": "Schnelle Bindung",
     "quickBindingDescription": "Aktivieren Sie die schnelle Bindung, um sie zu verwenden. Ein SOS-Signal\nwird ausgelöst, sobald Sie die folgende\nAktion ausführen.",
     "emergencyContacts": "Notfallkontakte",
+    "addEmergencyContacts": "Notfallkontakte hinzufügen",
     "emergency": "Notfall",
     "sosMessage": "Nachricht...",
     "sendYourGeolocation": "Senden Sie Ihren Standort?",

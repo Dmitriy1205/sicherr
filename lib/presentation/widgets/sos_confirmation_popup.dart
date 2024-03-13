@@ -13,7 +13,7 @@ import '../bloc/profile/profile_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
-void sosConfirmationPopup(BuildContext context) {
+Future<void> sosConfirmationPopup(BuildContext context,{ String? latitude, String? longitude}) async {
   showDialog<void>(
     context: context,
     builder: (BuildContext context) =>
@@ -186,7 +186,7 @@ void sosConfirmationPopup(BuildContext context) {
                   context.read<SendSosBloc>().add(SendSosEvent.sendSOS(
                     message: sosMessage == null || sosMessage.isEmpty ? 'SOS' : sosMessage,
                     currentUserPhone: currentUserPhone!,
-                    emContactPhone: emContactPhoneList, lat: '', long: '',
+                    emContactPhone: emContactPhoneList, lat: latitude, long: longitude ,
                   ));
                   Navigator.pop(context);
                 }),

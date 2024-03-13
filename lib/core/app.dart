@@ -10,6 +10,7 @@ import 'package:sicherr/presentation/widgets/loading_indicator.dart';
 
 import '../l10n/l10n.dart';
 import '../presentation/bloc/auth/auth_bloc.dart';
+import '../presentation/bloc/notification/notification_bloc.dart';
 import 'const/images.dart';
 
 class App extends StatefulWidget {
@@ -33,7 +34,6 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    // final currentLocale = L10n.getCurrentLocale(context);
     return Providers(
       child: MaterialApp(
         localizationsDelegates: L10n.localizationsDelegates,
@@ -47,7 +47,10 @@ class _AppState extends State<App> {
         ): null,
         home: BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
           return state.maybeMap(
-              authenticated: (_) => const InitialScreen(),
+              authenticated: (_) {
+                context.read<NotificationBloc>().add(const NotificationEvent.saveToken());
+               return const InitialScreen();
+              },
               unauthenticated: (_) => const SigninScreen(),
               orElse: () => const Material(child: LoadingIndicator()));
         }),
