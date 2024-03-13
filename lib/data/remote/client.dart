@@ -8,8 +8,8 @@ import '../../core/const/url.dart';
 class HttpClient {
   Future<void> sendSos({
     required String idToken,
-    required String lat,
-    required String long,
+    required String? lat,
+    required String? long,
     required String message,
     required String currentUserPhone,
     required List<String> emContactPhones,

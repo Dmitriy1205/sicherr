@@ -16,28 +16,28 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SendSosEvent {
-  String get lat => throw _privateConstructorUsedError;
-  String get long => throw _privateConstructorUsedError;
+  String? get lat => throw _privateConstructorUsedError;
+  String? get long => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
   String get currentUserPhone => throw _privateConstructorUsedError;
   List<String> get emContactPhone => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String lat, String long, String message,
+    required TResult Function(String? lat, String? long, String message,
             String currentUserPhone, List<String> emContactPhone)
         sendSOS,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String lat, String long, String message,
+    TResult? Function(String? lat, String? long, String message,
             String currentUserPhone, List<String> emContactPhone)?
         sendSOS,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String lat, String long, String message,
+    TResult Function(String? lat, String? long, String message,
             String currentUserPhone, List<String> emContactPhone)?
         sendSOS,
     required TResult orElse(),
@@ -72,8 +72,8 @@ abstract class $SendSosEventCopyWith<$Res> {
       _$SendSosEventCopyWithImpl<$Res, SendSosEvent>;
   @useResult
   $Res call(
-      {String lat,
-      String long,
+      {String? lat,
+      String? long,
       String message,
       String currentUserPhone,
       List<String> emContactPhone});
@@ -92,21 +92,21 @@ class _$SendSosEventCopyWithImpl<$Res, $Val extends SendSosEvent>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? lat = null,
-    Object? long = null,
+    Object? lat = freezed,
+    Object? long = freezed,
     Object? message = null,
     Object? currentUserPhone = null,
     Object? emContactPhone = null,
   }) {
     return _then(_value.copyWith(
-      lat: null == lat
+      lat: freezed == lat
           ? _value.lat
           : lat // ignore: cast_nullable_to_non_nullable
-              as String,
-      long: null == long
+              as String?,
+      long: freezed == long
           ? _value.long
           : long // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -132,8 +132,8 @@ abstract class _$$SendSOSImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String lat,
-      String long,
+      {String? lat,
+      String? long,
       String message,
       String currentUserPhone,
       List<String> emContactPhone});
@@ -150,21 +150,21 @@ class __$$SendSOSImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? lat = null,
-    Object? long = null,
+    Object? lat = freezed,
+    Object? long = freezed,
     Object? message = null,
     Object? currentUserPhone = null,
     Object? emContactPhone = null,
   }) {
     return _then(_$SendSOSImpl(
-      lat: null == lat
+      lat: freezed == lat
           ? _value.lat
           : lat // ignore: cast_nullable_to_non_nullable
-              as String,
-      long: null == long
+              as String?,
+      long: freezed == long
           ? _value.long
           : long // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -193,9 +193,9 @@ class _$SendSOSImpl implements _SendSOS {
       : _emContactPhone = emContactPhone;
 
   @override
-  final String lat;
+  final String? lat;
   @override
-  final String long;
+  final String? long;
   @override
   final String message;
   @override
@@ -240,7 +240,7 @@ class _$SendSOSImpl implements _SendSOS {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String lat, String long, String message,
+    required TResult Function(String? lat, String? long, String message,
             String currentUserPhone, List<String> emContactPhone)
         sendSOS,
   }) {
@@ -250,7 +250,7 @@ class _$SendSOSImpl implements _SendSOS {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String lat, String long, String message,
+    TResult? Function(String? lat, String? long, String message,
             String currentUserPhone, List<String> emContactPhone)?
         sendSOS,
   }) {
@@ -260,7 +260,7 @@ class _$SendSOSImpl implements _SendSOS {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String lat, String long, String message,
+    TResult Function(String? lat, String? long, String message,
             String currentUserPhone, List<String> emContactPhone)?
         sendSOS,
     required TResult orElse(),
@@ -302,16 +302,16 @@ class _$SendSOSImpl implements _SendSOS {
 
 abstract class _SendSOS implements SendSosEvent {
   const factory _SendSOS(
-      {required final String lat,
-      required final String long,
+      {required final String? lat,
+      required final String? long,
       required final String message,
       required final String currentUserPhone,
       required final List<String> emContactPhone}) = _$SendSOSImpl;
 
   @override
-  String get lat;
+  String? get lat;
   @override
-  String get long;
+  String? get long;
   @override
   String get message;
   @override
