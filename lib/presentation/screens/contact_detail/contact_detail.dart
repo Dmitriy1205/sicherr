@@ -87,13 +87,6 @@ class _ContactDetailScreenState extends State<ContactDetailScreen> {
                                   InkWell(
                                     onTap: () {
                                       isEmergency!
-                                          // context
-                                          //     .read<EmergencyContactBloc>()
-                                          //     .state
-                                          //     .emContacts == null|| context
-                                          //     .read<EmergencyContactBloc>()
-                                          //     .state
-                                          //     .emContacts!.any((element) => element.id == widget.contact.id)
                                           ? context
                                               .read<EmergencyContactBloc>()
                                               .add(EmergencyContactEvent

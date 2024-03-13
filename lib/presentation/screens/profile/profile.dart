@@ -7,9 +7,9 @@ import 'package:sicherr/presentation/bloc/auth/auth_bloc.dart';
 import 'package:sicherr/presentation/screens/alarm_tone/alarm_tone.dart';
 import 'package:sicherr/presentation/screens/contact_detail/widgets/contact_info.dart';
 import 'package:sicherr/presentation/screens/profile/model/models.dart';
+import 'package:sicherr/presentation/screens/profile/sos/sos_screen.dart';
 import 'package:sicherr/presentation/screens/profile/widgets/profile_category_item.dart';
 import 'package:sicherr/presentation/screens/profile/widgets/profile_category_label.dart';
-import 'package:sicherr/presentation/screens/sos/sos_screen.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

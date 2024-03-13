@@ -22,6 +22,7 @@ class AppStrings {
   static const String quickBindingDescription =
       '''Activate in order to use quick binding. SOS signal\nwill be triggered once you execute the following\naction.''';
   static const String emergencyContacts  = 'Emergency contacts';
+  static const String addEmergencyContacts  = 'Add emergency contacts';
   static const String emergency  = 'Emergency';
   static const String sosMessage  = 'Message...';
   static const String sendYourGeolocation  = 'Send your geolocation?';
