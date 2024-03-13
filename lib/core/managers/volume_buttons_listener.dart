@@ -41,3 +41,18 @@ final class VolumeButtonsListener {
     VolumeController().removeListener();
   }
 }
+
+mixin VolumeListenerMixin {
+  StreamSubscription<BindingActions>? _volumeButtonsSubscription;
+
+  void startListenVolumeBtn({required void Function(BindingActions) callback}) {
+    _volumeButtonsSubscription = VolumeButtonsListener.listenActions(callback);
+  }
+
+  void stopListenVolumeBtn() {
+    if (_volumeButtonsSubscription != null) {
+      _volumeButtonsSubscription?.cancel();
+      VolumeButtonsListener.removeListener();
+    }
+  }
+}
