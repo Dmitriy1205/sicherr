@@ -30,7 +30,7 @@ const verifyToken = (req, res, next) => {
 
 // Middleware to validate request body
 const validateBody = (req, res, next) => {
-  const { phones, message, lat, long } = req.body;
+  const { phones, message, lat, long, phone } = req.body;
 
   if (!phones || !Array.isArray(phones) || phones.length === 0) {
     return res.status(400).json({ error: 'Phones parameter is missing or empty' });
@@ -40,17 +40,17 @@ const validateBody = (req, res, next) => {
     return res.status(400).json({ error: 'Message parameter is invalid' });
   }
 
-  req.sosData = { phones, message, lat, long };
+  req.sosData = { phones, message, lat, long, phone };
   next();
 };
 
 // Route for sending SOS
 app.post('/send_sos', verifyToken, validateBody, (req, res) => {
-  const { phones, message, lat, long } = req.sosData;
+  const { phones, message, lat, long, phone } = req.sosData;
   const promises = [];
 
-  phones.forEach(phone => {
-    const userRef = admin.firestore().collection('users').where('phone', '==', phone).get();
+  phones.forEach(sendToPhone => {
+    const userRef = admin.firestore().collection('users').where('phone', '==', sendToPhone).get();
 
     promises.push(userRef.then(snapshot => {
       snapshot.forEach(doc => {
