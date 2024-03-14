@@ -110,7 +110,7 @@ String? _extractGoogleMapsLink(String message) {
   RegExp regExp = RegExp(r'https:\/\/www\.google\.com\/maps\?q=[0-9\.,&=]+');
   final match = regExp.firstMatch(message);
   if (match != null) {
-    return match.group(0).toString();
+    return match.group(0);
   }
   return null;
 }
