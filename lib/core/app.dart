@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sicherr/core/managers/notification_handler.dart';
 import 'package:sicherr/core/providers.dart';
+import 'package:sicherr/core/service_locator/service_locator.dart';
 import 'package:sicherr/core/theme/theme.dart';
 import 'package:sicherr/presentation/screens/auth/sign_in.dart';
 import 'package:sicherr/presentation/screens/initial.dart';
@@ -27,9 +29,13 @@ class _AppState extends State<App> {
   void didChangeDependencies() {
     precacheImage(const AssetImage(AppImages.background), context);
     precacheImage(const AssetImage(AppImages.logo), context);
-
     super.didChangeDependencies();
+  }
 
+  @override
+  void initState() {
+    super.initState();
+    sl<NotificationHandlerInterface>().handleNotification();
   }
 
   @override

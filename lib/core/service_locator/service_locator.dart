@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get_it/get_it.dart';
 import 'package:sicherr/core/managers/alarm_manager.dart';
+import 'package:sicherr/core/managers/notification_handler.dart';
 import 'package:sicherr/core/managers/quick_binding_handler.dart';
 import 'package:sicherr/data/remote/client.dart';
 import 'package:sicherr/data/remote/fcm_service.dart';
@@ -46,6 +47,7 @@ Future<void> init() async {
   final quickBindingListener = QuickBindingListener(userRepo: userRepository);
   final notificationRepository = NotificationRepositoryImpl(
       fcmService: sl(), firebaseFirestore: firestore);
+  final notificationHandler = NotificationHandler(messaging: FirebaseMessaging.instance);
 
   //Repositories
   sl.registerSingleton<AuthRepository>(authRepository);
@@ -55,6 +57,7 @@ Future<void> init() async {
   sl.registerSingleton<NotificationRepository>(notificationRepository);
   sl.registerSingleton<HttpClient>(httpClient);
   sl.registerSingleton<QuickBindingListener>(quickBindingListener);
+  sl.registerSingleton<NotificationHandlerInterface>(notificationHandler);
 
   //Blocs
   sl.registerLazySingleton(() => AuthBloc(
@@ -96,21 +99,4 @@ Future<void> initNotifications() async {
 @pragma('vm:entry-point')
 Future<void> fcmBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
-  final body = message.notification!.body!;
-  final googleMapsLink = _extractGoogleMapsLink(body);
-  if(googleMapsLink == null) return;
-
-  final uri = Uri.parse(googleMapsLink);
-  if(await canLaunchUrl(uri)){
-    await launchUrl(uri);
-  }
-}
-
-String? _extractGoogleMapsLink(String message) {
-  RegExp regExp = RegExp(r'https:\/\/www\.google\.com\/maps\?q=[0-9\.,&=]+');
-  final match = regExp.firstMatch(message);
-  if (match != null) {
-    return match.group(0);
-  }
-  return null;
 }
