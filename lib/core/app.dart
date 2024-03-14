@@ -35,7 +35,9 @@ class _AppState extends State<App> {
   @override
   void initState() {
     super.initState();
-    sl<NotificationHandlerInterface>().handleNotification();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      sl<NotificationHandlerInterface>().handleNotification();
+    });
   }
 
   @override
