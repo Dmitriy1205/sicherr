@@ -19,6 +19,7 @@ import 'package:sicherr/presentation/bloc/notification/notification_bloc.dart';
 import 'package:sicherr/presentation/bloc/send_sos/send_sos_bloc.dart';
 import 'package:sicherr/presentation/bloc/shake_detector/shake_detector_bloc.dart';
 import 'package:sicherr/presentation/bloc/sign_in/sign_in_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../domain/repositories/auth/auth_repository.dart';
 import '../../domain/repositories/auth/auth_repository_impl.dart';
@@ -95,4 +96,21 @@ Future<void> initNotifications() async {
 @pragma('vm:entry-point')
 Future<void> fcmBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
+  final body = message.notification!.body!;
+  final googleMapsLink = _extractGoogleMapsLink(body);
+  if(googleMapsLink == null) return;
+
+  final uri = Uri.parse(googleMapsLink);
+  if(await canLaunchUrl(uri)){
+    await launchUrl(uri);
+  }
+}
+
+String? _extractGoogleMapsLink(String message) {
+  RegExp regExp = RegExp(r'https:\/\/www\.google\.com\/maps\?q=[0-9\.,&=]+');
+  final match = regExp.firstMatch(message);
+  if (match != null) {
+    return match.group(0).toString();
+  }
+  return null;
 }
