@@ -182,8 +182,9 @@ Future<void> sosConfirmationPopup(BuildContext context,{ String? latitude, Strin
           ],
         ),
   );
-  if(confirmed != true || !context.mounted) return;
+  if(!context.mounted) return;
   context.read<SendSosBloc>().add(const SendSosEvent.closeDialog());
+  if(confirmed != true) return;
 
   var profileInfo = context.read<ProfileBloc>().state.profileInfo;
   var sosMessage = profileInfo?.sosMessage;
