@@ -36,8 +36,8 @@ const validateBody = (req, res, next) => {
     return res.status(400).json({ error: 'Phones parameter is missing or empty' });
   }
 
-  if (typeof message !== 'string' || message.trim() === '') {
-    return res.status(400).json({ error: 'Message parameter is missing or invalid' });
+  if (typeof message !== 'string') {
+    return res.status(400).json({ error: 'Message parameter is invalid' });
   }
 
   req.sosData = { phones, message, lat, long };
@@ -58,13 +58,14 @@ app.post('/send_sos', verifyToken, validateBody, (req, res) => {
         fcmTokensRef.orderBy('createdAt', 'desc').limit(1).get().then(tokenSnapshot => {
           tokenSnapshot.forEach(tokenDoc => {
             const tokenData = tokenDoc.data();
+            const displayMessage = message === null || message === "" ? "SOS" : message;
             const fcmMessage = {
+              token: tokenData.token,
               notification: {
                 title: `SOS | ${phone}`,
                 body: lat && long ?
-                  `${message}\nhttps://www.google.com/maps?q=${lat},${long}&z=15` : message
+                  `${displayMessage}\nhttps://www.google.com/maps?q=${lat},${long}&z=15` : displayMessage
               },
-              token: tokenData.token
             };
             admin.messaging().send(fcmMessage)
               .then(response => console.log('Successfully sent message:', response))
