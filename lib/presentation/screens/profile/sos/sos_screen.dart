@@ -61,41 +61,9 @@ class _SosScreenState extends State<SosScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: const DefaultAppBar(title:'SOS' ,),
-      // AppBar(
-      //   surfaceTintColor: AppColors.white,
-      //   backgroundColor: AppColors.lightGrey,
-      //   automaticallyImplyLeading: false,
-      //   title: Padding(
-      //     padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      //     child: Row(
-      //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //       children: [
-      //         InkWell(
-      //           onTap: () {
-      //             Navigator.pop(context);
-      //           },
-      //           child: const Padding(
-      //             padding: EdgeInsets.symmetric(vertical: 8.0),
-      //             child: FaIcon(
-      //               FontAwesomeIcons.chevronLeft,
-      //               color: AppColors.black,
-      //               size: 20,
-      //             ),
-      //           ),
-      //         ),
-      //         Text(
-      //           'SOS',
-      //           style: AppTheme.themeData.textTheme.displayLarge,
-      //         ),
-      //         const SizedBox(
-      //           width: 20,
-      //         ),
-      //       ],
-      //     ),
-      //   ),
-      // ),
-      body: BlocListener<EmergencyContactBloc, EmergencyContactState>(
+      body: BlocConsumer<EmergencyContactBloc, EmergencyContactState>(
         listener: (context, state) {
+
           state.maybeMap(
               loaded: (s) {
                 isQuickBinding = context
@@ -121,11 +89,10 @@ class _SosScreenState extends State<SosScreen> {
               },
               orElse: () {});
         },
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 18.0,),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+        builder:(context, state){
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 18.0,),
+            child: ListView(
               children: [
                 const SizedBox(height: 15,),
                 Text(
@@ -156,8 +123,8 @@ class _SosScreenState extends State<SosScreen> {
                           setState(() {
                             isQuickBinding = v;
                             context.read<ProfileBloc>().add(
-                                    ProfileEvent.updateSpecificProfileField(
-                                        data: {
+                                ProfileEvent.updateSpecificProfileField(
+                                    data: {
                                       "enabledSosQB": v,
                                     }));
                           });
@@ -194,24 +161,24 @@ class _SosScreenState extends State<SosScreen> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 15.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '${AppLocalizations.of(context)!.emergencyContacts} (${context.read<EmergencyContactBloc>().state.emContacts?.length ?? 0})',
-                        style: AppTheme.themeData.textTheme.displayLarge,
-                      ),
-                      InkWell(
-                        highlightColor: Colors.transparent,
-                        splashColor: Colors.transparent,
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const EmergencyContactsScreen(),
-                              ));
-                        },
-                        child: const Center(
+                  child: InkWell(
+                    highlightColor: Colors.transparent,
+                    splashColor: Colors.transparent,
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const EmergencyContactsScreen(),
+                          ));
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '${AppLocalizations.of(context)!.emergencyContacts} (${context.read<EmergencyContactBloc>().state.emContacts?.length ?? 0})',
+                          style: AppTheme.themeData.textTheme.displayLarge,
+                        ),
+                        const Center(
                           child: Padding(
                             padding: EdgeInsets.all( 3),
                             child: FaIcon(
@@ -221,29 +188,30 @@ class _SosScreenState extends State<SosScreen> {
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 context.read<EmergencyContactBloc>().state.emContacts == null ||
-                        context
-                            .read<EmergencyContactBloc>()
-                            .state
-                            .emContacts!
-                            .isEmpty
+                    context
+                        .read<EmergencyContactBloc>()
+                        .state
+                        .emContacts!
+                        .isEmpty
                     ? const SizedBox()
                     : Column(
-                        children: [
-                          const SizedBox(
-                            height: 37,
-                          ),
-                          SizedBox(
-                            height: 135,
-                            width: MediaQuery.of(context).size.width,
-                            child: const ScrollableContactList(),
-                          ),
-                        ],
-                      ),
+
+                  children: [
+                    const SizedBox(
+                      height: 37,
+                    ),
+                    SizedBox(
+                      height: 135,
+                      width: MediaQuery.of(context).size.width,
+                      child: const ScrollableContactList(),
+                    ),
+                  ],
+                ),
                 const SizedBox(
                   height: 22,
                 ),
@@ -260,7 +228,7 @@ class _SosScreenState extends State<SosScreen> {
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide:
-                              const BorderSide(color: AppColors.mainAccent),
+                          const BorderSide(color: AppColors.mainAccent),
                           borderRadius: BorderRadius.circular(11),
                         ),
                         hintText: AppLocalizations.of(context)!.sosMessage,
@@ -268,19 +236,12 @@ class _SosScreenState extends State<SosScreen> {
                         contentPadding: const EdgeInsets.symmetric(
                             horizontal: 19, vertical: 10)),
                     onChanged: (value) {
-                      String? message;
-                      setState(() {
-                        message = isSendLocation!
-                            ? '$value\nhttps://www.google.com/maps?q=${position!.longitude},${position!.latitude}&z=15'
-                            : value;
-                      });
-
                       Future.delayed(const Duration(milliseconds: 1000), () {
                         context
                             .read<ProfileBloc>()
                             .add(ProfileEvent.updateSpecificProfileField(data: {
-                              "sosMessage": messageController.text,
-                            }));
+                          "sosMessage": messageController.text,
+                        }));
                       });
                     },
                     onTapOutside: (v) {
@@ -305,7 +266,7 @@ class _SosScreenState extends State<SosScreen> {
                         value: isSendLocation!,
                         onChanged: (v) async {
                           LocationPermission permission =
-                              await Geolocator.checkPermission();
+                          await Geolocator.checkPermission();
 
                           if (permission == LocationPermission.deniedForever) {
                             setState(() {
@@ -324,22 +285,18 @@ class _SosScreenState extends State<SosScreen> {
                             );
                             setState(() {
                               isSendLocation = v;
-                              isSendLocation!
-                                  ? messageController.text =
-                                      '${messageController.text}\nhttps://www.google.com/maps?q=${position!.longitude},${position!.latitude}&z=15'
-                                  : messageController.text = '';
                               context.read<ProfileBloc>().add(
-                                      ProfileEvent.updateSpecificProfileField(
-                                          data: {
+                                  ProfileEvent.updateSpecificProfileField(
+                                      data: {
                                         "sosMessage": messageController.text,
                                       }));
                             });
                             if (mounted) {
                               context.read<ProfileBloc>().add(
-                                    ProfileEvent.updateSpecificProfileField(
-                                      data: {"sendSosGeolocation": v},
-                                    ),
-                                  );
+                                ProfileEvent.updateSpecificProfileField(
+                                  data: {"sendSosGeolocation": v},
+                                ),
+                              );
                             }
                           }
                         },
@@ -375,8 +332,9 @@ class _SosScreenState extends State<SosScreen> {
                 ),
               ],
             ),
-          ),
-        ),
+          );
+        } ,
+        // child: ,
       ),
     );
   }

@@ -37,6 +37,7 @@ dependencies:
   flutter_local_notifications: ^16.3.3
   sensors_plus: ^4.0.2
 
+
   #firebase
   firebase_core: ^2.24.2
   firebase_auth: ^4.16.0
