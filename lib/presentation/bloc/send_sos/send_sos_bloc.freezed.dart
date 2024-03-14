@@ -16,16 +16,13 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SendSosEvent {
-  String? get lat => throw _privateConstructorUsedError;
-  String? get long => throw _privateConstructorUsedError;
-  String get message => throw _privateConstructorUsedError;
-  String get currentUserPhone => throw _privateConstructorUsedError;
-  List<String> get emContactPhone => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? lat, String? long, String message,
             String currentUserPhone, List<String> emContactPhone)
         sendSOS,
+    required TResult Function() openDialog,
+    required TResult Function() closeDialog,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -33,6 +30,8 @@ mixin _$SendSosEvent {
     TResult? Function(String? lat, String? long, String message,
             String currentUserPhone, List<String> emContactPhone)?
         sendSOS,
+    TResult? Function()? openDialog,
+    TResult? Function()? closeDialog,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,28 +39,32 @@ mixin _$SendSosEvent {
     TResult Function(String? lat, String? long, String message,
             String currentUserPhone, List<String> emContactPhone)?
         sendSOS,
+    TResult Function()? openDialog,
+    TResult Function()? closeDialog,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_SendSOS value) sendSOS,
+    required TResult Function(_OpenDialog value) openDialog,
+    required TResult Function(_CloseDialog value) closeDialog,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_SendSOS value)? sendSOS,
+    TResult? Function(_OpenDialog value)? openDialog,
+    TResult? Function(_CloseDialog value)? closeDialog,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SendSOS value)? sendSOS,
+    TResult Function(_OpenDialog value)? openDialog,
+    TResult Function(_CloseDialog value)? closeDialog,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $SendSosEventCopyWith<SendSosEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -70,13 +73,6 @@ abstract class $SendSosEventCopyWith<$Res> {
   factory $SendSosEventCopyWith(
           SendSosEvent value, $Res Function(SendSosEvent) then) =
       _$SendSosEventCopyWithImpl<$Res, SendSosEvent>;
-  @useResult
-  $Res call(
-      {String? lat,
-      String? long,
-      String message,
-      String currentUserPhone,
-      List<String> emContactPhone});
 }
 
 /// @nodoc
@@ -88,48 +84,13 @@ class _$SendSosEventCopyWithImpl<$Res, $Val extends SendSosEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? lat = freezed,
-    Object? long = freezed,
-    Object? message = null,
-    Object? currentUserPhone = null,
-    Object? emContactPhone = null,
-  }) {
-    return _then(_value.copyWith(
-      lat: freezed == lat
-          ? _value.lat
-          : lat // ignore: cast_nullable_to_non_nullable
-              as String?,
-      long: freezed == long
-          ? _value.long
-          : long // ignore: cast_nullable_to_non_nullable
-              as String?,
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-      currentUserPhone: null == currentUserPhone
-          ? _value.currentUserPhone
-          : currentUserPhone // ignore: cast_nullable_to_non_nullable
-              as String,
-      emContactPhone: null == emContactPhone
-          ? _value.emContactPhone
-          : emContactPhone // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$SendSOSImplCopyWith<$Res>
-    implements $SendSosEventCopyWith<$Res> {
+abstract class _$$SendSOSImplCopyWith<$Res> {
   factory _$$SendSOSImplCopyWith(
           _$SendSOSImpl value, $Res Function(_$SendSOSImpl) then) =
       __$$SendSOSImplCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call(
       {String? lat,
@@ -243,6 +204,8 @@ class _$SendSOSImpl implements _SendSOS {
     required TResult Function(String? lat, String? long, String message,
             String currentUserPhone, List<String> emContactPhone)
         sendSOS,
+    required TResult Function() openDialog,
+    required TResult Function() closeDialog,
   }) {
     return sendSOS(lat, long, message, currentUserPhone, emContactPhone);
   }
@@ -253,6 +216,8 @@ class _$SendSOSImpl implements _SendSOS {
     TResult? Function(String? lat, String? long, String message,
             String currentUserPhone, List<String> emContactPhone)?
         sendSOS,
+    TResult? Function()? openDialog,
+    TResult? Function()? closeDialog,
   }) {
     return sendSOS?.call(lat, long, message, currentUserPhone, emContactPhone);
   }
@@ -263,6 +228,8 @@ class _$SendSOSImpl implements _SendSOS {
     TResult Function(String? lat, String? long, String message,
             String currentUserPhone, List<String> emContactPhone)?
         sendSOS,
+    TResult Function()? openDialog,
+    TResult Function()? closeDialog,
     required TResult orElse(),
   }) {
     if (sendSOS != null) {
@@ -275,6 +242,8 @@ class _$SendSOSImpl implements _SendSOS {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_SendSOS value) sendSOS,
+    required TResult Function(_OpenDialog value) openDialog,
+    required TResult Function(_CloseDialog value) closeDialog,
   }) {
     return sendSOS(this);
   }
@@ -283,6 +252,8 @@ class _$SendSOSImpl implements _SendSOS {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_SendSOS value)? sendSOS,
+    TResult? Function(_OpenDialog value)? openDialog,
+    TResult? Function(_CloseDialog value)? closeDialog,
   }) {
     return sendSOS?.call(this);
   }
@@ -291,6 +262,8 @@ class _$SendSOSImpl implements _SendSOS {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SendSOS value)? sendSOS,
+    TResult Function(_OpenDialog value)? openDialog,
+    TResult Function(_CloseDialog value)? closeDialog,
     required TResult orElse(),
   }) {
     if (sendSOS != null) {
@@ -308,20 +281,242 @@ abstract class _SendSOS implements SendSosEvent {
       required final String currentUserPhone,
       required final List<String> emContactPhone}) = _$SendSOSImpl;
 
-  @override
   String? get lat;
-  @override
   String? get long;
-  @override
   String get message;
-  @override
   String get currentUserPhone;
-  @override
   List<String> get emContactPhone;
-  @override
   @JsonKey(ignore: true)
   _$$SendSOSImplCopyWith<_$SendSOSImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$OpenDialogImplCopyWith<$Res> {
+  factory _$$OpenDialogImplCopyWith(
+          _$OpenDialogImpl value, $Res Function(_$OpenDialogImpl) then) =
+      __$$OpenDialogImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$OpenDialogImplCopyWithImpl<$Res>
+    extends _$SendSosEventCopyWithImpl<$Res, _$OpenDialogImpl>
+    implements _$$OpenDialogImplCopyWith<$Res> {
+  __$$OpenDialogImplCopyWithImpl(
+      _$OpenDialogImpl _value, $Res Function(_$OpenDialogImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$OpenDialogImpl implements _OpenDialog {
+  const _$OpenDialogImpl();
+
+  @override
+  String toString() {
+    return 'SendSosEvent.openDialog()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$OpenDialogImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String? lat, String? long, String message,
+            String currentUserPhone, List<String> emContactPhone)
+        sendSOS,
+    required TResult Function() openDialog,
+    required TResult Function() closeDialog,
+  }) {
+    return openDialog();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? lat, String? long, String message,
+            String currentUserPhone, List<String> emContactPhone)?
+        sendSOS,
+    TResult? Function()? openDialog,
+    TResult? Function()? closeDialog,
+  }) {
+    return openDialog?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? lat, String? long, String message,
+            String currentUserPhone, List<String> emContactPhone)?
+        sendSOS,
+    TResult Function()? openDialog,
+    TResult Function()? closeDialog,
+    required TResult orElse(),
+  }) {
+    if (openDialog != null) {
+      return openDialog();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_SendSOS value) sendSOS,
+    required TResult Function(_OpenDialog value) openDialog,
+    required TResult Function(_CloseDialog value) closeDialog,
+  }) {
+    return openDialog(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_SendSOS value)? sendSOS,
+    TResult? Function(_OpenDialog value)? openDialog,
+    TResult? Function(_CloseDialog value)? closeDialog,
+  }) {
+    return openDialog?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SendSOS value)? sendSOS,
+    TResult Function(_OpenDialog value)? openDialog,
+    TResult Function(_CloseDialog value)? closeDialog,
+    required TResult orElse(),
+  }) {
+    if (openDialog != null) {
+      return openDialog(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _OpenDialog implements SendSosEvent {
+  const factory _OpenDialog() = _$OpenDialogImpl;
+}
+
+/// @nodoc
+abstract class _$$CloseDialogImplCopyWith<$Res> {
+  factory _$$CloseDialogImplCopyWith(
+          _$CloseDialogImpl value, $Res Function(_$CloseDialogImpl) then) =
+      __$$CloseDialogImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$CloseDialogImplCopyWithImpl<$Res>
+    extends _$SendSosEventCopyWithImpl<$Res, _$CloseDialogImpl>
+    implements _$$CloseDialogImplCopyWith<$Res> {
+  __$$CloseDialogImplCopyWithImpl(
+      _$CloseDialogImpl _value, $Res Function(_$CloseDialogImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$CloseDialogImpl implements _CloseDialog {
+  const _$CloseDialogImpl();
+
+  @override
+  String toString() {
+    return 'SendSosEvent.closeDialog()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$CloseDialogImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String? lat, String? long, String message,
+            String currentUserPhone, List<String> emContactPhone)
+        sendSOS,
+    required TResult Function() openDialog,
+    required TResult Function() closeDialog,
+  }) {
+    return closeDialog();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? lat, String? long, String message,
+            String currentUserPhone, List<String> emContactPhone)?
+        sendSOS,
+    TResult? Function()? openDialog,
+    TResult? Function()? closeDialog,
+  }) {
+    return closeDialog?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? lat, String? long, String message,
+            String currentUserPhone, List<String> emContactPhone)?
+        sendSOS,
+    TResult Function()? openDialog,
+    TResult Function()? closeDialog,
+    required TResult orElse(),
+  }) {
+    if (closeDialog != null) {
+      return closeDialog();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_SendSOS value) sendSOS,
+    required TResult Function(_OpenDialog value) openDialog,
+    required TResult Function(_CloseDialog value) closeDialog,
+  }) {
+    return closeDialog(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_SendSOS value)? sendSOS,
+    TResult? Function(_OpenDialog value)? openDialog,
+    TResult? Function(_CloseDialog value)? closeDialog,
+  }) {
+    return closeDialog?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SendSOS value)? sendSOS,
+    TResult Function(_OpenDialog value)? openDialog,
+    TResult Function(_CloseDialog value)? closeDialog,
+    required TResult orElse(),
+  }) {
+    if (closeDialog != null) {
+      return closeDialog(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CloseDialog implements SendSosEvent {
+  const factory _CloseDialog() = _$CloseDialogImpl;
 }
 
 /// @nodoc
@@ -329,6 +524,7 @@ mixin _$SendSosState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() dialogOpened,
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(String message, String? code) error,
@@ -337,6 +533,7 @@ mixin _$SendSosState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? dialogOpened,
     TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function(String message, String? code)? error,
@@ -345,6 +542,7 @@ mixin _$SendSosState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? dialogOpened,
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String message, String? code)? error,
@@ -354,6 +552,7 @@ mixin _$SendSosState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_DialogOpened value) dialogOpened,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
@@ -362,6 +561,7 @@ mixin _$SendSosState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_DialogOpened value)? dialogOpened,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
@@ -370,6 +570,7 @@ mixin _$SendSosState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_DialogOpened value)? dialogOpened,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
@@ -414,8 +615,8 @@ class __$$InitialImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InitialImpl implements _Initial {
-  const _$InitialImpl();
+class _$InitialImpl extends _Initial {
+  const _$InitialImpl() : super._();
 
   @override
   String toString() {
@@ -435,6 +636,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() dialogOpened,
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(String message, String? code) error,
@@ -446,6 +648,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? dialogOpened,
     TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function(String message, String? code)? error,
@@ -457,6 +660,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? dialogOpened,
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String message, String? code)? error,
@@ -472,6 +676,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_DialogOpened value) dialogOpened,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
@@ -483,6 +688,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_DialogOpened value)? dialogOpened,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
@@ -494,6 +700,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_DialogOpened value)? dialogOpened,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
@@ -506,8 +713,130 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements SendSosState {
+abstract class _Initial extends SendSosState {
   const factory _Initial() = _$InitialImpl;
+  const _Initial._() : super._();
+}
+
+/// @nodoc
+abstract class _$$DialogOpenedImplCopyWith<$Res> {
+  factory _$$DialogOpenedImplCopyWith(
+          _$DialogOpenedImpl value, $Res Function(_$DialogOpenedImpl) then) =
+      __$$DialogOpenedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$DialogOpenedImplCopyWithImpl<$Res>
+    extends _$SendSosStateCopyWithImpl<$Res, _$DialogOpenedImpl>
+    implements _$$DialogOpenedImplCopyWith<$Res> {
+  __$$DialogOpenedImplCopyWithImpl(
+      _$DialogOpenedImpl _value, $Res Function(_$DialogOpenedImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$DialogOpenedImpl extends _DialogOpened {
+  const _$DialogOpenedImpl() : super._();
+
+  @override
+  String toString() {
+    return 'SendSosState.dialogOpened()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$DialogOpenedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() dialogOpened,
+    required TResult Function() loading,
+    required TResult Function() success,
+    required TResult Function(String message, String? code) error,
+  }) {
+    return dialogOpened();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? dialogOpened,
+    TResult? Function()? loading,
+    TResult? Function()? success,
+    TResult? Function(String message, String? code)? error,
+  }) {
+    return dialogOpened?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? dialogOpened,
+    TResult Function()? loading,
+    TResult Function()? success,
+    TResult Function(String message, String? code)? error,
+    required TResult orElse(),
+  }) {
+    if (dialogOpened != null) {
+      return dialogOpened();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_DialogOpened value) dialogOpened,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
+  }) {
+    return dialogOpened(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_DialogOpened value)? dialogOpened,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Error value)? error,
+  }) {
+    return dialogOpened?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_DialogOpened value)? dialogOpened,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (dialogOpened != null) {
+      return dialogOpened(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DialogOpened extends SendSosState {
+  const factory _DialogOpened() = _$DialogOpenedImpl;
+  const _DialogOpened._() : super._();
 }
 
 /// @nodoc
@@ -528,8 +857,8 @@ class __$$LoadingImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoadingImpl implements _Loading {
-  const _$LoadingImpl();
+class _$LoadingImpl extends _Loading {
+  const _$LoadingImpl() : super._();
 
   @override
   String toString() {
@@ -549,6 +878,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() dialogOpened,
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(String message, String? code) error,
@@ -560,6 +890,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? dialogOpened,
     TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function(String message, String? code)? error,
@@ -571,6 +902,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? dialogOpened,
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String message, String? code)? error,
@@ -586,6 +918,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_DialogOpened value) dialogOpened,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
@@ -597,6 +930,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_DialogOpened value)? dialogOpened,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
@@ -608,6 +942,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_DialogOpened value)? dialogOpened,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
@@ -620,8 +955,9 @@ class _$LoadingImpl implements _Loading {
   }
 }
 
-abstract class _Loading implements SendSosState {
+abstract class _Loading extends SendSosState {
   const factory _Loading() = _$LoadingImpl;
+  const _Loading._() : super._();
 }
 
 /// @nodoc
@@ -642,8 +978,8 @@ class __$$SuccessImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SuccessImpl implements _Success {
-  const _$SuccessImpl();
+class _$SuccessImpl extends _Success {
+  const _$SuccessImpl() : super._();
 
   @override
   String toString() {
@@ -663,6 +999,7 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() dialogOpened,
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(String message, String? code) error,
@@ -674,6 +1011,7 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? dialogOpened,
     TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function(String message, String? code)? error,
@@ -685,6 +1023,7 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? dialogOpened,
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String message, String? code)? error,
@@ -700,6 +1039,7 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_DialogOpened value) dialogOpened,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
@@ -711,6 +1051,7 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_DialogOpened value)? dialogOpened,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
@@ -722,6 +1063,7 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_DialogOpened value)? dialogOpened,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
@@ -734,8 +1076,9 @@ class _$SuccessImpl implements _Success {
   }
 }
 
-abstract class _Success implements SendSosState {
+abstract class _Success extends SendSosState {
   const factory _Success() = _$SuccessImpl;
+  const _Success._() : super._();
 }
 
 /// @nodoc
@@ -776,8 +1119,8 @@ class __$$ErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ErrorImpl implements _Error {
-  const _$ErrorImpl({required this.message, this.code});
+class _$ErrorImpl extends _Error {
+  const _$ErrorImpl({required this.message, this.code}) : super._();
 
   @override
   final String message;
@@ -811,6 +1154,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() dialogOpened,
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(String message, String? code) error,
@@ -822,6 +1166,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? dialogOpened,
     TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function(String message, String? code)? error,
@@ -833,6 +1178,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? dialogOpened,
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String message, String? code)? error,
@@ -848,6 +1194,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_DialogOpened value) dialogOpened,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
@@ -859,6 +1206,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_DialogOpened value)? dialogOpened,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
@@ -870,6 +1218,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_DialogOpened value)? dialogOpened,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
@@ -882,9 +1231,10 @@ class _$ErrorImpl implements _Error {
   }
 }
 
-abstract class _Error implements SendSosState {
+abstract class _Error extends SendSosState {
   const factory _Error({required final String message, final String? code}) =
       _$ErrorImpl;
+  const _Error._() : super._();
 
   String get message;
   String? get code;

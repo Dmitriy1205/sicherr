@@ -14,7 +14,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
 Future<void> sosConfirmationPopup(BuildContext context,{ String? latitude, String? longitude}) async {
-  showDialog<void>(
+  if(context.read<SendSosBloc>().state.isDialogOpened) return;
+
+  context.read<SendSosBloc>().add(const SendSosEvent.openDialog());
+  final confirmed = await showDialog<bool?>(
     context: context,
     builder: (BuildContext context) =>
         AlertDialog(
@@ -174,23 +177,21 @@ Future<void> sosConfirmationPopup(BuildContext context,{ String? latitude, Strin
                         .emContacts!
                         .isEmpty
                     ? null : () {
-                  var profileInfo = context.read<ProfileBloc>().state.profileInfo;
-                  var sosMessage = profileInfo?.sosMessage;
-
-                  var currentUserPhone = profileInfo?.phone;
-
-                  List<String> emContactPhoneList = context.read<EmergencyContactBloc>().state.emContacts!.map((contact) => contact.phoneNumber).toList();
-
-
-
-                  context.read<SendSosBloc>().add(SendSosEvent.sendSOS(
-                    message: sosMessage == null || sosMessage.isEmpty ? 'SOS' : sosMessage,
-                    currentUserPhone: currentUserPhone!,
-                    emContactPhone: emContactPhoneList, lat: latitude, long: longitude ,
-                  ));
-                  Navigator.pop(context);
+                  Navigator.of(context).pop(true);
                 }),
           ],
         ),
   );
+  if(confirmed != true || !context.mounted) return;
+  context.read<SendSosBloc>().add(const SendSosEvent.closeDialog());
+
+  var profileInfo = context.read<ProfileBloc>().state.profileInfo;
+  var sosMessage = profileInfo?.sosMessage;
+  var currentUserPhone = profileInfo?.phone;
+  List<String> emContactPhoneList = context.read<EmergencyContactBloc>().state.emContacts!.map((contact) => contact.phoneNumber).toList();
+  context.read<SendSosBloc>().add(SendSosEvent.sendSOS(
+    message: sosMessage == null || sosMessage.isEmpty ? 'SOS' : sosMessage,
+    currentUserPhone: currentUserPhone!,
+    emContactPhone: emContactPhoneList, lat: latitude, long: longitude ,
+  ));
 }

@@ -26,7 +26,17 @@ class SendSosBloc extends Bloc<SendSosEvent, SendSosState> {
           SendSosEvent event, Emitter<SendSosState> emit) async =>
       event.map(
         sendSOS: (e) => _sendSos(e, emit),
+        openDialog: (e) => _openDialog(e, emit),
+        closeDialog: (e) => _closeDialog(e, emit)
       );
+
+  Future<void> _openDialog(_OpenDialog event, Emitter<SendSosState> emit) async{
+    emit(const SendSosState.dialogOpened());
+  }
+
+  Future<void> _closeDialog(_CloseDialog event, Emitter<SendSosState> emit) async{
+    emit(const SendSosState.initial());
+  }
 
   Future<void> _sendSos(_SendSOS event, Emitter<SendSosState> emit) async {
     try {

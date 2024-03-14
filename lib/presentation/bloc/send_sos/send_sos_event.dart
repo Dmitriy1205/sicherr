@@ -9,4 +9,7 @@ class SendSosEvent with _$SendSosEvent {
     required String currentUserPhone,
     required List<String> emContactPhone,
   }) = _SendSOS;
+
+  const factory SendSosEvent.openDialog() = _OpenDialog;
+  const factory SendSosEvent.closeDialog() = _CloseDialog;
 }
