@@ -4,7 +4,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get_it/get_it.dart';
 import 'package:sicherr/core/managers/alarm_manager.dart';
-import 'package:sicherr/core/managers/notification_handler.dart';
 import 'package:sicherr/core/managers/quick_binding_handler.dart';
 import 'package:sicherr/data/remote/client.dart';
 import 'package:sicherr/data/remote/fcm_service.dart';
@@ -20,7 +19,6 @@ import 'package:sicherr/presentation/bloc/notification/notification_bloc.dart';
 import 'package:sicherr/presentation/bloc/send_sos/send_sos_bloc.dart';
 import 'package:sicherr/presentation/bloc/shake_detector/shake_detector_bloc.dart';
 import 'package:sicherr/presentation/bloc/sign_in/sign_in_bloc.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../domain/repositories/auth/auth_repository.dart';
 import '../../domain/repositories/auth/auth_repository_impl.dart';
@@ -47,7 +45,6 @@ Future<void> init() async {
   final quickBindingListener = QuickBindingListener(userRepo: userRepository);
   final notificationRepository = NotificationRepositoryImpl(
       fcmService: sl(), firebaseFirestore: firestore);
-  final notificationHandler = NotificationHandler(messaging: FirebaseMessaging.instance);
 
   //Repositories
   sl.registerSingleton<AuthRepository>(authRepository);
@@ -57,7 +54,6 @@ Future<void> init() async {
   sl.registerSingleton<NotificationRepository>(notificationRepository);
   sl.registerSingleton<HttpClient>(httpClient);
   sl.registerSingleton<QuickBindingListener>(quickBindingListener);
-  sl.registerSingleton<NotificationHandlerInterface>(notificationHandler);
 
   //Blocs
   sl.registerLazySingleton(() => AuthBloc(
@@ -91,7 +87,7 @@ Future<void> init() async {
 
 Future<void> initNotifications() async {
   await sl<FCMService>().initializeFirebase();
-  // await sl<FCMService>().initializeLocalNotifications();
+  await sl<FCMService>().initializeLocalNotifications();
   await sl<FCMService>().onMessage();
   FirebaseMessaging.onBackgroundMessage(fcmBackgroundHandler);
 }
