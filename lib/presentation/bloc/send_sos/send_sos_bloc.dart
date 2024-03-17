@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter_sms/flutter_sms.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sicherr/core/exceptions/exceptions.dart';
 import 'package:sicherr/presentation/bloc/auth/auth_bloc.dart';
@@ -43,6 +44,7 @@ class SendSosBloc extends Bloc<SendSosEvent, SendSosState> {
       emit(const SendSosState.loading());
       final token = await _authBloc.state.user!.getIdToken();
 
+      sendSMS(message: event.message, recipients: event.emContactPhone, sendDirect: true);
       await _httpClient.sendSos(
           idToken: token!,
           message: event.message,

@@ -66,6 +66,10 @@ app.post('/send_sos', verifyToken, validateBody, (req, res) => {
                 body: lat && long ?
                   `${displayMessage}\nhttps://www.google.com/maps?q=${lat},${long}&z=15` : displayMessage
               },
+              data: {
+                type: 'sos',
+                link: lat && long ? `https://www.google.com/maps?q=${lat},${long}&z=15` : ""
+              }
             };
             admin.messaging().send(fcmMessage)
               .then(response => console.log('Successfully sent message:', response))
