@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:sicherr/core/const/icons.dart';
 import 'package:sicherr/presentation/bloc/send_sos/send_sos_bloc.dart';
 import 'package:sicherr/presentation/widgets/app_elevated_button.dart';
@@ -15,6 +16,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Future<void> sosConfirmationPopup(BuildContext context,{ String? latitude, String? longitude}) async {
   if(context.read<SendSosBloc>().state.isDialogOpened) return;
+  await Permission.sms.request();
+  if(!context.mounted) return;
 
   context.read<SendSosBloc>().add(const SendSosEvent.openDialog());
   final confirmed = await showDialog<bool?>(
