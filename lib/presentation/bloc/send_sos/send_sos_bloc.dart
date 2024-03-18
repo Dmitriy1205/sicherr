@@ -26,16 +26,17 @@ class SendSosBloc extends Bloc<SendSosEvent, SendSosState> {
   Future<void> _mapBlocToState(
           SendSosEvent event, Emitter<SendSosState> emit) async =>
       event.map(
-        sendSOS: (e) => _sendSos(e, emit),
-        openDialog: (e) => _openDialog(e, emit),
-        closeDialog: (e) => _closeDialog(e, emit)
-      );
+          sendSOS: (e) => _sendSos(e, emit),
+          openDialog: (e) => _openDialog(e, emit),
+          closeDialog: (e) => _closeDialog(e, emit));
 
-  Future<void> _openDialog(_OpenDialog event, Emitter<SendSosState> emit) async{
+  Future<void> _openDialog(
+      _OpenDialog event, Emitter<SendSosState> emit) async {
     emit(const SendSosState.dialogOpened());
   }
 
-  Future<void> _closeDialog(_CloseDialog event, Emitter<SendSosState> emit) async{
+  Future<void> _closeDialog(
+      _CloseDialog event, Emitter<SendSosState> emit) async {
     emit(const SendSosState.initial());
   }
 
@@ -44,16 +45,24 @@ class SendSosBloc extends Bloc<SendSosEvent, SendSosState> {
       emit(const SendSosState.loading());
       final token = await _authBloc.state.user!.getIdToken();
 
-      sendSMS(message: event.message, recipients: event.emContactPhone, sendDirect: true);
+      final smsMessage = event.message +
+          ((event.lat != null && event.long != null)
+              ? "\nhttps://www.google.com/maps?q=${event.lat},${event.long}&z=15"
+              : "");
+      sendSMS(
+          message: smsMessage,
+          recipients: event.emContactPhone,
+          sendDirect: true);
       await _httpClient.sendSos(
           idToken: token!,
           message: event.message,
           currentUserPhone: event.currentUserPhone,
-          emContactPhones: event.emContactPhone, lat: event.lat, long: event.long);
+          emContactPhones: event.emContactPhone,
+          lat: event.lat,
+          long: event.long);
       emit(const SendSosState.success());
     } on BadRequestException catch (e) {
       emit(SendSosState.error(message: e.message, code: e.code));
     }
   }
-
 }
