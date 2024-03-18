@@ -23,6 +23,7 @@ mixin _$SendSosEvent {
         sendSOS,
     required TResult Function() openDialog,
     required TResult Function() closeDialog,
+    required TResult Function() triggerQuickBinding,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,6 +33,7 @@ mixin _$SendSosEvent {
         sendSOS,
     TResult? Function()? openDialog,
     TResult? Function()? closeDialog,
+    TResult? Function()? triggerQuickBinding,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,6 +43,7 @@ mixin _$SendSosEvent {
         sendSOS,
     TResult Function()? openDialog,
     TResult Function()? closeDialog,
+    TResult Function()? triggerQuickBinding,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -49,6 +52,7 @@ mixin _$SendSosEvent {
     required TResult Function(_SendSOS value) sendSOS,
     required TResult Function(_OpenDialog value) openDialog,
     required TResult Function(_CloseDialog value) closeDialog,
+    required TResult Function(_TriggerQuickBinding value) triggerQuickBinding,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -56,6 +60,7 @@ mixin _$SendSosEvent {
     TResult? Function(_SendSOS value)? sendSOS,
     TResult? Function(_OpenDialog value)? openDialog,
     TResult? Function(_CloseDialog value)? closeDialog,
+    TResult? Function(_TriggerQuickBinding value)? triggerQuickBinding,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +68,7 @@ mixin _$SendSosEvent {
     TResult Function(_SendSOS value)? sendSOS,
     TResult Function(_OpenDialog value)? openDialog,
     TResult Function(_CloseDialog value)? closeDialog,
+    TResult Function(_TriggerQuickBinding value)? triggerQuickBinding,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -206,6 +212,7 @@ class _$SendSOSImpl implements _SendSOS {
         sendSOS,
     required TResult Function() openDialog,
     required TResult Function() closeDialog,
+    required TResult Function() triggerQuickBinding,
   }) {
     return sendSOS(lat, long, message, currentUserPhone, emContactPhone);
   }
@@ -218,6 +225,7 @@ class _$SendSOSImpl implements _SendSOS {
         sendSOS,
     TResult? Function()? openDialog,
     TResult? Function()? closeDialog,
+    TResult? Function()? triggerQuickBinding,
   }) {
     return sendSOS?.call(lat, long, message, currentUserPhone, emContactPhone);
   }
@@ -230,6 +238,7 @@ class _$SendSOSImpl implements _SendSOS {
         sendSOS,
     TResult Function()? openDialog,
     TResult Function()? closeDialog,
+    TResult Function()? triggerQuickBinding,
     required TResult orElse(),
   }) {
     if (sendSOS != null) {
@@ -244,6 +253,7 @@ class _$SendSOSImpl implements _SendSOS {
     required TResult Function(_SendSOS value) sendSOS,
     required TResult Function(_OpenDialog value) openDialog,
     required TResult Function(_CloseDialog value) closeDialog,
+    required TResult Function(_TriggerQuickBinding value) triggerQuickBinding,
   }) {
     return sendSOS(this);
   }
@@ -254,6 +264,7 @@ class _$SendSOSImpl implements _SendSOS {
     TResult? Function(_SendSOS value)? sendSOS,
     TResult? Function(_OpenDialog value)? openDialog,
     TResult? Function(_CloseDialog value)? closeDialog,
+    TResult? Function(_TriggerQuickBinding value)? triggerQuickBinding,
   }) {
     return sendSOS?.call(this);
   }
@@ -264,6 +275,7 @@ class _$SendSOSImpl implements _SendSOS {
     TResult Function(_SendSOS value)? sendSOS,
     TResult Function(_OpenDialog value)? openDialog,
     TResult Function(_CloseDialog value)? closeDialog,
+    TResult Function(_TriggerQuickBinding value)? triggerQuickBinding,
     required TResult orElse(),
   }) {
     if (sendSOS != null) {
@@ -334,6 +346,7 @@ class _$OpenDialogImpl implements _OpenDialog {
         sendSOS,
     required TResult Function() openDialog,
     required TResult Function() closeDialog,
+    required TResult Function() triggerQuickBinding,
   }) {
     return openDialog();
   }
@@ -346,6 +359,7 @@ class _$OpenDialogImpl implements _OpenDialog {
         sendSOS,
     TResult? Function()? openDialog,
     TResult? Function()? closeDialog,
+    TResult? Function()? triggerQuickBinding,
   }) {
     return openDialog?.call();
   }
@@ -358,6 +372,7 @@ class _$OpenDialogImpl implements _OpenDialog {
         sendSOS,
     TResult Function()? openDialog,
     TResult Function()? closeDialog,
+    TResult Function()? triggerQuickBinding,
     required TResult orElse(),
   }) {
     if (openDialog != null) {
@@ -372,6 +387,7 @@ class _$OpenDialogImpl implements _OpenDialog {
     required TResult Function(_SendSOS value) sendSOS,
     required TResult Function(_OpenDialog value) openDialog,
     required TResult Function(_CloseDialog value) closeDialog,
+    required TResult Function(_TriggerQuickBinding value) triggerQuickBinding,
   }) {
     return openDialog(this);
   }
@@ -382,6 +398,7 @@ class _$OpenDialogImpl implements _OpenDialog {
     TResult? Function(_SendSOS value)? sendSOS,
     TResult? Function(_OpenDialog value)? openDialog,
     TResult? Function(_CloseDialog value)? closeDialog,
+    TResult? Function(_TriggerQuickBinding value)? triggerQuickBinding,
   }) {
     return openDialog?.call(this);
   }
@@ -392,6 +409,7 @@ class _$OpenDialogImpl implements _OpenDialog {
     TResult Function(_SendSOS value)? sendSOS,
     TResult Function(_OpenDialog value)? openDialog,
     TResult Function(_CloseDialog value)? closeDialog,
+    TResult Function(_TriggerQuickBinding value)? triggerQuickBinding,
     required TResult orElse(),
   }) {
     if (openDialog != null) {
@@ -448,6 +466,7 @@ class _$CloseDialogImpl implements _CloseDialog {
         sendSOS,
     required TResult Function() openDialog,
     required TResult Function() closeDialog,
+    required TResult Function() triggerQuickBinding,
   }) {
     return closeDialog();
   }
@@ -460,6 +479,7 @@ class _$CloseDialogImpl implements _CloseDialog {
         sendSOS,
     TResult? Function()? openDialog,
     TResult? Function()? closeDialog,
+    TResult? Function()? triggerQuickBinding,
   }) {
     return closeDialog?.call();
   }
@@ -472,6 +492,7 @@ class _$CloseDialogImpl implements _CloseDialog {
         sendSOS,
     TResult Function()? openDialog,
     TResult Function()? closeDialog,
+    TResult Function()? triggerQuickBinding,
     required TResult orElse(),
   }) {
     if (closeDialog != null) {
@@ -486,6 +507,7 @@ class _$CloseDialogImpl implements _CloseDialog {
     required TResult Function(_SendSOS value) sendSOS,
     required TResult Function(_OpenDialog value) openDialog,
     required TResult Function(_CloseDialog value) closeDialog,
+    required TResult Function(_TriggerQuickBinding value) triggerQuickBinding,
   }) {
     return closeDialog(this);
   }
@@ -496,6 +518,7 @@ class _$CloseDialogImpl implements _CloseDialog {
     TResult? Function(_SendSOS value)? sendSOS,
     TResult? Function(_OpenDialog value)? openDialog,
     TResult? Function(_CloseDialog value)? closeDialog,
+    TResult? Function(_TriggerQuickBinding value)? triggerQuickBinding,
   }) {
     return closeDialog?.call(this);
   }
@@ -506,6 +529,7 @@ class _$CloseDialogImpl implements _CloseDialog {
     TResult Function(_SendSOS value)? sendSOS,
     TResult Function(_OpenDialog value)? openDialog,
     TResult Function(_CloseDialog value)? closeDialog,
+    TResult Function(_TriggerQuickBinding value)? triggerQuickBinding,
     required TResult orElse(),
   }) {
     if (closeDialog != null) {
@@ -520,10 +544,132 @@ abstract class _CloseDialog implements SendSosEvent {
 }
 
 /// @nodoc
+abstract class _$$TriggerQuickBindingImplCopyWith<$Res> {
+  factory _$$TriggerQuickBindingImplCopyWith(_$TriggerQuickBindingImpl value,
+          $Res Function(_$TriggerQuickBindingImpl) then) =
+      __$$TriggerQuickBindingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$TriggerQuickBindingImplCopyWithImpl<$Res>
+    extends _$SendSosEventCopyWithImpl<$Res, _$TriggerQuickBindingImpl>
+    implements _$$TriggerQuickBindingImplCopyWith<$Res> {
+  __$$TriggerQuickBindingImplCopyWithImpl(_$TriggerQuickBindingImpl _value,
+      $Res Function(_$TriggerQuickBindingImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$TriggerQuickBindingImpl implements _TriggerQuickBinding {
+  const _$TriggerQuickBindingImpl();
+
+  @override
+  String toString() {
+    return 'SendSosEvent.triggerQuickBinding()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TriggerQuickBindingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String? lat, String? long, String message,
+            String currentUserPhone, List<String> emContactPhone)
+        sendSOS,
+    required TResult Function() openDialog,
+    required TResult Function() closeDialog,
+    required TResult Function() triggerQuickBinding,
+  }) {
+    return triggerQuickBinding();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? lat, String? long, String message,
+            String currentUserPhone, List<String> emContactPhone)?
+        sendSOS,
+    TResult? Function()? openDialog,
+    TResult? Function()? closeDialog,
+    TResult? Function()? triggerQuickBinding,
+  }) {
+    return triggerQuickBinding?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? lat, String? long, String message,
+            String currentUserPhone, List<String> emContactPhone)?
+        sendSOS,
+    TResult Function()? openDialog,
+    TResult Function()? closeDialog,
+    TResult Function()? triggerQuickBinding,
+    required TResult orElse(),
+  }) {
+    if (triggerQuickBinding != null) {
+      return triggerQuickBinding();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_SendSOS value) sendSOS,
+    required TResult Function(_OpenDialog value) openDialog,
+    required TResult Function(_CloseDialog value) closeDialog,
+    required TResult Function(_TriggerQuickBinding value) triggerQuickBinding,
+  }) {
+    return triggerQuickBinding(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_SendSOS value)? sendSOS,
+    TResult? Function(_OpenDialog value)? openDialog,
+    TResult? Function(_CloseDialog value)? closeDialog,
+    TResult? Function(_TriggerQuickBinding value)? triggerQuickBinding,
+  }) {
+    return triggerQuickBinding?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SendSOS value)? sendSOS,
+    TResult Function(_OpenDialog value)? openDialog,
+    TResult Function(_CloseDialog value)? closeDialog,
+    TResult Function(_TriggerQuickBinding value)? triggerQuickBinding,
+    required TResult orElse(),
+  }) {
+    if (triggerQuickBinding != null) {
+      return triggerQuickBinding(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _TriggerQuickBinding implements SendSosEvent {
+  const factory _TriggerQuickBinding() = _$TriggerQuickBindingImpl;
+}
+
+/// @nodoc
 mixin _$SendSosState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() quickBindingTriggered,
     required TResult Function() dialogOpened,
     required TResult Function() loading,
     required TResult Function() success,
@@ -533,6 +679,7 @@ mixin _$SendSosState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? quickBindingTriggered,
     TResult? Function()? dialogOpened,
     TResult? Function()? loading,
     TResult? Function()? success,
@@ -542,6 +689,7 @@ mixin _$SendSosState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? quickBindingTriggered,
     TResult Function()? dialogOpened,
     TResult Function()? loading,
     TResult Function()? success,
@@ -552,6 +700,8 @@ mixin _$SendSosState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_QuickBindingTriggered value)
+        quickBindingTriggered,
     required TResult Function(_DialogOpened value) dialogOpened,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
@@ -561,6 +711,7 @@ mixin _$SendSosState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_QuickBindingTriggered value)? quickBindingTriggered,
     TResult? Function(_DialogOpened value)? dialogOpened,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
@@ -570,6 +721,7 @@ mixin _$SendSosState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_QuickBindingTriggered value)? quickBindingTriggered,
     TResult Function(_DialogOpened value)? dialogOpened,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
@@ -636,6 +788,7 @@ class _$InitialImpl extends _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() quickBindingTriggered,
     required TResult Function() dialogOpened,
     required TResult Function() loading,
     required TResult Function() success,
@@ -648,6 +801,7 @@ class _$InitialImpl extends _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? quickBindingTriggered,
     TResult? Function()? dialogOpened,
     TResult? Function()? loading,
     TResult? Function()? success,
@@ -660,6 +814,7 @@ class _$InitialImpl extends _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? quickBindingTriggered,
     TResult Function()? dialogOpened,
     TResult Function()? loading,
     TResult Function()? success,
@@ -676,6 +831,8 @@ class _$InitialImpl extends _Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_QuickBindingTriggered value)
+        quickBindingTriggered,
     required TResult Function(_DialogOpened value) dialogOpened,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
@@ -688,6 +845,7 @@ class _$InitialImpl extends _Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_QuickBindingTriggered value)? quickBindingTriggered,
     TResult? Function(_DialogOpened value)? dialogOpened,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
@@ -700,6 +858,7 @@ class _$InitialImpl extends _Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_QuickBindingTriggered value)? quickBindingTriggered,
     TResult Function(_DialogOpened value)? dialogOpened,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
@@ -716,6 +875,136 @@ class _$InitialImpl extends _Initial {
 abstract class _Initial extends SendSosState {
   const factory _Initial() = _$InitialImpl;
   const _Initial._() : super._();
+}
+
+/// @nodoc
+abstract class _$$QuickBindingTriggeredImplCopyWith<$Res> {
+  factory _$$QuickBindingTriggeredImplCopyWith(
+          _$QuickBindingTriggeredImpl value,
+          $Res Function(_$QuickBindingTriggeredImpl) then) =
+      __$$QuickBindingTriggeredImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$QuickBindingTriggeredImplCopyWithImpl<$Res>
+    extends _$SendSosStateCopyWithImpl<$Res, _$QuickBindingTriggeredImpl>
+    implements _$$QuickBindingTriggeredImplCopyWith<$Res> {
+  __$$QuickBindingTriggeredImplCopyWithImpl(_$QuickBindingTriggeredImpl _value,
+      $Res Function(_$QuickBindingTriggeredImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$QuickBindingTriggeredImpl extends _QuickBindingTriggered {
+  const _$QuickBindingTriggeredImpl() : super._();
+
+  @override
+  String toString() {
+    return 'SendSosState.quickBindingTriggered()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$QuickBindingTriggeredImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() quickBindingTriggered,
+    required TResult Function() dialogOpened,
+    required TResult Function() loading,
+    required TResult Function() success,
+    required TResult Function(String message, String? code) error,
+  }) {
+    return quickBindingTriggered();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? quickBindingTriggered,
+    TResult? Function()? dialogOpened,
+    TResult? Function()? loading,
+    TResult? Function()? success,
+    TResult? Function(String message, String? code)? error,
+  }) {
+    return quickBindingTriggered?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? quickBindingTriggered,
+    TResult Function()? dialogOpened,
+    TResult Function()? loading,
+    TResult Function()? success,
+    TResult Function(String message, String? code)? error,
+    required TResult orElse(),
+  }) {
+    if (quickBindingTriggered != null) {
+      return quickBindingTriggered();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_QuickBindingTriggered value)
+        quickBindingTriggered,
+    required TResult Function(_DialogOpened value) dialogOpened,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
+  }) {
+    return quickBindingTriggered(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_QuickBindingTriggered value)? quickBindingTriggered,
+    TResult? Function(_DialogOpened value)? dialogOpened,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Error value)? error,
+  }) {
+    return quickBindingTriggered?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_QuickBindingTriggered value)? quickBindingTriggered,
+    TResult Function(_DialogOpened value)? dialogOpened,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (quickBindingTriggered != null) {
+      return quickBindingTriggered(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _QuickBindingTriggered extends SendSosState {
+  const factory _QuickBindingTriggered() = _$QuickBindingTriggeredImpl;
+  const _QuickBindingTriggered._() : super._();
 }
 
 /// @nodoc
@@ -757,6 +1046,7 @@ class _$DialogOpenedImpl extends _DialogOpened {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() quickBindingTriggered,
     required TResult Function() dialogOpened,
     required TResult Function() loading,
     required TResult Function() success,
@@ -769,6 +1059,7 @@ class _$DialogOpenedImpl extends _DialogOpened {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? quickBindingTriggered,
     TResult? Function()? dialogOpened,
     TResult? Function()? loading,
     TResult? Function()? success,
@@ -781,6 +1072,7 @@ class _$DialogOpenedImpl extends _DialogOpened {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? quickBindingTriggered,
     TResult Function()? dialogOpened,
     TResult Function()? loading,
     TResult Function()? success,
@@ -797,6 +1089,8 @@ class _$DialogOpenedImpl extends _DialogOpened {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_QuickBindingTriggered value)
+        quickBindingTriggered,
     required TResult Function(_DialogOpened value) dialogOpened,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
@@ -809,6 +1103,7 @@ class _$DialogOpenedImpl extends _DialogOpened {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_QuickBindingTriggered value)? quickBindingTriggered,
     TResult? Function(_DialogOpened value)? dialogOpened,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
@@ -821,6 +1116,7 @@ class _$DialogOpenedImpl extends _DialogOpened {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_QuickBindingTriggered value)? quickBindingTriggered,
     TResult Function(_DialogOpened value)? dialogOpened,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
@@ -878,6 +1174,7 @@ class _$LoadingImpl extends _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() quickBindingTriggered,
     required TResult Function() dialogOpened,
     required TResult Function() loading,
     required TResult Function() success,
@@ -890,6 +1187,7 @@ class _$LoadingImpl extends _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? quickBindingTriggered,
     TResult? Function()? dialogOpened,
     TResult? Function()? loading,
     TResult? Function()? success,
@@ -902,6 +1200,7 @@ class _$LoadingImpl extends _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? quickBindingTriggered,
     TResult Function()? dialogOpened,
     TResult Function()? loading,
     TResult Function()? success,
@@ -918,6 +1217,8 @@ class _$LoadingImpl extends _Loading {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_QuickBindingTriggered value)
+        quickBindingTriggered,
     required TResult Function(_DialogOpened value) dialogOpened,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
@@ -930,6 +1231,7 @@ class _$LoadingImpl extends _Loading {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_QuickBindingTriggered value)? quickBindingTriggered,
     TResult? Function(_DialogOpened value)? dialogOpened,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
@@ -942,6 +1244,7 @@ class _$LoadingImpl extends _Loading {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_QuickBindingTriggered value)? quickBindingTriggered,
     TResult Function(_DialogOpened value)? dialogOpened,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
@@ -999,6 +1302,7 @@ class _$SuccessImpl extends _Success {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() quickBindingTriggered,
     required TResult Function() dialogOpened,
     required TResult Function() loading,
     required TResult Function() success,
@@ -1011,6 +1315,7 @@ class _$SuccessImpl extends _Success {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? quickBindingTriggered,
     TResult? Function()? dialogOpened,
     TResult? Function()? loading,
     TResult? Function()? success,
@@ -1023,6 +1328,7 @@ class _$SuccessImpl extends _Success {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? quickBindingTriggered,
     TResult Function()? dialogOpened,
     TResult Function()? loading,
     TResult Function()? success,
@@ -1039,6 +1345,8 @@ class _$SuccessImpl extends _Success {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_QuickBindingTriggered value)
+        quickBindingTriggered,
     required TResult Function(_DialogOpened value) dialogOpened,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
@@ -1051,6 +1359,7 @@ class _$SuccessImpl extends _Success {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_QuickBindingTriggered value)? quickBindingTriggered,
     TResult? Function(_DialogOpened value)? dialogOpened,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
@@ -1063,6 +1372,7 @@ class _$SuccessImpl extends _Success {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_QuickBindingTriggered value)? quickBindingTriggered,
     TResult Function(_DialogOpened value)? dialogOpened,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
@@ -1154,6 +1464,7 @@ class _$ErrorImpl extends _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() quickBindingTriggered,
     required TResult Function() dialogOpened,
     required TResult Function() loading,
     required TResult Function() success,
@@ -1166,6 +1477,7 @@ class _$ErrorImpl extends _Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? quickBindingTriggered,
     TResult? Function()? dialogOpened,
     TResult? Function()? loading,
     TResult? Function()? success,
@@ -1178,6 +1490,7 @@ class _$ErrorImpl extends _Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? quickBindingTriggered,
     TResult Function()? dialogOpened,
     TResult Function()? loading,
     TResult Function()? success,
@@ -1194,6 +1507,8 @@ class _$ErrorImpl extends _Error {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_QuickBindingTriggered value)
+        quickBindingTriggered,
     required TResult Function(_DialogOpened value) dialogOpened,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
@@ -1206,6 +1521,7 @@ class _$ErrorImpl extends _Error {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_QuickBindingTriggered value)? quickBindingTriggered,
     TResult? Function(_DialogOpened value)? dialogOpened,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
@@ -1218,6 +1534,7 @@ class _$ErrorImpl extends _Error {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_QuickBindingTriggered value)? quickBindingTriggered,
     TResult Function(_DialogOpened value)? dialogOpened,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,

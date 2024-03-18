@@ -34,8 +34,6 @@ class _AlarmToneState extends State<AlarmTone> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _OverviewSection(),
-              const SizedBox(height: 27),
-              _QuickBindingSection(),
               const SizedBox(height: 20),
               _ActivateSection(),
               const SizedBox(height: 21),
@@ -68,81 +66,6 @@ class _PlayButton extends StatelessWidget {
             }),
         orElse: () => const SizedBox.shrink(),
       ),
-    );
-  }
-}
-
-class _QuickBindingSection extends StatefulWidget {
-  @override
-  State<_QuickBindingSection> createState() => _QuickBindingSectionState();
-}
-
-class _QuickBindingSectionState extends State<_QuickBindingSection> {
-  bool isQuickBinding = false;
-  @override
-  void initState() {
-    super.initState();
-    isQuickBinding =
-        context.read<ProfileBloc>().state.profileInfo?.alarmToneQB ?? false;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              AppLocalizations.of(context)!.quickBinding,
-              style: AppTheme.themeData.textTheme.displayLarge,
-            ),
-            AppSwitch(
-                value: isQuickBinding,
-                onChanged: (value) {
-                  context
-                      .read<ProfileBloc>()
-                      .add(ProfileEvent.updateSpecificProfileField(data: {
-                        "alarmToneQB": value,
-                      }));
-                }),
-          ],
-        ),
-        const SizedBox(height: 12),
-        Text(
-          AppLocalizations.of(context)!.quickBindingDesc,
-          style: AppTheme.themeData.textTheme.titleMedium!
-              .copyWith(color: AppColors.greyDark),
-        ),
-        const SizedBox(height: 15),
-        Row(
-          children: [
-            SvgPicture.asset(AppIcons.device),
-            const SizedBox(width: 30),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  AppLocalizations.of(context)!.volumeButton,
-                  style: AppTheme.themeData.textTheme.titleMedium!
-                      .copyWith(color: AppColors.greyDark),
-                ),
-                Text(
-                  '  • 2 ${AppLocalizations.of(context)!.up.toLowerCase()}',
-                  style: AppTheme.themeData.textTheme.titleMedium!
-                      .copyWith(color: AppColors.greyDark),
-                ),
-                Text(
-                  '  • 2 ${AppLocalizations.of(context)!.down.toLowerCase()}',
-                  style: AppTheme.themeData.textTheme.titleMedium!
-                      .copyWith(color: AppColors.greyDark),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ],
     );
   }
 }

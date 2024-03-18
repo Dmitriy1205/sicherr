@@ -14,13 +14,13 @@ import '../bloc/profile/profile_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
-Future<void> sosConfirmationPopup(BuildContext context,{ String? latitude, String? longitude}) async {
+Future<void> sosConfirmationPopup(BuildContext context,{ String? latitude, String? longitude, bool showPopup = true}) async {
   if(context.read<SendSosBloc>().state.isDialogOpened) return;
   await Permission.sms.request();
   if(!context.mounted) return;
 
   context.read<SendSosBloc>().add(const SendSosEvent.openDialog());
-  final confirmed = await showDialog<bool?>(
+  final confirmed = !showPopup ? true : await showDialog<bool?>(
     context: context,
     builder: (BuildContext context) =>
         AlertDialog(

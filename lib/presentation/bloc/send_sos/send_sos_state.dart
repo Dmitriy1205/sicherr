@@ -10,6 +10,8 @@ class SendSosState with _$SendSosState {
 
   const factory SendSosState.initial() = _Initial;
 
+  const factory SendSosState.quickBindingTriggered() = _QuickBindingTriggered;
+
   const factory SendSosState.dialogOpened() = _DialogOpened;
 
   const factory SendSosState.loading() = _Loading;

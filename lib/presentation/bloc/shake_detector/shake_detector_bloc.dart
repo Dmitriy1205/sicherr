@@ -14,26 +14,12 @@ part 'shake_detector_bloc.freezed.dart';
 class ShakeDetectorBloc extends Bloc<ShakeDetectorEvent, ShakeDetectorState> {
   final ProfileBloc _profileBloc;
 
-  late StreamSubscription _profileStreamSubscription;
   StreamSubscription<AccelerometerEvent>? _accelerometerSubscription;
 
   ShakeDetectorBloc({required ProfileBloc profileBloc})
       : _profileBloc = profileBloc,
         super(const ShakeDetectorState.initial()) {
     on<ShakeDetectorEvent>(_mapBlocToState);
-    _profileStreamSubscription = _profileBloc.stream.listen((profile) {
-      if (profile.profileInfo!.enabledSosQB) {
-
-        _accelerometerSubscription =
-            accelerometerEventStream().listen((AccelerometerEvent event) {
-          if (event.x.abs() > 12 || event.y.abs() > 12 || event.z.abs() > 12) {
-            add(const ShakeDetectorEvent.startDetection());
-          }
-        });
-      } else {
-        add(const ShakeDetectorEvent.stopDetection());
-      }
-    });
   }
 
   Future<void> _mapBlocToState(
@@ -57,7 +43,6 @@ class ShakeDetectorBloc extends Bloc<ShakeDetectorEvent, ShakeDetectorState> {
   @override
   Future<void> close() {
     _accelerometerSubscription!.cancel();
-    _profileStreamSubscription.cancel();
     return super.close();
   }
 }

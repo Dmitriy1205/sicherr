@@ -90,20 +90,12 @@ class _InitialScreenState extends State<InitialScreen> {
         BlocListener<SendSosBloc, SendSosState>(
           listener: (context, state) {
             state.maybeMap(
+                quickBindingTriggered: (_){
+                  sosConfirmationPopup(context, showPopup: false);
+                },
                 success: (_) => AppToast.showSuccess(
                     context, AppLocalizations.of(context)!.sosSent),
                 error: (error) => AppToast.showError(context, error.message),
-                orElse: () {});
-          },
-        ),
-        BlocListener<ShakeDetectorBloc, ShakeDetectorState>(
-          listener: (context, state) {
-            state.maybeMap(
-                success: (_) {
-                  sosConfirmationPopup(context).then((value) => context
-                      .read<ShakeDetectorBloc>()
-                      .add(const ShakeDetectorEvent.resetDetection()));
-                },
                 orElse: () {});
           },
         ),

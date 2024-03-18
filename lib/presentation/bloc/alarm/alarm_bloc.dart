@@ -10,20 +10,14 @@ part 'alarm_bloc.freezed.dart';
 
 class AlarmBloc extends Bloc<AlarmEvent, AlarmState> {
   final SimplePlayer player;
-  final QuickBindingInterface quickBindingListener;
 
-  AlarmBloc({required this.player, required this.quickBindingListener})
+  AlarmBloc({required this.player})
       : super(const AlarmState.loaded(isAlarmPlaying: false)) {
     on(_mapEventToState);
     player.isPlayingChangeStream.listen((isPlaying) {
       if (_isPlaying != isPlaying) {
         _isPlaying = isPlaying;
         add(const AlarmEvent.playerChangedState());
-      }
-    });
-    quickBindingListener.triggerActionStream.listen((event) {
-      if (event == ActivateBinding.alarm) {
-        add(const AlarmEvent.playAlarm());
       }
     });
   }

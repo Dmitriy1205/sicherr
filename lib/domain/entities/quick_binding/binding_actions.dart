@@ -1,17 +1,13 @@
 enum ActivateBinding {
-  alarm,
   sos,
   warning;
 
   List<BindingActions> get triggerCondition => switch (this) {
-        ActivateBinding.alarm => [
-            BindingActions.volumeUp,
-            BindingActions.volumeUp,
-            BindingActions.volumeDown,
-            BindingActions.volumeDown,
-          ],
         ActivateBinding.sos => [
-            BindingActions.shakePhone,
+            BindingActions.volumeUp,
+            BindingActions.volumeUp,
+            BindingActions.volumeDown,
+            BindingActions.volumeDown,
           ],
         ActivateBinding.warning => [
             BindingActions.volumeUp,

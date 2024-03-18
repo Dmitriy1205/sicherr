@@ -144,15 +144,27 @@ class _SosScreenState extends State<SosScreen> {
                 ),
                 Row(
                   children: [
-                    SvgPicture.asset(AppIcons.phoneShake),
-                    const SizedBox(
-                      width: 36,
-                    ),
-                    Text(
-                      AppLocalizations.of(context)!.phoneShake,
-                      style: AppTheme.themeData.textTheme.titleMedium!.copyWith(
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.greyDark),
+                    SvgPicture.asset(AppIcons.device),
+                    const SizedBox(width: 30),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          AppLocalizations.of(context)!.volumeButton,
+                          style: AppTheme.themeData.textTheme.titleMedium!
+                              .copyWith(color: AppColors.greyDark),
+                        ),
+                        Text(
+                          '  • 2 ${AppLocalizations.of(context)!.up.toLowerCase()}',
+                          style: AppTheme.themeData.textTheme.titleMedium!
+                              .copyWith(color: AppColors.greyDark),
+                        ),
+                        Text(
+                          '  • 2 ${AppLocalizations.of(context)!.down.toLowerCase()}',
+                          style: AppTheme.themeData.textTheme.titleMedium!
+                              .copyWith(color: AppColors.greyDark),
+                        ),
+                      ],
                     ),
                   ],
                 ),

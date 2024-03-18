@@ -3,7 +3,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sicherr/core/exceptions/exceptions.dart';
 import 'package:sicherr/presentation/bloc/auth/auth_bloc.dart';
 
+import '../../../core/managers/quick_binding_handler.dart';
 import '../../../data/remote/client.dart';
+import '../../../domain/entities/quick_binding/binding_actions.dart';
 
 part 'send_sos_event.dart';
 
@@ -14,12 +16,19 @@ part 'send_sos_bloc.freezed.dart';
 class SendSosBloc extends Bloc<SendSosEvent, SendSosState> {
   final AuthBloc _authBloc;
   final HttpClient _httpClient;
+  final QuickBindingInterface _quickBindingInterface;
 
-  SendSosBloc({required HttpClient httpClient, required AuthBloc authBloc})
+  SendSosBloc({required HttpClient httpClient, required QuickBindingInterface quickBindingInterface, required AuthBloc authBloc})
       : _httpClient = httpClient,
         _authBloc = authBloc,
+        _quickBindingInterface = quickBindingInterface,
         super(const SendSosState.initial()) {
     on<SendSosEvent>(_mapBlocToState);
+    _quickBindingInterface.triggerActionStream.listen((event) {
+      if (event == ActivateBinding.sos) {
+        add(const SendSosEvent.triggerQuickBinding());
+      }
+    });
   }
 
   Future<void> _mapBlocToState(
@@ -27,11 +36,19 @@ class SendSosBloc extends Bloc<SendSosEvent, SendSosState> {
       event.map(
           sendSOS: (e) => _sendSos(e, emit),
           openDialog: (e) => _openDialog(e, emit),
-          closeDialog: (e) => _closeDialog(e, emit));
+          closeDialog: (e) => _closeDialog(e, emit),
+          triggerQuickBinding: (e) => _triggerQuickBinding(e, emit));
 
   Future<void> _openDialog(
       _OpenDialog event, Emitter<SendSosState> emit) async {
     emit(const SendSosState.dialogOpened());
+  }
+
+  Future<void> _triggerQuickBinding(
+      _TriggerQuickBinding event, Emitter<SendSosState> emit) async {
+    if(state.isDialogOpened) return;
+    emit(const SendSosState.quickBindingTriggered());
+    emit(SendSosState.initial());
   }
 
   Future<void> _closeDialog(

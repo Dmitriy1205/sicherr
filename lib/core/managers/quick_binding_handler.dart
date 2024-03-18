@@ -47,7 +47,7 @@ final class QuickBindingListener
   }
 
   void _startsStopListeners() {
-    if (_userProfile!.alarmToneQB) {
+    if (_userProfile!.enabledSosQB) {
       startListenVolumeBtn(callback: addAction);
       // This delay has been added to clear the _actionsSequence after we subscribe 
       // to the volume listener, because it's triggers already as we subscribe,

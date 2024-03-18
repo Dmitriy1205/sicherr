@@ -54,6 +54,28 @@ class _HomeButtonsSliderState extends State<HomeButtonsSlider> {
     return SizedBox(
       width: double.infinity,
       height: double.infinity,
+      child: Column(
+        children: [
+          Spacer(),
+          _SOSWidget(
+            position: position,
+            isSelected: true,
+            goToNextItem: _goToNextButton,
+          ),
+          SizedBox(height: 25,),
+          _StartAlarm(
+            isSelected: true,
+            goToNextItem: _goToNextButton,
+          ),
+          Spacer()
+        ],
+      )
+    );
+    /*
+    In case customer changes his mind of design
+    return SizedBox(
+      width: double.infinity,
+      height: double.infinity,
       child: CarouselSlider(
           carouselController: controller,
           options: CarouselOptions(
@@ -77,7 +99,7 @@ class _HomeButtonsSliderState extends State<HomeButtonsSlider> {
               goToNextItem: _goToNextButton,
             )
           ]),
-    );
+    );*/
   }
 
   _goToNextButton(int page) {
