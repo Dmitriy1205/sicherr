@@ -19,7 +19,6 @@ import 'package:sicherr/presentation/bloc/notification/notification_bloc.dart';
 import 'package:sicherr/presentation/bloc/send_sos/send_sos_bloc.dart';
 import 'package:sicherr/presentation/bloc/shake_detector/shake_detector_bloc.dart';
 import 'package:sicherr/presentation/bloc/sign_in/sign_in_bloc.dart';
-import 'package:telephony/telephony.dart';
 
 import '../../domain/repositories/auth/auth_repository.dart';
 import '../../domain/repositories/auth/auth_repository_impl.dart';
@@ -80,7 +79,7 @@ Future<void> init() async {
       ));
   sl.registerLazySingleton(() => AlarmBloc(
       player: alarmManager, quickBindingListener: quickBindingListener));
-  sl.registerLazySingleton(() => SendSosBloc(httpClient: sl(), authBloc: sl(), telephony: Telephony.instance));
+  sl.registerLazySingleton(() => SendSosBloc(httpClient: sl(), authBloc: sl()));
   sl.registerLazySingleton(
       () => NotificationBloc(notificationRepository: sl(), authBloc: sl()));
   sl.registerLazySingleton(() => ShakeDetectorBloc(profileBloc: sl()));

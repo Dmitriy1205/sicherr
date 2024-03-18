@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sicherr/core/exceptions/exceptions.dart';
 import 'package:sicherr/presentation/bloc/auth/auth_bloc.dart';
-import 'package:telephony/telephony.dart';
 
 import '../../../data/remote/client.dart';
 
@@ -15,12 +14,10 @@ part 'send_sos_bloc.freezed.dart';
 class SendSosBloc extends Bloc<SendSosEvent, SendSosState> {
   final AuthBloc _authBloc;
   final HttpClient _httpClient;
-  final Telephony _telephony;
 
-  SendSosBloc({required HttpClient httpClient, required Telephony telephony, required AuthBloc authBloc})
+  SendSosBloc({required HttpClient httpClient, required AuthBloc authBloc})
       : _httpClient = httpClient,
         _authBloc = authBloc,
-        _telephony = telephony,
         super(const SendSosState.initial()) {
     on<SendSosEvent>(_mapBlocToState);
   }
@@ -46,14 +43,6 @@ class SendSosBloc extends Bloc<SendSosEvent, SendSosState> {
     try {
       emit(const SendSosState.loading());
       final token = await _authBloc.state.user!.getIdToken();
-
-      final smsMessage = event.message +
-          ((event.lat != null && event.long != null)
-              ? "\nhttps://www.google.com/maps?q=${event.lat},${event.long}&z=15"
-              : "");
-      for(var phone in event.emContactPhone){
-        await _telephony.sendSms(to: phone, message: smsMessage);
-      }
       await _httpClient.sendSos(
           idToken: token!,
           message: event.message,
