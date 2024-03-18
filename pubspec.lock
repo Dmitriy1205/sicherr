@@ -467,15 +467,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
-  flutter_sms:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: master
-      resolved-ref: "79385dba3dafc6156c9df2d00d5aa751639b5818"
-      url: "https://github.com/toaingo2108/flutter_sms.git"
-    source: git
-    version: "2.3.3"
   flutter_svg:
     dependency: "direct main"
     description:
@@ -1043,6 +1034,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  telephony:
+    dependency: "direct main"
+    description:
+      name: telephony
+      sha256: "821e074acec3c611e48edadd50a6d9fef864943771a545da7924adcc8509ada9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.0"
   term_glyph:
     dependency: transitive
     description:
