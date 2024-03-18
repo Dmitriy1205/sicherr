@@ -470,10 +470,11 @@ packages:
   flutter_sms:
     dependency: "direct main"
     description:
-      name: flutter_sms
-      sha256: "2fe5f584f02596343557eeca56348f9b82413fefe83a423fab880cdbdf54d8d8"
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: master
+      resolved-ref: "79385dba3dafc6156c9df2d00d5aa751639b5818"
+      url: "https://github.com/toaingo2108/flutter_sms.git"
+    source: git
     version: "2.3.3"
   flutter_svg:
     dependency: "direct main"
