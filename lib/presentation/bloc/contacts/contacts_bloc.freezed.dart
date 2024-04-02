@@ -99,8 +99,8 @@ class __$$LoadInProgressImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoadInProgressImpl implements _LoadInProgress {
-  const _$LoadInProgressImpl();
+class _$LoadInProgressImpl extends _LoadInProgress {
+  const _$LoadInProgressImpl() : super._();
 
   @override
   String toString() {
@@ -186,8 +186,9 @@ class _$LoadInProgressImpl implements _LoadInProgress {
   }
 }
 
-abstract class _LoadInProgress implements ContactsState {
+abstract class _LoadInProgress extends ContactsState {
   const factory _LoadInProgress() = _$LoadInProgressImpl;
+  const _LoadInProgress._() : super._();
 }
 
 /// @nodoc
@@ -230,13 +231,16 @@ class __$$LoadedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoadedImpl implements _Loaded {
+class _$LoadedImpl extends _Loaded {
   const _$LoadedImpl(
       {required final Map<String, List<ContactEntity>> categorizedContacts,
       required this.isPermissionDenied})
-      : _categorizedContacts = categorizedContacts;
+      : _categorizedContacts = categorizedContacts,
+        super._();
 
+// required List<ContactEntity> listContacts,
   final Map<String, List<ContactEntity>> _categorizedContacts;
+// required List<ContactEntity> listContacts,
   @override
   Map<String, List<ContactEntity>> get categorizedContacts {
     if (_categorizedContacts is EqualUnmodifiableMapView)
@@ -346,11 +350,13 @@ class _$LoadedImpl implements _Loaded {
   }
 }
 
-abstract class _Loaded implements ContactsState {
+abstract class _Loaded extends ContactsState {
   const factory _Loaded(
       {required final Map<String, List<ContactEntity>> categorizedContacts,
       required final bool isPermissionDenied}) = _$LoadedImpl;
+  const _Loaded._() : super._();
 
+// required List<ContactEntity> listContacts,
   Map<String, List<ContactEntity>> get categorizedContacts;
   bool get isPermissionDenied;
   @JsonKey(ignore: true)
@@ -555,7 +561,7 @@ class __$$SearchContactImplCopyWithImpl<$Res>
     Object? text = null,
   }) {
     return _then(_$SearchContactImpl(
-      null == text
+      text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
@@ -566,7 +572,7 @@ class __$$SearchContactImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SearchContactImpl implements _SearchContact {
-  const _$SearchContactImpl(this.text);
+  const _$SearchContactImpl({required this.text});
 
   @override
   final String text;
@@ -663,7 +669,8 @@ class _$SearchContactImpl implements _SearchContact {
 }
 
 abstract class _SearchContact implements ContactsEvent {
-  const factory _SearchContact(final String text) = _$SearchContactImpl;
+  const factory _SearchContact({required final String text}) =
+      _$SearchContactImpl;
 
   String get text;
   @JsonKey(ignore: true)
