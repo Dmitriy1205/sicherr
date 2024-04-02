@@ -8,7 +8,6 @@ import 'package:sicherr/core/managers/quick_binding_handler.dart';
 import 'package:sicherr/core/theme/theme.dart';
 import 'package:sicherr/presentation/bloc/profile/profile_bloc.dart';
 import 'package:sicherr/presentation/bloc/send_sos/send_sos_bloc.dart';
-import 'package:sicherr/presentation/bloc/shake_detector/shake_detector_bloc.dart';
 import 'package:sicherr/presentation/screens/contacts/contacts.dart';
 import 'package:sicherr/presentation/screens/home/home.dart';
 import 'package:sicherr/presentation/screens/map/map.dart';
@@ -17,6 +16,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sicherr/presentation/widgets/sos_confirmation_popup.dart';
 
 import '../../core/service_locator/service_locator.dart';
+import '../bloc/emergency_contact/emergency_contact_bloc.dart';
 import '../bloc/onboarding/onboarding_bloc.dart';
 import '../widgets/app_toast.dart';
 
@@ -42,6 +42,10 @@ class _InitialScreenState extends State<InitialScreen> {
     context.read<ProfileBloc>().add(const ProfileEvent.getProfileFields());
 
     context.read<OnboardingBloc>().add(const OnboardingEvent.get());
+    // context.read<ContactsBloc>().add(ContactsEvent.initial());
+    context
+        .read<EmergencyContactBloc>()
+        .add(const EmergencyContactEvent.getAllEmContacts());
     sl<QuickBindingListener>().initListeners();
     super.initState();
   }

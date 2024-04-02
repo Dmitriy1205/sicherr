@@ -9,6 +9,8 @@ abstract interface class ContactsInterface {
 }
 
 class ContactsManager implements ContactsInterface {
+
+
   @override
   Future<List<ContactEntity>> getContacts() async {
     final List<ContactEntity> contacts = [];

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -5,23 +7,34 @@ import 'package:sicherr/core/utils/phone_formatter.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
 import 'package:sicherr/core/managers/contacts_manager.dart';
 
+import '../profile/profile_bloc.dart';
+
 part 'contacts_state.dart';
+
 part 'contacts_event.dart';
+
 part 'contacts_bloc.freezed.dart';
 
 class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
-  ContactsBloc(this.contactsManager)
-      : super(const ContactsState.loadInProgress()) {
+  final ProfileBloc _profileBloc;
+  final ContactsInterface contactsManager;
+  late StreamSubscription _contactStreamSubscription;
+
+  ContactsBloc(
+      {required this.contactsManager, required ProfileBloc profileBloc})
+      : _profileBloc = profileBloc,
+        super(const ContactsState.loadInProgress()) {
     on<ContactsEvent>(_mapEventToState);
-    add(const ContactsEvent.initial());
+    _contactStreamSubscription = _profileBloc.stream.listen((event) {
+      event.maybeMap(
+          loaded: (_) => add(const ContactsEvent.initial()), orElse: () {});
+    });
   }
 
   List<ContactEntity> _contactsList = [];
-  List<ContactEntity> _contactsToDisplay = [];
-
-  final ContactsInterface contactsManager;
 
   PermissionStatus _permissionStatus = PermissionStatus.denied;
+
   bool get _isPermissionDenied =>
       _permissionStatus == PermissionStatus.denied ||
       _permissionStatus == PermissionStatus.permanentlyDenied;
@@ -36,22 +49,24 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
   Future<void> _initialEvent(
       _InitialEvent event, Emitter<ContactsState> emit) async {
     _contactsList = await contactsManager.getContacts();
-    _contactsToDisplay = [..._contactsList];
+    final contactsToDisplay = [..._contactsList];
     _permissionStatus = await Permission.contacts.status;
 
     emit(ContactsState.loaded(
       categorizedContacts:
-          ContactsManager.categorizeContacts(_contactsToDisplay),
+          ContactsManager.categorizeContacts(contactsToDisplay),
       isPermissionDenied: _isPermissionDenied,
     ));
   }
 
-  void _searchContact(_SearchContact event, Emitter<ContactsState> emit) {
-    emit(const ContactsState.loadInProgress());
+  Future<void> _searchContact(
+      _SearchContact event, Emitter<ContactsState> emit) async {
+    List<ContactEntity> filteredContacts = [];
+
     if (event.text.isEmpty) {
-      _contactsToDisplay = [..._contactsList];
+      filteredContacts = [..._contactsList];
     } else {
-      _contactsToDisplay = _contactsList.where((contact) {
+      filteredContacts = _contactsList.where((contact) {
         final name = contact.name.toLowerCase().replaceAll(RegExp(r'\s'), '');
         final phone = PhoneFormatter.formatPhone(contact.getMainPhoneNumber);
         final input = event.text.toLowerCase().replaceAll(RegExp(r'\s'), '');
@@ -60,8 +75,7 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
       }).toList();
     }
     emit(ContactsState.loaded(
-      categorizedContacts:
-          ContactsManager.categorizeContacts(_contactsToDisplay),
+      categorizedContacts: ContactsManager.categorizeContacts(filteredContacts),
       isPermissionDenied: _isPermissionDenied,
     ));
   }
@@ -71,5 +85,11 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
     if (await Permission.contacts.status == PermissionStatus.granted) {
       add(const ContactsEvent.initial());
     }
+  }
+
+  @override
+  Future<void> close() async {
+    _contactStreamSubscription.cancel();
+    super.close();
   }
 }
