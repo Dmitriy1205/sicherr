@@ -59,6 +59,7 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
     ));
   }
 
+
   Future<void> _searchContact(
       _SearchContact event, Emitter<ContactsState> emit) async {
     List<ContactEntity> filteredContacts = [];

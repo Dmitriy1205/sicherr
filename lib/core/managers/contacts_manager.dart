@@ -10,14 +10,13 @@ abstract interface class ContactsInterface {
 
 class ContactsManager implements ContactsInterface {
 
-
   @override
   Future<List<ContactEntity>> getContacts() async {
     final List<ContactEntity> contacts = [];
 
     final permission = await Permission.contacts.request();
     if (permission.isGranted) {
-      final localContacts = await ContactsService.getContacts();
+      final localContacts = await ContactsService.getContacts(photoHighResolution: false);
 
       for (var element in localContacts) {
         final contact = ContactEntity.fromLocalContact(element);
