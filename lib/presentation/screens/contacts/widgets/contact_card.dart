@@ -10,10 +10,9 @@ import 'package:sicherr/presentation/widgets/round_sos_icon.dart';
 import 'package:sicherr/presentation/widgets/round_wrapper_icon.dart';
 
 class ContactCard extends StatelessWidget {
-  final bool isEmergency;
 
   const ContactCard(
-      {super.key, required this.contact, required this.isEmergency});
+      {super.key, required this.contact});
 
   final ContactEntity contact;
 
@@ -63,13 +62,13 @@ class ContactCard extends StatelessWidget {
                           Text(
                             contact.name.isNotEmpty
                                 ? contact.name
-                                : contact.getMainPhoneNumber,
+                                : contact.phoneNumber,
                             style: const TextStyle(
                                 fontSize: 14, fontWeight: FontWeight.w500),
                             overflow: TextOverflow.ellipsis,
                           ),
                           Text(
-                            contact.getMainPhoneNumber,
+                            contact.phoneNumber,
                             style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,
@@ -78,7 +77,8 @@ class ContactCard extends StatelessWidget {
                           ),
                         ],
                       ),
-                     !state.emContacts!.any((element) => element.id == contact.id)
+                      !state.emContacts!
+                              .any((element) => element.id == contact.id)
                           ? const SizedBox()
                           : const RoundSosIcon(
                               height: 20,
@@ -94,7 +94,7 @@ class ContactCard extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     ContactsManager.launchCall(
-                        phoneNumber: contact.getMainPhoneNumber);
+                        phoneNumber: contact.phoneNumber);
                   },
                   child: const RoundWrapperIcon(svgPath: AppIcons.phone),
                 ),

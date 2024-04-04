@@ -66,7 +66,7 @@ class ContactInfo extends StatelessWidget {
               ],
             ),
             Text(
-              contact.getMainPhoneNumber,
+              contact.phoneNumber,
               style: const TextStyle(fontSize: 16, color: Color(0xFF838383)),
             )
           ],

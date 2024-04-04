@@ -13,7 +13,6 @@ import '../presentation/bloc/auth/auth_bloc.dart';
 import '../presentation/bloc/contacts/contacts_bloc.dart';
 import '../presentation/bloc/otp/otp_bloc.dart';
 import '../presentation/bloc/sign_in/sign_in_bloc.dart';
-import 'managers/contacts_manager.dart';
 
 class Providers extends StatelessWidget {
   final Widget child;
@@ -59,7 +58,7 @@ class Providers extends StatelessWidget {
           lazy: false,
         ),
         BlocProvider(
-          create: (context) => ContactsBloc(ContactsManager()),
+          create: (context) => ContactsBloc(),
         ),
         BlocProvider(
           create: (context) => sl<ShakeDetectorBloc>(),

@@ -4,10 +4,12 @@ import 'package:sicherr/core/const/colors.dart';
 import 'package:sicherr/core/theme/theme.dart';
 
 class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const DefaultAppBar({super.key, this.title, this.icon});
+  const DefaultAppBar(
+      {super.key, this.title, this.icon, this.showBackButton = true});
 
   final String? title;
   final Widget? icon;
+  final bool showBackButton;
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -17,22 +19,24 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       surfaceTintColor: AppColors.white,
       backgroundColor: AppColors.lightGrey,
-      leading: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: () {
-          Navigator.pop(context);
-        },
-        child: const Center(
-          child: Padding(
-            padding: EdgeInsets.only(left: 5),
-            child: FaIcon(
-              FontAwesomeIcons.chevronLeft,
-              color: AppColors.black,
-              size: 23,
-            ),
-          ),
-        ),
-      ),
+      leading: showBackButton && Navigator.canPop(context)
+          ? GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: const Center(
+                child: Padding(
+                  padding: EdgeInsets.only(left: 5),
+                  child: FaIcon(
+                    FontAwesomeIcons.chevronLeft,
+                    color: AppColors.black,
+                    size: 23,
+                  ),
+                ),
+              ),
+            )
+          : null,
       automaticallyImplyLeading: false,
       centerTitle: true,
       title: Text(

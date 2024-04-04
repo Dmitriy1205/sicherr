@@ -8,7 +8,7 @@ import 'package:sicherr/core/utils/phone_formatter.dart';
 part 'contact_entity.freezed.dart';
 
 @freezed
-class ContactEntity with _$ContactEntity {
+class ContactEntity with _$ContactEntity{
   factory ContactEntity({
     required String id,
     required String name,
@@ -20,7 +20,7 @@ class ContactEntity with _$ContactEntity {
 
   ContactEntity._();
 
-  String get getMainPhoneNumber => phones.isNotEmpty ? phones.first : '';
+  String get phoneNumber => phones.isNotEmpty ? phones.first : '';
 
   factory ContactEntity.fromLocalContact(Contact contact) {
     return ContactEntity(

@@ -20,24 +20,21 @@ mixin _$ContactsState {
   TResult when<TResult extends Object?>({
     required TResult Function() loadInProgress,
     required TResult Function(
-            Map<String, List<ContactEntity>> categorizedContacts,
-            bool isPermissionDenied)
+            Map<String, List<ContactEntity>> categorizedContacts)
         loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadInProgress,
-    TResult? Function(Map<String, List<ContactEntity>> categorizedContacts,
-            bool isPermissionDenied)?
+    TResult? Function(Map<String, List<ContactEntity>> categorizedContacts)?
         loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadInProgress,
-    TResult Function(Map<String, List<ContactEntity>> categorizedContacts,
-            bool isPermissionDenied)?
+    TResult Function(Map<String, List<ContactEntity>> categorizedContacts)?
         loaded,
     required TResult orElse(),
   }) =>
@@ -121,8 +118,7 @@ class _$LoadInProgressImpl implements _LoadInProgress {
   TResult when<TResult extends Object?>({
     required TResult Function() loadInProgress,
     required TResult Function(
-            Map<String, List<ContactEntity>> categorizedContacts,
-            bool isPermissionDenied)
+            Map<String, List<ContactEntity>> categorizedContacts)
         loaded,
   }) {
     return loadInProgress();
@@ -132,8 +128,7 @@ class _$LoadInProgressImpl implements _LoadInProgress {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadInProgress,
-    TResult? Function(Map<String, List<ContactEntity>> categorizedContacts,
-            bool isPermissionDenied)?
+    TResult? Function(Map<String, List<ContactEntity>> categorizedContacts)?
         loaded,
   }) {
     return loadInProgress?.call();
@@ -143,8 +138,7 @@ class _$LoadInProgressImpl implements _LoadInProgress {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadInProgress,
-    TResult Function(Map<String, List<ContactEntity>> categorizedContacts,
-            bool isPermissionDenied)?
+    TResult Function(Map<String, List<ContactEntity>> categorizedContacts)?
         loaded,
     required TResult orElse(),
   }) {
@@ -196,9 +190,7 @@ abstract class _$$LoadedImplCopyWith<$Res> {
           _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
       __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call(
-      {Map<String, List<ContactEntity>> categorizedContacts,
-      bool isPermissionDenied});
+  $Res call({Map<String, List<ContactEntity>> categorizedContacts});
 }
 
 /// @nodoc
@@ -213,17 +205,12 @@ class __$$LoadedImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? categorizedContacts = null,
-    Object? isPermissionDenied = null,
   }) {
     return _then(_$LoadedImpl(
       categorizedContacts: null == categorizedContacts
           ? _value._categorizedContacts
           : categorizedContacts // ignore: cast_nullable_to_non_nullable
               as Map<String, List<ContactEntity>>,
-      isPermissionDenied: null == isPermissionDenied
-          ? _value.isPermissionDenied
-          : isPermissionDenied // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -232,8 +219,7 @@ class __$$LoadedImplCopyWithImpl<$Res>
 
 class _$LoadedImpl implements _Loaded {
   const _$LoadedImpl(
-      {required final Map<String, List<ContactEntity>> categorizedContacts,
-      required this.isPermissionDenied})
+      {required final Map<String, List<ContactEntity>> categorizedContacts})
       : _categorizedContacts = categorizedContacts;
 
   final Map<String, List<ContactEntity>> _categorizedContacts;
@@ -246,11 +232,8 @@ class _$LoadedImpl implements _Loaded {
   }
 
   @override
-  final bool isPermissionDenied;
-
-  @override
   String toString() {
-    return 'ContactsState.loaded(categorizedContacts: $categorizedContacts, isPermissionDenied: $isPermissionDenied)';
+    return 'ContactsState.loaded(categorizedContacts: $categorizedContacts)';
   }
 
   @override
@@ -259,16 +242,12 @@ class _$LoadedImpl implements _Loaded {
         (other.runtimeType == runtimeType &&
             other is _$LoadedImpl &&
             const DeepCollectionEquality()
-                .equals(other._categorizedContacts, _categorizedContacts) &&
-            (identical(other.isPermissionDenied, isPermissionDenied) ||
-                other.isPermissionDenied == isPermissionDenied));
+                .equals(other._categorizedContacts, _categorizedContacts));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_categorizedContacts),
-      isPermissionDenied);
+      runtimeType, const DeepCollectionEquality().hash(_categorizedContacts));
 
   @JsonKey(ignore: true)
   @override
@@ -281,35 +260,32 @@ class _$LoadedImpl implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() loadInProgress,
     required TResult Function(
-            Map<String, List<ContactEntity>> categorizedContacts,
-            bool isPermissionDenied)
+            Map<String, List<ContactEntity>> categorizedContacts)
         loaded,
   }) {
-    return loaded(categorizedContacts, isPermissionDenied);
+    return loaded(categorizedContacts);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadInProgress,
-    TResult? Function(Map<String, List<ContactEntity>> categorizedContacts,
-            bool isPermissionDenied)?
+    TResult? Function(Map<String, List<ContactEntity>> categorizedContacts)?
         loaded,
   }) {
-    return loaded?.call(categorizedContacts, isPermissionDenied);
+    return loaded?.call(categorizedContacts);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadInProgress,
-    TResult Function(Map<String, List<ContactEntity>> categorizedContacts,
-            bool isPermissionDenied)?
+    TResult Function(Map<String, List<ContactEntity>> categorizedContacts)?
         loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(categorizedContacts, isPermissionDenied);
+      return loaded(categorizedContacts);
     }
     return orElse();
   }
@@ -348,11 +324,10 @@ class _$LoadedImpl implements _Loaded {
 
 abstract class _Loaded implements ContactsState {
   const factory _Loaded(
-      {required final Map<String, List<ContactEntity>> categorizedContacts,
-      required final bool isPermissionDenied}) = _$LoadedImpl;
+      {required final Map<String, List<ContactEntity>>
+          categorizedContacts}) = _$LoadedImpl;
 
   Map<String, List<ContactEntity>> get categorizedContacts;
-  bool get isPermissionDenied;
   @JsonKey(ignore: true)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -364,21 +339,18 @@ mixin _$ContactsEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String text) searchContact,
-    required TResult Function() checkPermission,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String text)? searchContact,
-    TResult? Function()? checkPermission,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String text)? searchContact,
-    TResult Function()? checkPermission,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -386,21 +358,18 @@ mixin _$ContactsEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_InitialEvent value) initial,
     required TResult Function(_SearchContact value) searchContact,
-    required TResult Function(_CheckPermission value) checkPermission,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitialEvent value)? initial,
     TResult? Function(_SearchContact value)? searchContact,
-    TResult? Function(_CheckPermission value)? checkPermission,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitialEvent value)? initial,
     TResult Function(_SearchContact value)? searchContact,
-    TResult Function(_CheckPermission value)? checkPermission,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -464,7 +433,6 @@ class _$InitialEventImpl implements _InitialEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String text) searchContact,
-    required TResult Function() checkPermission,
   }) {
     return initial();
   }
@@ -474,7 +442,6 @@ class _$InitialEventImpl implements _InitialEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String text)? searchContact,
-    TResult? Function()? checkPermission,
   }) {
     return initial?.call();
   }
@@ -484,7 +451,6 @@ class _$InitialEventImpl implements _InitialEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String text)? searchContact,
-    TResult Function()? checkPermission,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -498,7 +464,6 @@ class _$InitialEventImpl implements _InitialEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_InitialEvent value) initial,
     required TResult Function(_SearchContact value) searchContact,
-    required TResult Function(_CheckPermission value) checkPermission,
   }) {
     return initial(this);
   }
@@ -508,7 +473,6 @@ class _$InitialEventImpl implements _InitialEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitialEvent value)? initial,
     TResult? Function(_SearchContact value)? searchContact,
-    TResult? Function(_CheckPermission value)? checkPermission,
   }) {
     return initial?.call(this);
   }
@@ -518,7 +482,6 @@ class _$InitialEventImpl implements _InitialEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitialEvent value)? initial,
     TResult Function(_SearchContact value)? searchContact,
-    TResult Function(_CheckPermission value)? checkPermission,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -598,7 +561,6 @@ class _$SearchContactImpl implements _SearchContact {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String text) searchContact,
-    required TResult Function() checkPermission,
   }) {
     return searchContact(text);
   }
@@ -608,7 +570,6 @@ class _$SearchContactImpl implements _SearchContact {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String text)? searchContact,
-    TResult? Function()? checkPermission,
   }) {
     return searchContact?.call(text);
   }
@@ -618,7 +579,6 @@ class _$SearchContactImpl implements _SearchContact {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String text)? searchContact,
-    TResult Function()? checkPermission,
     required TResult orElse(),
   }) {
     if (searchContact != null) {
@@ -632,7 +592,6 @@ class _$SearchContactImpl implements _SearchContact {
   TResult map<TResult extends Object?>({
     required TResult Function(_InitialEvent value) initial,
     required TResult Function(_SearchContact value) searchContact,
-    required TResult Function(_CheckPermission value) checkPermission,
   }) {
     return searchContact(this);
   }
@@ -642,7 +601,6 @@ class _$SearchContactImpl implements _SearchContact {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitialEvent value)? initial,
     TResult? Function(_SearchContact value)? searchContact,
-    TResult? Function(_CheckPermission value)? checkPermission,
   }) {
     return searchContact?.call(this);
   }
@@ -652,7 +610,6 @@ class _$SearchContactImpl implements _SearchContact {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitialEvent value)? initial,
     TResult Function(_SearchContact value)? searchContact,
-    TResult Function(_CheckPermission value)? checkPermission,
     required TResult orElse(),
   }) {
     if (searchContact != null) {
@@ -669,112 +626,4 @@ abstract class _SearchContact implements ContactsEvent {
   @JsonKey(ignore: true)
   _$$SearchContactImplCopyWith<_$SearchContactImpl> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$CheckPermissionImplCopyWith<$Res> {
-  factory _$$CheckPermissionImplCopyWith(_$CheckPermissionImpl value,
-          $Res Function(_$CheckPermissionImpl) then) =
-      __$$CheckPermissionImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$CheckPermissionImplCopyWithImpl<$Res>
-    extends _$ContactsEventCopyWithImpl<$Res, _$CheckPermissionImpl>
-    implements _$$CheckPermissionImplCopyWith<$Res> {
-  __$$CheckPermissionImplCopyWithImpl(
-      _$CheckPermissionImpl _value, $Res Function(_$CheckPermissionImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$CheckPermissionImpl implements _CheckPermission {
-  const _$CheckPermissionImpl();
-
-  @override
-  String toString() {
-    return 'ContactsEvent.checkPermission()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$CheckPermissionImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(String text) searchContact,
-    required TResult Function() checkPermission,
-  }) {
-    return checkPermission();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(String text)? searchContact,
-    TResult? Function()? checkPermission,
-  }) {
-    return checkPermission?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(String text)? searchContact,
-    TResult Function()? checkPermission,
-    required TResult orElse(),
-  }) {
-    if (checkPermission != null) {
-      return checkPermission();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_InitialEvent value) initial,
-    required TResult Function(_SearchContact value) searchContact,
-    required TResult Function(_CheckPermission value) checkPermission,
-  }) {
-    return checkPermission(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InitialEvent value)? initial,
-    TResult? Function(_SearchContact value)? searchContact,
-    TResult? Function(_CheckPermission value)? checkPermission,
-  }) {
-    return checkPermission?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InitialEvent value)? initial,
-    TResult Function(_SearchContact value)? searchContact,
-    TResult Function(_CheckPermission value)? checkPermission,
-    required TResult orElse(),
-  }) {
-    if (checkPermission != null) {
-      return checkPermission(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _CheckPermission implements ContactsEvent {
-  const factory _CheckPermission() = _$CheckPermissionImpl;
 }

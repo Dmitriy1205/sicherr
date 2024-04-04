@@ -73,5 +73,7 @@
   "features": "Features",
   "quickAlarm": "Schnelle Warnung",
   "startAlarm": "START ALARM",
-  "account": "Account"
+
+  "selectContacts": "Select contacts that will be used in the app.",
+  "configureContacts": "Configure contacts"
 }

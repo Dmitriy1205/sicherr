@@ -9,11 +9,13 @@ import 'package:sicherr/core/theme/theme.dart';
 import 'package:sicherr/presentation/bloc/profile/profile_bloc.dart';
 import 'package:sicherr/presentation/bloc/send_sos/send_sos_bloc.dart';
 import 'package:sicherr/presentation/bloc/shake_detector/shake_detector_bloc.dart';
+import 'package:sicherr/presentation/screens/configure_contacts/configure_contacts_screen.dart';
 import 'package:sicherr/presentation/screens/contacts/contacts.dart';
 import 'package:sicherr/presentation/screens/home/home.dart';
 import 'package:sicherr/presentation/screens/map/map.dart';
 import 'package:sicherr/presentation/screens/profile/profile.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:sicherr/presentation/widgets/core_widgets.dart';
 import 'package:sicherr/presentation/widgets/sos_confirmation_popup.dart';
 
 import '../../core/service_locator/service_locator.dart';
@@ -45,6 +47,8 @@ class _InitialScreenState extends State<InitialScreen> {
     sl<QuickBindingListener>().initListeners();
     super.initState();
   }
+
+  final actions = {1: const _AddContactsBnt()};
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +94,7 @@ class _InitialScreenState extends State<InitialScreen> {
         BlocListener<SendSosBloc, SendSosState>(
           listener: (context, state) {
             state.maybeMap(
-                quickBindingTriggered: (_){
+                quickBindingTriggered: (_) {
                   sosConfirmationPopup(context, showPopup: false);
                 },
                 success: (_) => AppToast.showSuccess(
@@ -101,12 +105,10 @@ class _InitialScreenState extends State<InitialScreen> {
         ),
       ],
       child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            titles[_selectedPage],
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-          ),
-          backgroundColor: AppColors.lightGrey,
+        appBar: DefaultAppBar(
+          title: titles[_selectedPage],
+          showBackButton: false,
+          icon: actions[_selectedPage],
         ),
         body: GestureDetector(
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -124,6 +126,25 @@ class _InitialScreenState extends State<InitialScreen> {
           },
         ),
       ),
+    );
+  }
+}
+
+class _AddContactsBnt extends StatelessWidget {
+  const _AddContactsBnt();
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: const Icon(Icons.add_rounded, size: 30),
+      onPressed: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const ConfigureContactsScreen()));
+      },
+      padding: const EdgeInsets.all(15),
+      color: Theme.of(context).primaryColor,
     );
   }
 }

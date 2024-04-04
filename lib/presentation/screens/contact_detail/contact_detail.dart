@@ -59,7 +59,7 @@ class _ContactDetailScreenState extends State<ContactDetailScreen> {
                       child: GestureDetector(
                         onTap: () {
                           ContactsManager.launchCall(
-                              phoneNumber: widget.contact.getMainPhoneNumber);
+                              phoneNumber: widget.contact.phoneNumber);
                         },
                         child: Center(
                           child: Row(

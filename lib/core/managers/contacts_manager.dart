@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:sicherr/core/utils/phone_formatter.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
 
 abstract interface class ContactsInterface {
@@ -62,6 +63,18 @@ class ContactsManager implements ContactsInterface {
     }
 
     return categorizedContacts;
+  }
+
+  static List<ContactEntity> searchContacts(
+      String query, List<ContactEntity> contacts) {
+    final contactsToDisplay = contacts.where((contact) {
+      final name = contact.name.toLowerCase().replaceAll(RegExp(r'\s'), '');
+      final phone = PhoneFormatter.formatPhone(contact.phoneNumber);
+      final input = query.toLowerCase().replaceAll(RegExp(r'\s'), '');
+
+      return name.contains(input) || phone.contains(input);
+    }).toList();
+    return contactsToDisplay;
   }
 
   static Future<void> launchCall({required String phoneNumber}) async {
