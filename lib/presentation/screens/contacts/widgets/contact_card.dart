@@ -77,7 +77,7 @@ class ContactCard extends StatelessWidget {
                           ),
                         ],
                       ),
-                      !state.emContacts!
+                      !state.emContacts
                               .any((element) => element.id == contact.id)
                           ? const SizedBox()
                           : const RoundSosIcon(

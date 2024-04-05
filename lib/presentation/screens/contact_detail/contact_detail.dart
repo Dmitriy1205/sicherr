@@ -8,10 +8,8 @@ import 'package:sicherr/presentation/screens/contact_detail/widgets/additional_c
 import 'package:sicherr/presentation/screens/contact_detail/widgets/contact_info.dart';
 import 'package:sicherr/presentation/widgets/core_widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:sicherr/presentation/widgets/default_app_bar.dart';
 
 import '../../bloc/emergency_contact/emergency_contact_bloc.dart';
-import '../../widgets/round_sos_icon.dart';
 
 class ContactDetailScreen extends StatefulWidget {
   const ContactDetailScreen({super.key, required this.contact});
@@ -27,12 +25,12 @@ class _ContactDetailScreenState extends State<ContactDetailScreen> {
 
   @override
   void initState() {
-    isEmergency = context.read<EmergencyContactBloc>().state.emContacts == null
+    isEmergency = context.read<EmergencyContactBloc>().state.emContacts.isEmpty
         ? false
         : context
             .read<EmergencyContactBloc>()
             .state
-            .emContacts!
+            .emContacts
             .any((element) => element.id == widget.contact.id);
     super.initState();
   }
@@ -102,9 +100,7 @@ class _ContactDetailScreenState extends State<ContactDetailScreen> {
                                                       id: widget.contact.id,
                                                       name: widget.contact.name,
                                                       phoneNumber: widget
-                                                          .contact
-                                                          .phones
-                                                          .first),
+                                                          .contact.phoneNumber),
                                                 ),
                                               );
                                       setState(() {
@@ -120,18 +116,11 @@ class _ContactDetailScreenState extends State<ContactDetailScreen> {
                                   const SizedBox(height: 10),
                                   Text(
                                     context
-                                                    .read<
-                                                        EmergencyContactBloc>()
-                                                    .state
-                                                    .emContacts ==
-                                                null ||
-                                            context
-                                                .read<EmergencyContactBloc>()
-                                                .state
-                                                .emContacts!
-                                                .any((element) =>
-                                                    element.id ==
-                                                    widget.contact.id)
+                                            .read<EmergencyContactBloc>()
+                                            .state
+                                            .emContacts
+                                            .any((element) =>
+                                                element.id == widget.contact.id)
                                         ? '- ${AppLocalizations.of(context)!.emergency}'
                                         : '+ ${AppLocalizations.of(context)!.emergency}',
                                     style: TextStyle(

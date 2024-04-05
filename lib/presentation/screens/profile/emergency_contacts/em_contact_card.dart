@@ -28,7 +28,7 @@ class EmContactCard extends StatelessWidget {
                         emContact: EmergencyContact(
                             id: contact.id,
                             name: contact.name,
-                            phoneNumber: contact.phones.first),
+                            phoneNumber: contact.phoneNumber),
                       ),
                     );
           },

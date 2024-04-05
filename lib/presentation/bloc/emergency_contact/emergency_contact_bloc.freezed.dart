@@ -850,7 +850,7 @@ mixin _$EmergencyContactState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<EmergencyContact>? emContacts) loaded,
+    required TResult Function(List<EmergencyContact> emContacts) loaded,
     required TResult Function(String error) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -858,7 +858,7 @@ mixin _$EmergencyContactState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<EmergencyContact>? emContacts)? loaded,
+    TResult? Function(List<EmergencyContact> emContacts)? loaded,
     TResult? Function(String error)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -866,7 +866,7 @@ mixin _$EmergencyContactState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<EmergencyContact>? emContacts)? loaded,
+    TResult Function(List<EmergencyContact> emContacts)? loaded,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) =>
@@ -957,7 +957,7 @@ class _$InitialImpl extends _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<EmergencyContact>? emContacts) loaded,
+    required TResult Function(List<EmergencyContact> emContacts) loaded,
     required TResult Function(String error) error,
   }) {
     return initial();
@@ -968,7 +968,7 @@ class _$InitialImpl extends _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<EmergencyContact>? emContacts)? loaded,
+    TResult? Function(List<EmergencyContact> emContacts)? loaded,
     TResult? Function(String error)? error,
   }) {
     return initial?.call();
@@ -979,7 +979,7 @@ class _$InitialImpl extends _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<EmergencyContact>? emContacts)? loaded,
+    TResult Function(List<EmergencyContact> emContacts)? loaded,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -1072,7 +1072,7 @@ class _$LoadingImpl extends _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<EmergencyContact>? emContacts) loaded,
+    required TResult Function(List<EmergencyContact> emContacts) loaded,
     required TResult Function(String error) error,
   }) {
     return loading();
@@ -1083,7 +1083,7 @@ class _$LoadingImpl extends _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<EmergencyContact>? emContacts)? loaded,
+    TResult? Function(List<EmergencyContact> emContacts)? loaded,
     TResult? Function(String error)? error,
   }) {
     return loading?.call();
@@ -1094,7 +1094,7 @@ class _$LoadingImpl extends _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<EmergencyContact>? emContacts)? loaded,
+    TResult Function(List<EmergencyContact> emContacts)? loaded,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -1153,7 +1153,7 @@ abstract class _$$LoadedImplCopyWith<$Res> {
           _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
       __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<EmergencyContact>? emContacts});
+  $Res call({List<EmergencyContact> emContacts});
 }
 
 /// @nodoc
@@ -1167,13 +1167,13 @@ class __$$LoadedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? emContacts = freezed,
+    Object? emContacts = null,
   }) {
     return _then(_$LoadedImpl(
-      emContacts: freezed == emContacts
+      emContacts: null == emContacts
           ? _value._emContacts
           : emContacts // ignore: cast_nullable_to_non_nullable
-              as List<EmergencyContact>?,
+              as List<EmergencyContact>,
     ));
   }
 }
@@ -1181,18 +1181,16 @@ class __$$LoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadedImpl extends _Loaded {
-  const _$LoadedImpl({required final List<EmergencyContact>? emContacts})
+  const _$LoadedImpl({required final List<EmergencyContact> emContacts})
       : _emContacts = emContacts,
         super._();
 
-  final List<EmergencyContact>? _emContacts;
+  final List<EmergencyContact> _emContacts;
   @override
-  List<EmergencyContact>? get emContacts {
-    final value = _emContacts;
-    if (value == null) return null;
+  List<EmergencyContact> get emContacts {
     if (_emContacts is EqualUnmodifiableListView) return _emContacts;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_emContacts);
   }
 
   @override
@@ -1224,7 +1222,7 @@ class _$LoadedImpl extends _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<EmergencyContact>? emContacts) loaded,
+    required TResult Function(List<EmergencyContact> emContacts) loaded,
     required TResult Function(String error) error,
   }) {
     return loaded(emContacts);
@@ -1235,7 +1233,7 @@ class _$LoadedImpl extends _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<EmergencyContact>? emContacts)? loaded,
+    TResult? Function(List<EmergencyContact> emContacts)? loaded,
     TResult? Function(String error)? error,
   }) {
     return loaded?.call(emContacts);
@@ -1246,7 +1244,7 @@ class _$LoadedImpl extends _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<EmergencyContact>? emContacts)? loaded,
+    TResult Function(List<EmergencyContact> emContacts)? loaded,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -1295,11 +1293,11 @@ class _$LoadedImpl extends _Loaded {
 }
 
 abstract class _Loaded extends EmergencyContactState {
-  const factory _Loaded({required final List<EmergencyContact>? emContacts}) =
+  const factory _Loaded({required final List<EmergencyContact> emContacts}) =
       _$LoadedImpl;
   const _Loaded._() : super._();
 
-  List<EmergencyContact>? get emContacts;
+  List<EmergencyContact> get emContacts;
   @JsonKey(ignore: true)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1371,7 +1369,7 @@ class _$ErrorImpl extends _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<EmergencyContact>? emContacts) loaded,
+    required TResult Function(List<EmergencyContact> emContacts) loaded,
     required TResult Function(String error) error,
   }) {
     return error(this.error);
@@ -1382,7 +1380,7 @@ class _$ErrorImpl extends _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<EmergencyContact>? emContacts)? loaded,
+    TResult? Function(List<EmergencyContact> emContacts)? loaded,
     TResult? Function(String error)? error,
   }) {
     return error?.call(this.error);
@@ -1393,7 +1391,7 @@ class _$ErrorImpl extends _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<EmergencyContact>? emContacts)? loaded,
+    TResult Function(List<EmergencyContact> emContacts)? loaded,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {

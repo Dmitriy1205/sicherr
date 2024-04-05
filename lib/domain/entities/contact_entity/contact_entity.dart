@@ -1,74 +1,91 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:contacts_service/contacts_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sicherr/core/utils/phone_formatter.dart';
+import 'package:sicherr/domain/entities/rating/rating.dart';
 
-part 'contact_entity.freezed.dart';
+class ContactEntity {
+  ContactEntity({
+    required this.id,
+    required this.name,
+    required this.phoneNumber,
+    this.isEmergency = false,
+    this.tags = const [],
+    this.ratings = const [],
+    this.rating,
+    this.image,
+  });
 
-@freezed
-class ContactEntity with _$ContactEntity {
-  factory ContactEntity({
-    required String id,
-    required String name,
-    required List<String> phones,
-    double? rate,
-    List<String>? tags,
-    Uint8List? image,
-  }) = _ContactEntity;
-
-  ContactEntity._();
-
-  String get phoneNumber => phones.isNotEmpty ? phones.first : '';
+  final String id;
+  final String name;
+  final String phoneNumber;
+  final bool isEmergency;
+  final List<String> tags;
+  final List<Rating> ratings;
+  final double? rating;
+  final Uint8List? image;
 
   factory ContactEntity.fromLocalContact(Contact contact) {
+    final phoneNumber =
+        PhoneFormatter.formatPhone(contact.phones?.first.value ?? '');
     return ContactEntity(
-      id: contact.identifier ?? '',
-      name: contact.displayName ?? '',
-      phones: _parsePhoneNumbers(contact.phones),
-      image: contact.avatar,
-    );
+        id: phoneNumber,
+        name: contact.displayName ?? '',
+        phoneNumber: phoneNumber,
+        image: contact.avatar,
+        tags: [if (contact.displayName != null) contact.displayName!]);
   }
 
   factory ContactEntity.fromFirebaseUser(User user) {
+    //phone number mustn't be null
+    final phoneNumber = user.phoneNumber!;
     return ContactEntity(
-      id: user.uid,
+      id: phoneNumber,
       name: user.displayName ?? '',
-      phones: [if (user.phoneNumber != null) user.phoneNumber!],
+      phoneNumber: phoneNumber,
     );
   }
 
   factory ContactEntity.fromJson(Map<String, dynamic> json) {
+    final String? base64Image = json['imageBase64'];
     return ContactEntity(
       id: json['id'],
       name: json['name'] ?? '',
-      phones: [json['phone'] ?? ''],
+      phoneNumber: json['phone'] ?? '',
+      image: base64Image != null && base64Image.isNotEmpty
+          ? base64.decode(base64Image)
+          : null,
+      isEmergency: json['isEmergencyContact'] ?? false,
+      tags: json['tags'] ?? [],
+      rating: json['rating'],
     );
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toJsonSimplified() {
+    final imageBase64 = image != null ? base64.encode(image!) : null;
     return {
       'id': id,
       'name': name,
       'phone': phoneNumber,
-      'imageRef': '',
+      'isEmergencyContact': isEmergency,
+      'imageBase64': imageBase64,
     };
   }
 
-  static List<String> _parsePhoneNumbers(List<Item>? phones) {
-    if (phones != null && phones.isNotEmpty) {
-      final formattedNumbers = <String>[];
-      for (var element in phones) {
-        if (element.value != null) {
-          formattedNumbers.add(
-            PhoneFormatter.formatPhone(element.value!),
-          );
-        }
-      }
-      return formattedNumbers;
-    } else {
-      return [];
-    }
+  Map<String, dynamic> toJson() {
+    // final imageBase64 = image != null ? base64.encode(image!) : null;
+    return {
+      'id': id,
+      'name': name,
+      'phone': phoneNumber,
+      'isEmergencyContact': isEmergency,
+      // 'imageBase64': imageBase64,
+      'rating': rating,
+      'ratings': ratings.map((e) => e.toJson()).toList(),
+      'tags': tags,
+      'createdAt': DateTime.now(),
+    };
   }
 }

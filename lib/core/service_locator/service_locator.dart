@@ -61,6 +61,7 @@ Future<void> init() async {
   //Blocs
   sl.registerLazySingleton(() => AuthBloc(
         authRepository: sl(),
+        userRepository: sl(),
       ));
   sl.registerLazySingleton(() => SignInBloc(
         authRepository: sl(),
@@ -80,9 +81,11 @@ Future<void> init() async {
         authBloc: sl(),
         emContactsRepository: sl(),
       ));
-  sl.registerLazySingleton(() => AlarmBloc(
-      player: alarmManager));
-  sl.registerLazySingleton(() => SendSosBloc(httpClient: sl(), authBloc: sl(), quickBindingInterface: quickBindingListener));
+  sl.registerLazySingleton(() => AlarmBloc(player: alarmManager));
+  sl.registerLazySingleton(() => SendSosBloc(
+      httpClient: sl(),
+      authBloc: sl(),
+      quickBindingInterface: quickBindingListener));
   sl.registerLazySingleton(
       () => NotificationBloc(notificationRepository: sl(), authBloc: sl()));
   sl.registerLazySingleton(() => ShakeDetectorBloc(profileBloc: sl()));

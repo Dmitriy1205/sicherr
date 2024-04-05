@@ -995,8 +995,6 @@ abstract class _$$SelectContactImplCopyWith<$Res> {
       __$$SelectContactImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ContactEntity contact});
-
-  $ContactEntityCopyWith<$Res> get contact;
 }
 
 /// @nodoc
@@ -1018,14 +1016,6 @@ class __$$SelectContactImplCopyWithImpl<$Res>
           : contact // ignore: cast_nullable_to_non_nullable
               as ContactEntity,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ContactEntityCopyWith<$Res> get contact {
-    return $ContactEntityCopyWith<$Res>(_value.contact, (value) {
-      return _then(_value.copyWith(contact: value));
-    });
   }
 }
 

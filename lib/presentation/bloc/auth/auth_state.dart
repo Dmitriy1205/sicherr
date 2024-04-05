@@ -11,7 +11,7 @@ class AuthState with _$AuthState {
 
   const factory AuthState.unauthenticated() = _UnauthenticaredState;
 
-  const factory AuthState.authenticated({required User user}) =
+  const factory AuthState.authenticated({required User user, required bool isConfiguredContacts}) =
       _AuthenticatedState;
 
   const factory AuthState.undefined() = _UndefinedState;

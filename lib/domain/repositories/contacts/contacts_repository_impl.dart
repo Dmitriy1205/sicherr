@@ -10,8 +10,8 @@ import 'package:sicherr/domain/repositories/contacts/contacts_repository.dart';
 
 class ContactsRepositoryImpl implements ContactsRepository {
   final FirebaseFirestore _firestore;
-  final String collectionName = 'users';
-  final String subCollectionName = 'contacts';
+  final usersCollectionName = 'users';
+  final contactsSubCollectionName = 'contacts';
 
   ContactsRepositoryImpl({required FirebaseFirestore firestore})
       : _firestore = firestore;
@@ -20,9 +20,9 @@ class ContactsRepositoryImpl implements ContactsRepository {
   Stream<List<ContactEntity>?> getSharedContactsStream(
       {required String currentUserId}) {
     return _firestore
-        .collection(collectionName)
+        .collection(usersCollectionName)
         .doc(currentUserId)
-        .collection(subCollectionName)
+        .collection(contactsSubCollectionName)
         .snapshots()
         .map((querySnapshot) {
       return querySnapshot.docs.map((doc) {
@@ -37,9 +37,9 @@ class ContactsRepositoryImpl implements ContactsRepository {
       {required String currentUserId}) async {
     try {
       QuerySnapshot querySnapshot = await _firestore
-          .collection(collectionName)
+          .collection(usersCollectionName)
           .doc(currentUserId)
-          .collection(subCollectionName)
+          .collection(contactsSubCollectionName)
           .get();
 
       List<ContactEntity> contacts = querySnapshot.docs.map((doc) {
@@ -54,24 +54,45 @@ class ContactsRepositoryImpl implements ContactsRepository {
   }
 
   @override
-  Future<void> setUpdateContacts(
-      {required String currentUserId,
-      required List<ContactEntity> sharedContacts}) async {
+  Future<void> setUpdateContacts({
+    required String currentUserId,
+    required List<ContactEntity> sharedContacts,
+  }) async {
     try {
       final batch = _firestore.batch();
       await _deleteUnusedContacts(currentUserId,
           sharedContacts: sharedContacts);
 
       for (var contact in sharedContacts) {
-        // Reference to the document for each contact
-        DocumentReference docRef = _firestore
-            .collection(collectionName)
+        // Reference to the user selected contacts document
+        final docRefUserContacts = _firestore
+            .collection(usersCollectionName)
             .doc(currentUserId)
-            .collection(subCollectionName)
+            .collection(contactsSubCollectionName)
             .doc(contact.id);
 
+        //Shared contacts
+        final docRefSharedContacts =
+            _firestore.collection(contactsSubCollectionName).doc(contact.id);
+
+        // Check if the document already exists
+        final sharedDocSnapshot = await docRefSharedContacts.get();
+        if (sharedDocSnapshot.exists) {
+          // Document already exists, update the "tags" field
+          final existingTags =
+              List<String>.from(sharedDocSnapshot.data()?['tags'] ?? []);
+          final newTags = [
+            ...existingTags,
+            contact.name
+          ]; // Combine existing and new tags
+          batch.update(docRefSharedContacts, {'tags': newTags});
+        } else {
+          // Document does not exist, set the data for the new document
+          batch.set(docRefSharedContacts, contact.toJson());
+        }
+
         // Set the data for each document in the batch
-        batch.set(docRef, contact.toJson());
+        batch.set(docRefUserContacts, contact.toJsonSimplified());
       }
 
       await batch.commit();
@@ -84,9 +105,9 @@ class ContactsRepositoryImpl implements ContactsRepository {
       {required List<ContactEntity> sharedContacts}) async {
     final batch = _firestore.batch(); // Initialize a batch
     final collectionReference = await _firestore
-        .collection(collectionName)
+        .collection(usersCollectionName)
         .doc(currentUserId)
-        .collection(subCollectionName)
+        .collection(contactsSubCollectionName)
         .get();
     for (var document in collectionReference.docs) {
       if (sharedContacts.none((e) => e.id == document.id)) {
@@ -106,7 +127,7 @@ class ContactsRepositoryImpl implements ContactsRepository {
 
       for (var element in localContacts) {
         final contact = ContactEntity.fromLocalContact(element);
-        if (contact.phones.isNotEmpty) {
+        if (contact.phoneNumber.isNotEmpty) {
           contacts.add(contact);
         }
       }

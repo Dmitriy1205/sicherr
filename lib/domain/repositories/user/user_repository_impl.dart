@@ -113,4 +113,19 @@ class UserRepositoryImpl extends UserRepository {
       throw BadRequestException(message: e.message!);
     }
   }
+
+  @override
+  Future<bool> collectionExists(String userId, String collectionName) async {
+    try {
+      final collectionRef = await _firestore
+          .collection(this.collectionName)
+          .doc(userId)
+          .collection(collectionName).get();
+
+      return collectionRef.docs.isNotEmpty;
+    } catch (e) {
+      // Handle any errors, such as permission denied or network issues
+      return false;
+    }
+  }
 }
