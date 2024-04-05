@@ -8,7 +8,6 @@ import 'package:sicherr/core/managers/quick_binding_handler.dart';
 import 'package:sicherr/core/theme/theme.dart';
 import 'package:sicherr/presentation/bloc/profile/profile_bloc.dart';
 import 'package:sicherr/presentation/bloc/send_sos/send_sos_bloc.dart';
-import 'package:sicherr/presentation/bloc/shake_detector/shake_detector_bloc.dart';
 import 'package:sicherr/presentation/screens/configure_contacts/configure_contacts_screen.dart';
 import 'package:sicherr/presentation/screens/contacts/contacts.dart';
 import 'package:sicherr/presentation/screens/home/home.dart';
@@ -16,14 +15,13 @@ import 'package:sicherr/presentation/screens/map/map.dart';
 import 'package:sicherr/presentation/screens/profile/profile.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sicherr/presentation/widgets/core_widgets.dart';
-import 'package:sicherr/presentation/widgets/sos_confirmation_popup.dart';
 
 import '../../core/service_locator/service_locator.dart';
 import '../bloc/onboarding/onboarding_bloc.dart';
-import '../widgets/app_toast.dart';
 
 class InitialScreen extends StatefulWidget {
-  const InitialScreen({super.key});
+  const InitialScreen({super.key, this.initPage});
+  final PrimaryPageEnum? initPage;
 
   @override
   State<InitialScreen> createState() => _InitialScreenState();
@@ -32,15 +30,15 @@ class InitialScreen extends StatefulWidget {
 class _InitialScreenState extends State<InitialScreen> {
   int _selectedPage = 0;
 
-  final screens = const [
-    HomeScreen(),
-    ContactsScreen(),
-    MapScreen(),
-    ProfileScreen(),
-  ];
+  final screens = PrimaryPageEnum.values.map((e) => e.getPage).toList();
 
   @override
   void initState() {
+    if (widget.initPage != null) {
+      _selectedPage = PrimaryPageEnum.values.indexWhere(
+        (element) => element == widget.initPage,
+      );
+    }
     context.read<ProfileBloc>().add(const ProfileEvent.getProfileFields());
 
     context.read<OnboardingBloc>().add(const OnboardingEvent.get());
@@ -52,12 +50,6 @@ class _InitialScreenState extends State<InitialScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final titles = [
-      AppLocalizations.of(context)!.home,
-      AppLocalizations.of(context)!.contacts,
-      AppLocalizations.of(context)!.map,
-      AppLocalizations.of(context)!.profile,
-    ];
     return MultiBlocListener(
       listeners: [
         BlocListener<OnboardingBloc, OnboardingState>(
@@ -106,7 +98,9 @@ class _InitialScreenState extends State<InitialScreen> {
       ],
       child: Scaffold(
         appBar: DefaultAppBar(
-          title: titles[_selectedPage],
+          title: PrimaryPageEnum.values
+              .elementAt(_selectedPage)
+              .getLabel(context),
           showBackButton: false,
           icon: actions[_selectedPage],
         ),
@@ -119,7 +113,6 @@ class _InitialScreenState extends State<InitialScreen> {
           ),
         ),
         bottomNavigationBar: _MyBottomNavigationBar(
-          itemsLabel: titles,
           selectedIndex: _selectedPage,
           onItemTapped: (index) {
             setState(() => _selectedPage = index);
@@ -152,13 +145,11 @@ class _AddContactsBnt extends StatelessWidget {
 class _MyBottomNavigationBar extends StatelessWidget {
   final int selectedIndex;
   final Function(int) onItemTapped;
-  final List<String> itemsLabel;
 
   const _MyBottomNavigationBar({
     Key? key,
     required this.selectedIndex,
     required this.onItemTapped,
-    required this.itemsLabel,
   }) : super(key: key);
 
   @override
@@ -174,7 +165,7 @@ class _MyBottomNavigationBar extends StatelessWidget {
       ),
       child: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
-          ...BottomNavBarItems.values.asMap().entries.map(
+          ...PrimaryPageEnum.values.asMap().entries.map(
                 (item) => BottomNavigationBarItem(
                   icon: Padding(
                     padding: const EdgeInsets.only(bottom: 6, top: 10),
@@ -207,7 +198,7 @@ class _MyBottomNavigationBar extends StatelessWidget {
   }
 }
 
-enum BottomNavBarItems {
+enum PrimaryPageEnum {
   home,
   contacts,
   map,
@@ -215,19 +206,28 @@ enum BottomNavBarItems {
 
   String getLabel(BuildContext context) {
     return switch (this) {
-      BottomNavBarItems.home => AppLocalizations.of(context)!.home,
-      BottomNavBarItems.contacts => AppLocalizations.of(context)!.contacts,
-      BottomNavBarItems.map => AppLocalizations.of(context)!.map,
-      BottomNavBarItems.profile => AppLocalizations.of(context)!.profile,
+      PrimaryPageEnum.home => AppLocalizations.of(context)!.home,
+      PrimaryPageEnum.contacts => AppLocalizations.of(context)!.contacts,
+      PrimaryPageEnum.map => AppLocalizations.of(context)!.map,
+      PrimaryPageEnum.profile => AppLocalizations.of(context)!.profile,
     };
   }
 
   String get getIconPath {
     return switch (this) {
-      BottomNavBarItems.home => AppIcons.home,
-      BottomNavBarItems.contacts => AppIcons.contacts,
-      BottomNavBarItems.map => AppIcons.map,
-      BottomNavBarItems.profile => AppIcons.profile,
+      PrimaryPageEnum.home => AppIcons.home,
+      PrimaryPageEnum.contacts => AppIcons.contacts,
+      PrimaryPageEnum.map => AppIcons.map,
+      PrimaryPageEnum.profile => AppIcons.profile,
+    };
+  }
+
+  Widget get getPage {
+    return switch (this) {
+      PrimaryPageEnum.home => const HomeScreen(),
+      PrimaryPageEnum.contacts => const ContactsScreen(),
+      PrimaryPageEnum.map => const MapScreen(),
+      PrimaryPageEnum.profile => const ProfileScreen(),
     };
   }
 }

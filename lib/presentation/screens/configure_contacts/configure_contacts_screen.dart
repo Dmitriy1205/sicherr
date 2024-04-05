@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sicherr/core/theme/theme.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
-import 'package:sicherr/core/managers/contacts_manager.dart';
+import 'package:sicherr/domain/repositories/contacts/contacts_repository_impl.dart';
 import 'package:sicherr/presentation/bloc/configure_contacts/configure_contacts_bloc.dart';
+import 'package:sicherr/presentation/screens/initial.dart';
 import 'package:sicherr/presentation/widgets/core_widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -13,7 +15,9 @@ class ConfigureContactsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ConfigureContactsBloc(ContactsManager()),
+      create: (context) => ConfigureContactsBloc(ContactsRepositoryImpl(
+        firestore: FirebaseFirestore.instance,
+      )),
       child: Scaffold(
         appBar: DefaultAppBar(
           title: AppLocalizations.of(context)!.configureContacts,
@@ -71,7 +75,17 @@ class DoneBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ConfigureContactsBloc, ConfigureContactsState>(
+    return BlocConsumer<ConfigureContactsBloc, ConfigureContactsState>(
+      listener: (context, state) => state.whenOrNull(
+        assignedContacts: () => Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const InitialScreen(
+              initPage: PrimaryPageEnum.contacts,
+            ),
+          ),
+        ),
+      ),
       builder: (context, state) => state.maybeMap(
         loadInProgress: (_) => const SizedBox.shrink(),
         orElse: () => const SizedBox.shrink(),
@@ -79,7 +93,9 @@ class DoneBtn extends StatelessWidget {
           behavior: HitTestBehavior.opaque,
           onTap: state.selectedContacts.isNotEmpty
               ? () {
-                  print('object');
+                  context
+                      .read<ConfigureContactsBloc>()
+                      .add(const ConfigureContactsEvent.assignContacts());
                 }
               : null,
           child: Padding(

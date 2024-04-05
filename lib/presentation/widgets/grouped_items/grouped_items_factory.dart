@@ -32,7 +32,7 @@ class SelectableContactCardFactory implements BaseContactFactory {
   Widget create(ContactEntity contact) {
     return ConContactCard(
       contact: contact,
-      isSelected: selectedContacts.contains(contact),
+      isSelected: selectedContacts.any((e) => e.id == contact.id),
     );
   }
 }

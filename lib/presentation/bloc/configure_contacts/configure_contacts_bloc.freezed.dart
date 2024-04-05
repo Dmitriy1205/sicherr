@@ -19,6 +19,7 @@ mixin _$ConfigureContactsState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadInProgress,
+    required TResult Function() assignedContacts,
     required TResult Function(
             Map<String, List<ContactEntity>> categorizedContacts,
             bool isPermissionDenied,
@@ -29,6 +30,7 @@ mixin _$ConfigureContactsState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadInProgress,
+    TResult? Function()? assignedContacts,
     TResult? Function(Map<String, List<ContactEntity>> categorizedContacts,
             bool isPermissionDenied, List<ContactEntity> selectedContacts)?
         loaded,
@@ -37,6 +39,7 @@ mixin _$ConfigureContactsState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadInProgress,
+    TResult Function()? assignedContacts,
     TResult Function(Map<String, List<ContactEntity>> categorizedContacts,
             bool isPermissionDenied, List<ContactEntity> selectedContacts)?
         loaded,
@@ -46,18 +49,21 @@ mixin _$ConfigureContactsState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadInProgress value) loadInProgress,
+    required TResult Function(_AssignedContacts value) assignedContacts,
     required TResult Function(_Loaded value) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_LoadInProgress value)? loadInProgress,
+    TResult? Function(_AssignedContacts value)? assignedContacts,
     TResult? Function(_Loaded value)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadInProgress value)? loadInProgress,
+    TResult Function(_AssignedContacts value)? assignedContacts,
     TResult Function(_Loaded value)? loaded,
     required TResult orElse(),
   }) =>
@@ -122,6 +128,7 @@ class _$LoadInProgressImpl implements _LoadInProgress {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadInProgress,
+    required TResult Function() assignedContacts,
     required TResult Function(
             Map<String, List<ContactEntity>> categorizedContacts,
             bool isPermissionDenied,
@@ -135,6 +142,7 @@ class _$LoadInProgressImpl implements _LoadInProgress {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadInProgress,
+    TResult? Function()? assignedContacts,
     TResult? Function(Map<String, List<ContactEntity>> categorizedContacts,
             bool isPermissionDenied, List<ContactEntity> selectedContacts)?
         loaded,
@@ -146,6 +154,7 @@ class _$LoadInProgressImpl implements _LoadInProgress {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadInProgress,
+    TResult Function()? assignedContacts,
     TResult Function(Map<String, List<ContactEntity>> categorizedContacts,
             bool isPermissionDenied, List<ContactEntity> selectedContacts)?
         loaded,
@@ -161,6 +170,7 @@ class _$LoadInProgressImpl implements _LoadInProgress {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadInProgress value) loadInProgress,
+    required TResult Function(_AssignedContacts value) assignedContacts,
     required TResult Function(_Loaded value) loaded,
   }) {
     return loadInProgress(this);
@@ -170,6 +180,7 @@ class _$LoadInProgressImpl implements _LoadInProgress {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_LoadInProgress value)? loadInProgress,
+    TResult? Function(_AssignedContacts value)? assignedContacts,
     TResult? Function(_Loaded value)? loaded,
   }) {
     return loadInProgress?.call(this);
@@ -179,6 +190,7 @@ class _$LoadInProgressImpl implements _LoadInProgress {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadInProgress value)? loadInProgress,
+    TResult Function(_AssignedContacts value)? assignedContacts,
     TResult Function(_Loaded value)? loaded,
     required TResult orElse(),
   }) {
@@ -191,6 +203,122 @@ class _$LoadInProgressImpl implements _LoadInProgress {
 
 abstract class _LoadInProgress implements ConfigureContactsState {
   const factory _LoadInProgress() = _$LoadInProgressImpl;
+}
+
+/// @nodoc
+abstract class _$$AssignedContactsImplCopyWith<$Res> {
+  factory _$$AssignedContactsImplCopyWith(_$AssignedContactsImpl value,
+          $Res Function(_$AssignedContactsImpl) then) =
+      __$$AssignedContactsImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$AssignedContactsImplCopyWithImpl<$Res>
+    extends _$ConfigureContactsStateCopyWithImpl<$Res, _$AssignedContactsImpl>
+    implements _$$AssignedContactsImplCopyWith<$Res> {
+  __$$AssignedContactsImplCopyWithImpl(_$AssignedContactsImpl _value,
+      $Res Function(_$AssignedContactsImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$AssignedContactsImpl implements _AssignedContacts {
+  const _$AssignedContactsImpl();
+
+  @override
+  String toString() {
+    return 'ConfigureContactsState.assignedContacts()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$AssignedContactsImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loadInProgress,
+    required TResult Function() assignedContacts,
+    required TResult Function(
+            Map<String, List<ContactEntity>> categorizedContacts,
+            bool isPermissionDenied,
+            List<ContactEntity> selectedContacts)
+        loaded,
+  }) {
+    return assignedContacts();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loadInProgress,
+    TResult? Function()? assignedContacts,
+    TResult? Function(Map<String, List<ContactEntity>> categorizedContacts,
+            bool isPermissionDenied, List<ContactEntity> selectedContacts)?
+        loaded,
+  }) {
+    return assignedContacts?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadInProgress,
+    TResult Function()? assignedContacts,
+    TResult Function(Map<String, List<ContactEntity>> categorizedContacts,
+            bool isPermissionDenied, List<ContactEntity> selectedContacts)?
+        loaded,
+    required TResult orElse(),
+  }) {
+    if (assignedContacts != null) {
+      return assignedContacts();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoadInProgress value) loadInProgress,
+    required TResult Function(_AssignedContacts value) assignedContacts,
+    required TResult Function(_Loaded value) loaded,
+  }) {
+    return assignedContacts(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_LoadInProgress value)? loadInProgress,
+    TResult? Function(_AssignedContacts value)? assignedContacts,
+    TResult? Function(_Loaded value)? loaded,
+  }) {
+    return assignedContacts?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadInProgress value)? loadInProgress,
+    TResult Function(_AssignedContacts value)? assignedContacts,
+    TResult Function(_Loaded value)? loaded,
+    required TResult orElse(),
+  }) {
+    if (assignedContacts != null) {
+      return assignedContacts(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AssignedContacts implements ConfigureContactsState {
+  const factory _AssignedContacts() = _$AssignedContactsImpl;
 }
 
 /// @nodoc
@@ -302,6 +430,7 @@ class _$LoadedImpl implements _Loaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadInProgress,
+    required TResult Function() assignedContacts,
     required TResult Function(
             Map<String, List<ContactEntity>> categorizedContacts,
             bool isPermissionDenied,
@@ -315,6 +444,7 @@ class _$LoadedImpl implements _Loaded {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadInProgress,
+    TResult? Function()? assignedContacts,
     TResult? Function(Map<String, List<ContactEntity>> categorizedContacts,
             bool isPermissionDenied, List<ContactEntity> selectedContacts)?
         loaded,
@@ -327,6 +457,7 @@ class _$LoadedImpl implements _Loaded {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadInProgress,
+    TResult Function()? assignedContacts,
     TResult Function(Map<String, List<ContactEntity>> categorizedContacts,
             bool isPermissionDenied, List<ContactEntity> selectedContacts)?
         loaded,
@@ -342,6 +473,7 @@ class _$LoadedImpl implements _Loaded {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadInProgress value) loadInProgress,
+    required TResult Function(_AssignedContacts value) assignedContacts,
     required TResult Function(_Loaded value) loaded,
   }) {
     return loaded(this);
@@ -351,6 +483,7 @@ class _$LoadedImpl implements _Loaded {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_LoadInProgress value)? loadInProgress,
+    TResult? Function(_AssignedContacts value)? assignedContacts,
     TResult? Function(_Loaded value)? loaded,
   }) {
     return loaded?.call(this);
@@ -360,6 +493,7 @@ class _$LoadedImpl implements _Loaded {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadInProgress value)? loadInProgress,
+    TResult Function(_AssignedContacts value)? assignedContacts,
     TResult Function(_Loaded value)? loaded,
     required TResult orElse(),
   }) {
@@ -392,6 +526,7 @@ mixin _$ConfigureContactsEvent {
     required TResult Function(String text) searchContact,
     required TResult Function() checkPermission,
     required TResult Function(ContactEntity contact) selectContact,
+    required TResult Function() assignContacts,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -400,6 +535,7 @@ mixin _$ConfigureContactsEvent {
     TResult? Function(String text)? searchContact,
     TResult? Function()? checkPermission,
     TResult? Function(ContactEntity contact)? selectContact,
+    TResult? Function()? assignContacts,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -408,6 +544,7 @@ mixin _$ConfigureContactsEvent {
     TResult Function(String text)? searchContact,
     TResult Function()? checkPermission,
     TResult Function(ContactEntity contact)? selectContact,
+    TResult Function()? assignContacts,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -417,6 +554,7 @@ mixin _$ConfigureContactsEvent {
     required TResult Function(_SearchContact value) searchContact,
     required TResult Function(_CheckPermission value) checkPermission,
     required TResult Function(_SelectContact value) selectContact,
+    required TResult Function(_AssignContacts value) assignContacts,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -425,6 +563,7 @@ mixin _$ConfigureContactsEvent {
     TResult? Function(_SearchContact value)? searchContact,
     TResult? Function(_CheckPermission value)? checkPermission,
     TResult? Function(_SelectContact value)? selectContact,
+    TResult? Function(_AssignContacts value)? assignContacts,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -433,6 +572,7 @@ mixin _$ConfigureContactsEvent {
     TResult Function(_SearchContact value)? searchContact,
     TResult Function(_CheckPermission value)? checkPermission,
     TResult Function(_SelectContact value)? selectContact,
+    TResult Function(_AssignContacts value)? assignContacts,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -499,6 +639,7 @@ class _$InitialEventImpl implements _InitialEvent {
     required TResult Function(String text) searchContact,
     required TResult Function() checkPermission,
     required TResult Function(ContactEntity contact) selectContact,
+    required TResult Function() assignContacts,
   }) {
     return initial();
   }
@@ -510,6 +651,7 @@ class _$InitialEventImpl implements _InitialEvent {
     TResult? Function(String text)? searchContact,
     TResult? Function()? checkPermission,
     TResult? Function(ContactEntity contact)? selectContact,
+    TResult? Function()? assignContacts,
   }) {
     return initial?.call();
   }
@@ -521,6 +663,7 @@ class _$InitialEventImpl implements _InitialEvent {
     TResult Function(String text)? searchContact,
     TResult Function()? checkPermission,
     TResult Function(ContactEntity contact)? selectContact,
+    TResult Function()? assignContacts,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -536,6 +679,7 @@ class _$InitialEventImpl implements _InitialEvent {
     required TResult Function(_SearchContact value) searchContact,
     required TResult Function(_CheckPermission value) checkPermission,
     required TResult Function(_SelectContact value) selectContact,
+    required TResult Function(_AssignContacts value) assignContacts,
   }) {
     return initial(this);
   }
@@ -547,6 +691,7 @@ class _$InitialEventImpl implements _InitialEvent {
     TResult? Function(_SearchContact value)? searchContact,
     TResult? Function(_CheckPermission value)? checkPermission,
     TResult? Function(_SelectContact value)? selectContact,
+    TResult? Function(_AssignContacts value)? assignContacts,
   }) {
     return initial?.call(this);
   }
@@ -558,6 +703,7 @@ class _$InitialEventImpl implements _InitialEvent {
     TResult Function(_SearchContact value)? searchContact,
     TResult Function(_CheckPermission value)? checkPermission,
     TResult Function(_SelectContact value)? selectContact,
+    TResult Function(_AssignContacts value)? assignContacts,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -639,6 +785,7 @@ class _$SearchContactImpl implements _SearchContact {
     required TResult Function(String text) searchContact,
     required TResult Function() checkPermission,
     required TResult Function(ContactEntity contact) selectContact,
+    required TResult Function() assignContacts,
   }) {
     return searchContact(text);
   }
@@ -650,6 +797,7 @@ class _$SearchContactImpl implements _SearchContact {
     TResult? Function(String text)? searchContact,
     TResult? Function()? checkPermission,
     TResult? Function(ContactEntity contact)? selectContact,
+    TResult? Function()? assignContacts,
   }) {
     return searchContact?.call(text);
   }
@@ -661,6 +809,7 @@ class _$SearchContactImpl implements _SearchContact {
     TResult Function(String text)? searchContact,
     TResult Function()? checkPermission,
     TResult Function(ContactEntity contact)? selectContact,
+    TResult Function()? assignContacts,
     required TResult orElse(),
   }) {
     if (searchContact != null) {
@@ -676,6 +825,7 @@ class _$SearchContactImpl implements _SearchContact {
     required TResult Function(_SearchContact value) searchContact,
     required TResult Function(_CheckPermission value) checkPermission,
     required TResult Function(_SelectContact value) selectContact,
+    required TResult Function(_AssignContacts value) assignContacts,
   }) {
     return searchContact(this);
   }
@@ -687,6 +837,7 @@ class _$SearchContactImpl implements _SearchContact {
     TResult? Function(_SearchContact value)? searchContact,
     TResult? Function(_CheckPermission value)? checkPermission,
     TResult? Function(_SelectContact value)? selectContact,
+    TResult? Function(_AssignContacts value)? assignContacts,
   }) {
     return searchContact?.call(this);
   }
@@ -698,6 +849,7 @@ class _$SearchContactImpl implements _SearchContact {
     TResult Function(_SearchContact value)? searchContact,
     TResult Function(_CheckPermission value)? checkPermission,
     TResult Function(_SelectContact value)? selectContact,
+    TResult Function(_AssignContacts value)? assignContacts,
     required TResult orElse(),
   }) {
     if (searchContact != null) {
@@ -758,6 +910,7 @@ class _$CheckPermissionImpl implements _CheckPermission {
     required TResult Function(String text) searchContact,
     required TResult Function() checkPermission,
     required TResult Function(ContactEntity contact) selectContact,
+    required TResult Function() assignContacts,
   }) {
     return checkPermission();
   }
@@ -769,6 +922,7 @@ class _$CheckPermissionImpl implements _CheckPermission {
     TResult? Function(String text)? searchContact,
     TResult? Function()? checkPermission,
     TResult? Function(ContactEntity contact)? selectContact,
+    TResult? Function()? assignContacts,
   }) {
     return checkPermission?.call();
   }
@@ -780,6 +934,7 @@ class _$CheckPermissionImpl implements _CheckPermission {
     TResult Function(String text)? searchContact,
     TResult Function()? checkPermission,
     TResult Function(ContactEntity contact)? selectContact,
+    TResult Function()? assignContacts,
     required TResult orElse(),
   }) {
     if (checkPermission != null) {
@@ -795,6 +950,7 @@ class _$CheckPermissionImpl implements _CheckPermission {
     required TResult Function(_SearchContact value) searchContact,
     required TResult Function(_CheckPermission value) checkPermission,
     required TResult Function(_SelectContact value) selectContact,
+    required TResult Function(_AssignContacts value) assignContacts,
   }) {
     return checkPermission(this);
   }
@@ -806,6 +962,7 @@ class _$CheckPermissionImpl implements _CheckPermission {
     TResult? Function(_SearchContact value)? searchContact,
     TResult? Function(_CheckPermission value)? checkPermission,
     TResult? Function(_SelectContact value)? selectContact,
+    TResult? Function(_AssignContacts value)? assignContacts,
   }) {
     return checkPermission?.call(this);
   }
@@ -817,6 +974,7 @@ class _$CheckPermissionImpl implements _CheckPermission {
     TResult Function(_SearchContact value)? searchContact,
     TResult Function(_CheckPermission value)? checkPermission,
     TResult Function(_SelectContact value)? selectContact,
+    TResult Function(_AssignContacts value)? assignContacts,
     required TResult orElse(),
   }) {
     if (checkPermission != null) {
@@ -908,6 +1066,7 @@ class _$SelectContactImpl implements _SelectContact {
     required TResult Function(String text) searchContact,
     required TResult Function() checkPermission,
     required TResult Function(ContactEntity contact) selectContact,
+    required TResult Function() assignContacts,
   }) {
     return selectContact(contact);
   }
@@ -919,6 +1078,7 @@ class _$SelectContactImpl implements _SelectContact {
     TResult? Function(String text)? searchContact,
     TResult? Function()? checkPermission,
     TResult? Function(ContactEntity contact)? selectContact,
+    TResult? Function()? assignContacts,
   }) {
     return selectContact?.call(contact);
   }
@@ -930,6 +1090,7 @@ class _$SelectContactImpl implements _SelectContact {
     TResult Function(String text)? searchContact,
     TResult Function()? checkPermission,
     TResult Function(ContactEntity contact)? selectContact,
+    TResult Function()? assignContacts,
     required TResult orElse(),
   }) {
     if (selectContact != null) {
@@ -945,6 +1106,7 @@ class _$SelectContactImpl implements _SelectContact {
     required TResult Function(_SearchContact value) searchContact,
     required TResult Function(_CheckPermission value) checkPermission,
     required TResult Function(_SelectContact value) selectContact,
+    required TResult Function(_AssignContacts value) assignContacts,
   }) {
     return selectContact(this);
   }
@@ -956,6 +1118,7 @@ class _$SelectContactImpl implements _SelectContact {
     TResult? Function(_SearchContact value)? searchContact,
     TResult? Function(_CheckPermission value)? checkPermission,
     TResult? Function(_SelectContact value)? selectContact,
+    TResult? Function(_AssignContacts value)? assignContacts,
   }) {
     return selectContact?.call(this);
   }
@@ -967,6 +1130,7 @@ class _$SelectContactImpl implements _SelectContact {
     TResult Function(_SearchContact value)? searchContact,
     TResult Function(_CheckPermission value)? checkPermission,
     TResult Function(_SelectContact value)? selectContact,
+    TResult Function(_AssignContacts value)? assignContacts,
     required TResult orElse(),
   }) {
     if (selectContact != null) {
@@ -984,4 +1148,124 @@ abstract class _SelectContact implements ConfigureContactsEvent {
   @JsonKey(ignore: true)
   _$$SelectContactImplCopyWith<_$SelectContactImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$AssignContactsImplCopyWith<$Res> {
+  factory _$$AssignContactsImplCopyWith(_$AssignContactsImpl value,
+          $Res Function(_$AssignContactsImpl) then) =
+      __$$AssignContactsImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$AssignContactsImplCopyWithImpl<$Res>
+    extends _$ConfigureContactsEventCopyWithImpl<$Res, _$AssignContactsImpl>
+    implements _$$AssignContactsImplCopyWith<$Res> {
+  __$$AssignContactsImplCopyWithImpl(
+      _$AssignContactsImpl _value, $Res Function(_$AssignContactsImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$AssignContactsImpl implements _AssignContacts {
+  const _$AssignContactsImpl();
+
+  @override
+  String toString() {
+    return 'ConfigureContactsEvent.assignContacts()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$AssignContactsImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(String text) searchContact,
+    required TResult Function() checkPermission,
+    required TResult Function(ContactEntity contact) selectContact,
+    required TResult Function() assignContacts,
+  }) {
+    return assignContacts();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(String text)? searchContact,
+    TResult? Function()? checkPermission,
+    TResult? Function(ContactEntity contact)? selectContact,
+    TResult? Function()? assignContacts,
+  }) {
+    return assignContacts?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(String text)? searchContact,
+    TResult Function()? checkPermission,
+    TResult Function(ContactEntity contact)? selectContact,
+    TResult Function()? assignContacts,
+    required TResult orElse(),
+  }) {
+    if (assignContacts != null) {
+      return assignContacts();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_InitialEvent value) initial,
+    required TResult Function(_SearchContact value) searchContact,
+    required TResult Function(_CheckPermission value) checkPermission,
+    required TResult Function(_SelectContact value) selectContact,
+    required TResult Function(_AssignContacts value) assignContacts,
+  }) {
+    return assignContacts(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_InitialEvent value)? initial,
+    TResult? Function(_SearchContact value)? searchContact,
+    TResult? Function(_CheckPermission value)? checkPermission,
+    TResult? Function(_SelectContact value)? selectContact,
+    TResult? Function(_AssignContacts value)? assignContacts,
+  }) {
+    return assignContacts?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InitialEvent value)? initial,
+    TResult Function(_SearchContact value)? searchContact,
+    TResult Function(_CheckPermission value)? checkPermission,
+    TResult Function(_SelectContact value)? selectContact,
+    TResult Function(_AssignContacts value)? assignContacts,
+    required TResult orElse(),
+  }) {
+    if (assignContacts != null) {
+      return assignContacts(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AssignContacts implements ConfigureContactsEvent {
+  const factory _AssignContacts() = _$AssignContactsImpl;
 }

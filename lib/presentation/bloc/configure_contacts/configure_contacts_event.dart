@@ -7,4 +7,5 @@ class ConfigureContactsEvent with _$ConfigureContactsEvent {
       _SearchContact;
   const factory ConfigureContactsEvent.checkPermission() = _CheckPermission;
   const factory ConfigureContactsEvent.selectContact(ContactEntity contact) = _SelectContact;
+  const factory ConfigureContactsEvent.assignContacts() = _AssignContacts;
 }

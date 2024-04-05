@@ -1,8 +1,10 @@
 import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sicherr/core/managers/contacts_manager.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
+import 'package:sicherr/domain/repositories/contacts/contacts_repository.dart';
 
 part 'configure_contacts_state.dart';
 part 'configure_contacts_event.dart';
@@ -10,7 +12,7 @@ part 'configure_contacts_bloc.freezed.dart';
 
 class ConfigureContactsBloc
     extends Bloc<ConfigureContactsEvent, ConfigureContactsState> {
-  ConfigureContactsBloc(this.contactsManager)
+  ConfigureContactsBloc(this.contactsRepository)
       : super(const ConfigureContactsState.loadInProgress()) {
     on<ConfigureContactsEvent>(_mapEventToState);
     add(const ConfigureContactsEvent.initial());
@@ -18,9 +20,9 @@ class ConfigureContactsBloc
 
   List<ContactEntity> _contactsList = [];
   List<ContactEntity> _contactsToDisplay = [];
-  final List<ContactEntity> _selectedContacts = [];
+  List<ContactEntity> _selectedContacts = [];
 
-  final ContactsInterface contactsManager;
+  final ContactsRepository contactsRepository;
 
   PermissionStatus _permissionStatus = PermissionStatus.denied;
   bool get _isPermissionDenied =>
@@ -34,11 +36,15 @@ class ConfigureContactsBloc
         searchContact: (e) => _searchContact(e, emit),
         checkPermission: (e) => _checkPermission(e, emit),
         selectContact: (e) => _selectContact(e, emit),
+        assignContacts: (e) => _assignContacts(e, emit),
       );
 
   Future<void> _initialEvent(
       _InitialEvent event, Emitter<ConfigureContactsState> emit) async {
-    _contactsList = await contactsManager.getContacts();
+    _contactsList = await contactsRepository.getLocalContacts();
+    _selectedContacts = await contactsRepository.getSharedContacts(
+            currentUserId: FirebaseAuth.instance.currentUser!.uid) ??
+        [];
     _contactsToDisplay = [..._contactsList];
     _permissionStatus = await Permission.contacts.status;
 
@@ -67,13 +73,23 @@ class ConfigureContactsBloc
   Future<void> _selectContact(
       _SelectContact event, Emitter<ConfigureContactsState> emit) async {
     emit(const ConfigureContactsState.loadInProgress());
-    if (_selectedContacts.contains(event.contact)) {
-      _selectedContacts.remove(event.contact);
+    if (_selectedContacts.any((e) => e.id == event.contact.id)) {
+      _selectedContacts.removeWhere((e) => e.id == event.contact.id);
     } else {
       _selectedContacts.add(event.contact);
     }
 
     _emitLoadedState(emit);
+  }
+
+  Future<void> _assignContacts(
+      _AssignContacts event, Emitter<ConfigureContactsState> emit) async {
+    emit(const ConfigureContactsState.loadInProgress());
+    contactsRepository.setUpdateContacts(
+      currentUserId: FirebaseAuth.instance.currentUser!.uid,
+      sharedContacts: _selectedContacts,
+    );
+    emit(const ConfigureContactsState.assignedContacts());
   }
 
   void _emitLoadedState(Emitter<ConfigureContactsState> emit) {

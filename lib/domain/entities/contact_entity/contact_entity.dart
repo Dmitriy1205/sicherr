@@ -8,7 +8,7 @@ import 'package:sicherr/core/utils/phone_formatter.dart';
 part 'contact_entity.freezed.dart';
 
 @freezed
-class ContactEntity with _$ContactEntity{
+class ContactEntity with _$ContactEntity {
   factory ContactEntity({
     required String id,
     required String name,
@@ -37,6 +37,23 @@ class ContactEntity with _$ContactEntity{
       name: user.displayName ?? '',
       phones: [if (user.phoneNumber != null) user.phoneNumber!],
     );
+  }
+
+  factory ContactEntity.fromJson(Map<String, dynamic> json) {
+    return ContactEntity(
+      id: json['id'],
+      name: json['name'] ?? '',
+      phones: [json['phone'] ?? ''],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'phone': phoneNumber,
+      'imageRef': '',
+    };
   }
 
   static List<String> _parsePhoneNumbers(List<Item>? phones) {

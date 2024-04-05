@@ -337,38 +337,38 @@ abstract class _Loaded implements ContactsState {
 mixin _$ContactsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function() loadContacts,
     required TResult Function(String text) searchContact,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
+    TResult? Function()? loadContacts,
     TResult? Function(String text)? searchContact,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function()? loadContacts,
     TResult Function(String text)? searchContact,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_InitialEvent value) initial,
+    required TResult Function(_LoadContacts value) loadContacts,
     required TResult Function(_SearchContact value) searchContact,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InitialEvent value)? initial,
+    TResult? Function(_LoadContacts value)? loadContacts,
     TResult? Function(_SearchContact value)? searchContact,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InitialEvent value)? initial,
+    TResult Function(_LoadContacts value)? loadContacts,
     TResult Function(_SearchContact value)? searchContact,
     required TResult orElse(),
   }) =>
@@ -394,35 +394,35 @@ class _$ContactsEventCopyWithImpl<$Res, $Val extends ContactsEvent>
 }
 
 /// @nodoc
-abstract class _$$InitialEventImplCopyWith<$Res> {
-  factory _$$InitialEventImplCopyWith(
-          _$InitialEventImpl value, $Res Function(_$InitialEventImpl) then) =
-      __$$InitialEventImplCopyWithImpl<$Res>;
+abstract class _$$LoadContactsImplCopyWith<$Res> {
+  factory _$$LoadContactsImplCopyWith(
+          _$LoadContactsImpl value, $Res Function(_$LoadContactsImpl) then) =
+      __$$LoadContactsImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$InitialEventImplCopyWithImpl<$Res>
-    extends _$ContactsEventCopyWithImpl<$Res, _$InitialEventImpl>
-    implements _$$InitialEventImplCopyWith<$Res> {
-  __$$InitialEventImplCopyWithImpl(
-      _$InitialEventImpl _value, $Res Function(_$InitialEventImpl) _then)
+class __$$LoadContactsImplCopyWithImpl<$Res>
+    extends _$ContactsEventCopyWithImpl<$Res, _$LoadContactsImpl>
+    implements _$$LoadContactsImplCopyWith<$Res> {
+  __$$LoadContactsImplCopyWithImpl(
+      _$LoadContactsImpl _value, $Res Function(_$LoadContactsImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$InitialEventImpl implements _InitialEvent {
-  const _$InitialEventImpl();
+class _$LoadContactsImpl implements _LoadContacts {
+  const _$LoadContactsImpl();
 
   @override
   String toString() {
-    return 'ContactsEvent.initial()';
+    return 'ContactsEvent.loadContacts()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitialEventImpl);
+        (other.runtimeType == runtimeType && other is _$LoadContactsImpl);
   }
 
   @override
@@ -431,30 +431,30 @@ class _$InitialEventImpl implements _InitialEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function() loadContacts,
     required TResult Function(String text) searchContact,
   }) {
-    return initial();
+    return loadContacts();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
+    TResult? Function()? loadContacts,
     TResult? Function(String text)? searchContact,
   }) {
-    return initial?.call();
+    return loadContacts?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function()? loadContacts,
     TResult Function(String text)? searchContact,
     required TResult orElse(),
   }) {
-    if (initial != null) {
-      return initial();
+    if (loadContacts != null) {
+      return loadContacts();
     }
     return orElse();
   }
@@ -462,37 +462,37 @@ class _$InitialEventImpl implements _InitialEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_InitialEvent value) initial,
+    required TResult Function(_LoadContacts value) loadContacts,
     required TResult Function(_SearchContact value) searchContact,
   }) {
-    return initial(this);
+    return loadContacts(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InitialEvent value)? initial,
+    TResult? Function(_LoadContacts value)? loadContacts,
     TResult? Function(_SearchContact value)? searchContact,
   }) {
-    return initial?.call(this);
+    return loadContacts?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InitialEvent value)? initial,
+    TResult Function(_LoadContacts value)? loadContacts,
     TResult Function(_SearchContact value)? searchContact,
     required TResult orElse(),
   }) {
-    if (initial != null) {
-      return initial(this);
+    if (loadContacts != null) {
+      return loadContacts(this);
     }
     return orElse();
   }
 }
 
-abstract class _InitialEvent implements ContactsEvent {
-  const factory _InitialEvent() = _$InitialEventImpl;
+abstract class _LoadContacts implements ContactsEvent {
+  const factory _LoadContacts() = _$LoadContactsImpl;
 }
 
 /// @nodoc
@@ -559,7 +559,7 @@ class _$SearchContactImpl implements _SearchContact {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function() loadContacts,
     required TResult Function(String text) searchContact,
   }) {
     return searchContact(text);
@@ -568,7 +568,7 @@ class _$SearchContactImpl implements _SearchContact {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
+    TResult? Function()? loadContacts,
     TResult? Function(String text)? searchContact,
   }) {
     return searchContact?.call(text);
@@ -577,7 +577,7 @@ class _$SearchContactImpl implements _SearchContact {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function()? loadContacts,
     TResult Function(String text)? searchContact,
     required TResult orElse(),
   }) {
@@ -590,7 +590,7 @@ class _$SearchContactImpl implements _SearchContact {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_InitialEvent value) initial,
+    required TResult Function(_LoadContacts value) loadContacts,
     required TResult Function(_SearchContact value) searchContact,
   }) {
     return searchContact(this);
@@ -599,7 +599,7 @@ class _$SearchContactImpl implements _SearchContact {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InitialEvent value)? initial,
+    TResult? Function(_LoadContacts value)? loadContacts,
     TResult? Function(_SearchContact value)? searchContact,
   }) {
     return searchContact?.call(this);
@@ -608,7 +608,7 @@ class _$SearchContactImpl implements _SearchContact {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InitialEvent value)? initial,
+    TResult Function(_LoadContacts value)? loadContacts,
     TResult Function(_SearchContact value)? searchContact,
     required TResult orElse(),
   }) {

@@ -1,8 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sicherr/core/managers/alarm_manager.dart';
-import 'package:sicherr/core/managers/quick_binding_handler.dart';
-import 'package:sicherr/domain/entities/quick_binding/binding_actions.dart';
 
 part 'alarm_state.dart';
 part 'alarm_event.dart';
