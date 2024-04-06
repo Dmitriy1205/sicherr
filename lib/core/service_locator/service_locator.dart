@@ -25,6 +25,7 @@ import 'package:sicherr/presentation/bloc/sign_in/sign_in_bloc.dart';
 
 import '../../domain/repositories/auth/auth_repository.dart';
 import '../../domain/repositories/auth/auth_repository_impl.dart';
+import '../../domain/repositories/contacts/contacts_repository.dart';
 import '../../presentation/bloc/auth/auth_bloc.dart';
 import '../../presentation/bloc/onboarding/onboarding_bloc.dart';
 import '../../presentation/bloc/otp/otp_bloc.dart';
@@ -55,7 +56,7 @@ Future<void> init() async {
   sl.registerSingleton<AuthRepository>(authRepository);
   sl.registerSingleton<UserRepository>(userRepository);
   sl.registerSingleton<EmContactsRepository>(emContactRepository);
-  sl.registerSingleton<ContactsRepositoryImpl>(contactsRepository);
+  sl.registerSingleton<ContactsRepository>(contactsRepository);
   sl.registerSingleton<AlarmManager>(alarmManager);
   sl.registerSingleton<NotificationRepository>(notificationRepository);
   sl.registerSingleton<HttpClient>(httpClient);
@@ -93,7 +94,7 @@ Future<void> init() async {
   sl.registerLazySingleton(
       () => NotificationBloc(notificationRepository: sl(), authBloc: sl()));
   sl.registerLazySingleton(() => ShakeDetectorBloc(profileBloc: sl()));
-  sl.registerLazySingleton(() => ContactsBloc(contactsManager: sl(), profileBloc: sl()));
+  sl.registerLazySingleton(() => ContactsBloc(sl()));
 }
 
 Future<void> initNotifications() async {
