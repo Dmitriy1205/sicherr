@@ -31,6 +31,8 @@ class _SearchPhoneFieldState extends State<SearchPhoneField> {
   final _focus = FocusNode();
   final _controller = TextEditingController();
 
+  bool _showCancel = false;
+
   @override
   void initState() {
     super.initState();
@@ -47,13 +49,21 @@ class _SearchPhoneFieldState extends State<SearchPhoneField> {
   }
 
   void _onFocusChange() {
-    setState(() {});
+    setState(() {
+      _showCancel = _focus.hasFocus;
+    });
   }
 
   void _onTextChange() {
     if (widget.onChanged != null) {
       widget.onChanged!(_controller.text);
     }
+  }
+
+  void _clearText() {
+    _controller.clear();
+    _focus.unfocus();
+
   }
 
   @override
@@ -78,7 +88,7 @@ class _SearchPhoneFieldState extends State<SearchPhoneField> {
                   ),
                 ),
                 prefixIconConstraints:
-                    const BoxConstraints(minHeight: 16, maxHeight: 16),
+                const BoxConstraints(minHeight: 16, maxHeight: 16),
                 filled: true,
                 fillColor: AppColors.lightGrey,
                 contentPadding: EdgeInsets.zero,
@@ -87,21 +97,20 @@ class _SearchPhoneFieldState extends State<SearchPhoneField> {
                 enabledBorder: _border,
                 disabledBorder: _border,
               ),
-              onSubmitted: widget.onSubmitted,
+              onSubmitted: widget.onChanged,
             ),
           ),
-          if (_focus.hasFocus)
+          if (_showCancel)
             GestureDetector(
-              onTap: () {
-                FocusManager.instance.primaryFocus?.unfocus();
-                _controller.text = '';
-              },
+              onTap: _clearText,
               child: Padding(
                 padding: const EdgeInsets.only(left: 15),
                 child: Text(
                   AppLocalizations.of(context)!.cancel,
                   style: TextStyle(
-                      color: Theme.of(context).primaryColor, fontSize: 16),
+                    color: Theme.of(context).primaryColor,
+                    fontSize: 16,
+                  ),
                 ),
               ),
             ),
@@ -110,3 +119,4 @@ class _SearchPhoneFieldState extends State<SearchPhoneField> {
     );
   }
 }
+

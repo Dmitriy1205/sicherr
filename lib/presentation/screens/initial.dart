@@ -4,11 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sicherr/core/const/colors.dart';
 import 'package:sicherr/core/const/icons.dart';
+import 'package:sicherr/core/managers/contacts_manager.dart';
 import 'package:sicherr/core/managers/quick_binding_handler.dart';
 import 'package:sicherr/core/theme/theme.dart';
 import 'package:sicherr/presentation/bloc/profile/profile_bloc.dart';
 import 'package:sicherr/presentation/bloc/send_sos/send_sos_bloc.dart';
+
 import 'package:sicherr/presentation/screens/configure_contacts/configure_contacts_screen.dart';
+
 import 'package:sicherr/presentation/screens/contacts/contacts.dart';
 import 'package:sicherr/presentation/screens/home/home.dart';
 import 'package:sicherr/presentation/screens/map/map.dart';
@@ -17,6 +20,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sicherr/presentation/widgets/core_widgets.dart';
 
 import '../../core/service_locator/service_locator.dart';
+import '../bloc/contacts/contacts_bloc.dart';
+import '../bloc/emergency_contact/emergency_contact_bloc.dart';
 import '../bloc/onboarding/onboarding_bloc.dart';
 
 class InitialScreen extends StatefulWidget {
@@ -42,6 +47,11 @@ class _InitialScreenState extends State<InitialScreen> {
     context.read<ProfileBloc>().add(const ProfileEvent.getProfileFields());
 
     context.read<OnboardingBloc>().add(const OnboardingEvent.get());
+    // context.read<ContactsBloc>().add(ContactsEvent.initial());
+    // sl<ContactsInterface>().getContacts();
+    context
+        .read<EmergencyContactBloc>()
+        .add(const EmergencyContactEvent.getAllEmContacts());
     sl<QuickBindingListener>().initListeners();
     super.initState();
   }

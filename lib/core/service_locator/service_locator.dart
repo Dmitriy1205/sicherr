@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get_it/get_it.dart';
 import 'package:sicherr/core/managers/alarm_manager.dart';
+import 'package:sicherr/core/managers/contacts_manager.dart';
 import 'package:sicherr/core/managers/quick_binding_handler.dart';
 import 'package:sicherr/data/remote/client.dart';
 import 'package:sicherr/data/remote/fcm_service.dart';
@@ -15,6 +16,7 @@ import 'package:sicherr/domain/repositories/notification/notification_repository
 import 'package:sicherr/domain/repositories/user/user_repository.dart';
 import 'package:sicherr/domain/repositories/user/user_repository_impl.dart';
 import 'package:sicherr/presentation/bloc/alarm/alarm_bloc.dart';
+import 'package:sicherr/presentation/bloc/contacts/contacts_bloc.dart';
 import 'package:sicherr/presentation/bloc/emergency_contact/emergency_contact_bloc.dart';
 import 'package:sicherr/presentation/bloc/notification/notification_bloc.dart';
 import 'package:sicherr/presentation/bloc/send_sos/send_sos_bloc.dart';
@@ -47,6 +49,7 @@ Future<void> init() async {
   final quickBindingListener = QuickBindingListener(userRepo: userRepository);
   final notificationRepository = NotificationRepositoryImpl(
       fcmService: sl(), firebaseFirestore: firestore);
+  final contactManager = ContactsManager();
 
   //Repositories
   sl.registerSingleton<AuthRepository>(authRepository);
@@ -57,6 +60,7 @@ Future<void> init() async {
   sl.registerSingleton<NotificationRepository>(notificationRepository);
   sl.registerSingleton<HttpClient>(httpClient);
   sl.registerSingleton<QuickBindingListener>(quickBindingListener);
+  sl.registerSingleton<ContactsInterface>(contactManager);
 
   //Blocs
   sl.registerLazySingleton(() => AuthBloc(
@@ -89,6 +93,7 @@ Future<void> init() async {
   sl.registerLazySingleton(
       () => NotificationBloc(notificationRepository: sl(), authBloc: sl()));
   sl.registerLazySingleton(() => ShakeDetectorBloc(profileBloc: sl()));
+  sl.registerLazySingleton(() => ContactsBloc(contactsManager: sl(), profileBloc: sl()));
 }
 
 Future<void> initNotifications() async {

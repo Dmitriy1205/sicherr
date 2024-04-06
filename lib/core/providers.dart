@@ -59,7 +59,9 @@ class Providers extends StatelessWidget {
           lazy: false,
         ),
         BlocProvider(
-          create: (context) => ContactsBloc(sl<ContactsRepositoryImpl>()),
+
+          create: (context) => sl<ContactsBloc>(),
+
         ),
         BlocProvider(
           create: (context) => sl<ShakeDetectorBloc>(),
