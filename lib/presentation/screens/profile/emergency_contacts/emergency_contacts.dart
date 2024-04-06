@@ -7,6 +7,7 @@ import 'package:sicherr/presentation/widgets/core_widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../bloc/emergency_contact/emergency_contact_bloc.dart';
+import 'em_contact_card.dart';
 
 class EmergencyContactsScreen extends StatefulWidget {
   const EmergencyContactsScreen({Key? key}) : super(key: key);
@@ -158,7 +159,7 @@ class ContactListDisplayed extends StatelessWidget {
                                             (element) => element.id == item.id);
                                 return EmContactCard(
                                   contact: item,
-                                  isEmergency: isEmergency,
+                                  // isEmergency: isEmergency,
                                 );
                               },
                             ),

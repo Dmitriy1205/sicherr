@@ -17,5 +17,6 @@ class ContactsState with _$ContactsState {
 
   const factory ContactsState.loaded({
     required Map<String, List<ContactEntity>> categorizedContacts,
+    required bool isPermissionDenied,
   }) = _Loaded;
 }
