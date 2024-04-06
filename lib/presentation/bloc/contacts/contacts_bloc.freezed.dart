@@ -96,8 +96,8 @@ class __$$LoadInProgressImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoadInProgressImpl extends _LoadInProgress {
-  const _$LoadInProgressImpl() : super._();
+class _$LoadInProgressImpl implements _LoadInProgress {
+  const _$LoadInProgressImpl();
 
   @override
   String toString() {
@@ -180,9 +180,8 @@ class _$LoadInProgressImpl extends _LoadInProgress {
   }
 }
 
-abstract class _LoadInProgress extends ContactsState {
+abstract class _LoadInProgress implements ContactsState {
   const factory _LoadInProgress() = _$LoadInProgressImpl;
-  const _LoadInProgress._() : super._();
 }
 
 /// @nodoc
@@ -218,18 +217,12 @@ class __$$LoadedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoadedImpl extends _Loaded {
+class _$LoadedImpl implements _Loaded {
   const _$LoadedImpl(
+      {required final Map<String, List<ContactEntity>> categorizedContacts})
+      : _categorizedContacts = categorizedContacts;
 
-      {required final Map<String, List<ContactEntity>> categorizedContacts,
-      required this.isPermissionDenied})
-      : _categorizedContacts = categorizedContacts,
-        super._();
-
-
-// required List<ContactEntity> listContacts,
   final Map<String, List<ContactEntity>> _categorizedContacts;
-// required List<ContactEntity> listContacts,
   @override
   Map<String, List<ContactEntity>> get categorizedContacts {
     if (_categorizedContacts is EqualUnmodifiableMapView)
@@ -329,15 +322,11 @@ class _$LoadedImpl extends _Loaded {
   }
 }
 
-abstract class _Loaded extends ContactsState {
+abstract class _Loaded implements ContactsState {
   const factory _Loaded(
+      {required final Map<String, List<ContactEntity>>
+          categorizedContacts}) = _$LoadedImpl;
 
-      {required final Map<String, List<ContactEntity>> categorizedContacts,
-      required final bool isPermissionDenied}) = _$LoadedImpl;
-  const _Loaded._() : super._();
-
-
-// required List<ContactEntity> listContacts,
   Map<String, List<ContactEntity>> get categorizedContacts;
   @JsonKey(ignore: true)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
@@ -529,7 +518,7 @@ class __$$SearchContactImplCopyWithImpl<$Res>
     Object? text = null,
   }) {
     return _then(_$SearchContactImpl(
-      text: null == text
+      null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
@@ -540,7 +529,7 @@ class __$$SearchContactImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SearchContactImpl implements _SearchContact {
-  const _$SearchContactImpl({required this.text});
+  const _$SearchContactImpl(this.text);
 
   @override
   final String text;
@@ -631,8 +620,7 @@ class _$SearchContactImpl implements _SearchContact {
 }
 
 abstract class _SearchContact implements ContactsEvent {
-  const factory _SearchContact({required final String text}) =
-      _$SearchContactImpl;
+  const factory _SearchContact(final String text) = _$SearchContactImpl;
 
   String get text;
   @JsonKey(ignore: true)

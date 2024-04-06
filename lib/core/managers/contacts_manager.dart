@@ -1,9 +1,13 @@
 import 'dart:developer';
+import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:sicherr/core/utils/phone_formatter.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
 
-
+abstract interface class ContactsInterface {
+  Future<List<ContactEntity>> getContacts();
+}
 
 class ContactsManager implements ContactsInterface {
 
@@ -16,9 +20,13 @@ class ContactsManager implements ContactsInterface {
       final localContacts = await ContactsService.getContacts(photoHighResolution: false);
 
       for (var element in localContacts) {
-        final contact = ContactEntity.fromLocalContact(element);
-        if (contact.phones.isNotEmpty) {
-          contacts.add(contact);
+        try{
+          final contact = ContactEntity.fromLocalContact(element);
+          if (contact.phoneNumber.isNotEmpty) {
+            contacts.add(contact);
+          }
+        }catch(_){
+
         }
       }
     } else if (permission.isPermanentlyDenied) {
