@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
 import 'package:sicherr/presentation/bloc/contacts/contacts_bloc.dart';
-import 'package:sicherr/presentation/screens/contacts/widgets/contact_card.dart';
-import 'package:sicherr/presentation/widgets/loading_indicator.dart';
-import 'package:sicherr/presentation/widgets/permission_alert_dialog.dart';
-import 'package:sicherr/presentation/widgets/search_phone_field.dart';
+import 'package:sicherr/presentation/widgets/core_widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../bloc/emergency_contact/emergency_contact_bloc.dart';
+
 
 class ContactsScreen extends StatelessWidget {
   const ContactsScreen({Key? key}) : super(key: key);
@@ -34,11 +32,13 @@ class ContactsScreen extends StatelessWidget {
         ),
         const ContactListDisplayed(),
       ],
+
     );
   }
 }
 
 class ContactListDisplayed extends StatelessWidget {
+
   const ContactListDisplayed({
     Key? key,
   }) : super(key: key);
@@ -229,5 +229,6 @@ class ContactListDisplayed extends StatelessWidget {
         //       ),
       );
     });
+
   }
 }

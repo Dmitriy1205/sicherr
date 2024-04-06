@@ -1,11 +1,12 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:sicherr/core/utils/phone_formatter.dart';
+import 'package:sicherr/core/exceptions/exceptions.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
 import 'package:sicherr/core/managers/contacts_manager.dart';
+import 'package:sicherr/domain/repositories/contacts/contacts_repository.dart';
 
 import '../profile/profile_bloc.dart';
 
@@ -16,6 +17,7 @@ part 'contacts_event.dart';
 part 'contacts_bloc.freezed.dart';
 
 class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
+
   final ProfileBloc _profileBloc;
   final ContactsInterface contactsManager;
   late StreamSubscription _contactStreamSubscription;
@@ -31,7 +33,18 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
     });
   }
 
+
+          add(const ContactsEvent.loadContacts());
+        }
+      }, onError: (error) {});
+    } on BadRequestException catch (_) {
+      add(const ContactsEvent.loadContacts());
+    }
+  }
+  final ContactsRepository contactsRepository;
+  late StreamSubscription _contactsStreamSub;
   List<ContactEntity> _contactsList = [];
+
 
   PermissionStatus _permissionStatus = PermissionStatus.denied;
 
@@ -39,12 +52,13 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
       _permissionStatus == PermissionStatus.denied ||
       _permissionStatus == PermissionStatus.permanentlyDenied;
 
+
   void _mapEventToState(ContactsEvent event, Emitter<ContactsState> emit) =>
       event.map(
-        initial: (e) => _initialEvent(e, emit),
         searchContact: (e) => _searchContact(e, emit),
-        checkPermission: (e) => _checkPermission(e, emit),
+        loadContacts: (e) => _loadContacts(e, emit),
       );
+
 
   Future<void> _initialEvent(
       _InitialEvent event, Emitter<ContactsState> emit) async {
@@ -60,6 +74,7 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
   }
 
 
+
   Future<void> _searchContact(
       _SearchContact event, Emitter<ContactsState> emit) async {
     List<ContactEntity> filteredContacts = [];
@@ -67,6 +82,7 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
     if (event.text.isEmpty) {
       filteredContacts = [..._contactsList];
     } else {
+
       filteredContacts = _contactsList.where((contact) {
         final name = contact.name.toLowerCase().replaceAll(RegExp(r'\s'), '');
         final phone = PhoneFormatter.formatPhone(contact.getMainPhoneNumber);
@@ -78,14 +94,21 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
     emit(ContactsState.loaded(
       categorizedContacts: ContactsManager.categorizeContacts(filteredContacts),
       isPermissionDenied: _isPermissionDenied,
+
     ));
   }
 
-  Future<void> _checkPermission(
-      _CheckPermission event, Emitter<ContactsState> emit) async {
-    if (await Permission.contacts.status == PermissionStatus.granted) {
-      add(const ContactsEvent.initial());
-    }
+  void _loadContacts(_LoadContacts event, Emitter<ContactsState> emit) {
+    emit(ContactsState.loaded(
+      categorizedContacts:
+          ContactsManager.categorizeContacts(_contactsToDisplay),
+    ));
+  }
+
+  @override
+  Future<void> close() {
+    _contactsStreamSub.cancel();
+    return super.close();
   }
 
   @override

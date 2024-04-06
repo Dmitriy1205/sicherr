@@ -18,7 +18,6 @@ import '../../../bloc/emergency_contact/emergency_contact_bloc.dart';
 import '../../../widgets/app_switch.dart';
 import '../../../widgets/scrollable_contacts_list.dart';
 
-
 class SosScreen extends StatefulWidget {
   const SosScreen({super.key});
 
@@ -60,10 +59,9 @@ class _SosScreenState extends State<SosScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: const DefaultAppBar(title:'SOS' ,),
+      appBar: const DefaultAppBar(title: 'SOS'),
       body: BlocConsumer<EmergencyContactBloc, EmergencyContactState>(
         listener: (context, state) {
-
           state.maybeMap(
               loaded: (s) {
                 isQuickBinding = context
@@ -89,12 +87,16 @@ class _SosScreenState extends State<SosScreen> {
               },
               orElse: () {});
         },
-        builder:(context, state){
+        builder: (context, state) {
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 18.0,),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 18.0,
+            ),
             child: ListView(
               children: [
-                const SizedBox(height: 15,),
+                const SizedBox(
+                  height: 15,
+                ),
                 Text(
                   AppLocalizations.of(context)!.overview,
                   style: AppTheme.themeData.textTheme.displayLarge,
@@ -123,8 +125,8 @@ class _SosScreenState extends State<SosScreen> {
                           setState(() {
                             isQuickBinding = v;
                             context.read<ProfileBloc>().add(
-                                ProfileEvent.updateSpecificProfileField(
-                                    data: {
+                                    ProfileEvent.updateSpecificProfileField(
+                                        data: {
                                       "enabledSosQB": v,
                                     }));
                           });
@@ -180,7 +182,8 @@ class _SosScreenState extends State<SosScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const EmergencyContactsScreen(),
+                            builder: (context) =>
+                                const EmergencyContactsScreen(),
                           ));
                     },
                     child: Row(
@@ -192,7 +195,7 @@ class _SosScreenState extends State<SosScreen> {
                         ),
                         const Center(
                           child: Padding(
-                            padding: EdgeInsets.all( 3),
+                            padding: EdgeInsets.all(3),
                             child: FaIcon(
                               FontAwesomeIcons.chevronRight,
                               color: AppColors.black,
@@ -205,25 +208,24 @@ class _SosScreenState extends State<SosScreen> {
                   ),
                 ),
                 context.read<EmergencyContactBloc>().state.emContacts == null ||
-                    context
-                        .read<EmergencyContactBloc>()
-                        .state
-                        .emContacts!
-                        .isEmpty
+                        context
+                            .read<EmergencyContactBloc>()
+                            .state
+                            .emContacts!
+                            .isEmpty
                     ? const SizedBox()
                     : Column(
-
-                  children: [
-                    const SizedBox(
-                      height: 37,
-                    ),
-                    SizedBox(
-                      height: 135,
-                      width: MediaQuery.of(context).size.width,
-                      child: const ScrollableContactList(),
-                    ),
-                  ],
-                ),
+                        children: [
+                          const SizedBox(
+                            height: 37,
+                          ),
+                          SizedBox(
+                            height: 135,
+                            width: MediaQuery.of(context).size.width,
+                            child: const ScrollableContactList(),
+                          ),
+                        ],
+                      ),
                 const SizedBox(
                   height: 22,
                 ),
@@ -240,7 +242,7 @@ class _SosScreenState extends State<SosScreen> {
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide:
-                          const BorderSide(color: AppColors.mainAccent),
+                              const BorderSide(color: AppColors.mainAccent),
                           borderRadius: BorderRadius.circular(11),
                         ),
                         hintText: AppLocalizations.of(context)!.sosMessage,
@@ -252,8 +254,8 @@ class _SosScreenState extends State<SosScreen> {
                         context
                             .read<ProfileBloc>()
                             .add(ProfileEvent.updateSpecificProfileField(data: {
-                          "sosMessage": messageController.text,
-                        }));
+                              "sosMessage": messageController.text,
+                            }));
                       });
                     },
                     onTapOutside: (v) {
@@ -278,7 +280,7 @@ class _SosScreenState extends State<SosScreen> {
                         value: isSendLocation!,
                         onChanged: (v) async {
                           LocationPermission permission =
-                          await Geolocator.checkPermission();
+                              await Geolocator.checkPermission();
 
                           if (permission == LocationPermission.deniedForever) {
                             setState(() {
@@ -298,17 +300,17 @@ class _SosScreenState extends State<SosScreen> {
                             setState(() {
                               isSendLocation = v;
                               context.read<ProfileBloc>().add(
-                                  ProfileEvent.updateSpecificProfileField(
-                                      data: {
+                                      ProfileEvent.updateSpecificProfileField(
+                                          data: {
                                         "sosMessage": messageController.text,
                                       }));
                             });
                             if (mounted) {
                               context.read<ProfileBloc>().add(
-                                ProfileEvent.updateSpecificProfileField(
-                                  data: {"sendSosGeolocation": v},
-                                ),
-                              );
+                                    ProfileEvent.updateSpecificProfileField(
+                                      data: {"sendSosGeolocation": v},
+                                    ),
+                                  );
                             }
                           }
                         },
@@ -337,7 +339,9 @@ class _SosScreenState extends State<SosScreen> {
                 AppElevatedButton(
                     text: AppLocalizations.of(context)!.send,
                     onPressed: () {
-                      sosConfirmationPopup(context, latitude: position?.latitude.toString(), longitude: position?.longitude.toString());
+                      sosConfirmationPopup(context,
+                          latitude: position?.latitude.toString(),
+                          longitude: position?.longitude.toString());
                     }),
                 const SizedBox(
                   height: 40,
@@ -345,7 +349,7 @@ class _SosScreenState extends State<SosScreen> {
               ],
             ),
           );
-        } ,
+        },
         // child: ,
       ),
     );

@@ -3,14 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sicherr/core/theme/theme.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
 import 'package:sicherr/presentation/bloc/contacts/contacts_bloc.dart';
-import 'package:sicherr/presentation/widgets/loading_indicator.dart';
-import 'package:sicherr/presentation/widgets/permission_alert_dialog.dart';
-import 'package:sicherr/presentation/widgets/search_phone_field.dart';
+import 'package:sicherr/presentation/widgets/core_widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../bloc/emergency_contact/emergency_contact_bloc.dart';
-import '../../../widgets/default_app_bar.dart';
-import 'em_contact_card.dart';
 
 class EmergencyContactsScreen extends StatefulWidget {
   const EmergencyContactsScreen({Key? key}) : super(key: key);
@@ -55,6 +51,7 @@ class _EmergencyContactsScreenState extends State<EmergencyContactsScreen> {
                     .read<EmergencyContactBloc>()
                     .add(const EmergencyContactEvent.getAllEmContacts());
 
+
                 context.read<ContactsBloc>().add(ContactsEvent.searchContact(
                       text: text,
                     ));
@@ -63,12 +60,14 @@ class _EmergencyContactsScreenState extends State<EmergencyContactsScreen> {
           ),
           const ContactListDisplayed(),
         ],
+
       ),
     );
   }
 }
 
 class ContactListDisplayed extends StatelessWidget {
+
   const ContactListDisplayed({
     Key? key,
   }) : super(key: key);
@@ -170,5 +169,6 @@ class ContactListDisplayed extends StatelessWidget {
                   ));
       },
     );
+
   }
 }

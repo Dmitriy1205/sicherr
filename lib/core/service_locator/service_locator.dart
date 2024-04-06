@@ -8,6 +8,7 @@ import 'package:sicherr/core/managers/contacts_manager.dart';
 import 'package:sicherr/core/managers/quick_binding_handler.dart';
 import 'package:sicherr/data/remote/client.dart';
 import 'package:sicherr/data/remote/fcm_service.dart';
+import 'package:sicherr/domain/repositories/contacts/contacts_repository_impl.dart';
 import 'package:sicherr/domain/repositories/emeregency_contacts/em_contacts_repository.dart';
 import 'package:sicherr/domain/repositories/emeregency_contacts/em_contacts_repository_impl.dart';
 import 'package:sicherr/domain/repositories/notification/notification_repository.dart';
@@ -43,6 +44,7 @@ Future<void> init() async {
   final authRepository = AuthRepositoryImpl(auth: auth);
   final userRepository = UserRepositoryImpl(firestore: firestore);
   final emContactRepository = EmContactsRepositoryImpl(firestore: firestore);
+  final contactsRepository = ContactsRepositoryImpl(firestore: firestore);
   final alarmManager = AlarmManager();
   final quickBindingListener = QuickBindingListener(userRepo: userRepository);
   final notificationRepository = NotificationRepositoryImpl(
@@ -53,6 +55,7 @@ Future<void> init() async {
   sl.registerSingleton<AuthRepository>(authRepository);
   sl.registerSingleton<UserRepository>(userRepository);
   sl.registerSingleton<EmContactsRepository>(emContactRepository);
+  sl.registerSingleton<ContactsRepositoryImpl>(contactsRepository);
   sl.registerSingleton<AlarmManager>(alarmManager);
   sl.registerSingleton<NotificationRepository>(notificationRepository);
   sl.registerSingleton<HttpClient>(httpClient);
@@ -62,6 +65,7 @@ Future<void> init() async {
   //Blocs
   sl.registerLazySingleton(() => AuthBloc(
         authRepository: sl(),
+        userRepository: sl(),
       ));
   sl.registerLazySingleton(() => SignInBloc(
         authRepository: sl(),
@@ -81,9 +85,11 @@ Future<void> init() async {
         authBloc: sl(),
         emContactsRepository: sl(),
       ));
-  sl.registerLazySingleton(() => AlarmBloc(
-      player: alarmManager));
-  sl.registerLazySingleton(() => SendSosBloc(httpClient: sl(), authBloc: sl(), quickBindingInterface: quickBindingListener));
+  sl.registerLazySingleton(() => AlarmBloc(player: alarmManager));
+  sl.registerLazySingleton(() => SendSosBloc(
+      httpClient: sl(),
+      authBloc: sl(),
+      quickBindingInterface: quickBindingListener));
   sl.registerLazySingleton(
       () => NotificationBloc(notificationRepository: sl(), authBloc: sl()));
   sl.registerLazySingleton(() => ShakeDetectorBloc(profileBloc: sl()));

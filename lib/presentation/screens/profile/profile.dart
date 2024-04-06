@@ -32,7 +32,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final firebaseUser = FirebaseAuth.instance.currentUser;
     user = firebaseUser != null
         ? ContactEntity.fromFirebaseUser(firebaseUser)
-        : ContactEntity(id: '-1', name: AppLocalizations.of(context)!.account, phones: ['-']);
+        : ContactEntity(id: '-1', name: AppLocalizations.of(context)!.account, phoneNumber: '');
   }
 
   late final ContactEntity user;
