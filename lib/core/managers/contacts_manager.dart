@@ -20,9 +20,13 @@ class ContactsManager implements ContactsInterface {
       final localContacts = await ContactsService.getContacts(photoHighResolution: false);
 
       for (var element in localContacts) {
-        final contact = ContactEntity.fromLocalContact(element);
-        if (contact.phoneNumber.isNotEmpty) {
-          contacts.add(contact);
+        try{
+          final contact = ContactEntity.fromLocalContact(element);
+          if (contact.phoneNumber.isNotEmpty) {
+            contacts.add(contact);
+          }
+        }catch(_){
+
         }
       }
     } else if (permission.isPermanentlyDenied) {
