@@ -4,4 +4,5 @@ part of 'contacts_bloc.dart';
 class ContactsEvent with _$ContactsEvent {
   const factory ContactsEvent.loadContacts() = _LoadContacts;
   const factory ContactsEvent.searchContact(String text) = _SearchContact;
+  const factory ContactsEvent.searchSharedContact(String text) = _SearchSharedContact;
 }

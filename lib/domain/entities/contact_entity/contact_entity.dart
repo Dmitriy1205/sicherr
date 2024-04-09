@@ -58,7 +58,7 @@ class ContactEntity {
           ? base64.decode(base64Image)
           : null,
       isEmergency: json['isEmergencyContact'] ?? false,
-      tags: json['tags'] ?? [],
+      tags: List<String>.from(json['tags'] ?? []),
       rating: json['rating'],
     );
   }

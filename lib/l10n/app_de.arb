@@ -78,5 +78,6 @@
     "account": "Konto",
 
     "selectContacts": "Wählen Sie Kontakte aus, die in der App verwendet werden sollen.",
-    "configureContacts": "Kontakte konfigurieren"
+    "configureContacts": "Kontakte konfigurieren",
+    "searchForContact": "Suche nach Kontakt"
 }

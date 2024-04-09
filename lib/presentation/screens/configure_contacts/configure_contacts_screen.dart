@@ -1,6 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sicherr/core/theme/theme.dart';
@@ -180,20 +178,3 @@ class ContactListDisplayed extends StatelessWidget {
           );
   }
 }
-
-// Future<bool> collectionExists() async {
-//   try {
-//     final collectionRef = await FirebaseFirestore.instance
-//         .collection('users')
-//         .doc(FirebaseAuth.instance.currentUser!.uid)
-//         .collection('contacts').get();
-//     final docs = collectionRef.docs;
-//     // Perform a query to check if there are any documents in the collection
-//     // final exist = collectionRef.limit(1).snapshots();
-//     // final empty = await exist.isEmpty;
-//     return false;
-//   } catch (e) {
-//     // Handle any errors, such as permission denied or network issues
-//     return false;
-//   }
-// }

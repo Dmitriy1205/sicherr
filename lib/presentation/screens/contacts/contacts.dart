@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
 import 'package:sicherr/presentation/bloc/contacts/contacts_bloc.dart';
-import 'package:sicherr/presentation/screens/contacts/widgets/contact_card.dart';
+import 'package:sicherr/presentation/screens/contact_detail/contact_detail.dart';
 import 'package:sicherr/presentation/widgets/core_widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../bloc/emergency_contact/emergency_contact_bloc.dart';
-
 
 class ContactsScreen extends StatefulWidget {
   const ContactsScreen({Key? key}) : super(key: key);
@@ -19,70 +18,123 @@ class ContactsScreen extends StatefulWidget {
 class _ContactsScreenState extends State<ContactsScreen> {
   @override
   void initState() {
+    super.initState();
     context
         .read<EmergencyContactBloc>()
         .add(const EmergencyContactEvent.getAllEmContacts());
-    super.initState();
+  }
+
+  final _searchTextController = TextEditingController();
+
+  @override
+  void dispose() {
+    _searchTextController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ContactsBloc, ContactsState>(
+    return BlocConsumer<ContactsBloc, ContactsState>(
+      listener: (BuildContext context, ContactsState state) {
+        state.maybeMap(
+          notFoundContact: (_){
+            AppToast.showError(context, AppLocalizations.of(context)!.noContacts);
+          },
+            openFoundedContact: (state) {
+              _searchTextController.text = '';
+              context
+                  .read<ContactsBloc>()
+                  .add(const ContactsEvent.searchContact(''));
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        ContactDetailScreen(contact: state.contact)),
+              );
+            },
+            orElse: () {});
+      },
       builder: (context, state) {
         return state.maybeMap(
             loadInProgress: (_) => const Center(child: LoadingIndicator()),
             orElse: () => const Center(child: LoadingIndicator()),
             loaded: (state) => Column(
-              children: [
-                Padding(
-                  padding:
-                  const EdgeInsets.only(left: 20, right: 20, top: 18),
-                  child: SearchPhoneField(
-                    hintText: AppLocalizations.of(context)!.search,
-                    onChanged: (text) {
-                      context.read<EmergencyContactBloc>().add(
-                          const EmergencyContactEvent.getAllEmContacts());
+                  children: [
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 20, right: 20, top: 18),
+                      child: SearchPhoneField(
+                        controller: _searchTextController,
+                        hintText: AppLocalizations.of(context)!.search,
+                        onChanged: (text) {
+                          context.read<EmergencyContactBloc>().add(
+                              const EmergencyContactEvent.getAllEmContacts());
 
-                      context
-                          .read<ContactsBloc>()
-                          .add(ContactsEvent.searchContact(text));
-                    },
-                  ),
-                ),
-                ContactListDisplayed(
-                    groupedContacts: state.categorizedContacts)
-              ],
-            ));
+                          context
+                              .read<ContactsBloc>()
+                              .add(ContactsEvent.searchContact(text));
+                        },
+                      ),
+                    ),
+                    ContactListDisplayed(
+                      groupedContacts: state.categorizedContacts,
+                      searchingNumber: _searchTextController.text,
+                    )
+                  ],
+                ));
       },
     );
   }
 }
 
 class ContactListDisplayed extends StatelessWidget {
-  const ContactListDisplayed({Key? key, required this.groupedContacts})
-      : super(key: key);
+  const ContactListDisplayed({
+    Key? key,
+    required this.groupedContacts,
+    required this.searchingNumber,
+  }) : super(key: key);
   final Map<String, List<ContactEntity>> groupedContacts;
+  final String searchingNumber;
 
   @override
   Widget build(BuildContext context) {
     return groupedContacts.isEmpty
         ? Expanded(
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              AppLocalizations.of(context)!.noContacts,
-              style: const TextStyle(fontSize: 18),
+            child: GestureDetector(
+              onTap: () {
+                context
+                    .read<ContactsBloc>()
+                    .add(ContactsEvent.searchSharedContact(searchingNumber));
+              },
+              behavior: HitTestBehavior.opaque,
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      AppLocalizations.of(context)!.searchForContact,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                    Text(
+                      searchingNumber,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
-          ],
-        ),
-      ),
-    )
+          )
         : GroupedItems(
-      groupedContacts: groupedContacts,
-      contactFactory: ContactCardFactory(),
-    );
+            groupedContacts: groupedContacts,
+            contactFactory: ContactCardFactory(),
+          );
   }
 }

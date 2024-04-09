@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
@@ -20,7 +19,7 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
     try {
       contactsRepository
           .getSharedContactsStream(
-          currentUserId: FirebaseAuth.instance.currentUser!.uid)
+              currentUserId: FirebaseAuth.instance.currentUser!.uid)
           .listen((contacts) {
         if (contacts == null) {
           add(const ContactsEvent.loadContacts());
@@ -44,8 +43,8 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
       event.map(
         searchContact: (e) => _searchContact(e, emit),
         loadContacts: (e) => _loadContacts(e, emit),
+        searchSharedContact: (e) => _searchSharedContact(e, emit),
       );
-
 
   void _searchContact(_SearchContact event, Emitter<ContactsState> emit) {
     emit(const ContactsState.loadInProgress());
@@ -57,14 +56,30 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
     }
     emit(ContactsState.loaded(
       categorizedContacts:
-      ContactsManager.categorizeContacts(_contactsToDisplay),
+          ContactsManager.categorizeContacts(_contactsToDisplay),
     ));
   }
 
   void _loadContacts(_LoadContacts event, Emitter<ContactsState> emit) {
     emit(ContactsState.loaded(
       categorizedContacts:
-      ContactsManager.categorizeContacts(_contactsToDisplay),
+          ContactsManager.categorizeContacts(_contactsToDisplay),
+    ));
+  }
+
+  void _searchSharedContact(
+      _SearchSharedContact event, Emitter<ContactsState> emit) async {
+    emit(const ContactsState.loadInProgress());
+    final contact = await contactsRepository.searchInSharedContacts(event.text);
+    if (contact != null) {
+      emit(ContactsState.openFoundedContact(contact: contact));
+    }else{
+      emit(const ContactsState.notFoundContact());
+    }
+
+    emit(ContactsState.loaded(
+      categorizedContacts:
+          ContactsManager.categorizeContacts(_contactsToDisplay),
     ));
   }
 

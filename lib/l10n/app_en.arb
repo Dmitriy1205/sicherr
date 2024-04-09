@@ -75,5 +75,6 @@
   "startAlarm": "START ALARM",
 
   "selectContacts": "Select contacts that will be used in the app.",
-  "configureContacts": "Configure contacts"
+  "configureContacts": "Configure contacts",
+  "searchForContact": "Search for contact"
 }

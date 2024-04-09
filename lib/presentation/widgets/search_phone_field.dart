@@ -11,12 +11,14 @@ class SearchPhoneField extends StatefulWidget {
     this.hintText = '',
     this.onChanged,
     this.onSubmitted,
+    this.controller,
   });
 
   final double height;
   final String hintText;
   final Function(String)? onChanged;
   final Function(String)? onSubmitted;
+  final TextEditingController? controller;
 
   @override
   State<SearchPhoneField> createState() => _SearchPhoneFieldState();
@@ -27,15 +29,17 @@ class _SearchPhoneFieldState extends State<SearchPhoneField> {
     borderRadius: BorderRadius.all(Radius.circular(8)),
     borderSide: BorderSide.none,
   );
-
+  late final TextEditingController _controller;
   final _focus = FocusNode();
-  final _controller = TextEditingController();
 
   bool _showCancel = false;
+
+  final _defaultController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+    _controller = widget.controller ?? _defaultController;
     _focus.addListener(_onFocusChange);
     _controller.addListener(_onTextChange);
   }
@@ -43,8 +47,7 @@ class _SearchPhoneFieldState extends State<SearchPhoneField> {
   @override
   void dispose() {
     _focus.dispose();
-    _controller.dispose();
-
+    _defaultController.dispose();
     super.dispose();
   }
 
@@ -63,7 +66,6 @@ class _SearchPhoneFieldState extends State<SearchPhoneField> {
   void _clearText() {
     _controller.clear();
     _focus.unfocus();
-
   }
 
   @override
@@ -88,7 +90,7 @@ class _SearchPhoneFieldState extends State<SearchPhoneField> {
                   ),
                 ),
                 prefixIconConstraints:
-                const BoxConstraints(minHeight: 16, maxHeight: 16),
+                    const BoxConstraints(minHeight: 16, maxHeight: 16),
                 filled: true,
                 fillColor: AppColors.lightGrey,
                 contentPadding: EdgeInsets.zero,
@@ -119,4 +121,3 @@ class _SearchPhoneFieldState extends State<SearchPhoneField> {
     );
   }
 }
-
