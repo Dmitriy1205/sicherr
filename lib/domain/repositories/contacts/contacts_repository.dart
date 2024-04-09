@@ -7,4 +7,5 @@ abstract class ContactsRepository {
   Stream<List<ContactEntity>?> getSharedContactsStream({required String currentUserId});
   Future<List<ContactEntity>?> getSharedContacts({required String currentUserId});
   Future<List<ContactEntity>> getLocalContacts();
+  Future<ContactEntity?> searchInSharedContacts(String number);
 }
