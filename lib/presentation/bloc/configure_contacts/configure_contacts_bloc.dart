@@ -42,7 +42,7 @@ class ConfigureContactsBloc
   Future<void> _initialEvent(
       _InitialEvent event, Emitter<ConfigureContactsState> emit) async {
     _contactsList = await contactsRepository.getLocalContacts();
-    _selectedContacts = await contactsRepository.getSharedContacts(
+    _selectedContacts = await contactsRepository.getUserContacts(
             currentUserId: FirebaseAuth.instance.currentUser!.uid) ??
         [];
     _contactsToDisplay = [..._contactsList];

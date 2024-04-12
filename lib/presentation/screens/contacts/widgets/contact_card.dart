@@ -7,7 +7,7 @@ import 'package:sicherr/core/managers/contacts_manager.dart';
 import 'package:sicherr/presentation/bloc/emergency_contact/emergency_contact_bloc.dart';
 import 'package:sicherr/presentation/screens/contact_detail/contact_detail.dart';
 import 'package:sicherr/presentation/widgets/round_sos_icon.dart';
-import 'package:sicherr/presentation/widgets/round_wrapper_icon.dart';
+import 'package:sicherr/presentation/widgets/svg_round_wrapper_icon.dart';
 
 class ContactCard extends StatelessWidget {
 
@@ -96,7 +96,7 @@ class ContactCard extends StatelessWidget {
                     ContactsManager.launchCall(
                         phoneNumber: contact.phoneNumber);
                   },
-                  child: const RoundWrapperIcon(svgPath: AppIcons.phone),
+                  child: const SvgRoundWrapperIcon(svgPath: AppIcons.phone),
                 ),
               ],
             ),

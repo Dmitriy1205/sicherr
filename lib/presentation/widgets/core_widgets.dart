@@ -1,7 +1,7 @@
 // For not making mess with importing general widgets
 // Export here new core widget
 
-export 'round_wrapper_icon.dart';
+export 'svg_round_wrapper_icon.dart';
 export 'loading_indicator.dart';
 export 'app_elevated_button.dart';
 export 'search_phone_field.dart';
@@ -15,3 +15,5 @@ export 'selectable_contact_card.dart';
 export 'sos_confirmation_popup.dart';
 export 'grouped_items/grouped_items_factory.dart';
 export 'grouped_items/grouped_items.dart';
+export 'round_action_button.dart';
+export 'round_wrapper_icon.dart';

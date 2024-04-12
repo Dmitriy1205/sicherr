@@ -71,10 +71,14 @@
   "logout": "Logout",
   "account": "Account",
   "features": "Features",
-  "quickAlarm": "Schnelle Warnung",
+  "quickAlarm": "Quick warning",
   "startAlarm": "START ALARM",
 
   "selectContacts": "Select contacts that will be used in the app.",
   "configureContacts": "Configure contacts",
-  "searchForContact": "Search for contact"
+  "searchForContact": "Search for contact",
+
+  "addTag": "Add Tag",
+  "addTagDesc": "Write a tag that will be visible to the public.",
+  "enterTag": "Enter tag"
 }

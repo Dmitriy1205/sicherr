@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
 import 'package:sicherr/presentation/screens/contact_detail/widgets/rating_stars.dart';
 import 'package:sicherr/presentation/screens/contact_detail/widgets/show_tags.dart';
 
 class AdditionalContentBlock extends StatelessWidget {
+  final ContactEntity contact;
   const AdditionalContentBlock({
     super.key,
+    required this.contact,
   });
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        
         Column(
           children: [
-            const ShowTags(),
+            ShowTags(
+              tags: contact.tags,
+            ),
             const Divider(height: 1),
             Container(
               padding: const EdgeInsets.all(20),
@@ -32,10 +36,10 @@ class AdditionalContentBlock extends StatelessWidget {
             ),
           ],
         ),
-        Container(
-          decoration: const BoxDecoration(color: Color.fromRGBO(255, 255, 255, 0.75)),
-          height: 150,
-        ),
+        // Container(
+        //   decoration: const BoxDecoration(color: Color.fromRGBO(255, 255, 255, 0.75)),
+        //   height: 150,
+        // ),
       ],
     );
   }

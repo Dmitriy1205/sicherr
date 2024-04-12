@@ -19,7 +19,7 @@ class ContactsRepositoryImpl implements ContactsRepository {
       : _firestore = firestore;
 
   @override
-  Stream<List<ContactEntity>?> getSharedContactsStream(
+  Stream<List<ContactEntity>?> getUserContactsStream(
       {required String currentUserId}) {
     return _firestore
         .collection(usersCollectionName)
@@ -35,7 +35,7 @@ class ContactsRepositoryImpl implements ContactsRepository {
   }
 
   @override
-  Future<List<ContactEntity>?> getSharedContacts(
+  Future<List<ContactEntity>?> getUserContacts(
       {required String currentUserId}) async {
     try {
       QuerySnapshot querySnapshot = await _firestore
@@ -74,8 +74,7 @@ class ContactsRepositoryImpl implements ContactsRepository {
             .doc(contact.id);
 
         //Shared contacts
-        final docRefSharedContacts =
-            _firestore.collection(contactsSubCollectionName).doc(contact.id);
+        final docRefSharedContacts = _getSharedContactDocRef(contact.id);
 
         // Check if the document already exists
         final sharedDocSnapshot = await docRefSharedContacts.get();
@@ -182,5 +181,52 @@ class ContactsRepositoryImpl implements ContactsRepository {
     final data = contactSnapshot?.data();
     final contact = data != null ? ContactEntity.fromJson(data) : null;
     return contact;
+  }
+
+  @override
+  Future<ContactEntity?> addNewContactTag({
+    required String contactId,
+    required String tag,
+  }) async {
+    try {
+      //Shared contacts
+      final docRefSharedContacts = _getSharedContactDocRef(contactId);
+
+      // Check if the document already exists
+      final sharedDocSnapshot = await docRefSharedContacts.get();
+      if (sharedDocSnapshot.exists) {
+        // Document already exists, update the "tags" field
+        final existingTags =
+            List<String>.from(sharedDocSnapshot.data()?['tags'] ?? []);
+        final newTags = [...existingTags, tag]; // Combine existing and new tags
+        await docRefSharedContacts.update({'tags': newTags});
+        final updatedData = await docRefSharedContacts.get();
+        if (updatedData.data() != null) {
+          return ContactEntity.fromJson(updatedData.data()!);
+        }
+      }
+    } catch (e) {
+      log('addNewContactTag error');
+      return null;
+    }
+    return null;
+  }
+
+  DocumentReference<Map<String, dynamic>> _getSharedContactDocRef(
+      String contactId) {
+    final result =
+        _firestore.collection(contactsSubCollectionName).doc(contactId);
+    return result;
+  }
+
+  @override
+  Future<ContactEntity?> getSharedContact(String id) async {
+    final docRefSharedContacts = await _getSharedContactDocRef(id).get();
+    final data = docRefSharedContacts.data();
+    if (data != null) {
+      return ContactEntity.fromJson(data);
+    } else {
+      return null;
+    }
   }
 }

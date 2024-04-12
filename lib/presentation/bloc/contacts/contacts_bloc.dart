@@ -18,7 +18,7 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
     on<ContactsEvent>(_mapEventToState);
     try {
       contactsRepository
-          .getSharedContactsStream(
+          .getUserContactsStream(
               currentUserId: FirebaseAuth.instance.currentUser!.uid)
           .listen((contacts) {
         if (contacts == null) {

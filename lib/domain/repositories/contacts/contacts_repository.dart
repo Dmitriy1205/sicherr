@@ -4,8 +4,14 @@ abstract class ContactsRepository {
   Future<void> setUpdateContacts(
       {required String currentUserId,
       required List<ContactEntity> sharedContacts});
-  Stream<List<ContactEntity>?> getSharedContactsStream({required String currentUserId});
-  Future<List<ContactEntity>?> getSharedContacts({required String currentUserId});
+  Stream<List<ContactEntity>?> getUserContactsStream(
+      {required String currentUserId});
+  Future<List<ContactEntity>?> getUserContacts({required String currentUserId});
   Future<List<ContactEntity>> getLocalContacts();
   Future<ContactEntity?> searchInSharedContacts(String number);
+  Future<ContactEntity?> getSharedContact(String id);
+  Future<ContactEntity?> addNewContactTag({
+    required String contactId,
+    required String tag,
+  });
 }

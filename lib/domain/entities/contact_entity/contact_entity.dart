@@ -63,6 +63,19 @@ class ContactEntity {
     );
   }
 
+  factory ContactEntity.combineContactsInfo(
+      {required ContactEntity simpleContact,
+      required ContactEntity detailedContact}) {
+    return ContactEntity(
+        id: detailedContact.id,
+        name: detailedContact.name,
+        phoneNumber: detailedContact.phoneNumber,
+        tags: detailedContact.tags,
+        rating: detailedContact.rating,
+        isEmergency: simpleContact.isEmergency,
+        ratings: detailedContact.ratings);
+  }
+
   Map<String, dynamic> toJsonSimplified() {
     final imageBase64 = image != null ? base64.encode(image!) : null;
     return {

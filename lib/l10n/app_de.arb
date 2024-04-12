@@ -79,5 +79,9 @@
 
     "selectContacts": "Wählen Sie Kontakte aus, die in der App verwendet werden sollen.",
     "configureContacts": "Kontakte konfigurieren",
-    "searchForContact": "Suche nach Kontakt"
+    "searchForContact": "Suche nach Kontakt",
+
+  "addTag": "Tag hinzufügen",
+  "addTagDesc": "Schreiben Sie einen Tag, der für die Öffentlichkeit sichtbar sein wird.",
+  "enterTag": "Tag eingeben"
 }
