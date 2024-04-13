@@ -69,6 +69,7 @@ class _ContactDetailScreenState extends State<ContactDetailScreen> {
                             ContactInfo(
                               contact: state.detailedContact,
                               isEmergency: isEmergency!,
+                              showRating: true,
                             ),
                             const SizedBox(height: 30),
                             Padding(

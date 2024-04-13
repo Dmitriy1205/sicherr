@@ -8,6 +8,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:sicherr/core/exceptions/exceptions.dart';
 import 'package:sicherr/core/managers/contacts_manager.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
+import 'package:sicherr/domain/entities/rating/rating.dart';
 import 'package:sicherr/domain/repositories/contacts/contacts_repository.dart';
 
 class ContactsRepositoryImpl implements ContactsRepository {
@@ -221,12 +222,69 @@ class ContactsRepositoryImpl implements ContactsRepository {
 
   @override
   Future<ContactEntity?> getSharedContact(String id) async {
-    final docRefSharedContacts = await _getSharedContactDocRef(id).get();
-    final data = docRefSharedContacts.data();
-    if (data != null) {
-      return ContactEntity.fromJson(data);
+    FirebaseAuth.instance.currentUser!.uid;
+    final docRefSharedContact = await _getSharedContactDocRef(id).get();
+    final docRefUserContact = await _firestore
+        .collection(usersCollectionName)
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection(contactsSubCollectionName)
+        .doc(id)
+        .get();
+    final sharedContactJson = docRefSharedContact.data();
+    final userContactJson = docRefUserContact.data();
+    if (sharedContactJson != null || userContactJson != null) {
+      return ContactEntity.combineContactsInfo(
+          userContactJson: userContactJson ?? {},
+          sharedContactJson: sharedContactJson ?? {});
     } else {
       return null;
     }
+  }
+
+  @override
+  Future<ContactEntity?> rateContact({
+    required String contactId,
+    required double rate,
+  }) async {
+    try {
+      //Shared contacts
+      final docRefSharedContacts = _getSharedContactDocRef(contactId);
+
+      final sharedDocSnapshot = await docRefSharedContacts.get();
+      if (sharedDocSnapshot.exists) {
+        final List existingRatings =
+            (sharedDocSnapshot.data()?['ratings'] ?? []);
+        final alreadyRated = existingRatings.any((element) =>
+            element['fromUserId'] ==
+            FirebaseAuth.instance.currentUser!.phoneNumber);
+
+        if (alreadyRated) {
+          existingRatings.removeWhere((element) =>
+              element['fromUserId'] == FirebaseAuth.instance.currentUser!.phoneNumber);
+        }
+
+        final newRatings = [
+          ...existingRatings,
+          {
+            "fromUserId": FirebaseAuth.instance.currentUser!.phoneNumber,
+            "rating": rate
+          }
+        ];
+
+        final newRate = ContactsManager.calculateContactRate(
+            newRatings.map((e) => Rating.fromJson(e)).toList());
+
+        await docRefSharedContacts
+            .update({'ratings': newRatings, 'rating': newRate});
+        final updatedData = await docRefSharedContacts.get();
+        if (updatedData.data() != null) {
+          return ContactEntity.fromJson(updatedData.data()!);
+        }
+      }
+    } catch (e) {
+      log('rateContact error');
+      return null;
+    }
+    return null;
   }
 }

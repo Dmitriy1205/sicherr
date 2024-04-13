@@ -14,4 +14,8 @@ abstract class ContactsRepository {
     required String contactId,
     required String tag,
   });
+  Future<ContactEntity?> rateContact({
+    required String contactId,
+    required double rate,
+  });
 }

@@ -83,5 +83,16 @@
 
   "addTag": "Tag hinzufügen",
   "addTagDesc": "Schreiben Sie einen Tag, der für die Öffentlichkeit sichtbar sein wird.",
-  "enterTag": "Tag eingeben"
+  "enterTag": "Tag eingeben",
+  "tag": "Tag",
+  "showNumTags": "{count} Tags anzeigen",
+  "@showNumTags": {
+  "placeholders": {
+    "count": {
+      "type": "String",
+      "example": "5"
+    }
+   }
+  },
+  "rateThisContact": "Kontakt bewerten" 
 }

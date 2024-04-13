@@ -9,14 +9,13 @@ import 'package:sicherr/presentation/widgets/core_widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DisplayTagsScreen extends StatelessWidget {
-  const DisplayTagsScreen({super.key, required this.tags});
-  final List<String> tags;
+  const DisplayTagsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: DefaultAppBar(
-        title: 'Tag',
+        title: AppLocalizations.of(context)!.tag,
         icon: GestureDetector(
           onTap: () {
             Navigator.push(
@@ -41,38 +40,42 @@ class DisplayTagsScreen extends StatelessWidget {
       ),
       body: BlocBuilder<ContactDetailsBloc, ContactDetailsState>(
         builder: (context, state) {
-          return ListView.separated(
-            itemBuilder: (context, i) {
-              return Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                child: Row(
-                  children: [
-                    SvgPicture.asset(
-                      AppIcons.hashtag,
-                      color: Theme.of(context).primaryColor,
-                      height: 18.2,
-                      width: 16.2,
-                    ),
-                    const SizedBox(width: 20),
-                    Expanded(
-                      child: Text(
-                        tags[i],
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-            separatorBuilder: (BuildContext context, int _) {
-              return const Divider(
-                height: 1,
-                color: AppColors.lightGrey,
-              );
-            },
-            itemCount: tags.length,
-          );
+          return state.maybeMap(
+              loaded: (state) => ListView.separated(
+                    itemBuilder: (context, i) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 15),
+                        child: Row(
+                          children: [
+                            SvgPicture.asset(
+                              AppIcons.hashtag,
+                              color: Theme.of(context).primaryColor,
+                              height: 18.2,
+                              width: 16.2,
+                            ),
+                            const SizedBox(width: 20),
+                            Expanded(
+                              child: Text(
+                                state.detailedContact.tags[i],
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    separatorBuilder: (BuildContext context, int _) {
+                      return const Divider(
+                        height: 1,
+                        color: AppColors.lightGrey,
+                      );
+                    },
+                    itemCount: state.detailedContact.tags.length,
+                  ),
+              orElse: () => const Center(
+                    child: CircularProgressIndicator(),
+                  ));
         },
       ),
     );

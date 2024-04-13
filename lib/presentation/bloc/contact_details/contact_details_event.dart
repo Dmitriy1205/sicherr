@@ -4,4 +4,5 @@ part of 'contact_details_bloc.dart';
 class ContactDetailsEvent with _$ContactDetailsEvent {
     const factory ContactDetailsEvent.initial(ContactEntity contact) = _InitialEvent;
     const factory ContactDetailsEvent.addTag(String text) = _AddTagEvent;
+    const factory ContactDetailsEvent.rateContact(double rating) = _RateContactEvent;
 }

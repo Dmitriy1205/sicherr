@@ -581,18 +581,21 @@ mixin _$ContactDetailsEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(ContactEntity contact) initial,
     required TResult Function(String text) addTag,
+    required TResult Function(double rating) rateContact,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(ContactEntity contact)? initial,
     TResult? Function(String text)? addTag,
+    TResult? Function(double rating)? rateContact,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(ContactEntity contact)? initial,
     TResult Function(String text)? addTag,
+    TResult Function(double rating)? rateContact,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -600,18 +603,21 @@ mixin _$ContactDetailsEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_InitialEvent value) initial,
     required TResult Function(_AddTagEvent value) addTag,
+    required TResult Function(_RateContactEvent value) rateContact,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitialEvent value)? initial,
     TResult? Function(_AddTagEvent value)? addTag,
+    TResult? Function(_RateContactEvent value)? rateContact,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitialEvent value)? initial,
     TResult Function(_AddTagEvent value)? addTag,
+    TResult Function(_RateContactEvent value)? rateContact,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -701,6 +707,7 @@ class _$InitialEventImpl implements _InitialEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(ContactEntity contact) initial,
     required TResult Function(String text) addTag,
+    required TResult Function(double rating) rateContact,
   }) {
     return initial(contact);
   }
@@ -710,6 +717,7 @@ class _$InitialEventImpl implements _InitialEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(ContactEntity contact)? initial,
     TResult? Function(String text)? addTag,
+    TResult? Function(double rating)? rateContact,
   }) {
     return initial?.call(contact);
   }
@@ -719,6 +727,7 @@ class _$InitialEventImpl implements _InitialEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(ContactEntity contact)? initial,
     TResult Function(String text)? addTag,
+    TResult Function(double rating)? rateContact,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -732,6 +741,7 @@ class _$InitialEventImpl implements _InitialEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_InitialEvent value) initial,
     required TResult Function(_AddTagEvent value) addTag,
+    required TResult Function(_RateContactEvent value) rateContact,
   }) {
     return initial(this);
   }
@@ -741,6 +751,7 @@ class _$InitialEventImpl implements _InitialEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitialEvent value)? initial,
     TResult? Function(_AddTagEvent value)? addTag,
+    TResult? Function(_RateContactEvent value)? rateContact,
   }) {
     return initial?.call(this);
   }
@@ -750,6 +761,7 @@ class _$InitialEventImpl implements _InitialEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitialEvent value)? initial,
     TResult Function(_AddTagEvent value)? addTag,
+    TResult Function(_RateContactEvent value)? rateContact,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -834,6 +846,7 @@ class _$AddTagEventImpl implements _AddTagEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(ContactEntity contact) initial,
     required TResult Function(String text) addTag,
+    required TResult Function(double rating) rateContact,
   }) {
     return addTag(text);
   }
@@ -843,6 +856,7 @@ class _$AddTagEventImpl implements _AddTagEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(ContactEntity contact)? initial,
     TResult? Function(String text)? addTag,
+    TResult? Function(double rating)? rateContact,
   }) {
     return addTag?.call(text);
   }
@@ -852,6 +866,7 @@ class _$AddTagEventImpl implements _AddTagEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(ContactEntity contact)? initial,
     TResult Function(String text)? addTag,
+    TResult Function(double rating)? rateContact,
     required TResult orElse(),
   }) {
     if (addTag != null) {
@@ -865,6 +880,7 @@ class _$AddTagEventImpl implements _AddTagEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_InitialEvent value) initial,
     required TResult Function(_AddTagEvent value) addTag,
+    required TResult Function(_RateContactEvent value) rateContact,
   }) {
     return addTag(this);
   }
@@ -874,6 +890,7 @@ class _$AddTagEventImpl implements _AddTagEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitialEvent value)? initial,
     TResult? Function(_AddTagEvent value)? addTag,
+    TResult? Function(_RateContactEvent value)? rateContact,
   }) {
     return addTag?.call(this);
   }
@@ -883,6 +900,7 @@ class _$AddTagEventImpl implements _AddTagEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitialEvent value)? initial,
     TResult Function(_AddTagEvent value)? addTag,
+    TResult Function(_RateContactEvent value)? rateContact,
     required TResult orElse(),
   }) {
     if (addTag != null) {
@@ -898,5 +916,145 @@ abstract class _AddTagEvent implements ContactDetailsEvent {
   String get text;
   @JsonKey(ignore: true)
   _$$AddTagEventImplCopyWith<_$AddTagEventImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$RateContactEventImplCopyWith<$Res> {
+  factory _$$RateContactEventImplCopyWith(_$RateContactEventImpl value,
+          $Res Function(_$RateContactEventImpl) then) =
+      __$$RateContactEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({double rating});
+}
+
+/// @nodoc
+class __$$RateContactEventImplCopyWithImpl<$Res>
+    extends _$ContactDetailsEventCopyWithImpl<$Res, _$RateContactEventImpl>
+    implements _$$RateContactEventImplCopyWith<$Res> {
+  __$$RateContactEventImplCopyWithImpl(_$RateContactEventImpl _value,
+      $Res Function(_$RateContactEventImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? rating = null,
+  }) {
+    return _then(_$RateContactEventImpl(
+      null == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$RateContactEventImpl implements _RateContactEvent {
+  const _$RateContactEventImpl(this.rating);
+
+  @override
+  final double rating;
+
+  @override
+  String toString() {
+    return 'ContactDetailsEvent.rateContact(rating: $rating)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$RateContactEventImpl &&
+            (identical(other.rating, rating) || other.rating == rating));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, rating);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$RateContactEventImplCopyWith<_$RateContactEventImpl> get copyWith =>
+      __$$RateContactEventImplCopyWithImpl<_$RateContactEventImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ContactEntity contact) initial,
+    required TResult Function(String text) addTag,
+    required TResult Function(double rating) rateContact,
+  }) {
+    return rateContact(rating);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ContactEntity contact)? initial,
+    TResult? Function(String text)? addTag,
+    TResult? Function(double rating)? rateContact,
+  }) {
+    return rateContact?.call(rating);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ContactEntity contact)? initial,
+    TResult Function(String text)? addTag,
+    TResult Function(double rating)? rateContact,
+    required TResult orElse(),
+  }) {
+    if (rateContact != null) {
+      return rateContact(rating);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_InitialEvent value) initial,
+    required TResult Function(_AddTagEvent value) addTag,
+    required TResult Function(_RateContactEvent value) rateContact,
+  }) {
+    return rateContact(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_InitialEvent value)? initial,
+    TResult? Function(_AddTagEvent value)? addTag,
+    TResult? Function(_RateContactEvent value)? rateContact,
+  }) {
+    return rateContact?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InitialEvent value)? initial,
+    TResult Function(_AddTagEvent value)? addTag,
+    TResult Function(_RateContactEvent value)? rateContact,
+    required TResult orElse(),
+  }) {
+    if (rateContact != null) {
+      return rateContact(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RateContactEvent implements ContactDetailsEvent {
+  const factory _RateContactEvent(final double rating) = _$RateContactEventImpl;
+
+  double get rating;
+  @JsonKey(ignore: true)
+  _$$RateContactEventImplCopyWith<_$RateContactEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

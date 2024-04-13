@@ -80,5 +80,16 @@
 
   "addTag": "Add Tag",
   "addTagDesc": "Write a tag that will be visible to the public.",
-  "enterTag": "Enter tag"
+  "enterTag": "Enter tag",
+  "tag": "Tag",
+  "showNumTags": "Show {count} tags",
+  "@showNumTags": {
+  "placeholders": {
+    "count": {
+      "type": "String",
+      "example": "5"
+    }
+   }
+  },
+  "rateThisContact": "Rate this contact" 
 }
