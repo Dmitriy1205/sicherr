@@ -59,21 +59,21 @@ class ContactEntity {
           : null,
       isEmergency: json['isEmergencyContact'] ?? false,
       tags: List<String>.from(json['tags'] ?? []),
-      rating: json['rating'],
+      rating: json['rating'] != null
+          ? double.parse(json['rating'].toString())
+          : null,
     );
   }
 
   factory ContactEntity.combineContactsInfo(
-      {required ContactEntity simpleContact,
-      required ContactEntity detailedContact}) {
-    return ContactEntity(
-        id: detailedContact.id,
-        name: detailedContact.name,
-        phoneNumber: detailedContact.phoneNumber,
-        tags: detailedContact.tags,
-        rating: detailedContact.rating,
-        isEmergency: simpleContact.isEmergency,
-        ratings: detailedContact.ratings);
+      {required Map<String, dynamic> userContactJson,
+      required Map<String, dynamic> sharedContactJson}) {
+    final json = <String, dynamic>{};
+    json
+      ..addAll(sharedContactJson)
+      ..addAll(userContactJson);
+
+    return ContactEntity.fromJson(json);
   }
 
   Map<String, dynamic> toJsonSimplified() {
@@ -100,5 +100,27 @@ class ContactEntity {
       'tags': tags,
       'createdAt': DateTime.now(),
     };
+  }
+
+  ContactEntity copyWith({
+    String? id,
+    String? name,
+    String? phoneNumber,
+    bool? isEmergency,
+    List<String>? tags,
+    List<Rating>? ratings,
+    double? rating,
+    Uint8List? image,
+  }) {
+    return ContactEntity(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      isEmergency: isEmergency ?? this.isEmergency,
+      tags: tags ?? this.tags,
+      ratings: ratings ?? this.ratings,
+      rating: rating ?? this.rating,
+      image: image ?? this.image,
+    );
   }
 }

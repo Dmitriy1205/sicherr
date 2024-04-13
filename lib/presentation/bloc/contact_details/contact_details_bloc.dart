@@ -22,22 +22,21 @@ class ContactDetailsBloc
       event.map(
         initial: (e) => _initialEvent(e, emit),
         addTag: (e) => _addTagEvent(e, emit),
+        rateContact: (e) => _rateContactEvent(e, emit),
       );
 
   Future<void> _initialEvent(
       _InitialEvent event, Emitter<ContactDetailsState> emit) async {
     initialContact = event.contact;
     emit(const ContactDetailsState.loadInProgress());
-    await updateDetailedContact();
+    await _initializeContact();
     emit(ContactDetailsState.loaded(detailedContact: _detailedContact));
   }
 
-  Future<void> updateDetailedContact() async {
-    final sharedContact =
-        await contactsRepo.getSharedContact(initialContact.id);
-    if (sharedContact != null) {
-      _detailedContact = ContactEntity.combineContactsInfo(
-          simpleContact: initialContact, detailedContact: sharedContact);
+  Future<void> _initializeContact() async {
+    final contact = await contactsRepo.getSharedContact(initialContact.id);
+    if (contact != null) {
+      _detailedContact = contact;
     } else {
       _detailedContact = initialContact;
     }
@@ -49,10 +48,24 @@ class ContactDetailsBloc
     final contact = await contactsRepo.addNewContactTag(
         contactId: initialContact.id, tag: event.text);
     if (contact != null) {
-      _detailedContact = ContactEntity.combineContactsInfo(
-          simpleContact: initialContact, detailedContact: contact);
+      _detailedContact = _detailedContact.copyWith(tags: contact.tags);
     }
     emit(const ContactDetailsState.successAddedTag());
+    emit(ContactDetailsState.loaded(detailedContact: _detailedContact));
+  }
+
+  Future<void> _rateContactEvent(
+      _RateContactEvent event, Emitter<ContactDetailsState> emit) async {
+    final contact = await contactsRepo.rateContact(
+        contactId: _detailedContact.id, rate: event.rating);
+
+    if (contact != null) {
+      _detailedContact = _detailedContact.copyWith(
+        ratings: contact.ratings,
+        rating: contact.rating,
+      );
+    }
+    emit(const ContactDetailsState.loadInProgress());
     emit(ContactDetailsState.loaded(detailedContact: _detailedContact));
   }
 }

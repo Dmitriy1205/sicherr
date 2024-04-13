@@ -4,6 +4,7 @@ import 'package:sicherr/core/const/icons.dart';
 import 'package:sicherr/presentation/bloc/contact_details/contact_details_bloc.dart';
 import 'package:sicherr/presentation/screens/contact_detail/display_tags.dart';
 import 'package:sicherr/presentation/widgets/svg_round_wrapper_icon.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ShowTags extends StatelessWidget {
   const ShowTags({
@@ -22,9 +23,7 @@ class ShowTags extends StatelessWidget {
             MaterialPageRoute(
               builder: (_) => BlocProvider.value(
                 value: context.read<ContactDetailsBloc>(),
-                child: DisplayTagsScreen(
-                  tags: tags,
-                ),
+                child: const DisplayTagsScreen(),
               ),
             ));
       },
@@ -41,7 +40,7 @@ class ShowTags extends StatelessWidget {
             ),
             const SizedBox(width: 15),
             Text(
-              'Show ${tags.length} tags',
+              AppLocalizations.of(context)!.showNumTags(tags.length.toString()),
               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
           ],
