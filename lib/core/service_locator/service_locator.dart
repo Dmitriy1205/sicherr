@@ -6,6 +6,7 @@ import 'package:get_it/get_it.dart';
 import 'package:sicherr/core/managers/alarm_manager.dart';
 import 'package:sicherr/core/managers/contacts_manager.dart';
 import 'package:sicherr/core/managers/quick_binding_handler.dart';
+import 'package:sicherr/data/remote/caller_identifications_service.dart';
 import 'package:sicherr/data/remote/client.dart';
 import 'package:sicherr/data/remote/fcm_service.dart';
 import 'package:sicherr/domain/repositories/contacts/contacts_repository_impl.dart';
@@ -41,6 +42,7 @@ Future<void> init() async {
   //Services
   final httpClient = HttpClient();
   sl.registerLazySingleton(() => FCMService(messaging: messaging));
+  sl.registerLazySingleton(() => CallerIdService());
 
   final authRepository = AuthRepositoryImpl(auth: auth);
   final userRepository = UserRepositoryImpl(firestore: firestore);
@@ -98,6 +100,7 @@ Future<void> init() async {
 }
 
 Future<void> initNotifications() async {
+  await sl<CallerIdService>().initFCXProvider();
   await sl<FCMService>().initializeFirebase();
   await sl<FCMService>().initializeLocalNotifications();
   await sl<FCMService>().onMessage();
