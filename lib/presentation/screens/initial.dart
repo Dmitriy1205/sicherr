@@ -6,6 +6,7 @@ import 'package:sicherr/core/const/colors.dart';
 import 'package:sicherr/core/const/icons.dart';
 import 'package:sicherr/core/managers/quick_binding_handler.dart';
 import 'package:sicherr/core/theme/theme.dart';
+import 'package:sicherr/presentation/bloc/contact_dentification/contact_identification_bloc.dart';
 import 'package:sicherr/presentation/bloc/profile/profile_bloc.dart';
 import 'package:sicherr/presentation/bloc/send_sos/send_sos_bloc.dart';
 
@@ -45,7 +46,7 @@ class _InitialScreenState extends State<InitialScreen> {
     context.read<ProfileBloc>().add(const ProfileEvent.getProfileFields());
 
     context.read<OnboardingBloc>().add(const OnboardingEvent.get());
-    // context.read<ContactsBloc>().add(ContactsEvent.initial());
+    context.read<ContactIdentificationBloc>().add(const ContactIdentificationEvent.identifyContacts());
     // sl<ContactsInterface>().getContacts();
     context
         .read<EmergencyContactBloc>()
