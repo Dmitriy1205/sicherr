@@ -164,6 +164,7 @@ class _ContactDetailScreenState extends State<ContactDetailScreen> {
                       const Divider(height: 1),
                       AdditionalContentBlock(
                         contact: state.detailedContact,
+                        ratingByUser: state.ratingByUser,
                       ),
                       // const Spacer(),
                       // Padding(

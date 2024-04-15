@@ -9,9 +9,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AdditionalContentBlock extends StatelessWidget {
   final ContactEntity contact;
+  final double ratingByUser;
   const AdditionalContentBlock({
     super.key,
     required this.contact,
+    required this.ratingByUser,
   });
 
   @override
@@ -33,7 +35,7 @@ class AdditionalContentBlock extends StatelessWidget {
                 ),
               ),
               RatingBar.builder(
-                initialRating: contact.rating ?? 0.0,
+                initialRating: ratingByUser,
                 minRating: 1,
                 maxRating: 5,
                 allowHalfRating: false,
@@ -41,7 +43,7 @@ class AdditionalContentBlock extends StatelessWidget {
                 itemCount: 5,
                 itemSize: 22,
                 itemBuilder: (context, i) => Icon(
-                  i < (contact.rating ?? 0.0) ? Icons.star : Icons.star_border,
+                  i < (ratingByUser) ? Icons.star : Icons.star_border,
                   color: AppColors.yellow,
                 ),
                 unratedColor: Colors.black,

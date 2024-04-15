@@ -50,6 +50,7 @@ class ContactEntity {
 
   factory ContactEntity.fromJson(Map<String, dynamic> json) {
     final String? base64Image = json['imageBase64'];
+    final ratings = List<Map<String, dynamic>>.from(json['ratings'] ?? []) ;
     return ContactEntity(
       id: json['id'],
       name: json['name'] ?? '',
@@ -62,6 +63,7 @@ class ContactEntity {
       rating: json['rating'] != null
           ? double.parse(json['rating'].toString())
           : null,
+      ratings: ratings.map((e) => Rating.fromJson(e)).toList(),
     );
   }
 
