@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
 import 'package:sicherr/domain/repositories/contacts/contacts_repository.dart';
@@ -13,9 +14,11 @@ class ContactDetailsBloc
       : super(const ContactDetailsState.initial()) {
     on<ContactDetailsEvent>(_mapEventToState);
   }
-  late final ContactEntity initialContact;
+
+  late final ContactEntity _initialContact;
   final ContactsRepository contactsRepo;
   late ContactEntity _detailedContact;
+  late final bool _showEmrBtn;
 
   _mapEventToState(
           ContactDetailsEvent event, Emitter<ContactDetailsState> emit) =>
@@ -27,18 +30,31 @@ class ContactDetailsBloc
 
   Future<void> _initialEvent(
       _InitialEvent event, Emitter<ContactDetailsState> emit) async {
-    initialContact = event.contact;
     emit(const ContactDetailsState.loadInProgress());
+    _initialContact = event.contact;
     await _initializeContact();
-    emit(ContactDetailsState.loaded(detailedContact: _detailedContact));
+    await _initializeEmgBtn();
+    emit(ContactDetailsState.loaded(
+        detailedContact: _detailedContact, showEmrBtn: _showEmrBtn));
+  }
+
+  Future<void> _initializeEmgBtn() async {
+    final userContacts = await contactsRepo.getUserContacts(
+        currentUserId: FirebaseAuth.instance.currentUser!.uid);
+    if (userContacts == null) {
+      _showEmrBtn = false;
+    } else {
+      _showEmrBtn =
+          userContacts.any((element) => element.id == _initialContact.id);
+    }
   }
 
   Future<void> _initializeContact() async {
-    final contact = await contactsRepo.getSharedContact(initialContact.id);
+    final contact = await contactsRepo.getSharedContact(_initialContact.id);
     if (contact != null) {
       _detailedContact = contact;
     } else {
-      _detailedContact = initialContact;
+      _detailedContact = _initialContact;
     }
   }
 
@@ -46,12 +62,13 @@ class ContactDetailsBloc
       _AddTagEvent event, Emitter<ContactDetailsState> emit) async {
     emit(const ContactDetailsState.loadInProgress());
     final contact = await contactsRepo.addNewContactTag(
-        contactId: initialContact.id, tag: event.text);
+        contactId: _initialContact.id, tag: event.text);
     if (contact != null) {
       _detailedContact = _detailedContact.copyWith(tags: contact.tags);
     }
     emit(const ContactDetailsState.successAddedTag());
-    emit(ContactDetailsState.loaded(detailedContact: _detailedContact));
+    emit(ContactDetailsState.loaded(
+        detailedContact: _detailedContact, showEmrBtn: _showEmrBtn));
   }
 
   Future<void> _rateContactEvent(
@@ -66,6 +83,7 @@ class ContactDetailsBloc
       );
     }
     emit(const ContactDetailsState.loadInProgress());
-    emit(ContactDetailsState.loaded(detailedContact: _detailedContact));
+    emit(ContactDetailsState.loaded(
+        detailedContact: _detailedContact, showEmrBtn: _showEmrBtn));
   }
 }
