@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:collection/collection.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
@@ -19,6 +20,8 @@ class ContactDetailsBloc
   final ContactsRepository contactsRepo;
   late ContactEntity _detailedContact;
   late final bool _showEmrBtn;
+  double _ratingByUser = 0.0;
+  final firebaseUser = FirebaseAuth.instance.currentUser!;
 
   _mapEventToState(
           ContactDetailsEvent event, Emitter<ContactDetailsState> emit) =>
@@ -34,13 +37,26 @@ class ContactDetailsBloc
     _initialContact = event.contact;
     await _initializeContact();
     await _initializeEmgBtn();
+    _initializeRatingByUser();
+    _emitLoadedState(emit);
+  }
+
+  void _emitLoadedState(Emitter<ContactDetailsState> emit) {
     emit(ContactDetailsState.loaded(
-        detailedContact: _detailedContact, showEmrBtn: _showEmrBtn));
+        detailedContact: _detailedContact,
+        showEmrBtn: _showEmrBtn,
+        ratingByUser: _ratingByUser));
+  }
+
+  void _initializeRatingByUser() {
+    final ratingByUser = _detailedContact.ratings
+        .firstWhereOrNull((e) => e.fromUserId == firebaseUser.phoneNumber);
+    _ratingByUser = ratingByUser?.rating ?? 0.0;
   }
 
   Future<void> _initializeEmgBtn() async {
-    final userContacts = await contactsRepo.getUserContacts(
-        currentUserId: FirebaseAuth.instance.currentUser!.uid);
+    final userContacts =
+        await contactsRepo.getUserContacts(currentUserId: firebaseUser.uid);
     if (userContacts == null) {
       _showEmrBtn = false;
     } else {
@@ -67,12 +83,13 @@ class ContactDetailsBloc
       _detailedContact = _detailedContact.copyWith(tags: contact.tags);
     }
     emit(const ContactDetailsState.successAddedTag());
-    emit(ContactDetailsState.loaded(
-        detailedContact: _detailedContact, showEmrBtn: _showEmrBtn));
+    _emitLoadedState(emit);
   }
 
   Future<void> _rateContactEvent(
       _RateContactEvent event, Emitter<ContactDetailsState> emit) async {
+    _ratingByUser = event.rating;
+    _emitLoadedState(emit);
     final contact = await contactsRepo.rateContact(
         contactId: _detailedContact.id, rate: event.rating);
 
@@ -81,9 +98,7 @@ class ContactDetailsBloc
         ratings: contact.ratings,
         rating: contact.rating,
       );
-    }
-    emit(const ContactDetailsState.loadInProgress());
-    emit(ContactDetailsState.loaded(
-        detailedContact: _detailedContact, showEmrBtn: _showEmrBtn));
+    };
+    _emitLoadedState(emit);
   }
 }
