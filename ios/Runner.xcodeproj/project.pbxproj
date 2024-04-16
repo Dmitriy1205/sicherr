@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0304F16EBF288DEA3370FAAC /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77DC3BE1FE9E2CED2FF1A7DD /* Pods_Runner.framework */; };
+		04315A272BCEFCCE00F366AC /* IdentifiableNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04315A262BCEFCCE00F366AC /* IdentifiableNumber.swift */; };
+		04315A2B2BCEFE1600F366AC /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04315A242BCEFB0100F366AC /* UserDefault.swift */; };
+		04315A2E2BCEFE3000F366AC /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04315A242BCEFB0100F366AC /* UserDefault.swift */; };
+		04315A2F2BCEFE3300F366AC /* IdentifiableNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04315A262BCEFCCE00F366AC /* IdentifiableNumber.swift */; };
 		060002D29E868C353D3962B7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 871E1DC309C92CF1210CBD64 /* GoogleService-Info.plist */; };
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
 		310AA20F223459010A455C47 /* Pods_RunnerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 571697DBE6333AB117BA2ECA /* Pods_RunnerTests.framework */; };
@@ -63,6 +67,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		04315A242BCEFB0100F366AC /* UserDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
+		04315A262BCEFCCE00F366AC /* IdentifiableNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IdentifiableNumber.swift; path = ../../../../../Downloads/IdentifiableNumber.swift; sourceTree = "<group>"; };
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
 		331C807B294A618700263BE5 /* RunnerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerTests.swift; sourceTree = "<group>"; };
@@ -184,6 +190,8 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				04315A242BCEFB0100F366AC /* UserDefault.swift */,
+				04315A262BCEFCCE00F366AC /* IdentifiableNumber.swift */,
 				3C9BF9CA2B9B4E9500D439FD /* Runner.entitlements */,
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
 				97C146FD1CF9000F007C117D /* Assets.xcassets */,
@@ -262,7 +270,7 @@
 				9705A1C41CF9048500538489 /* Embed Frameworks */,
 				97C146EC1CF9000F007C117D /* Resources */,
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
-				EFFE7B091853C488527BA086 /* [CP] Copy Pods Resources */,
+				9482FB518B51659B7DE7748D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -386,6 +394,23 @@
 			shellPath = /bin/sh;
 			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" embed_and_thin\n";
 		};
+		9482FB518B51659B7DE7748D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		9740EEB61CF901F6004384FC /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -440,23 +465,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EFFE7B091853C488527BA086 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -472,7 +480,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04315A2E2BCEFE3000F366AC /* UserDefault.swift in Sources */,
 				3C01EF7D2BCBDCE70020D279 /* CallDirectoryHandler.swift in Sources */,
+				04315A2F2BCEFE3300F366AC /* IdentifiableNumber.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,6 +490,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04315A272BCEFCCE00F366AC /* IdentifiableNumber.swift in Sources */,
+				04315A2B2BCEFE1600F366AC /* UserDefault.swift in Sources */,
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
 			);
