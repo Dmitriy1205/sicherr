@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sicherr/core/utils/phone_formatter.dart';
@@ -16,6 +17,7 @@ class ContactEntity {
     this.ratings = const [],
     this.rating,
     this.image,
+    this.createdAt,
   });
 
   final String id;
@@ -26,6 +28,7 @@ class ContactEntity {
   final List<Rating> ratings;
   final double? rating;
   final Uint8List? image;
+  final DateTime? createdAt;
 
   factory ContactEntity.fromLocalContact(Contact contact) {
     final phoneNumber =
@@ -50,7 +53,17 @@ class ContactEntity {
 
   factory ContactEntity.fromJson(Map<String, dynamic> json) {
     final String? base64Image = json['imageBase64'];
+
+    final Timestamp? createdAtTimestamp = json['createdAt'] as Timestamp?;
+
+    DateTime? createdAt;
+    if (createdAtTimestamp != null) {
+      createdAt = createdAtTimestamp.toDate();
+
+    }
+
     final ratings = List<Map<String, dynamic>>.from(json['ratings'] ?? []) ;
+
     return ContactEntity(
       id: json['id'],
       name: json['name'] ?? '',
@@ -63,7 +76,11 @@ class ContactEntity {
       rating: json['rating'] != null
           ? double.parse(json['rating'].toString())
           : null,
+
+      createdAt: createdAt,
+
       ratings: ratings.map((e) => Rating.fromJson(e)).toList(),
+
     );
   }
 

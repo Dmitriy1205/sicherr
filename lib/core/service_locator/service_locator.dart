@@ -6,7 +6,8 @@ import 'package:get_it/get_it.dart';
 import 'package:sicherr/core/managers/alarm_manager.dart';
 import 'package:sicherr/core/managers/contacts_manager.dart';
 import 'package:sicherr/core/managers/quick_binding_handler.dart';
-import 'package:sicherr/data/remote/caller_identifications_service.dart';
+import 'package:sicherr/data/local/caller_identifications_service.dart';
+import 'package:sicherr/data/local/latest_contact_prefs.dart';
 import 'package:sicherr/data/remote/client.dart';
 import 'package:sicherr/data/remote/fcm_service.dart';
 import 'package:sicherr/domain/repositories/contacts/contacts_repository_impl.dart';
@@ -17,6 +18,7 @@ import 'package:sicherr/domain/repositories/notification/notification_repository
 import 'package:sicherr/domain/repositories/user/user_repository.dart';
 import 'package:sicherr/domain/repositories/user/user_repository_impl.dart';
 import 'package:sicherr/presentation/bloc/alarm/alarm_bloc.dart';
+import 'package:sicherr/presentation/bloc/contact_dentification/contact_identification_bloc.dart';
 import 'package:sicherr/presentation/bloc/contacts/contacts_bloc.dart';
 import 'package:sicherr/presentation/bloc/emergency_contact/emergency_contact_bloc.dart';
 import 'package:sicherr/presentation/bloc/notification/notification_bloc.dart';
@@ -27,6 +29,8 @@ import 'package:sicherr/presentation/bloc/sign_in/sign_in_bloc.dart';
 import '../../domain/repositories/auth/auth_repository.dart';
 import '../../domain/repositories/auth/auth_repository_impl.dart';
 import '../../domain/repositories/contacts/contacts_repository.dart';
+import '../../domain/repositories/identification_contacts/id_contacts_repository.dart';
+import '../../domain/repositories/identification_contacts/id_contacts_repository_impl.dart';
 import '../../presentation/bloc/auth/auth_bloc.dart';
 import '../../presentation/bloc/onboarding/onboarding_bloc.dart';
 import '../../presentation/bloc/otp/otp_bloc.dart';
@@ -54,6 +58,11 @@ Future<void> init() async {
       fcmService: sl(), firebaseFirestore: firestore);
   final contactManager = ContactsManager();
 
+  final latestContactPrefs = LatestContactPrefs();
+  final callerIdService = CallerIdService();
+  final callerIdRepository = CallerIdRepositoryImpl(
+      callerIdService: callerIdService, latestContactPrefs: latestContactPrefs);
+
   //Repositories
   sl.registerSingleton<AuthRepository>(authRepository);
   sl.registerSingleton<UserRepository>(userRepository);
@@ -64,6 +73,7 @@ Future<void> init() async {
   sl.registerSingleton<HttpClient>(httpClient);
   sl.registerSingleton<QuickBindingListener>(quickBindingListener);
   sl.registerSingleton<ContactsInterface>(contactManager);
+  sl.registerSingleton<CallerIdRepository>(callerIdRepository);
 
   //Blocs
   sl.registerLazySingleton(() => AuthBloc(
@@ -97,6 +107,8 @@ Future<void> init() async {
       () => NotificationBloc(notificationRepository: sl(), authBloc: sl()));
   sl.registerLazySingleton(() => ShakeDetectorBloc(profileBloc: sl()));
   sl.registerLazySingleton(() => ContactsBloc(sl()));
+  sl.registerLazySingleton(() => ContactIdentificationBloc(
+      callerIdRepository: sl(), contactsRepository: sl()));
 }
 
 Future<void> initNotifications() async {

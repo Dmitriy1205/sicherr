@@ -291,4 +291,18 @@ class ContactsRepositoryImpl implements ContactsRepository {
     }
     return null;
   }
+
+  @override
+  Future<List<ContactEntity>> getAllSharedContacts() async {
+    try {
+      final collectionReference =
+          await _firestore.collection(contactsSubCollectionName).get();
+      final List<ContactEntity> sharedContacts = collectionReference.docs
+          .map((doc) => ContactEntity.fromJson(doc.data()))
+          .toList();
+      return sharedContacts;
+    } on Exception catch (e) {
+      throw BadRequestException(message: e.toString());
+    }
+  }
 }
