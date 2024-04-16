@@ -53,6 +53,7 @@ class ContactEntity {
 
   factory ContactEntity.fromJson(Map<String, dynamic> json) {
     final String? base64Image = json['imageBase64'];
+
     final Timestamp? createdAtTimestamp = json['createdAt'] as Timestamp?;
 
     DateTime? createdAt;
@@ -60,6 +61,9 @@ class ContactEntity {
       createdAt = createdAtTimestamp.toDate();
 
     }
+
+    final ratings = List<Map<String, dynamic>>.from(json['ratings'] ?? []) ;
+
     return ContactEntity(
       id: json['id'],
       name: json['name'] ?? '',
@@ -72,7 +76,11 @@ class ContactEntity {
       rating: json['rating'] != null
           ? double.parse(json['rating'].toString())
           : null,
+
       createdAt: createdAt,
+
+      ratings: ratings.map((e) => Rating.fromJson(e)).toList(),
+
     );
   }
 

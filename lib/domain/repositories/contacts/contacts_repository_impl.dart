@@ -83,11 +83,14 @@ class ContactsRepositoryImpl implements ContactsRepository {
           // Document already exists, update the "tags" field
           final existingTags =
               List<String>.from(sharedDocSnapshot.data()?['tags'] ?? []);
-          final newTags = [
-            ...existingTags,
-            contact.name
-          ]; // Combine existing and new tags
-          batch.update(docRefSharedContacts, {'tags': newTags});
+          if (!existingTags.contains(contact.name)) {
+            final newTags = [
+              ...existingTags,
+              contact.name
+            ]; // Combine existing and new tags
+
+            batch.update(docRefSharedContacts, {'tags': newTags});
+          }
         } else {
           // Document does not exist, set the data for the new document
           batch.set(docRefSharedContacts, contact.toJson());
