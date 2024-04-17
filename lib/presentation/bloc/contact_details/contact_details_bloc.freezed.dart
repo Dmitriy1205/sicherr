@@ -20,7 +20,9 @@ mixin _$ContactDetailsState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(ContactEntity detailedContact) loaded,
+    required TResult Function(
+            ContactEntity detailedContact, bool showEmrBtn, double ratingByUser)
+        loaded,
     required TResult Function() successAddedTag,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +30,9 @@ mixin _$ContactDetailsState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loadInProgress,
-    TResult? Function(ContactEntity detailedContact)? loaded,
+    TResult? Function(ContactEntity detailedContact, bool showEmrBtn,
+            double ratingByUser)?
+        loaded,
     TResult? Function()? successAddedTag,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +40,9 @@ mixin _$ContactDetailsState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(ContactEntity detailedContact)? loaded,
+    TResult Function(ContactEntity detailedContact, bool showEmrBtn,
+            double ratingByUser)?
+        loaded,
     TResult Function()? successAddedTag,
     required TResult orElse(),
   }) =>
@@ -126,7 +132,9 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(ContactEntity detailedContact) loaded,
+    required TResult Function(
+            ContactEntity detailedContact, bool showEmrBtn, double ratingByUser)
+        loaded,
     required TResult Function() successAddedTag,
   }) {
     return initial();
@@ -137,7 +145,9 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loadInProgress,
-    TResult? Function(ContactEntity detailedContact)? loaded,
+    TResult? Function(ContactEntity detailedContact, bool showEmrBtn,
+            double ratingByUser)?
+        loaded,
     TResult? Function()? successAddedTag,
   }) {
     return initial?.call();
@@ -148,7 +158,9 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(ContactEntity detailedContact)? loaded,
+    TResult Function(ContactEntity detailedContact, bool showEmrBtn,
+            double ratingByUser)?
+        loaded,
     TResult Function()? successAddedTag,
     required TResult orElse(),
   }) {
@@ -240,7 +252,9 @@ class _$LoadInProgressImpl implements _LoadInProgress {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(ContactEntity detailedContact) loaded,
+    required TResult Function(
+            ContactEntity detailedContact, bool showEmrBtn, double ratingByUser)
+        loaded,
     required TResult Function() successAddedTag,
   }) {
     return loadInProgress();
@@ -251,7 +265,9 @@ class _$LoadInProgressImpl implements _LoadInProgress {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loadInProgress,
-    TResult? Function(ContactEntity detailedContact)? loaded,
+    TResult? Function(ContactEntity detailedContact, bool showEmrBtn,
+            double ratingByUser)?
+        loaded,
     TResult? Function()? successAddedTag,
   }) {
     return loadInProgress?.call();
@@ -262,7 +278,9 @@ class _$LoadInProgressImpl implements _LoadInProgress {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(ContactEntity detailedContact)? loaded,
+    TResult Function(ContactEntity detailedContact, bool showEmrBtn,
+            double ratingByUser)?
+        loaded,
     TResult Function()? successAddedTag,
     required TResult orElse(),
   }) {
@@ -320,7 +338,8 @@ abstract class _$$LoadedImplCopyWith<$Res> {
           _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
       __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({ContactEntity detailedContact});
+  $Res call(
+      {ContactEntity detailedContact, bool showEmrBtn, double ratingByUser});
 }
 
 /// @nodoc
@@ -335,12 +354,22 @@ class __$$LoadedImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? detailedContact = null,
+    Object? showEmrBtn = null,
+    Object? ratingByUser = null,
   }) {
     return _then(_$LoadedImpl(
       detailedContact: null == detailedContact
           ? _value.detailedContact
           : detailedContact // ignore: cast_nullable_to_non_nullable
               as ContactEntity,
+      showEmrBtn: null == showEmrBtn
+          ? _value.showEmrBtn
+          : showEmrBtn // ignore: cast_nullable_to_non_nullable
+              as bool,
+      ratingByUser: null == ratingByUser
+          ? _value.ratingByUser
+          : ratingByUser // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -348,14 +377,21 @@ class __$$LoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadedImpl implements _Loaded {
-  const _$LoadedImpl({required this.detailedContact});
+  const _$LoadedImpl(
+      {required this.detailedContact,
+      required this.showEmrBtn,
+      required this.ratingByUser});
 
   @override
   final ContactEntity detailedContact;
+  @override
+  final bool showEmrBtn;
+  @override
+  final double ratingByUser;
 
   @override
   String toString() {
-    return 'ContactDetailsState.loaded(detailedContact: $detailedContact)';
+    return 'ContactDetailsState.loaded(detailedContact: $detailedContact, showEmrBtn: $showEmrBtn, ratingByUser: $ratingByUser)';
   }
 
   @override
@@ -364,11 +400,16 @@ class _$LoadedImpl implements _Loaded {
         (other.runtimeType == runtimeType &&
             other is _$LoadedImpl &&
             (identical(other.detailedContact, detailedContact) ||
-                other.detailedContact == detailedContact));
+                other.detailedContact == detailedContact) &&
+            (identical(other.showEmrBtn, showEmrBtn) ||
+                other.showEmrBtn == showEmrBtn) &&
+            (identical(other.ratingByUser, ratingByUser) ||
+                other.ratingByUser == ratingByUser));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, detailedContact);
+  int get hashCode =>
+      Object.hash(runtimeType, detailedContact, showEmrBtn, ratingByUser);
 
   @JsonKey(ignore: true)
   @override
@@ -381,10 +422,12 @@ class _$LoadedImpl implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(ContactEntity detailedContact) loaded,
+    required TResult Function(
+            ContactEntity detailedContact, bool showEmrBtn, double ratingByUser)
+        loaded,
     required TResult Function() successAddedTag,
   }) {
-    return loaded(detailedContact);
+    return loaded(detailedContact, showEmrBtn, ratingByUser);
   }
 
   @override
@@ -392,10 +435,12 @@ class _$LoadedImpl implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loadInProgress,
-    TResult? Function(ContactEntity detailedContact)? loaded,
+    TResult? Function(ContactEntity detailedContact, bool showEmrBtn,
+            double ratingByUser)?
+        loaded,
     TResult? Function()? successAddedTag,
   }) {
-    return loaded?.call(detailedContact);
+    return loaded?.call(detailedContact, showEmrBtn, ratingByUser);
   }
 
   @override
@@ -403,12 +448,14 @@ class _$LoadedImpl implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(ContactEntity detailedContact)? loaded,
+    TResult Function(ContactEntity detailedContact, bool showEmrBtn,
+            double ratingByUser)?
+        loaded,
     TResult Function()? successAddedTag,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(detailedContact);
+      return loaded(detailedContact, showEmrBtn, ratingByUser);
     }
     return orElse();
   }
@@ -452,10 +499,14 @@ class _$LoadedImpl implements _Loaded {
 }
 
 abstract class _Loaded implements ContactDetailsState {
-  const factory _Loaded({required final ContactEntity detailedContact}) =
-      _$LoadedImpl;
+  const factory _Loaded(
+      {required final ContactEntity detailedContact,
+      required final bool showEmrBtn,
+      required final double ratingByUser}) = _$LoadedImpl;
 
   ContactEntity get detailedContact;
+  bool get showEmrBtn;
+  double get ratingByUser;
   @JsonKey(ignore: true)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -501,7 +552,9 @@ class _$SuccessAddedTagImpl implements _SuccessAddedTag {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(ContactEntity detailedContact) loaded,
+    required TResult Function(
+            ContactEntity detailedContact, bool showEmrBtn, double ratingByUser)
+        loaded,
     required TResult Function() successAddedTag,
   }) {
     return successAddedTag();
@@ -512,7 +565,9 @@ class _$SuccessAddedTagImpl implements _SuccessAddedTag {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loadInProgress,
-    TResult? Function(ContactEntity detailedContact)? loaded,
+    TResult? Function(ContactEntity detailedContact, bool showEmrBtn,
+            double ratingByUser)?
+        loaded,
     TResult? Function()? successAddedTag,
   }) {
     return successAddedTag?.call();
@@ -523,7 +578,9 @@ class _$SuccessAddedTagImpl implements _SuccessAddedTag {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(ContactEntity detailedContact)? loaded,
+    TResult Function(ContactEntity detailedContact, bool showEmrBtn,
+            double ratingByUser)?
+        loaded,
     TResult Function()? successAddedTag,
     required TResult orElse(),
   }) {

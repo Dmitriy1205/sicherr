@@ -107,51 +107,53 @@ class _ContactDetailScreenState extends State<ContactDetailScreen> {
                                       },
                                     ),
                                     const SizedBox(width: 25),
-                                    ActionTextBotBnt(
-                                      icon: const RoundSosIcon(
-                                        height: 31,
-                                        width: 31,
-                                        fontSize: 7.33,
+                                    if (state.showEmrBtn)
+                                      ActionTextBotBnt(
+                                        icon: const RoundSosIcon(
+                                          height: 31,
+                                          width: 31,
+                                          fontSize: 7.33,
+                                        ),
+                                        text: context
+                                                .read<EmergencyContactBloc>()
+                                                .state
+                                                .emContacts
+                                                .any((element) =>
+                                                    element.id ==
+                                                    state.detailedContact.id)
+                                            ? '- ${AppLocalizations.of(context)!.emergency}'
+                                            : '+ ${AppLocalizations.of(context)!.emergency}',
+                                        onTap: () {
+                                          isEmergency!
+                                              ? context
+                                                  .read<EmergencyContactBloc>()
+                                                  .add(EmergencyContactEvent
+                                                      .deleteFromEmContact(
+                                                          contactId: state
+                                                              .detailedContact
+                                                              .id))
+                                              : context
+                                                  .read<EmergencyContactBloc>()
+                                                  .add(
+                                                    EmergencyContactEvent
+                                                        .addToEmContact(
+                                                      emContact: EmergencyContact(
+                                                          id: state
+                                                              .detailedContact
+                                                              .id,
+                                                          name: state
+                                                              .detailedContact
+                                                              .name,
+                                                          phoneNumber: state
+                                                              .detailedContact
+                                                              .phoneNumber),
+                                                    ),
+                                                  );
+                                          setState(() {
+                                            isEmergency = !isEmergency!;
+                                          });
+                                        },
                                       ),
-                                      text: context
-                                              .read<EmergencyContactBloc>()
-                                              .state
-                                              .emContacts
-                                              .any((element) =>
-                                                  element.id ==
-                                                  state.detailedContact.id)
-                                          ? '- ${AppLocalizations.of(context)!.emergency}'
-                                          : '+ ${AppLocalizations.of(context)!.emergency}',
-                                      onTap: () {
-                                        isEmergency!
-                                            ? context
-                                                .read<EmergencyContactBloc>()
-                                                .add(EmergencyContactEvent
-                                                    .deleteFromEmContact(
-                                                        contactId: state
-                                                            .detailedContact
-                                                            .id))
-                                            : context
-                                                .read<EmergencyContactBloc>()
-                                                .add(
-                                                  EmergencyContactEvent
-                                                      .addToEmContact(
-                                                    emContact: EmergencyContact(
-                                                        id: state
-                                                            .detailedContact.id,
-                                                        name: state
-                                                            .detailedContact
-                                                            .name,
-                                                        phoneNumber: state
-                                                            .detailedContact
-                                                            .phoneNumber),
-                                                  ),
-                                                );
-                                        setState(() {
-                                          isEmergency = !isEmergency!;
-                                        });
-                                      },
-                                    ),
                                   ],
                                 ),
                               ),
@@ -162,6 +164,7 @@ class _ContactDetailScreenState extends State<ContactDetailScreen> {
                       const Divider(height: 1),
                       AdditionalContentBlock(
                         contact: state.detailedContact,
+                        ratingByUser: state.ratingByUser,
                       ),
                       // const Spacer(),
                       // Padding(
