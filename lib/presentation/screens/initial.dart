@@ -25,6 +25,7 @@ import '../bloc/onboarding/onboarding_bloc.dart';
 
 class InitialScreen extends StatefulWidget {
   const InitialScreen({super.key, this.initPage});
+
   final PrimaryPageEnum? initPage;
 
   @override
@@ -46,7 +47,9 @@ class _InitialScreenState extends State<InitialScreen> {
     context.read<ProfileBloc>().add(const ProfileEvent.getProfileFields());
 
     context.read<OnboardingBloc>().add(const OnboardingEvent.get());
-    context.read<ContactIdentificationBloc>().add(const ContactIdentificationEvent.identifyContacts());
+    context
+        .read<ContactIdentificationBloc>()
+        .add(const ContactIdentificationEvent.identifyContacts());
     // sl<ContactsInterface>().getContacts();
     context
         .read<EmergencyContactBloc>()
@@ -61,6 +64,12 @@ class _InitialScreenState extends State<InitialScreen> {
   Widget build(BuildContext context) {
     return MultiBlocListener(
       listeners: [
+        BlocListener<ContactIdentificationBloc, ContactIdentificationState>(
+            listener: (context, state) {
+              state.maybeMap(
+                  error: (e)=>AppToast.showError(context, e.error),
+                  orElse: (){});
+            }),
         BlocListener<OnboardingBloc, OnboardingState>(
           listener: (context, state) {
             state.maybeMap(
@@ -107,9 +116,8 @@ class _InitialScreenState extends State<InitialScreen> {
       ],
       child: Scaffold(
         appBar: DefaultAppBar(
-          title: PrimaryPageEnum.values
-              .elementAt(_selectedPage)
-              .getLabel(context),
+          title:
+              PrimaryPageEnum.values.elementAt(_selectedPage).getLabel(context),
           showBackButton: false,
           icon: actions[_selectedPage],
         ),
