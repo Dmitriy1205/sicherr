@@ -37,7 +37,7 @@ class ContactIdentificationBloc
           sharedContacts: sharedContacts);
       emit(const ContactIdentificationState.loaded());
     } on BadRequestException catch (e) {
-      emit(ContactIdentificationState.error(error: e.toString()));
+      emit(ContactIdentificationState.error(error: e.message));
     }
   }
 }
