@@ -39,10 +39,9 @@ class CallerIdRepositoryImpl extends CallerIdRepository {
             .toList();
         await _latestContactPrefs.setLastCreatedAt(latestCreatedAt);
         await _callerIdService.addSharedNumbers(contacts: contactsToAdd);
-      } else if (latestUpdateDate.isBefore(latestCreatedAt)) {
+      } else{
         contactsToAdd = sharedContacts
             .where((contact) =>
-                contact.createdAt!.isAfter(latestUpdateDate) &&
                 (contact.rating ?? 0) < 3.5)
             .toList();
         await _latestContactPrefs.setLastCreatedAt(latestCreatedAt);
