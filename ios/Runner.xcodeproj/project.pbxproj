@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		0304F16EBF288DEA3370FAAC /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77DC3BE1FE9E2CED2FF1A7DD /* Pods_Runner.framework */; };
-		04315A272BCEFCCE00F366AC /* IdentifiableNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04315A262BCEFCCE00F366AC /* IdentifiableNumber.swift */; };
 		04315A2B2BCEFE1600F366AC /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04315A242BCEFB0100F366AC /* UserDefault.swift */; };
 		04315A2E2BCEFE3000F366AC /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04315A242BCEFB0100F366AC /* UserDefault.swift */; };
-		04315A2F2BCEFE3300F366AC /* IdentifiableNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04315A262BCEFCCE00F366AC /* IdentifiableNumber.swift */; };
-		060002D29E868C353D3962B7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 871E1DC309C92CF1210CBD64 /* GoogleService-Info.plist */; };
+		048D12EA2BD96BAE00ED2B7A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 048D12E92BD96B7A00ED2B7A /* GoogleService-Info.plist */; };
+		048D12F02BD9717F00ED2B7A /* IdentifiableNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D12EF2BD9717F00ED2B7A /* IdentifiableNumber.swift */; };
+		048D12F12BD9717F00ED2B7A /* IdentifiableNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D12EF2BD9717F00ED2B7A /* IdentifiableNumber.swift */; };
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
 		310AA20F223459010A455C47 /* Pods_RunnerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 571697DBE6333AB117BA2ECA /* Pods_RunnerTests.framework */; };
 		331C808B294A63AB00263BE5 /* RunnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331C807B294A618700263BE5 /* RunnerTests.swift */; };
@@ -68,7 +68,9 @@
 
 /* Begin PBXFileReference section */
 		04315A242BCEFB0100F366AC /* UserDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
-		04315A262BCEFCCE00F366AC /* IdentifiableNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IdentifiableNumber.swift; path = ../../../../../Downloads/IdentifiableNumber.swift; sourceTree = "<group>"; };
+		048D12E62BD967FF00ED2B7A /* CallerExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CallerExtension.entitlements; sourceTree = "<group>"; };
+		048D12E92BD96B7A00ED2B7A /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		048D12EF2BD9717F00ED2B7A /* IdentifiableNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifiableNumber.swift; sourceTree = "<group>"; };
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
 		331C807B294A618700263BE5 /* RunnerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerTests.swift; sourceTree = "<group>"; };
@@ -84,7 +86,6 @@
 		74858FAE1ED2DC5600515810 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		77DC3BE1FE9E2CED2FF1A7DD /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
-		871E1DC309C92CF1210CBD64 /* GoogleService-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Runner/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		88820EB2908F5652E1ADD807 /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = Flutter/Debug.xcconfig; sourceTree = "<group>"; };
 		9740EEB31CF90195004384FC /* Generated.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Generated.xcconfig; path = Flutter/Generated.xcconfig; sourceTree = "<group>"; };
@@ -137,6 +138,7 @@
 		3C01EF7B2BCBDCE70020D279 /* CallerExtension */ = {
 			isa = PBXGroup;
 			children = (
+				048D12E62BD967FF00ED2B7A /* CallerExtension.entitlements */,
 				3C01EF7C2BCBDCE70020D279 /* CallDirectoryHandler.swift */,
 				3C01EF7E2BCBDCE70020D279 /* Info.plist */,
 			);
@@ -171,7 +173,6 @@
 				3C01EF7B2BCBDCE70020D279 /* CallerExtension */,
 				97C146EF1CF9000F007C117D /* Products */,
 				331C8082294A63A400263BE5 /* RunnerTests */,
-				871E1DC309C92CF1210CBD64 /* GoogleService-Info.plist */,
 				FAEC9629F042DF0E14855F8A /* Pods */,
 				77D78914474385EBCFCA1E65 /* Frameworks */,
 			);
@@ -190,8 +191,9 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				048D12EF2BD9717F00ED2B7A /* IdentifiableNumber.swift */,
+				048D12E92BD96B7A00ED2B7A /* GoogleService-Info.plist */,
 				04315A242BCEFB0100F366AC /* UserDefault.swift */,
-				04315A262BCEFCCE00F366AC /* IdentifiableNumber.swift */,
 				3C9BF9CA2B9B4E9500D439FD /* Runner.entitlements */,
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
 				97C146FD1CF9000F007C117D /* Assets.xcassets */,
@@ -347,9 +349,9 @@
 			files = (
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
+				048D12EA2BD96BAE00ED2B7A /* GoogleService-Info.plist in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
-				060002D29E868C353D3962B7 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,9 +482,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				048D12F12BD9717F00ED2B7A /* IdentifiableNumber.swift in Sources */,
 				04315A2E2BCEFE3000F366AC /* UserDefault.swift in Sources */,
 				3C01EF7D2BCBDCE70020D279 /* CallDirectoryHandler.swift in Sources */,
-				04315A2F2BCEFE3300F366AC /* IdentifiableNumber.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,7 +492,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04315A272BCEFCCE00F366AC /* IdentifiableNumber.swift in Sources */,
+				048D12F02BD9717F00ED2B7A /* IdentifiableNumber.swift in Sources */,
 				04315A2B2BCEFE1600F366AC /* UserDefault.swift in Sources */,
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
@@ -591,14 +593,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
-				DEVELOPMENT_TEAM = WXA9BL8ML3;
+				DEVELOPMENT_TEAM = P9C22T92US;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.pandascode.sicherr;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pandascode.sicher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -620,7 +622,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.pandascode.sicherr.RunnerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pandascode.sicher.RunnerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -638,7 +640,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.pandascode.sicherr.RunnerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pandascode.sicher.RunnerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Runner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Runner";
@@ -654,7 +656,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.pandascode.sicherr.RunnerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pandascode.sicher.RunnerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Runner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Runner";
@@ -672,9 +674,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = CallerExtension/CallerExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = WXA9BL8ML3;
+				DEVELOPMENT_TEAM = P9C22T92US;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -691,7 +694,7 @@
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.pandascode.sicherr.CallerExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pandascode.sicher.CallerExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
@@ -713,9 +716,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = CallerExtension/CallerExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = WXA9BL8ML3;
+				DEVELOPMENT_TEAM = P9C22T92US;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -731,7 +735,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.pandascode.sicherr.CallerExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pandascode.sicher.CallerExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -751,9 +755,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = CallerExtension/CallerExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = WXA9BL8ML3;
+				DEVELOPMENT_TEAM = P9C22T92US;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -769,7 +774,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.pandascode.sicherr.CallerExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pandascode.sicher.CallerExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -894,14 +899,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
-				DEVELOPMENT_TEAM = WXA9BL8ML3;
+				DEVELOPMENT_TEAM = P9C22T92US;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.pandascode.sicherr;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pandascode.sicher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -924,14 +929,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
-				DEVELOPMENT_TEAM = WXA9BL8ML3;
+				DEVELOPMENT_TEAM = P9C22T92US;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.pandascode.sicherr;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pandascode.sicher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
