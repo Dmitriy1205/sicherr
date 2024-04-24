@@ -1,9 +1,6 @@
-//
-//  IdentifiableNumber.swift
-//  Runner
-//
-//  Created by Dmytro Plashkin on 16.04.2024.
-//
+/*
+*  Copyright (c) 2011-2021, Zingaya, Inc. All rights reserved.
+*/
 
 import Foundation
 

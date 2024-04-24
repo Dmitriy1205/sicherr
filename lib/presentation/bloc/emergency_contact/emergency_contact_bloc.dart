@@ -44,8 +44,7 @@ class EmergencyContactBloc
   Future<void> _getAllEmContacts(
       _GetAllEmContacts event, Emitter<EmergencyContactState> emit) async {
     try {
-      _emStreamSubscription = _emContactsRepository
-          .getEmContactList(currentUserId: _authBloc.state.user!.uid)
+      _emStreamSubscription = _emContactsRepository.getEmContactList(currentUserId: _authBloc.state.user!.uid)
           .listen((emContacts) {
         if (emContacts == null) {
           add(const EmergencyContactEvent.loadEmContacts(emContacts: []));

@@ -16,6 +16,8 @@ final class CallDirectoryHandler: CXCallDirectoryProvider {
 
     @NullableUserDefault("lastUpdate")
     private var lastUpdate: Date?
+    
+    
 
     override func beginRequest(with context: CXCallDirectoryExtensionContext) {
         context.delegate = self
@@ -25,9 +27,12 @@ final class CallDirectoryHandler: CXCallDirectoryProvider {
         // But the extension must still be prepared to provide the full set of data at any time, so add all blocking
         // and identification phone numbers if the request is not incremental.
         // To perform an incremental update, the 'lastUpdate' used (date of the previous update).
+        print(identifiedNumbers.count);
         if let lastUpdate = lastUpdate, context.isIncremental {
+            print("Increment");
             addOrRemoveIncrementalIdentificationPhoneNumbers(to: context, since: lastUpdate)
         } else {
+            print("Add");
             addAllIdentificationPhoneNumbers(to: context)
         }
 

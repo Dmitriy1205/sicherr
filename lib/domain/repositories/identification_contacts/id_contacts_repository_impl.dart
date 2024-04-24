@@ -49,7 +49,7 @@ class CallerIdRepositoryImpl extends CallerIdRepository {
         await _callerIdService.addSharedNumbers(contacts: contactsToAdd);
       }
     } on Exception catch (e) {
-     throw BadRequestException(message: e.toString());
+      throw BadRequestException(message: e.toString());
     }
   }
 }

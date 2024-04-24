@@ -44,12 +44,9 @@ class CallerIdService {
     try {
       await _plugin.addIdentifiablePhoneNumbers(identifiableContacts);
     } on FCXException catch (e) {
-      print(e.message);
       throw Exception(e.message);
     } on FCXPluginError catch (e) {
-      print(e.toString());
       throw Exception(e);
-
     }
   }
 }
