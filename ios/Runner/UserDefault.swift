@@ -4,7 +4,7 @@
 
 import Foundation
 
-fileprivate let userDefaults = UserDefaults(suiteName: "group.com.pandascode.sicher")
+fileprivate let userDefaults = UserDefaults(suiteName: "group.com.pandascode.sicherr")
 
 @propertyWrapper
 struct UserDefault<T: Codable> {
