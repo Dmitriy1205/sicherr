@@ -13,7 +13,7 @@ final class AppDelegate: FlutterAppDelegate {
 
   func reloadExtension(){
       CXCallDirectoryManager.sharedInstance.reloadExtension(
-          withIdentifier: "com.pandascode.sicher.CallerExtension",
+          withIdentifier: "com.pandascode.sicherr.CallerExtension",
           completionHandler: { error in
               if let error = error {
                   print("Error reloading Call Directory extension: \(error.localizedDescription)")
