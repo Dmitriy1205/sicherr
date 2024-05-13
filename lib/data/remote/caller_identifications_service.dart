@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_callkit_voximplant/flutter_callkit_voximplant.dart';
 
 class CallerIdService {
@@ -7,6 +9,7 @@ class CallerIdService {
   bool _configured = false;
 
   Future<void> initFCXProvider() async {
+    if(Platform.isAndroid) return;
     if (_configured) {
       return;
     }
@@ -30,6 +33,7 @@ class CallerIdService {
   }
 
   Future<void> handleIncomingCallIdentification() async {
+    if(Platform.isAndroid) return;
     try {
       await _plugin.getIdentifiablePhoneNumbers();
     } on FCXException catch (e) {
