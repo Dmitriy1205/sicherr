@@ -4,6 +4,8 @@ import 'package:sicherr/presentation/screens/configure_contacts/widgets/con_cont
 import 'package:sicherr/presentation/screens/contacts/widgets/contact_card.dart';
 import 'package:sicherr/presentation/screens/profile/emergency_contacts/em_contact_card.dart';
 
+import '../../screens/dangerous_contacts/select_from_contacts/dc_card.dart';
+
 // Factory pattern for creating dynamic UI with grouped items
 // If you wanna use GropedItems widget, add here new factory for your custom items
 abstract class BaseContactFactory {
@@ -24,8 +26,16 @@ class EmContactCardFactory implements BaseContactFactory {
   }
 }
 
+class DCCardFactory implements BaseContactFactory {
+  @override
+  Widget create(ContactEntity contact) {
+    return DCCard(contact: contact);
+  }
+}
+
 class SelectableContactCardFactory implements BaseContactFactory {
   List<ContactEntity> selectedContacts;
+
   SelectableContactCardFactory({this.selectedContacts = const []});
 
   @override

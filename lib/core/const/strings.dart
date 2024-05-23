@@ -1,6 +1,4 @@
 class AppStrings {
-
-
   static const String contacts = 'Contacts';
   static const String home = 'Home';
   static const String map = 'Map';
@@ -21,20 +19,22 @@ class AppStrings {
   static const String quickBinding = 'Quick binding';
   static const String quickBindingDescription =
       '''Activate in order to use quick binding. SOS signal\nwill be triggered once you execute the following\naction.''';
-  static const String emergencyContacts  = 'Emergency contacts';
-  static const String addEmergencyContacts  = 'Add emergency contacts';
-  static const String emergency  = 'Emergency';
-  static const String sosMessage  = 'Message...';
-  static const String sendYourGeolocation  = 'Send your geolocation?';
-  static const String activate  = 'Activate';
-  static const String activateDescription  = '''Alternatively you can just press the button to\nactivate.''';
-  static const String send  = 'Send';
-  static const String phoneShake  = 'Phone shake';
-  static const String sosDescription  = 'an SOS signal will be sent to your contacts';
-  static const String message  = 'Message';
-  static const String geolocation  = 'geolocation';
-  static const String noEmContacts  = 'No emergency contacts selected';
-  static const String sosSent  = 'SOS has been sent!';
+  static const String emergencyContacts = 'Emergency contacts';
+  static const String addEmergencyContacts = 'Add emergency contacts';
+  static const String emergency = 'Emergency';
+  static const String sosMessage = 'Message...';
+  static const String sendYourGeolocation = 'Send your geolocation?';
+  static const String activate = 'Activate';
+  static const String activateDescription =
+      '''Alternatively you can just press the button to\nactivate.''';
+  static const String send = 'Send';
+  static const String phoneShake = 'Phone shake';
+  static const String sosDescription =
+      'an SOS signal will be sent to your contacts';
+  static const String message = 'Message';
+  static const String geolocation = 'geolocation';
+  static const String noEmContacts = 'No emergency contacts selected';
+  static const String sosSent = 'SOS has been sent!';
 
   static const String logout = 'Logout';
   static const String account = 'Account';
@@ -42,4 +42,7 @@ class AppStrings {
   static const String alarmTone = 'Alarm tone';
   static const String quickAlarm = 'Quick Warning';
   static const String startAlarm = 'START ALARM';
+
+  static const String warningDe = 'Achtung auffällige Person!';
+  static const String warningEn = 'Attention conspicuous person!';
 }

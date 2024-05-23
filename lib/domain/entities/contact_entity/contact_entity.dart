@@ -142,4 +142,6 @@ class ContactEntity {
       image: image ?? this.image,
     );
   }
+
+  read() {}
 }

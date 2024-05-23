@@ -7,6 +7,7 @@ import 'package:sicherr/presentation/widgets/core_widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../bloc/emergency_contact/emergency_contact_bloc.dart';
+import '../../bloc/shared_contacts/sc_bloc.dart';
 
 class ContactsScreen extends StatefulWidget {
   const ContactsScreen({Key? key}) : super(key: key);
@@ -22,6 +23,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
     context
         .read<EmergencyContactBloc>()
         .add(const EmergencyContactEvent.getAllEmContacts());
+    context.read<ScBloc>().add(const ScEvent.getAllSC());
   }
 
   final _searchTextController = TextEditingController();
@@ -37,9 +39,10 @@ class _ContactsScreenState extends State<ContactsScreen> {
     return BlocConsumer<ContactsBloc, ContactsState>(
       listener: (BuildContext context, ContactsState state) {
         state.maybeMap(
-          notFoundContact: (_){
-            AppToast.showError(context, AppLocalizations.of(context)!.noContacts);
-          },
+            notFoundContact: (_) {
+              AppToast.showError(
+                  context, AppLocalizations.of(context)!.noContacts);
+            },
             openFoundedContact: (state) {
               _searchTextController.text = '';
               context

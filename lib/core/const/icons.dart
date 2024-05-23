@@ -13,4 +13,7 @@ class AppIcons {
   static const phoneShake = 'assets/icons/phone_shake.svg';
   static const message = 'assets/icons/message.svg';
   static const device = 'assets/icons/device.svg';
+  static const warning = 'assets/icons/warning.svg';
+  static const addressBook = 'assets/icons/address_book.svg';
+  static const done = 'assets/icons/done.svg';
 }

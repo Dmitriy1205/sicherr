@@ -51,7 +51,7 @@ class ContactDetailsBloc
   void _initializeRatingByUser() {
     final ratingByUser = _detailedContact.ratings
         .firstWhereOrNull((e) => e.fromUserId == firebaseUser.phoneNumber);
-    _ratingByUser = ratingByUser?.rating ?? 0.0;
+    // _ratingByUser = ratingByUser?.rating ?? 0.0;
   }
 
   Future<void> _initializeEmgBtn() async {
@@ -78,7 +78,7 @@ class ContactDetailsBloc
       _AddTagEvent event, Emitter<ContactDetailsState> emit) async {
     emit(const ContactDetailsState.loadInProgress());
     final contact = await contactsRepo.addNewContactTag(
-        contactId: _initialContact.id, tag: event.text);
+        contactId: event.contactId, tag: event.text);
     if (contact != null) {
       _detailedContact = _detailedContact.copyWith(tags: contact.tags);
     }

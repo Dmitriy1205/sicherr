@@ -15,7 +15,7 @@ class AppTheme {
         cursorColor: AppColors.mainAccent),
     inputDecorationTheme: InputDecorationTheme(
       fillColor: AppColors.mainAccent.withOpacity(0.1),
-      hintStyle: const TextStyle(color: Color(0xFF474D4C)),
+      hintStyle: const TextStyle(color: Color(0xFF474D4C),fontSize: 16,fontWeight: FontWeight.w400),
       prefixIconColor: const Color(0xFF474D4C),
       focusColor: const Color(0xFF474D4C),
       enabledBorder: OutlineInputBorder(
@@ -83,6 +83,7 @@ class AppTheme {
         fontSize: 14,
         color: Color(0xFFFAFAFA),
       ),
+
     ),
   );
 }

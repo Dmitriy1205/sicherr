@@ -7,12 +7,14 @@ import 'package:sicherr/core/const/icons.dart';
 import 'package:sicherr/core/managers/quick_binding_handler.dart';
 import 'package:sicherr/core/theme/theme.dart';
 import 'package:sicherr/presentation/bloc/contact_dentification/contact_identification_bloc.dart';
+import 'package:sicherr/presentation/bloc/danger_contact/dc_bloc.dart';
 import 'package:sicherr/presentation/bloc/profile/profile_bloc.dart';
 import 'package:sicherr/presentation/bloc/send_sos/send_sos_bloc.dart';
 
 import 'package:sicherr/presentation/screens/configure_contacts/configure_contacts_screen.dart';
 
 import 'package:sicherr/presentation/screens/contacts/contacts.dart';
+import 'package:sicherr/presentation/screens/dangerous_contacts/dc_screen.dart';
 import 'package:sicherr/presentation/screens/home/home.dart';
 import 'package:sicherr/presentation/screens/map/map.dart';
 import 'package:sicherr/presentation/screens/profile/profile.dart';
@@ -54,6 +56,9 @@ class _InitialScreenState extends State<InitialScreen> {
     context
         .read<EmergencyContactBloc>()
         .add(const EmergencyContactEvent.getAllEmContacts());
+    context
+        .read<DcBloc>()
+        .add(const DcEvent.getAllDC());
     sl<QuickBindingListener>().initListeners();
     super.initState();
   }
@@ -117,7 +122,9 @@ class _InitialScreenState extends State<InitialScreen> {
       child: Scaffold(
         appBar: DefaultAppBar(
           title:
-              PrimaryPageEnum.values.elementAt(_selectedPage).getLabel(context),
+          PrimaryPageEnum.values[_selectedPage] == PrimaryPageEnum.add
+              ? AppLocalizations.of(context)!.dangerContacts
+              : PrimaryPageEnum.values.elementAt(_selectedPage).getLabel(context),
           showBackButton: false,
           icon: actions[_selectedPage],
         ),
@@ -218,6 +225,7 @@ class _MyBottomNavigationBar extends StatelessWidget {
 enum PrimaryPageEnum {
   home,
   contacts,
+  add,
   map,
   profile;
 
@@ -225,6 +233,7 @@ enum PrimaryPageEnum {
     return switch (this) {
       PrimaryPageEnum.home => AppLocalizations.of(context)!.home,
       PrimaryPageEnum.contacts => AppLocalizations.of(context)!.contacts,
+      PrimaryPageEnum.add => AppLocalizations.of(context)!.add,
       PrimaryPageEnum.map => AppLocalizations.of(context)!.map,
       PrimaryPageEnum.profile => AppLocalizations.of(context)!.profile,
     };
@@ -234,6 +243,7 @@ enum PrimaryPageEnum {
     return switch (this) {
       PrimaryPageEnum.home => AppIcons.home,
       PrimaryPageEnum.contacts => AppIcons.contacts,
+      PrimaryPageEnum.add => AppIcons.warning,
       PrimaryPageEnum.map => AppIcons.map,
       PrimaryPageEnum.profile => AppIcons.profile,
     };
@@ -243,6 +253,7 @@ enum PrimaryPageEnum {
     return switch (this) {
       PrimaryPageEnum.home => const HomeScreen(),
       PrimaryPageEnum.contacts => const ContactsScreen(),
+      PrimaryPageEnum.add =>  DCScreen(),
       PrimaryPageEnum.map => const MapScreen(),
       PrimaryPageEnum.profile => const ProfileScreen(),
     };

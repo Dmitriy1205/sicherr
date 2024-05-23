@@ -11,6 +11,8 @@ import 'package:sicherr/data/local/latest_contact_prefs.dart';
 import 'package:sicherr/data/remote/client.dart';
 import 'package:sicherr/data/remote/fcm_service.dart';
 import 'package:sicherr/domain/repositories/contacts/contacts_repository_impl.dart';
+import 'package:sicherr/domain/repositories/dangerous_contacs/dc_repository.dart';
+import 'package:sicherr/domain/repositories/dangerous_contacs/dc_repository_impl.dart';
 import 'package:sicherr/domain/repositories/emeregency_contacts/em_contacts_repository.dart';
 import 'package:sicherr/domain/repositories/emeregency_contacts/em_contacts_repository_impl.dart';
 import 'package:sicherr/domain/repositories/notification/notification_repository.dart';
@@ -20,21 +22,29 @@ import 'package:sicherr/domain/repositories/user/user_repository_impl.dart';
 import 'package:sicherr/presentation/bloc/alarm/alarm_bloc.dart';
 import 'package:sicherr/presentation/bloc/contact_dentification/contact_identification_bloc.dart';
 import 'package:sicherr/presentation/bloc/contacts/contacts_bloc.dart';
+import 'package:sicherr/presentation/bloc/danger_contact/dc_bloc.dart';
 import 'package:sicherr/presentation/bloc/emergency_contact/emergency_contact_bloc.dart';
 import 'package:sicherr/presentation/bloc/notification/notification_bloc.dart';
+import 'package:sicherr/presentation/bloc/pick_dc/pick_dc_cubit.dart';
 import 'package:sicherr/presentation/bloc/send_sos/send_sos_bloc.dart';
 import 'package:sicherr/presentation/bloc/shake_detector/shake_detector_bloc.dart';
+import 'package:sicherr/presentation/bloc/shared_contacts/sc_bloc.dart';
 import 'package:sicherr/presentation/bloc/sign_in/sign_in_bloc.dart';
+import 'package:sicherr/presentation/bloc/users_length/users_lentgh_cubit.dart';
 
 import '../../domain/repositories/auth/auth_repository.dart';
 import '../../domain/repositories/auth/auth_repository_impl.dart';
 import '../../domain/repositories/contacts/contacts_repository.dart';
 import '../../domain/repositories/identification_contacts/id_contacts_repository.dart';
 import '../../domain/repositories/identification_contacts/id_contacts_repository_impl.dart';
+import '../../domain/repositories/shared_contacts/sc_repository.dart';
+import '../../domain/repositories/shared_contacts/sc_repository_impl.dart';
 import '../../presentation/bloc/auth/auth_bloc.dart';
+import '../../presentation/bloc/contact_details/contact_details_bloc.dart';
 import '../../presentation/bloc/onboarding/onboarding_bloc.dart';
 import '../../presentation/bloc/otp/otp_bloc.dart';
 import '../../presentation/bloc/profile/profile_bloc.dart';
+import '../utils/phone_encryptor.dart';
 
 final sl = GetIt.instance;
 
@@ -42,16 +52,18 @@ Future<void> init() async {
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   FirebaseMessaging messaging = FirebaseMessaging.instance;
+  PhoneNumberEncryptor encryptor = PhoneNumberEncryptor();
 
   //Services
   final httpClient = HttpClient();
   sl.registerLazySingleton(() => FCMService(messaging: messaging));
   sl.registerLazySingleton(() => CallerIdService());
+  sl.registerLazySingleton(() => PhoneNumberEncryptor());
 
   final authRepository = AuthRepositoryImpl(auth: auth);
-  final userRepository = UserRepositoryImpl(firestore: firestore);
-  final emContactRepository = EmContactsRepositoryImpl(firestore: firestore);
-  final contactsRepository = ContactsRepositoryImpl(firestore: firestore);
+  final userRepository = UserRepositoryImpl(firestore: firestore, encryptor: encryptor);
+  final emContactRepository = EmContactsRepositoryImpl(firestore: firestore, encryptor: encryptor);
+  final contactsRepository = ContactsRepositoryImpl(firestore: firestore, encryptor: encryptor);
   final alarmManager = AlarmManager();
   final quickBindingListener = QuickBindingListener(userRepo: userRepository);
   final notificationRepository = NotificationRepositoryImpl(
@@ -61,7 +73,13 @@ Future<void> init() async {
   final latestContactPrefs = LatestContactPrefs();
   final callerIdService = CallerIdService();
   final callerIdRepository = CallerIdRepositoryImpl(
-      callerIdService: callerIdService, latestContactPrefs: latestContactPrefs);
+      callerIdService: callerIdService,
+      latestContactPrefs: latestContactPrefs,
+      encryptor: encryptor);
+  final dangerContactsRepository =
+      DCRepositoryImpl(firestore: firestore, encryptor: encryptor);
+  final sharedContactsRepository =
+      SCRepositoryImpl(firestore: firestore, encryptor: encryptor);
 
   //Repositories
   sl.registerSingleton<AuthRepository>(authRepository);
@@ -74,6 +92,8 @@ Future<void> init() async {
   sl.registerSingleton<QuickBindingListener>(quickBindingListener);
   sl.registerSingleton<ContactsInterface>(contactManager);
   sl.registerSingleton<CallerIdRepository>(callerIdRepository);
+  sl.registerSingleton<DCRepository>(dangerContactsRepository);
+  sl.registerSingleton<SCRepository>(sharedContactsRepository);
 
   //Blocs
   sl.registerLazySingleton(() => AuthBloc(
@@ -107,8 +127,17 @@ Future<void> init() async {
       () => NotificationBloc(notificationRepository: sl(), authBloc: sl()));
   sl.registerLazySingleton(() => ShakeDetectorBloc(profileBloc: sl()));
   sl.registerLazySingleton(() => ContactsBloc(sl()));
+  sl.registerLazySingleton(() => ContactDetailsBloc(
+        contactsRepo: sl(),
+      ));
   sl.registerLazySingleton(() => ContactIdentificationBloc(
       callerIdRepository: sl(), contactsRepository: sl()));
+
+  ///Dangerous Contacts
+  sl.registerLazySingleton(() => PickDcCubit());
+  sl.registerLazySingleton(() => DcBloc(dcRepository: sl(), authBloc: sl()));
+  sl.registerLazySingleton(() => ScBloc(scRepository: sl(), authBloc: sl()));
+  sl.registerLazySingleton(() => UsersLengthCubit(scRepository: sl()));
 }
 
 Future<void> initNotifications() async {

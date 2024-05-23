@@ -8,7 +8,7 @@ part 'rating.g.dart';
 abstract class Rating with _$Rating {
   const factory Rating({
     required String fromUserId,
-    double? rating,
+    String? rating,
   }) = _Rating;
 
   factory Rating.fromJson(Map<String, dynamic> json) => _$RatingFromJson(json);
