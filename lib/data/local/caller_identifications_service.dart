@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_callkit_voximplant/flutter_callkit_voximplant.dart';
 
 import '../../domain/entities/contact_entity/contact_entity.dart';
@@ -9,6 +11,7 @@ class CallerIdService {
   bool _configured = false;
 
   Future<void> initFCXProvider() async {
+    if(Platform.isAndroid) return;
     if (_configured) {
       return;
     }
@@ -32,6 +35,7 @@ class CallerIdService {
   }
 
   Future<void> addSharedNumbers({required List<ContactEntity> contacts}) async {
+    if(Platform.isAndroid) return;
     List<FCXIdentifiablePhoneNumber> identifiableContacts = [];
     for (var contact in contacts) {
       String formattedPhoneNumber = contact.phoneNumber.replaceAll('+', '');
@@ -41,6 +45,7 @@ class CallerIdService {
       );
       identifiableContacts.add(phone);
     }
+
     try {
       await _plugin.addIdentifiablePhoneNumbers(identifiableContacts);
     } on FCXException catch (e) {

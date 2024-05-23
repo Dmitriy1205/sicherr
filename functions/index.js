@@ -2,6 +2,7 @@ const functions = require('firebase-functions');
 const express = require('express');
 const admin = require('firebase-admin');
 const bodyParser = require('body-parser');
+const axios = require('axios');
 
 admin.initializeApp();
 
@@ -81,7 +82,42 @@ app.post('/send_sos', verifyToken, validateBody, (req, res) => {
   });
 
   Promise.all(promises)
-    .then(() => res.status(200).json({ status: 200 }))
+    .then(async () => {
+  const displayMessage = message === null || message === "" ? "SOS" : message;
+      // Constructing SMS messages array
+  const smsMessages = phones.map(sendToPhone => ({
+    from: "Sicherr",
+    to: sendToPhone,
+    source: "sdk",
+    body: `SOS | ${phone}\n` + (lat && long ?
+                  `${displayMessage}\nhttps://www.google.com/maps?q=${lat},${long}&z=15` : displayMessage)
+  }));
+
+  // Constructing ClickSend request payload
+  const clickSendMessage = {
+    messages: smsMessages
+  };
+
+  try {
+    // Sending SMS using ClickSend API with Basic Authentication
+    const username = 'info@wecallsmart.de';
+    const password = 'AD733F48-165D-7C09-D289-97018F3DD398';
+    const authHeader = `Basic ${Buffer.from(`${username}:${password}`).toString('base64')}`;
+
+    const response = await axios.post('https://rest.clicksend.com/v3/sms/send', clickSendMessage, {
+      headers: {
+        'Authorization': authHeader,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    console.log('Successfully sent SMS:', response.data);
+    res.status(200).json({ status: 200 });
+  } catch (error) {
+    console.error('Error sending SOS:', error.response.data);
+    res.status(500).json({ status: 500, error: error.response.data });
+  }
+    })
     .catch(error => {
       console.error('Error sending SOS:', error);
       res.status(500).json({ status: 500, error: error.stack });
