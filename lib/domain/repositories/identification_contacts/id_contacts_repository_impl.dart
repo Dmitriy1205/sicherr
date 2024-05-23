@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:sicherr/core/exceptions/exceptions.dart';
 import 'package:sicherr/data/local/caller_identifications_service.dart';
 import 'package:sicherr/domain/repositories/identification_contacts/id_contacts_repository.dart';
@@ -19,6 +21,7 @@ class CallerIdRepositoryImpl extends CallerIdRepository {
   Future<void> updateIdentifiedContacts(
       {required List<ContactEntity> sharedContacts}) async {
     try {
+      if(Platform.isAndroid) return;
       List<ContactEntity> contactsToAdd = [];
 
       ///getting the list of createAt from contacts

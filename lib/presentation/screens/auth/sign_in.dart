@@ -31,8 +31,8 @@ class SigninScreen extends StatefulWidget {
 class _SigninScreenState extends State<SigninScreen> {
   final _phoneController = TextEditingController();
   final _focusNode = FocusNode();
-  String isoCode = 'UA';
-  String dialCode = '+380';
+  String isoCode = 'DE';
+  String dialCode = '+49';
   List<CountryCodes> countryCodes = [];
 
   Future<void> readJson() async {
@@ -205,8 +205,10 @@ class _SigninScreenState extends State<SigninScreen> {
                                                     vertical: 0),
                                           ),
                                           onChanged: (v) {
-                                            dialCode = v.dialCode!;
-                                            isoCode = v.code!;
+                                            setState(() {
+                                              dialCode = v.dialCode!;
+                                              isoCode = v.code!;
+                                            });
                                           },
                                           countryList:
                                               sortCountries(List.of(codes)),
