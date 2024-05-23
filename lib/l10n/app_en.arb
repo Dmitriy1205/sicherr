@@ -82,6 +82,8 @@
   "addTagDesc": "Write a tag that will be visible to the public.",
   "enterTag": "Enter tag",
   "tag": "Tag",
+  "add":"Add",
+  "dangerContacts":"Dangerous contacts",
   "showNumTags": "Show {count} tags",
   "@showNumTags": {
   "placeholders": {
@@ -91,5 +93,52 @@
     }
    }
   },
-  "rateThisContact": "Rate this contact" 
+  "rateThisContact": "Rate this contact",
+
+  "inappropriateBehavior": "Inappropriate behavior",
+    "harassment": "Harassment",
+    "stalking": "Stalking",
+    "theft": "Theft",
+    "insults": "Insults",
+    "didNotShowUp": "Did not show up at the agreed location/date",
+    "physicalViolence": "Physical violence",
+    "psychologicalViolence": "Psychological violence",
+    "becameNegativelyNoticeable": "Became negatively noticeable",
+    "attack": "Attack",
+    "intimidation": "Intimidation",
+    "cyberbullying": "Cyberbullying",
+    "discrimination": "Discrimination",
+    "safetyConcerns": "Safety concerns",
+    "threat": "Threat",
+    "abuse": "Abuse",
+    "touchedInappropriately": "Touched inappropriately",
+    "fakeCall": "Fake call",
+    "swindler": "Swindler",
+    "notPaid": "Not paid",
+    "exploitation": "Exploitation",
+
+    "good": "Good",
+    "bad": "Bad",
+    "delete": "Delete",
+    "warning": "Warning",
+    "youSureWantDelete": "Are you sure you want to delete ?",
+    "suspiciousContact": "Suspicious contact",
+
+    "remove": "remove",
+    "selectFromContacts": "select from contacts",
+    "addNumber": "Add number",
+    "enterTheNumber": "Enter the number",
+    "nameIsUnknown": "Name is unknown",
+    "enterTheFirstName": "Enter the first name",
+    "firstName": "First name",
+    "enterTheLastName": "Enter the last name",
+    "lastName": "Last name",
+    "chooseTag": "Choose a tag",
+    "selectContactsScreen": "Select contacts",
+    "selectContactsToDangerous": "Select contacts that will be added to dangerous",
+    "selectFromContacts": "Select from contacts",
+    "select": "Select",
+    "contactsSelected": "contacts selected",
+    "notSelected": "Not selected"
+
 }

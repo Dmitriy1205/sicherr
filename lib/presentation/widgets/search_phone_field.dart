@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sicherr/core/const/colors.dart';
 import 'package:sicherr/core/const/icons.dart';
@@ -79,6 +80,9 @@ class _SearchPhoneFieldState extends State<SearchPhoneField> {
               keyboardType: TextInputType.text,
               controller: _controller,
               focusNode: _focus,
+              inputFormatters: [
+                FilteringTextInputFormatter.deny(RegExp(r'[ ()-]')),
+              ],
               decoration: InputDecoration(
                 hintText: widget.hintText,
                 hintStyle: const TextStyle(color: AppColors.grey),

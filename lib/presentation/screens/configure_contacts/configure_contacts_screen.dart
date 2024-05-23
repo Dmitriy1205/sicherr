@@ -2,12 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sicherr/core/theme/theme.dart';
+import 'package:sicherr/core/utils/phone_encryptor.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
 import 'package:sicherr/domain/repositories/contacts/contacts_repository_impl.dart';
 import 'package:sicherr/presentation/bloc/configure_contacts/configure_contacts_bloc.dart';
 import 'package:sicherr/presentation/screens/initial.dart';
 import 'package:sicherr/presentation/widgets/core_widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../core/service_locator/service_locator.dart';
 
 class ConfigureContactsScreen extends StatelessWidget {
   const ConfigureContactsScreen({super.key});
@@ -17,6 +20,7 @@ class ConfigureContactsScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => ConfigureContactsBloc(ContactsRepositoryImpl(
         firestore: FirebaseFirestore.instance,
+        encryptor: sl<PhoneNumberEncryptor>(),
       )),
       child: Scaffold(
         appBar: DefaultAppBar(

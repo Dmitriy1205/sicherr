@@ -8,7 +8,6 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:sicherr/core/utils/phone_formatter.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
 import 'package:sicherr/domain/entities/country_codes/country_codes.dart';
-import 'package:sicherr/domain/entities/rating/rating.dart';
 
 abstract interface class ContactsInterface {
   Future<List<ContactEntity>> getLocalContacts();
@@ -141,11 +140,11 @@ class ContactsManager implements ContactsInterface {
     }
   }
 
-  static  double calculateContactRate(List<Rating> ratings) {
-    final ratingsNumbers =
-        ratings.where((e) => e.rating != null).map((e) => e.rating).toList();
-    final sum = ratingsNumbers.fold(
-        0, (num previousValue, element) => previousValue + element!);
-    return double.parse((sum / ratingsNumbers.length).toStringAsFixed(1));
-  }
+  // static  double calculateContactRate(List<Rating> ratings) {
+  //   final ratingsNumbers =
+  //       ratings.where((e) => e.rating != null).map((e) => e.rating).toList();
+  //   final sum = ratingsNumbers.fold(
+  //       0, (num previousValue, element) => previousValue + element!);
+  //   return double.parse((sum / ratingsNumbers.length).toStringAsFixed(1));
+  // }
 }

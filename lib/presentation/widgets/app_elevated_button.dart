@@ -11,6 +11,7 @@ class AppElevatedButton extends StatelessWidget {
   final Widget? widget;
   final Color? color;
   final Color? borderColor;
+  final double? width;
 
   const AppElevatedButton({
     required this.text,
@@ -23,13 +24,14 @@ class AppElevatedButton extends StatelessWidget {
     this.widget,
     this.color,
     this.borderColor,
+    this.width,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 46,
-      width: MediaQuery.of(context).size.width,
+      width: width == 0 ? null : MediaQuery.of(context).size.width,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(

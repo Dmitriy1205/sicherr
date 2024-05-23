@@ -8,7 +8,7 @@ part of 'rating.dart';
 
 _$RatingImpl _$$RatingImplFromJson(Map<String, dynamic> json) => _$RatingImpl(
       fromUserId: json['fromUserId'] as String,
-      rating: (json['rating'] as num?)?.toDouble(),
+      rating: json['rating'] as String?,
     );
 
 Map<String, dynamic> _$$RatingImplToJson(_$RatingImpl instance) =>

@@ -6,6 +6,9 @@ import 'package:sicherr/presentation/bloc/contact_details/contact_details_bloc.d
 import 'package:sicherr/presentation/widgets/core_widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../core/utils/localization_utils.dart';
+import '../../widgets/app_dropdown_picker.dart';
+
 class AddTagScreen extends StatefulWidget {
   const AddTagScreen({super.key});
 
@@ -14,7 +17,9 @@ class AddTagScreen extends StatefulWidget {
 }
 
 class _AddTagScreenState extends State<AddTagScreen> {
-  final textController = TextEditingController();
+  // final textController = TextEditingController();
+  String? tagName;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,38 +47,69 @@ class _AddTagScreenState extends State<AddTagScreen> {
                           ),
                         ),
                         const SizedBox(height: 28),
-                        SizedBox(
-                            height: 47,
-                            child: TextField(
-                              controller: textController,
-                              decoration: InputDecoration(
-                                hintText:
-                                    AppLocalizations.of(context)!.enterTag,
-                                hintStyle:
-                                    const TextStyle(color: AppColors.grey),
-                              ),
-                              onSubmitted: (text) {
-                                context
-                                    .read<ContactDetailsBloc>()
-                                    .add(ContactDetailsEvent.addTag(text));
-                              },
-                            )),
-                        const Spacer(),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 30),
-                          child: AppElevatedButton(
-                            text: AppLocalizations.of(context)!.addTag,
-                            style: const TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w500),
-                            onPressed: () {
-                              FocusScope.of(context).unfocus();
-                              context.read<ContactDetailsBloc>().add(
-                                  ContactDetailsEvent.addTag(
-                                      textController.text));
-                              textController.clear();
-                            },
-                          ),
+                        AppDropdownPicker(
+                          onChange: (v) {
+                            setState(() {
+                              tagName = v;
+                            });
+                          },
+                          items: LocalizationUtils(context: context)
+                              .localizedDangerousTags(),
                         ),
+                        // SizedBox(
+                        //     height: 47,
+                        //     child: TextField(
+                        //       controller: textController,
+                        //       decoration: InputDecoration(
+                        //         hintText:
+                        //             AppLocalizations.of(context)!.enterTag,
+                        //         hintStyle:
+                        //             const TextStyle(color: AppColors.grey),
+                        //       ),
+                        //       onSubmitted: (text) {
+                        //         context
+                        //             .read<ContactDetailsBloc>()
+                        //             .add(ContactDetailsEvent.addTag(text));
+                        //       },
+                        //     )),
+                        const Spacer(),
+                        AppElevatedButton(
+                          text: 'Add',
+                          widget: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 28.0),
+                            child: Text(AppLocalizations.of(context)!.add),
+                          ),
+                          onPressed: tagName== null ?null: () {
+                            context
+                                .read<ContactDetailsBloc>()
+                                .add(ContactDetailsEvent.addTag(contactId: '', text: tagName!));
+                          },
+                          width: 0,
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium!
+                              .copyWith(color: AppColors.white),
+                          borderRadius: 30,
+                        ),
+                        const SizedBox(
+                          height: 55,
+                        ),
+                        // Padding(
+                        //   padding: const EdgeInsets.symmetric(horizontal: 30),
+                        //   child: AppElevatedButton(
+                        //     text: AppLocalizations.of(context)!.addTag,
+                        //     style: const TextStyle(
+                        //         fontSize: 16, fontWeight: FontWeight.w500),
+                        //     onPressed: () {
+                        //       FocusScope.of(context).unfocus();
+                        //       context.read<ContactDetailsBloc>().add(
+                        //           ContactDetailsEvent.addTag(
+                        //               textController.text));
+                        //       textController.clear();
+                        //     },
+                        //   ),
+                        // ),
                       ],
                     ),
                   ));

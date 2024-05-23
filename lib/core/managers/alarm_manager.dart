@@ -44,7 +44,7 @@ base class AlarmManager implements SimplePlayer {
   @override
   Future<void> play() async {
     try {
-      assetsAudioPlayer.setAsset('assets/sounds/alarm.mp3');
+      assetsAudioPlayer.setAsset('assets/sounds/alarm.wav');
       VolumeController().setVolume(1);
       await assetsAudioPlayer.play();
     } catch (e) {

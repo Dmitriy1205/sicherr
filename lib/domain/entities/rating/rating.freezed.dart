@@ -21,7 +21,7 @@ Rating _$RatingFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Rating {
   String get fromUserId => throw _privateConstructorUsedError;
-  double? get rating => throw _privateConstructorUsedError;
+  String? get rating => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +33,7 @@ abstract class $RatingCopyWith<$Res> {
   factory $RatingCopyWith(Rating value, $Res Function(Rating) then) =
       _$RatingCopyWithImpl<$Res, Rating>;
   @useResult
-  $Res call({String fromUserId, double? rating});
+  $Res call({String fromUserId, String? rating});
 }
 
 /// @nodoc
@@ -60,7 +60,7 @@ class _$RatingCopyWithImpl<$Res, $Val extends Rating>
       rating: freezed == rating
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as String?,
     ) as $Val);
   }
 }
@@ -72,7 +72,7 @@ abstract class _$$RatingImplCopyWith<$Res> implements $RatingCopyWith<$Res> {
       __$$RatingImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String fromUserId, double? rating});
+  $Res call({String fromUserId, String? rating});
 }
 
 /// @nodoc
@@ -97,7 +97,7 @@ class __$$RatingImplCopyWithImpl<$Res>
       rating: freezed == rating
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as String?,
     ));
   }
 }
@@ -113,7 +113,7 @@ class _$RatingImpl implements _Rating {
   @override
   final String fromUserId;
   @override
-  final double? rating;
+  final String? rating;
 
   @override
   String toString() {
@@ -150,14 +150,14 @@ class _$RatingImpl implements _Rating {
 
 abstract class _Rating implements Rating {
   const factory _Rating(
-      {required final String fromUserId, final double? rating}) = _$RatingImpl;
+      {required final String fromUserId, final String? rating}) = _$RatingImpl;
 
   factory _Rating.fromJson(Map<String, dynamic> json) = _$RatingImpl.fromJson;
 
   @override
   String get fromUserId;
   @override
-  double? get rating;
+  String? get rating;
   @override
   @JsonKey(ignore: true)
   _$$RatingImplCopyWith<_$RatingImpl> get copyWith =>

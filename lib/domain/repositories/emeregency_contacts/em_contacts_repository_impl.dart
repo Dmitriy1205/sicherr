@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../core/exceptions/exceptions.dart';
+import '../../../core/utils/phone_encryptor.dart';
 import '../../entities/emergency_contact/emergency_contact.dart';
 import 'em_contacts_repository.dart';
 
@@ -9,15 +10,20 @@ class EmContactsRepositoryImpl extends EmContactsRepository {
   final String collectionName = 'users';
   final String subCollectionName = 'emergency';
 
-  EmContactsRepositoryImpl({required FirebaseFirestore firestore})
-      : _firestore = firestore;
+  EmContactsRepositoryImpl({
+    required FirebaseFirestore firestore,
+    required PhoneNumberEncryptor encryptor,
+  })  : _firestore = firestore;
+
 
   @override
   Future<void> setEmContact({
     required String currentUserId,
     required EmergencyContact emContact,
   }) async {
-    try {
+   try {
+
+
       await _firestore
           .collection(collectionName)
           .doc(currentUserId)

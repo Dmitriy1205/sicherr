@@ -637,21 +637,21 @@ mixin _$ContactDetailsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(ContactEntity contact) initial,
-    required TResult Function(String text) addTag,
+    required TResult Function(String contactId, String text) addTag,
     required TResult Function(double rating) rateContact,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(ContactEntity contact)? initial,
-    TResult? Function(String text)? addTag,
+    TResult? Function(String contactId, String text)? addTag,
     TResult? Function(double rating)? rateContact,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(ContactEntity contact)? initial,
-    TResult Function(String text)? addTag,
+    TResult Function(String contactId, String text)? addTag,
     TResult Function(double rating)? rateContact,
     required TResult orElse(),
   }) =>
@@ -763,7 +763,7 @@ class _$InitialEventImpl implements _InitialEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(ContactEntity contact) initial,
-    required TResult Function(String text) addTag,
+    required TResult Function(String contactId, String text) addTag,
     required TResult Function(double rating) rateContact,
   }) {
     return initial(contact);
@@ -773,7 +773,7 @@ class _$InitialEventImpl implements _InitialEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(ContactEntity contact)? initial,
-    TResult? Function(String text)? addTag,
+    TResult? Function(String contactId, String text)? addTag,
     TResult? Function(double rating)? rateContact,
   }) {
     return initial?.call(contact);
@@ -783,7 +783,7 @@ class _$InitialEventImpl implements _InitialEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(ContactEntity contact)? initial,
-    TResult Function(String text)? addTag,
+    TResult Function(String contactId, String text)? addTag,
     TResult Function(double rating)? rateContact,
     required TResult orElse(),
   }) {
@@ -843,7 +843,7 @@ abstract class _$$AddTagEventImplCopyWith<$Res> {
           _$AddTagEventImpl value, $Res Function(_$AddTagEventImpl) then) =
       __$$AddTagEventImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String text});
+  $Res call({String contactId, String text});
 }
 
 /// @nodoc
@@ -857,10 +857,15 @@ class __$$AddTagEventImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? contactId = null,
     Object? text = null,
   }) {
     return _then(_$AddTagEventImpl(
-      null == text
+      contactId: null == contactId
+          ? _value.contactId
+          : contactId // ignore: cast_nullable_to_non_nullable
+              as String,
+      text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
@@ -871,14 +876,16 @@ class __$$AddTagEventImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AddTagEventImpl implements _AddTagEvent {
-  const _$AddTagEventImpl(this.text);
+  const _$AddTagEventImpl({required this.contactId, required this.text});
 
+  @override
+  final String contactId;
   @override
   final String text;
 
   @override
   String toString() {
-    return 'ContactDetailsEvent.addTag(text: $text)';
+    return 'ContactDetailsEvent.addTag(contactId: $contactId, text: $text)';
   }
 
   @override
@@ -886,11 +893,13 @@ class _$AddTagEventImpl implements _AddTagEvent {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AddTagEventImpl &&
+            (identical(other.contactId, contactId) ||
+                other.contactId == contactId) &&
             (identical(other.text, text) || other.text == text));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, text);
+  int get hashCode => Object.hash(runtimeType, contactId, text);
 
   @JsonKey(ignore: true)
   @override
@@ -902,32 +911,32 @@ class _$AddTagEventImpl implements _AddTagEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(ContactEntity contact) initial,
-    required TResult Function(String text) addTag,
+    required TResult Function(String contactId, String text) addTag,
     required TResult Function(double rating) rateContact,
   }) {
-    return addTag(text);
+    return addTag(contactId, text);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(ContactEntity contact)? initial,
-    TResult? Function(String text)? addTag,
+    TResult? Function(String contactId, String text)? addTag,
     TResult? Function(double rating)? rateContact,
   }) {
-    return addTag?.call(text);
+    return addTag?.call(contactId, text);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(ContactEntity contact)? initial,
-    TResult Function(String text)? addTag,
+    TResult Function(String contactId, String text)? addTag,
     TResult Function(double rating)? rateContact,
     required TResult orElse(),
   }) {
     if (addTag != null) {
-      return addTag(text);
+      return addTag(contactId, text);
     }
     return orElse();
   }
@@ -968,8 +977,11 @@ class _$AddTagEventImpl implements _AddTagEvent {
 }
 
 abstract class _AddTagEvent implements ContactDetailsEvent {
-  const factory _AddTagEvent(final String text) = _$AddTagEventImpl;
+  const factory _AddTagEvent(
+      {required final String contactId,
+      required final String text}) = _$AddTagEventImpl;
 
+  String get contactId;
   String get text;
   @JsonKey(ignore: true)
   _$$AddTagEventImplCopyWith<_$AddTagEventImpl> get copyWith =>
@@ -1042,7 +1054,7 @@ class _$RateContactEventImpl implements _RateContactEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(ContactEntity contact) initial,
-    required TResult Function(String text) addTag,
+    required TResult Function(String contactId, String text) addTag,
     required TResult Function(double rating) rateContact,
   }) {
     return rateContact(rating);
@@ -1052,7 +1064,7 @@ class _$RateContactEventImpl implements _RateContactEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(ContactEntity contact)? initial,
-    TResult? Function(String text)? addTag,
+    TResult? Function(String contactId, String text)? addTag,
     TResult? Function(double rating)? rateContact,
   }) {
     return rateContact?.call(rating);
@@ -1062,7 +1074,7 @@ class _$RateContactEventImpl implements _RateContactEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(ContactEntity contact)? initial,
-    TResult Function(String text)? addTag,
+    TResult Function(String contactId, String text)? addTag,
     TResult Function(double rating)? rateContact,
     required TResult orElse(),
   }) {

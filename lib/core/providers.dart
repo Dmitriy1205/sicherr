@@ -3,16 +3,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sicherr/core/service_locator/service_locator.dart';
 import 'package:sicherr/presentation/bloc/alarm/alarm_bloc.dart';
 import 'package:sicherr/presentation/bloc/contact_dentification/contact_identification_bloc.dart';
+import 'package:sicherr/presentation/bloc/contact_details/contact_details_bloc.dart';
+import 'package:sicherr/presentation/bloc/danger_contact/dc_bloc.dart';
 import 'package:sicherr/presentation/bloc/emergency_contact/emergency_contact_bloc.dart';
 import 'package:sicherr/presentation/bloc/notification/notification_bloc.dart';
 import 'package:sicherr/presentation/bloc/onboarding/onboarding_bloc.dart';
+import 'package:sicherr/presentation/bloc/pick_dc/pick_dc_cubit.dart';
 import 'package:sicherr/presentation/bloc/profile/profile_bloc.dart';
 import 'package:sicherr/presentation/bloc/send_sos/send_sos_bloc.dart';
 import 'package:sicherr/presentation/bloc/shake_detector/shake_detector_bloc.dart';
+import 'package:sicherr/presentation/bloc/users_length/users_lentgh_cubit.dart';
 
 import '../presentation/bloc/auth/auth_bloc.dart';
 import '../presentation/bloc/contacts/contacts_bloc.dart';
 import '../presentation/bloc/otp/otp_bloc.dart';
+import '../presentation/bloc/shared_contacts/sc_bloc.dart';
 import '../presentation/bloc/sign_in/sign_in_bloc.dart';
 
 class Providers extends StatelessWidget {
@@ -67,6 +72,21 @@ class Providers extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => sl<ContactIdentificationBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => sl<PickDcCubit>(),
+        ),
+        BlocProvider(
+          create: (context) => sl<DcBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => sl<ContactDetailsBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => sl<ScBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => sl<UsersLengthCubit>(),
         ),
       ],
       child: child,

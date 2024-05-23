@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:sicherr/core/const/images.dart';
+import 'package:sicherr/core/utils/phone_encryptor.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sicherr/presentation/screens/contact_detail/widgets/rating_stars.dart';
 
+import '../../../../core/service_locator/service_locator.dart';
+import '../../../../core/utils/name_formatter.dart';
 import '../../../widgets/round_sos_icon.dart';
 
 class ContactInfo extends StatelessWidget {
   final bool isEmergency;
+  final bool? isDanger;
+
   const ContactInfo({
     super.key,
     required this.contact,
     required this.isEmergency,
     this.showRating = false,
+    this.isDanger,
   });
 
   final ContactEntity contact;
@@ -51,7 +57,16 @@ class ContactInfo extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: Text(
+                    child:isDanger != null?
+                    Text(
+                      NameFormatter.formatName(
+                        context: context,
+                        name: contact.name,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.w600),
+                    ) : Text(
                       contact.name.isNotEmpty
                           ? contact.name
                           : AppLocalizations.of(context)!.account,
@@ -71,7 +86,7 @@ class ContactInfo extends StatelessWidget {
                 ],
               ),
               Text(
-                contact.phoneNumber,
+                sl<PhoneNumberEncryptor>().decrypt(contact.phoneNumber),
                 style: const TextStyle(fontSize: 16, color: Color(0xFF838383)),
               )
             ],
