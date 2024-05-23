@@ -10,10 +10,10 @@ final class AppDelegate: FlutterAppDelegate {
   @UserDefault("identifiedNumbers", defaultValue: [])
   private var identifiedNumbers: [IdentifiableNumber]
     
-
+    
   func reloadExtension(){
       CXCallDirectoryManager.sharedInstance.reloadExtension(
-          withIdentifier: "com.pandascode.sicherr.CallerExtension",
+          withIdentifier: "com.pandascode.sicher.CallerExtension",
           completionHandler: { error in
               if let error = error {
                   print("Error reloading Call Directory extension: \(error.localizedDescription)")
@@ -23,7 +23,7 @@ final class AppDelegate: FlutterAppDelegate {
           }
       )
   }
-
+    
   override func application(
 
     _ application: UIApplication,
