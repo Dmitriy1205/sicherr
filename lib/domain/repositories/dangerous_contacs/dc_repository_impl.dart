@@ -27,8 +27,10 @@ class DCRepositoryImpl extends DCRepository {
       ///Adding contact to dangerous_contacts sub collection
       if (dc is ContactEntity) {
         ///encryption of contact
-        String encryptedPhoneNumber = _encryptor.encrypt(dc.phoneNumber);
-        String encryptedId = _encryptor.encrypt(dc.id);
+        String decryptedPhoneNumber = _encryptor.decrypt(dc.phoneNumber);
+        String decryptedId = _encryptor.decrypt(dc.id);
+        String encryptedPhoneNumber = _encryptor.encrypt(decryptedPhoneNumber);
+        String encryptedId = _encryptor.encrypt(decryptedId);
         dc = dc.copyWith(phoneNumber: encryptedPhoneNumber, id: encryptedId);
         await _firestore
             .collection(usersCollection)

@@ -34,7 +34,7 @@ class _AddDCScreenState extends State<AddDCScreen> {
   listener: (context, state) {
     state.maybeMap(
         loaded: (_) {
-          context.read<ScBloc>().add(ScEvent.getAllSC());
+          context.read<ScBloc>().add(const ScEvent.getAllSC());
           return Navigator.pop(context);
         },
         orElse: () {});
