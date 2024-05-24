@@ -105,7 +105,7 @@ class AdditionalContentBlock extends StatelessWidget {
                                           style: TextStyle(color: Colors.black),
                                         ),
                                         Text(
-                                          '${goodRating.toStringAsFixed(0)}%',
+                                          '${(goodRatingPercentage * 100).toInt()}%',
                                           style: const TextStyle(
                                               color: Colors.black),
                                         ),
@@ -181,7 +181,7 @@ class AdditionalContentBlock extends StatelessWidget {
                                           style: TextStyle(color: Colors.black),
                                         ),
                                         Text(
-                                          '${badRating.toStringAsFixed(0)}%',
+                                          '${(badRatingPercentage * 100).toInt()}%',
                                           style: const TextStyle(
                                               color: Colors.black),
                                         ),
