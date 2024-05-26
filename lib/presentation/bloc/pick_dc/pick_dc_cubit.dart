@@ -24,6 +24,6 @@ class PickDcCubit extends Cubit<PickDcState> {
   }
 
   Future<void> reset() async {
-    emit(const PickDcState.picked(contacts: []));
+    emit(const PickDcState.initial());
   }
 }

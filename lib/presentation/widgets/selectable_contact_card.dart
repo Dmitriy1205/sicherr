@@ -74,7 +74,7 @@ class SelectableContactCard extends StatelessWidget {
           const SizedBox(
             width: 25,
           ),
-          context.read<ScBloc>().state.sc?.any((element) => element.id == contact.id) ?? false
+          context.watch<ScBloc>().state.sc?.any((element) => element.id == contact.id) ?? false
               ? const SizedBox()
               : isSelected
                   ? GestureDetector(

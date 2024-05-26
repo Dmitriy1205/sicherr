@@ -32,6 +32,11 @@ class SelectFromContactsScreen extends StatefulWidget {
 
 class _SelectFromContactsScreenState extends State<SelectFromContactsScreen> {
   String? pickedValue;
+  @override
+  void initState() {
+    context.read<ScBloc>().add(const ScEvent.getAllSC());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +44,8 @@ class _SelectFromContactsScreenState extends State<SelectFromContactsScreen> {
       listener: (context, state) {
         state.maybeMap(
             loaded: (_) {
-              context.read<ScBloc>().add(ScEvent.getAllSC());
+              context.read<ScBloc>().add(const ScEvent.getAllSC());
+              context.read<PickDcCubit>().reset();
               return Navigator.pop(context);
             },
             orElse: () {});
@@ -200,7 +206,7 @@ class _SelectFromContactsScreenState extends State<SelectFromContactsScreen> {
                                 return ContactEntity(
                                   id: sl<PhoneNumberEncryptor>()
                                       .decrypt(contact.id),
-                                  name: contact.name,
+                                  name: '',
                                   phoneNumber: sl<PhoneNumberEncryptor>()
                                       .decrypt(contact.phoneNumber),
                                   tags: [pickedValue!],

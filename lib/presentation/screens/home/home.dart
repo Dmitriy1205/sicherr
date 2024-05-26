@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: SearchPhoneField(
                           controller: _searchTextController,
                           hintText: AppLocalizations.of(context)!.search,
-                          onChanged: (text) {
+                          onSubmitted: (text) {
                             context.read<EmergencyContactBloc>().add(
                                 const EmergencyContactEvent.getAllEmContacts());
 

@@ -67,6 +67,9 @@ class _SearchPhoneFieldState extends State<SearchPhoneField> {
   void _clearText() {
     _controller.clear();
     _focus.unfocus();
+    if (widget.onSubmitted != null) {
+      widget.onSubmitted!('');
+    }
   }
 
   @override
@@ -103,7 +106,7 @@ class _SearchPhoneFieldState extends State<SearchPhoneField> {
                 enabledBorder: _border,
                 disabledBorder: _border,
               ),
-              onSubmitted: widget.onChanged,
+              onSubmitted: widget.onSubmitted ?? widget.onChanged,
             ),
           ),
           if (_showCancel)

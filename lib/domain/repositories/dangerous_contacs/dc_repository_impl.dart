@@ -24,6 +24,8 @@ class DCRepositoryImpl extends DCRepository {
     required dynamic dc,
   }) async {
     try {
+
+
       ///Adding contact to dangerous_contacts sub collection
       if (dc is ContactEntity) {
         ///encryption of contact
@@ -32,12 +34,36 @@ class DCRepositoryImpl extends DCRepository {
         String encryptedPhoneNumber = _encryptor.encrypt(decryptedPhoneNumber);
         String encryptedId = _encryptor.encrypt(decryptedId);
         dc = dc.copyWith(phoneNumber: encryptedPhoneNumber, id: encryptedId);
-        await _firestore
+
+        QuerySnapshot allDangerous = await _firestore
             .collection(usersCollection)
             .doc(currentUserId)
             .collection(subCollectionName)
-            .doc(dc.id)
-            .set(dc.toJson());
+            .get();
+
+        bool documentExists = allDangerous.docs.any((doc) => doc.id == dc.id);
+        if (documentExists) {
+
+          await _firestore
+              .collection(usersCollection)
+              .doc(currentUserId)
+              .collection(subCollectionName)
+              .doc(dc.id)
+              .update({
+            'phoneNumber': dc.phoneNumber,
+            'id': dc.id,
+            'tags': FieldValue.arrayUnion(dc.tags),
+            'ratings': FieldValue.arrayUnion(dc.ratings),
+          });
+        } else {
+          final a = dc.toJson();
+          await _firestore
+              .collection(usersCollection)
+              .doc(currentUserId)
+              .collection(subCollectionName)
+              .doc(dc.id)
+              .set(dc.toJson(),SetOptions(merge: true));
+        }
       } else if (dc is List<ContactEntity>) {
         WriteBatch batch = _firestore.batch();
 
@@ -62,15 +88,26 @@ class DCRepositoryImpl extends DCRepository {
 
       ///Adding contact to shared_contacts collection
       if (dc is ContactEntity) {
-        ///encryption of contact
-        // String encryptedPhoneNumber = _encryptor.encrypt(dc.phoneNumber);
-        // String encryptedId = _encryptor.encrypt(dc.id);
-        // dc = dc.copyWith(phoneNumber: encryptedPhoneNumber, id: encryptedId);
+        QuerySnapshot allShared =
+        await _firestore.collection(sharedConCollection).get();
+        bool documentExists = allShared.docs.any((doc) => doc.id == dc.id);
+        if(documentExists){
+          await _firestore
+              .collection(sharedConCollection)
+              .doc(dc.id)
+              .update({
+            'phoneNumber': dc.phoneNumber,
+            'id': dc.id,
+            'tags': FieldValue.arrayUnion(dc.tags),
+            'ratings': FieldValue.arrayUnion(dc.ratings),
+          });
+        }else{
+          await _firestore
+              .collection(sharedConCollection)
+              .doc(dc.id)
+              .set(dc.toJson(), SetOptions(merge: true));
+        }
 
-        await _firestore
-            .collection(sharedConCollection)
-            .doc(dc.id)
-            .set(dc.toJson());
       } else if (dc is List<ContactEntity>) {
         WriteBatch batch = _firestore.batch();
 
@@ -127,12 +164,6 @@ class DCRepositoryImpl extends DCRepository {
         final data = doc.data();
 
         ContactEntity contact = ContactEntity.fromJson(data);
-
-        // ///decryption of every contact
-        // String decryptedPhoneNumber = _encryptor.decrypt(contact.phoneNumber);
-        // String decryptedId = _encryptor.decrypt(contact.id);
-
-        // return contact.copyWith(phoneNumber: decryptedPhoneNumber,id: decryptedId);
         return contact;
       }).toList();
 

@@ -32,11 +32,11 @@ class _AppCurrencyPickerState extends State<AppDropdownPicker> {
               contentPadding:
                   const EdgeInsets.only(left: 20, ),
               enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color:Color(0xFFC8C8C8)),
+                borderSide: const BorderSide(color:Color(0xFFE1E1E1)),
                 borderRadius: BorderRadius.circular(17.0),
               ),
               focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Color(0xFFC8C8C8)),
+                borderSide: const BorderSide(color: Color(0xFFE1E1E1)),
                 borderRadius: BorderRadius.circular(17.0),
               )),
           isExpanded: true,

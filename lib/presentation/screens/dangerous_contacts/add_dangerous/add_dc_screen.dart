@@ -31,215 +31,215 @@ class _AddDCScreenState extends State<AddDCScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<DcBloc, DcState>(
-  listener: (context, state) {
-    state.maybeMap(
-        loaded: (_) {
-          context.read<ScBloc>().add(const ScEvent.getAllSC());
-          return Navigator.pop(context);
-        },
-        orElse: () {});
-  },
-  child: Scaffold(
-      appBar: DefaultAppBar(
-        title: AppLocalizations.of(context)!.addNumber,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: Stack(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 27,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 15.0),
-                  child: Text(
-                    AppLocalizations.of(context)!.enterTheNumber,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleSmall!
-                        .copyWith(fontSize: 18, color: AppColors.mainAccent),
-                  ),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                CountryCodeField(
-                  onChanged: (value) {
-                    setState(() {
-                      phoneNumber = value;
-                    });
-                  },
-                ),
-                const SizedBox(
-                  height: 29,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Row(
-                    children: [
-                      AppCheckbox(
-                          value: isNameUnknown,
-                          onChanged: (v) {
-                            setState(() {
-                              isNameUnknown = v!;
-                            });
-                          },
-                          borderColor: AppColors.lightGrey),
-                      const SizedBox(
-                        width: 12,
-                      ),
-                      Text(
-                        AppLocalizations.of(context)!.nameIsUnknown,
-                        style: Theme.of(context).textTheme.titleLarge,
-                      )
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 29,
-                ),
-                isNameUnknown
-                    ? const SizedBox()
-                    : Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15.0),
-                            child: Text(
-                              AppLocalizations.of(context)!.enterTheFirstName,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall!
-                                  .copyWith(
-                                      fontSize: 18,
-                                      color: AppColors.mainAccent),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          TextFormField(
-                            controller: nameController,
-                            focusNode: _nameFocusNode,
-                            decoration: InputDecoration(
-                              hintText: AppLocalizations.of(context)!.firstName,
-                              contentPadding: const EdgeInsets.symmetric(
-                                vertical: 10,
-                                horizontal: 20,
-                              ),
-                            ),
-                            onTapOutside: (v) {
-                              _nameFocusNode.unfocus();
-                            },
-                          ),
-                          const SizedBox(
-                            height: 29,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15.0),
-                            child: Text(
-                              AppLocalizations.of(context)!.enterTheLastName,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall!
-                                  .copyWith(
-                                      fontSize: 18,
-                                      color: AppColors.mainAccent),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          TextFormField(
-                            controller: lastNameController,
-                            focusNode: _lastNameFocusNode,
-                            decoration: InputDecoration(
-                              hintText: AppLocalizations.of(context)!.lastName,
-                              contentPadding: const EdgeInsets.symmetric(
-                                vertical: 10,
-                                horizontal: 20,
-                              ),
-                            ),
-                            onTapOutside: (v) {
-                              _lastNameFocusNode.unfocus();
-                            },
-                          ),
-                          const SizedBox(
-                            height: 29,
-                          ),
-                        ],
-                      ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 15.0),
-                  child: Text(
-                    AppLocalizations.of(context)!.chooseTag,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleSmall!
-                        .copyWith(fontSize: 18, color: AppColors.mainAccent),
-                  ),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                AppDropdownPicker(
-                  onChange: (v) {
-                    setState(() {
-                      tag = v;
-                    });
-                  },
-                  items: LocalizationUtils(context: context)
-                      .localizedDangerousTags(),
-                ),
-              ],
-            ),
-            Positioned(
-              bottom: 55,
-              left: 0,
-              right: 0,
-              child: Column(
+      listener: (context, state) {
+        state.maybeMap(
+            loaded: (_) {
+              context.read<ScBloc>().add(const ScEvent.getAllSC());
+              return Navigator.pop(context);
+            },
+            orElse: () {});
+      },
+      child: Scaffold(
+        appBar: DefaultAppBar(
+          title: AppLocalizations.of(context)!.addNumber,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Stack(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  AppElevatedButton(
-                    text: 'Add',
-                    widget: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 28.0),
-                      child: Text(AppLocalizations.of(context)!.add),
+                  const SizedBox(
+                    height: 27,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15.0),
+                    child: Text(
+                      AppLocalizations.of(context)!.enterTheNumber,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleSmall!
+                          .copyWith(fontSize: 18, color: AppColors.mainAccent),
                     ),
-                    onPressed: phoneNumber.isEmpty || tag.isEmpty
-                        ? null
-                        : () {
-                            context.read<DcBloc>().add(
-                                  DcEvent.addToDC(
-                                    dangerContact: ContactEntity(
-                                      id: phoneNumber,
-                                      name:
-                                          '${nameController.text} ${lastNameController.text} ',
-                                      phoneNumber: phoneNumber,
-                                      tags: [tag],
-                                    ),
-                                  ),
-                                );
-
-
-                          },
-                    width: 0,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleMedium!
-                        .copyWith(color: AppColors.white),
-                    borderRadius: 30,
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  CountryCodeField(
+                    onChanged: (value) {
+                      setState(() {
+                        phoneNumber = value;
+                      });
+                    },
+                  ),
+                  const SizedBox(
+                    height: 29,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Row(
+                      children: [
+                        AppCheckbox(
+                            value: isNameUnknown,
+                            onChanged: (v) {
+                              setState(() {
+                                isNameUnknown = v!;
+                              });
+                            },
+                            borderColor: AppColors.lightGrey),
+                        const SizedBox(
+                          width: 12,
+                        ),
+                        Text(
+                          AppLocalizations.of(context)!.nameIsUnknown,
+                          style: Theme.of(context).textTheme.titleLarge,
+                        )
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 29,
+                  ),
+                  isNameUnknown
+                      ? const SizedBox()
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 15.0),
+                              child: Text(
+                                AppLocalizations.of(context)!.enterTheFirstName,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleSmall!
+                                    .copyWith(
+                                        fontSize: 18,
+                                        color: AppColors.mainAccent),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            TextFormField(
+                              controller: nameController,
+                              focusNode: _nameFocusNode,
+                              decoration: InputDecoration(
+                                hintText:
+                                    AppLocalizations.of(context)!.firstName,
+                                contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 10,
+                                  horizontal: 20,
+                                ),
+                              ),
+                              onTapOutside: (v) {
+                                _nameFocusNode.unfocus();
+                              },
+                            ),
+                            const SizedBox(
+                              height: 29,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 15.0),
+                              child: Text(
+                                AppLocalizations.of(context)!.enterTheLastName,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleSmall!
+                                    .copyWith(
+                                        fontSize: 18,
+                                        color: AppColors.mainAccent),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            TextFormField(
+                              controller: lastNameController,
+                              focusNode: _lastNameFocusNode,
+                              decoration: InputDecoration(
+                                hintText:
+                                    AppLocalizations.of(context)!.lastName,
+                                contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 10,
+                                  horizontal: 20,
+                                ),
+                              ),
+                              onTapOutside: (v) {
+                                _lastNameFocusNode.unfocus();
+                              },
+                            ),
+                            const SizedBox(
+                              height: 29,
+                            ),
+                          ],
+                        ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15.0),
+                    child: Text(
+                      AppLocalizations.of(context)!.chooseTag,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleSmall!
+                          .copyWith(fontSize: 18, color: AppColors.mainAccent),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  AppDropdownPicker(
+                    onChange: (v) {
+                      setState(() {
+                        tag = v;
+                      });
+                    },
+                    items: LocalizationUtils(context: context)
+                        .localizedDangerousTags(),
                   ),
                 ],
               ),
-            ),
-          ],
+              Positioned(
+                bottom: 55,
+                left: 0,
+                right: 0,
+                child: Column(
+                  children: [
+                    AppElevatedButton(
+                      text: 'Add',
+                      widget: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 28.0),
+                        child: Text(AppLocalizations.of(context)!.add),
+                      ),
+                      onPressed: phoneNumber.isEmpty || tag.isEmpty
+                          ? null
+                          : () {
+                              context.read<DcBloc>().add(
+                                    DcEvent.addToDC(
+                                      dangerContact: ContactEntity(
+                                        id: phoneNumber,
+                                        name:
+                                            '${nameController.text} ${lastNameController.text} ',
+                                        phoneNumber: phoneNumber,
+                                        tags: [tag],
+                                      ),
+                                    ),
+                                  );
+                            },
+                      width: 0,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium!
+                          .copyWith(color: AppColors.white),
+                      borderRadius: 30,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
-    ),
-);
+    );
   }
 
   @override

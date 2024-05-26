@@ -12,6 +12,7 @@ import '../../../core/const/images.dart';
 import '../../../core/service_locator/service_locator.dart';
 import '../../../core/theme/theme.dart';
 import '../../bloc/danger_contact/dc_bloc.dart';
+import '../../bloc/pick_dc/pick_dc_cubit.dart';
 import '../../widgets/app_transparent_button.dart';
 import 'add_dangerous/add_dc_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -159,6 +160,7 @@ class _DCScreenState extends State<DCScreen> {
                     AppTransparentButton(
                       text: AppLocalizations.of(context)!.selectFromContacts,
                       onPressed: () {
+                        // context.read<PickDcCubit>().reset();
                         Navigator.push(
                             context,
                             MaterialPageRoute(

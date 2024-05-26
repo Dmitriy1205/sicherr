@@ -103,8 +103,11 @@ class _CountryCodeFieldState extends State<CountryCodeField> {
                   contentPadding: EdgeInsets.symmetric(vertical: 0),
                 ),
                 onChanged: (v) {
-                  dialCode = v.dialCode!;
-                  isoCode = v.code!;
+                  setState(() {
+                    dialCode = v.dialCode!;
+                    isoCode = v.code!;
+                  });
+
                 },
                 countryList: sortCountries(List.of(codes)),
               ),
