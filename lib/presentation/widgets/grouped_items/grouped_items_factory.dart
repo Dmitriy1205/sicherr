@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:sicherr/core/utils/phone_encryptor.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
 import 'package:sicherr/presentation/screens/configure_contacts/widgets/con_contact_card.dart';
 import 'package:sicherr/presentation/screens/contacts/widgets/contact_card.dart';
@@ -35,6 +36,7 @@ class DCCardFactory implements BaseContactFactory {
 
 class SelectableContactCardFactory implements BaseContactFactory {
   List<ContactEntity> selectedContacts;
+  final PhoneNumberEncryptor en = PhoneNumberEncryptor();
 
   SelectableContactCardFactory({this.selectedContacts = const []});
 
@@ -42,7 +44,7 @@ class SelectableContactCardFactory implements BaseContactFactory {
   Widget create(ContactEntity contact) {
     return ConContactCard(
       contact: contact,
-      isSelected: selectedContacts.any((e) => e.id == contact.id),
+      isSelected: selectedContacts.any((e) => en.decrypt(e.id) == contact.id),
     );
   }
 }

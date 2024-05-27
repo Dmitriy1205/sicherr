@@ -6,13 +6,15 @@ import 'package:sicherr/core/managers/contacts_manager.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
 import 'package:sicherr/domain/repositories/contacts/contacts_repository.dart';
 
+import '../../../core/utils/phone_encryptor.dart';
+
 part 'configure_contacts_state.dart';
 part 'configure_contacts_event.dart';
 part 'configure_contacts_bloc.freezed.dart';
 
 class ConfigureContactsBloc
     extends Bloc<ConfigureContactsEvent, ConfigureContactsState> {
-  ConfigureContactsBloc(this.contactsRepository)
+  ConfigureContactsBloc(this.contactsRepository, this.encryptor)
       : super(const ConfigureContactsState.loadInProgress()) {
     on<ConfigureContactsEvent>(_mapEventToState);
     add(const ConfigureContactsEvent.initial());
@@ -23,6 +25,7 @@ class ConfigureContactsBloc
   List<ContactEntity> _selectedContacts = [];
 
   final ContactsRepository contactsRepository;
+  final PhoneNumberEncryptor encryptor;
 
   PermissionStatus _permissionStatus = PermissionStatus.denied;
   bool get _isPermissionDenied =>
@@ -73,8 +76,8 @@ class ConfigureContactsBloc
   Future<void> _selectContact(
       _SelectContact event, Emitter<ConfigureContactsState> emit) async {
     emit(const ConfigureContactsState.loadInProgress());
-    if (_selectedContacts.any((e) => e.id == event.contact.id)) {
-      _selectedContacts.removeWhere((e) => e.id == event.contact.id);
+    if (_selectedContacts.any((e) => encryptor.decrypt(e.id) == encryptor.decrypt(event.contact.id))) {
+      _selectedContacts.removeWhere((e) => encryptor.decrypt(e.id) == encryptor.decrypt(event.contact.id));
     } else {
       _selectedContacts.add(event.contact);
     }

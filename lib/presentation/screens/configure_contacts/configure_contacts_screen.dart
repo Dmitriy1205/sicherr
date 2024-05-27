@@ -21,7 +21,7 @@ class ConfigureContactsScreen extends StatelessWidget {
       create: (context) => ConfigureContactsBloc(ContactsRepositoryImpl(
         firestore: FirebaseFirestore.instance,
         encryptor: sl<PhoneNumberEncryptor>(),
-      )),
+      ),sl<PhoneNumberEncryptor>()),
       child: Scaffold(
         appBar: DefaultAppBar(
           title: AppLocalizations.of(context)!.configureContacts,

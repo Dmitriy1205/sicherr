@@ -10,6 +10,7 @@ class ConContactCard extends StatelessWidget {
   final ContactEntity contact;
   final bool isSelected;
 
+
   @override
   Widget build(BuildContext context) {
     return SelectableContactCard(
