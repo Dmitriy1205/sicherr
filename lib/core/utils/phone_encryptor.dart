@@ -1,7 +1,7 @@
 import 'package:encrypt/encrypt.dart';
 
 class PhoneNumberEncryptor {
-  final String _keyString = 'hJfP5rDgJQEFhG/JY+mP2gPj9efvDsN4C4oeaROOQi4=';
+  final String _keyString = 'hJfP5rDgJQEFhG1JY+mP2gPj9efvDsN4C4oeaROOQi4=';
   final String _ivString = 'Jktlg2&kjl#ctk5@';
 
   late final Key _key;

@@ -56,7 +56,6 @@ class DCRepositoryImpl extends DCRepository {
             'ratings': FieldValue.arrayUnion(dc.ratings),
           });
         } else {
-          final a = dc.toJson();
           await _firestore
               .collection(usersCollection)
               .doc(currentUserId)
