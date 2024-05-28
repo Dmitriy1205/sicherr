@@ -55,7 +55,7 @@ Future<void> init() async {
   PhoneNumberEncryptor encryptor = PhoneNumberEncryptor();
 
   //Services
-  final httpClient = HttpClient();
+  final httpClient = HttpClient(encryptor: encryptor);
   sl.registerLazySingleton(() => FCMService(messaging: messaging));
   sl.registerLazySingleton(() => CallerIdService());
   sl.registerLazySingleton(() => PhoneNumberEncryptor());

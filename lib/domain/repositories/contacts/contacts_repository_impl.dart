@@ -174,7 +174,6 @@ class ContactsRepositoryImpl implements ContactsRepository {
 
     final sharedContactsSnap =
         await _firestore.collection(sharedCollectionName).get();
-    print(sharedContactsSnap.size);
 
     final query1 = number;
     final Set queries = {query1};
@@ -199,7 +198,7 @@ class ContactsRepositoryImpl implements ContactsRepository {
     }
 
     final contactSnapshot = sharedContactsSnap.docs.firstWhereOrNull((element) {
-      if (queries.contains(element.id)) {
+      if (queries.contains(_encryptor.decrypt(element.id))) {
         return true;
       }
       return false;

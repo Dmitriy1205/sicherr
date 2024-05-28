@@ -1,11 +1,15 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:sicherr/core/exceptions/exceptions.dart';
 import 'package:http/http.dart' as http;
 
 import '../../core/const/url.dart';
+import '../../core/utils/phone_encryptor.dart';
 
 class HttpClient {
+  final PhoneNumberEncryptor encryptor;
+
   Future<void> sendSos({
     required String idToken,
     required String? lat,
@@ -23,9 +27,11 @@ class HttpClient {
         'lat': lat,
         'long': long,
         'message': message,
-        'phone': currentUserPhone,
-        'phones': emContactPhones,
+        'phone': encryptor.decrypt(currentUserPhone),
+        'phones': emContactPhones.map((e) => encryptor.decrypt(e)).toList(),
       };
+
+      print(jsonEncode(body));
 
       var apiUrl = Uri.parse('$url$sosEndpoint');
       var response =
@@ -40,4 +46,8 @@ class HttpClient {
       throw BadRequestException(message: e.toString());
     }
   }
+
+  const HttpClient({
+    required this.encryptor,
+  });
 }

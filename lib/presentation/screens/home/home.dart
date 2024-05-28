@@ -55,12 +55,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 context
                     .read<ContactsBloc>()
                     .add(const ContactsEvent.searchContact(''));
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          ContactDetailScreen(contact: state.contact)),
-                );
               },
               orElse: () {});
         },
@@ -84,15 +78,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 .read<ContactsBloc>()
                                 .add(ContactsEvent.searchContact(text));
                             if(_searchTextController.text.isNotEmpty){
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Scaffold(
-                                          appBar: DefaultAppBar(title: AppLocalizations.of(context)!.contacts,),
-                                          body: ContactsScreen(
-                                            contactName:
-                                            _searchTextController.text,
-                                          ))));
+                              context
+                                  .read<ContactsBloc>()
+                                  .add(ContactsEvent.searchSharedContact(_searchTextController.text));
                             }
 
                           },
