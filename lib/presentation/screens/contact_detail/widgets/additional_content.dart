@@ -32,14 +32,22 @@ class AdditionalContentBlock extends StatelessWidget {
         rating.fromUserId == userPhoneNumber && rating.rating == 'Bad');
     final bool isGoodRated = sharedContact.ratings.any((rating) =>
         rating.fromUserId == userPhoneNumber && rating.rating == 'Good');
-    final usersLength = context.watch<UsersLengthCubit>().state.usersLength.toDouble();
-    final validUsersLength = usersLength > 0 ? usersLength : 1.0;
+    // final usersLength = context.watch<UsersLengthCubit>().state.usersLength.toDouble();
+    final int usersBadVoteLength = sharedContact.ratings
+        .where((rating) => rating.fromUserId == userPhoneNumber && rating.rating == 'Bad')
+        .length;
+
+    final int usersGoodVoteLength = sharedContact.ratings
+        .where((rating) => rating.fromUserId == userPhoneNumber && rating.rating == 'Good')
+        .length;
+    final validBadUsersLength = usersBadVoteLength > 0 ? usersBadVoteLength : 1.0;
+    final validGoodUsersLength = usersGoodVoteLength > 0 ? usersGoodVoteLength : 1.0;
 
     final validGoodRating = goodRating.isNaN || goodRating.isInfinite ? 0 : goodRating;
     final validBadRating = badRating.isNaN || badRating.isInfinite ? 0 : badRating;
 
-    final goodRatingPercentage = validGoodRating / validUsersLength;
-    final badRatingPercentage = validBadRating / validUsersLength;
+    final goodRatingPercentage = validGoodRating / validGoodUsersLength;
+    final badRatingPercentage = validBadRating / validBadUsersLength;
     return Column(
       children: [
         // ShowTags(

@@ -4,7 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:sicherr/core/service_locator/service_locator.dart';
 import 'package:sicherr/presentation/bloc/alarm/alarm_bloc.dart';
+import 'package:sicherr/presentation/screens/contacts/contacts.dart';
 import 'package:sicherr/presentation/screens/home/widgets/circle_action_button.dart';
+import 'package:sicherr/presentation/widgets/core_widgets.dart';
 import 'package:sicherr/presentation/widgets/sos_confirmation_popup.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -81,17 +83,30 @@ class _HomeScreenState extends State<HomeScreen> {
                             context
                                 .read<ContactsBloc>()
                                 .add(ContactsEvent.searchContact(text));
+                            if(_searchTextController.text.isNotEmpty){
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Scaffold(
+                                          appBar: DefaultAppBar(title: AppLocalizations.of(context)!.contacts,),
+                                          body: ContactsScreen(
+                                            contactName:
+                                            _searchTextController.text,
+                                          ))));
+                            }
+
                           },
                         ),
                       ),
-                      _searchTextController.text.isEmpty
-                          ? const Expanded(
-                              child: HomeButtonsSlider(),
-                            )
-                          : ContactListDisplayed(
-                              groupedContacts: state.categorizedContacts,
-                              searchingNumber: _searchTextController.text,
-                            )
+                      // _searchTextController.text.isEmpty
+                      //     ?
+                      const Expanded(
+                        child: HomeButtonsSlider(),
+                      )
+                      // : ContactListDisplayed(
+                      //     groupedContacts: state.categorizedContacts,
+                      //     searchingNumber: _searchTextController.text,
+                      //   )
                     ],
                   ));
         },

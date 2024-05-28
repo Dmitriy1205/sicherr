@@ -10,23 +10,26 @@ import '../../bloc/emergency_contact/emergency_contact_bloc.dart';
 import '../../bloc/shared_contacts/sc_bloc.dart';
 
 class ContactsScreen extends StatefulWidget {
-  const ContactsScreen({Key? key}) : super(key: key);
+  final String? contactName;
+
+  const ContactsScreen({Key? key, this.contactName}) : super(key: key);
 
   @override
   State<ContactsScreen> createState() => _ContactsScreenState();
 }
 
 class _ContactsScreenState extends State<ContactsScreen> {
+  late TextEditingController _searchTextController ;
+
   @override
   void initState() {
     super.initState();
+    _searchTextController = TextEditingController(text: widget.contactName);
     context
         .read<EmergencyContactBloc>()
         .add(const EmergencyContactEvent.getAllEmContacts());
     context.read<ScBloc>().add(const ScEvent.getAllSC());
   }
-
-  final _searchTextController = TextEditingController();
 
   @override
   void dispose() {
