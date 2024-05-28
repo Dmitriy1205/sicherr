@@ -10,6 +10,7 @@ import 'package:sicherr/core/managers/contacts_manager.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
 import 'package:sicherr/domain/repositories/contacts/contacts_repository.dart';
 
+import '../../../core/utils/is_base64.dart';
 import '../../../core/utils/phone_encryptor.dart';
 
 class ContactsRepositoryImpl implements ContactsRepository {
@@ -73,12 +74,15 @@ class ContactsRepositoryImpl implements ContactsRepository {
           sharedContacts: sharedContacts);
 
       for (var contact in sharedContacts) {
-        String decryptedPhoneNumber = _encryptor.decrypt(contact.phoneNumber);
-        String decryptedId = _encryptor.decrypt(contact.id);
-
-        // Encrypt phone number and id
-        String encryptedPhoneNumber = _encryptor.encrypt(decryptedPhoneNumber);
-        String encryptedId = _encryptor.encrypt(decryptedId);
+        final String encryptedPhoneNumber;
+        final String encryptedId;
+        if(isBase64(contact.phoneNumber)){
+          encryptedPhoneNumber = _encryptor.encrypt(contact.phoneNumber);
+          encryptedId = _encryptor.encrypt(contact.id);
+        }else{
+          encryptedPhoneNumber = contact.phoneNumber;
+          encryptedId = contact.id;
+        }
 
         contact = contact.copyWith(
             phoneNumber: encryptedPhoneNumber, id: encryptedId);
