@@ -204,11 +204,9 @@ class _SelectFromContactsScreenState extends State<SelectFromContactsScreen> {
                               List<ContactEntity> updatedContacts =
                                   contactList.map((contact) {
                                 return ContactEntity(
-                                  id: sl<PhoneNumberEncryptor>()
-                                      .decrypt(contact.id),
+                                  id: contact.id,
                                   name: '',
-                                  phoneNumber: sl<PhoneNumberEncryptor>()
-                                      .decrypt(contact.phoneNumber),
+                                  phoneNumber: contact.phoneNumber,
                                   tags: [pickedValue!],
                                 );
                               }).toList();

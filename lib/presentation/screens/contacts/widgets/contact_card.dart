@@ -87,7 +87,7 @@ class ContactCard extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                           ),
                           Text(
-                            sl<PhoneNumberEncryptor>().decrypt(contact.phoneNumber),
+                            contact.phoneNumber,
                             style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,

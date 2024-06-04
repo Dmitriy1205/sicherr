@@ -57,6 +57,7 @@ dependencies:
   just_audio: ^0.9.36
   volume_controller: ^2.0.7
   flutter_rating_bar: ^4.0.1
+  firebase_crashlytics: ^3.4.18
 
 dev_dependencies:
   flutter_test:

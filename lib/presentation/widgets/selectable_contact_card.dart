@@ -53,13 +53,13 @@ class SelectableContactCard extends StatelessWidget {
                     Text(
                       contact.name.isNotEmpty
                           ? contact.name
-                          : sl<PhoneNumberEncryptor>().decrypt(contact.phoneNumber),
+                          : contact.phoneNumber,
                       style: const TextStyle(
                           fontSize: 14, fontWeight: FontWeight.w500),
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
-                     sl<PhoneNumberEncryptor>().decrypt(contact.phoneNumber) ,
+                     contact.phoneNumber ,
                       style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
@@ -74,7 +74,7 @@ class SelectableContactCard extends StatelessWidget {
           const SizedBox(
             width: 25,
           ),
-          context.watch<ScBloc>().state.sc?.any((element) => element.id == contact.id) ?? false
+          context.watch<ScBloc>().state.sc?.any((element) => element.phoneNumber == contact.phoneNumber) ?? false
               ? const SizedBox()
               : isSelected
                   ? GestureDetector(

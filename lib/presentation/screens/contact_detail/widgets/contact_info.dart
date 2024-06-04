@@ -86,7 +86,7 @@ class ContactInfo extends StatelessWidget {
                 ],
               ),
               Text(
-                sl<PhoneNumberEncryptor>().decrypt(contact.phoneNumber),
+                contact.phoneNumber,
                 style: const TextStyle(fontSize: 16, color: Color(0xFF838383)),
               )
             ],

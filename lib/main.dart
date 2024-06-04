@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 
 import 'bloc_observer.dart';
@@ -15,6 +16,7 @@ void main() async {
   );
   await sl.init();
   await sl.initNotifications();
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
   runApp(const App());
 }

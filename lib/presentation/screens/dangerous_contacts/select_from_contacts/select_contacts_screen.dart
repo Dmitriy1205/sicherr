@@ -30,6 +30,7 @@ class _SelectContactsScreenState extends State<SelectContactsScreen> {
     context
         .read<EmergencyContactBloc>()
         .add(const EmergencyContactEvent.getAllEmContacts());
+    context.read<PickDcCubit>().init();
     super.initState();
   }
 
@@ -40,8 +41,7 @@ class _SelectContactsScreenState extends State<SelectContactsScreen> {
         title: AppLocalizations.of(context)!.selectContactsScreen,
         icon: Padding(
           padding: const EdgeInsets.only(right: 20),
-          child: context.watch<PickDcCubit>().state.contacts == null ||
-                  context.watch<PickDcCubit>().state.contacts!.isEmpty
+          child: context.watch<PickDcCubit>().state.contacts.isEmpty
               ? const SizedBox()
               : GestureDetector(
                   onTap: () {
@@ -53,27 +53,11 @@ class _SelectContactsScreenState extends State<SelectContactsScreen> {
                   )),
         ),
       ),
-      body: BlocBuilder<ContactsBloc, ContactsState>(
+      body: BlocBuilder<PickDcCubit, PickDcState>(
         builder: (context, state) {
           return state.maybeMap(
-              loadInProgress: (_) => const Center(child: LoadingIndicator()),
               orElse: () => const Center(child: LoadingIndicator()),
-              loaded: (state) {
-                // final Set<String> dangerousContactIds = widget.dangerousContacts
-                //     .map((contact) => contact.id)
-                //     .toSet();
-                //
-                // final Map<String, List<ContactEntity>>
-                //     filteredCategorizedContacts = state.categorizedContacts.map(
-                //   (category, contacts) {
-                //     final filteredContacts = contacts
-                //         .where((contact) =>
-                //             !dangerousContactIds.contains(contact.id))
-                //         .toList();
-                //     return MapEntry(category, filteredContacts);
-                //   },
-                // );
-
+              picked: (state) {
                 return Column(
                   children: [
                     Align(
@@ -94,17 +78,14 @@ class _SelectContactsScreenState extends State<SelectContactsScreen> {
                       child: SearchPhoneField(
                         hintText: AppLocalizations.of(context)!.search,
                         onChanged: (text) {
-                          context.read<EmergencyContactBloc>().add(
-                              const EmergencyContactEvent.getAllEmContacts());
-
                           context
-                              .read<ContactsBloc>()
-                              .add(ContactsEvent.searchContact(text));
+                              .read<PickDcCubit>()
+                              .search(text);
                         },
                       ),
                     ),
                     ContactListDisplayed(
-                        groupedContacts: state.categorizedContacts)
+                        groupedContacts: state.searchedContactsCategorized)
                   ],
                 );
               });

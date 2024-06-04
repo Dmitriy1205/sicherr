@@ -17,9 +17,9 @@ class EmContactCard extends StatelessWidget {
         return SelectableContactCard(
           contact: contact,
           isSelected:
-              state.emContacts!.any((element) => element.id == contact.id),
+              state.emContacts.any((element) => element.id == contact.id),
           onTap: () {
-            state.emContacts!.any((element) => element.id == contact.id)
+            state.emContacts.any((element) => element.id == contact.id)
                 ? context.read<EmergencyContactBloc>().add(
                     EmergencyContactEvent.deleteFromEmContact(
                         contactId: contact.id))

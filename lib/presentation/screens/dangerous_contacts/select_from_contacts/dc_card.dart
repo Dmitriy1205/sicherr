@@ -15,9 +15,7 @@ class DCCard extends StatelessWidget {
       builder: (context, state) {
         return SelectableContactCard(
           contact: contact,
-          isSelected: state.contacts != null
-              ? state.contacts!.any((element) => element.id == contact.id)
-              : false,
+          isSelected: state.contacts.any((element) => element.id == contact.id),
           onTap: () {
             context.read<PickDcCubit>().pickAsDanger(
                 pickedContact: contact,

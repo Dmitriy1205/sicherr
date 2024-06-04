@@ -53,7 +53,7 @@ class CallerIdRepositoryImpl extends CallerIdRepository {
                 name: PlatformDispatcher.instance.locale.languageCode == 'de'
                     ? AppStrings.warningDe
                     : AppStrings.warningEn,
-                phoneNumber: _encryptor.decrypt(element.phoneNumber)))
+                phoneNumber: element.phoneNumber))
             .toList();
 
         if (latestUpdateDate == null) {
