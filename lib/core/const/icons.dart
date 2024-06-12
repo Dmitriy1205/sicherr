@@ -16,4 +16,9 @@ class AppIcons {
   static const warning = 'assets/icons/warning.svg';
   static const addressBook = 'assets/icons/address_book.svg';
   static const done = 'assets/icons/done.svg';
+  static const add = 'assets/icons/add.svg';
+  static const directions = 'assets/icons/directions.svg';
+  static const start = 'assets/icons/start.svg';
+  static const eta = 'assets/icons/eta.svg';
+  static const position = 'assets/icons/posistion.svg';
 }

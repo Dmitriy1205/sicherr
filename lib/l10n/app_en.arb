@@ -124,6 +124,17 @@
     "youSureWantDelete": "Are you sure you want to delete ?",
     "suspiciousContact": "Suspicious contact",
 
+    "directions": "Directions",
+    "addHome": "Add home",
+    "shareETA": "Share ETA",
+    "exit": "Exit",
+    "openContacts": "Open Contacts",
+    "searchHere": "Search here",
+    "chooseContacts": "Choose contacts",
+    "chooseContactsDescription": "Choose one contact to track your location",
+    "youLeftTheRoute": "You left the route. SOS signal sent",
+    "youHaveArrived": "You have arrived",
+
     "remove": "remove",
     "selectFromContacts": "select from contacts",
     "addNumber": "Add number",

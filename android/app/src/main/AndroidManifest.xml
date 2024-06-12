@@ -40,6 +40,10 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
+        <!-- API key for google maps-->
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAbLBaDeytsTP5ih_W5DPzuJr84nR0Wo6E"/>
     </application>
 
     <!-- Provide required visibility configuration for API level 30 and above -->

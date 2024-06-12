@@ -2,6 +2,7 @@ import UIKit
 import Flutter
 import flutter_local_notifications
 import flutter_callkit_voximplant
+import GoogleMaps
 
 @UIApplicationMain
 final class AppDelegate: FlutterAppDelegate {
@@ -35,6 +36,7 @@ final class AppDelegate: FlutterAppDelegate {
     if #available(iOS 10.0, *) {
           UNUserNotificationCenter.current().delegate = self as UNUserNotificationCenterDelegate
         }
+    GMSServices.provideAPIKey("AIzaSyAbLBaDeytsTP5ih_W5DPzuJr84nR0Wo6E")
     GeneratedPluginRegistrant.register(with: self)
     callKitPlugin.didAddIdentifiablePhoneNumbers = { [weak self] numbers in
                   guard let self = self else { return }

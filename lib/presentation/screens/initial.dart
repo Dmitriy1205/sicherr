@@ -16,13 +16,14 @@ import 'package:sicherr/presentation/screens/configure_contacts/configure_contac
 import 'package:sicherr/presentation/screens/contacts/contacts.dart';
 import 'package:sicherr/presentation/screens/dangerous_contacts/dc_screen.dart';
 import 'package:sicherr/presentation/screens/home/home.dart';
-import 'package:sicherr/presentation/screens/map/map.dart';
+import 'package:sicherr/presentation/screens/map/map_screen.dart';
 import 'package:sicherr/presentation/screens/profile/profile.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sicherr/presentation/widgets/core_widgets.dart';
 
 import '../../core/service_locator/service_locator.dart';
 import '../bloc/emergency_contact/emergency_contact_bloc.dart';
+import '../bloc/map/home_position/home_position_cubit.dart';
 import '../bloc/onboarding/onboarding_bloc.dart';
 
 class InitialScreen extends StatefulWidget {
@@ -59,6 +60,7 @@ class _InitialScreenState extends State<InitialScreen> {
     context
         .read<DcBloc>()
         .add(const DcEvent.getAllDC());
+    context.read<HomePositionCubit>().getPosition();
     sl<QuickBindingListener>().initListeners();
     super.initState();
   }
@@ -120,7 +122,7 @@ class _InitialScreenState extends State<InitialScreen> {
         ),
       ],
       child: Scaffold(
-        appBar: DefaultAppBar(
+        appBar:_selectedPage == 3 ? null: DefaultAppBar(
           title:
           PrimaryPageEnum.values[_selectedPage] == PrimaryPageEnum.add
               ? AppLocalizations.of(context)!.dangerContacts

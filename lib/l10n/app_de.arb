@@ -119,6 +119,20 @@
     "notPaid": "Nicht bezahlt",
     "exploitation": "Ausbeutung",
 
+        "directions": "Wegbeschreibung",
+        "addHome": "Heim hinzufügen",
+        "shareETA": "Ankunftszeit teilen",
+        "exit": "Beenden",
+        "openContacts": "Kontakte öffnen",
+        "searchHere": "Hier suchen",
+        "chooseContacts": "Kontakte auswählen",
+            "chooseContactsDescription": "Wählen Sie einen Kontakt, um Ihren Standort zu verfolgen",
+        "youLeftTheRoute": "Sie haben die Route verlassen. SOS-Signal gesendet.",
+          "youHaveArrived": "Sie sind angekommen.",
+
+
+
+
     "good": "Gut",
         "bad": "Schlecht",
         "delete": "Löschen",
