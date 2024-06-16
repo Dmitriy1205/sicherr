@@ -16,6 +16,8 @@ import 'package:sicherr/presentation/bloc/users_length/users_lentgh_cubit.dart';
 
 import '../presentation/bloc/auth/auth_bloc.dart';
 import '../presentation/bloc/contacts/contacts_bloc.dart';
+import '../presentation/bloc/map/home_position/home_position_cubit.dart';
+import '../presentation/bloc/map/search_position/search_position_cubit.dart';
 import '../presentation/bloc/otp/otp_bloc.dart';
 import '../presentation/bloc/shared_contacts/sc_bloc.dart';
 import '../presentation/bloc/sign_in/sign_in_bloc.dart';
@@ -88,6 +90,13 @@ class Providers extends StatelessWidget {
         BlocProvider(
           create: (context) => sl<UsersLengthCubit>(),
         ),
+        BlocProvider(
+          create: (context) => sl<HomePositionCubit>(),
+        ),
+        BlocProvider(
+          create: (context) => sl<SearchPositionCubit>(),
+        ),
+
       ],
       child: child,
     );

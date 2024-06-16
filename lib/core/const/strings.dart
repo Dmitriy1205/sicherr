@@ -1,4 +1,5 @@
 class AppStrings {
+  static const String googleAPIKey = 'AIzaSyAbLBaDeytsTP5ih_W5DPzuJr84nR0Wo6E';
   static const String contacts = 'Contacts';
   static const String home = 'Home';
   static const String map = 'Map';
@@ -45,4 +46,7 @@ class AppStrings {
 
   static const String warningDe = 'Achtung auffällige Person!';
   static const String warningEn = 'Attention conspicuous person!';
+
+  static const List<String> distances = ['500m', '1km', '2km', '5km', '10km'];
+
 }

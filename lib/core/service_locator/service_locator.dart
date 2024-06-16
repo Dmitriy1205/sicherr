@@ -8,6 +8,7 @@ import 'package:sicherr/core/managers/alarm_manager.dart';
 import 'package:sicherr/core/managers/contacts_manager.dart';
 import 'package:sicherr/core/managers/quick_binding_handler.dart';
 import 'package:sicherr/data/local/caller_identifications_service.dart';
+import 'package:sicherr/data/local/home_position_prefs.dart';
 import 'package:sicherr/data/local/latest_contact_prefs.dart';
 import 'package:sicherr/data/remote/client.dart';
 import 'package:sicherr/data/remote/fcm_service.dart';
@@ -16,6 +17,8 @@ import 'package:sicherr/domain/repositories/dangerous_contacs/dc_repository.dart
 import 'package:sicherr/domain/repositories/dangerous_contacs/dc_repository_impl.dart';
 import 'package:sicherr/domain/repositories/emeregency_contacts/em_contacts_repository.dart';
 import 'package:sicherr/domain/repositories/emeregency_contacts/em_contacts_repository_impl.dart';
+import 'package:sicherr/domain/repositories/navigation/navigation_repository.dart';
+import 'package:sicherr/domain/repositories/navigation/navigation_repository_impl.dart';
 import 'package:sicherr/domain/repositories/notification/notification_repository.dart';
 import 'package:sicherr/domain/repositories/notification/notification_repository_impl.dart';
 import 'package:sicherr/domain/repositories/timer/timer_repository_contract.dart';
@@ -26,6 +29,7 @@ import 'package:sicherr/presentation/bloc/contact_dentification/contact_identifi
 import 'package:sicherr/presentation/bloc/contacts/contacts_bloc.dart';
 import 'package:sicherr/presentation/bloc/danger_contact/dc_bloc.dart';
 import 'package:sicherr/presentation/bloc/emergency_contact/emergency_contact_bloc.dart';
+import 'package:sicherr/presentation/bloc/map/search_position/search_position_cubit.dart';
 import 'package:sicherr/presentation/bloc/notification/notification_bloc.dart';
 import 'package:sicherr/presentation/bloc/pick_dc/pick_dc_cubit.dart';
 import 'package:sicherr/presentation/bloc/send_sos/send_sos_bloc.dart';
@@ -45,6 +49,7 @@ import '../../domain/repositories/shared_contacts/sc_repository_impl.dart';
 import '../../domain/repositories/timer/timer_repository_service.dart';
 import '../../presentation/bloc/auth/auth_bloc.dart';
 import '../../presentation/bloc/contact_details/contact_details_bloc.dart';
+import '../../presentation/bloc/map/home_position/home_position_cubit.dart';
 import '../../presentation/bloc/onboarding/onboarding_bloc.dart';
 import '../../presentation/bloc/otp/otp_bloc.dart';
 import '../../presentation/bloc/profile/profile_bloc.dart';
@@ -78,7 +83,10 @@ Future<void> init() async {
       fcmService: sl(), firebaseFirestore: firestore);
   final contactManager = ContactsManager();
 
+  //local storage
   final latestContactPrefs = LatestContactPrefs();
+  final homePositionPrefs = HomePositionPrefs();
+
   final callerIdService = CallerIdService();
   final callerIdRepository = CallerIdRepositoryImpl(
       callerIdService: callerIdService,
@@ -88,6 +96,8 @@ Future<void> init() async {
       DCRepositoryImpl(firestore: firestore, encryptor: encryptor);
   final sharedContactsRepository =
       SCRepositoryImpl(firestore: firestore, encryptor: encryptor);
+  final navigationRepository =
+      NavigationRepositoryImpl(homePositionPrefs: homePositionPrefs);
   final timerRepository = TimerRepositoryImpl(db: firestore);
 
   //Repositories
@@ -104,6 +114,7 @@ Future<void> init() async {
   sl.registerSingleton<CallerIdRepository>(callerIdRepository);
   sl.registerSingleton<DCRepository>(dangerContactsRepository);
   sl.registerSingleton<SCRepository>(sharedContactsRepository);
+  sl.registerSingleton<NavigationRepository>(navigationRepository);
 
   sl.registerFactory(() => TimerBloc(httpClient: sl(), timerRepository: sl()));
   //Blocs
@@ -143,6 +154,9 @@ Future<void> init() async {
       ));
   sl.registerLazySingleton(() => ContactIdentificationBloc(
       callerIdRepository: sl(), contactsRepository: sl()));
+  sl.registerLazySingleton(
+      () => HomePositionCubit(homePositionPrefs: homePositionPrefs, navigationRepository: sl()));
+  sl.registerLazySingleton(() => SearchPositionCubit(navigationRepository: sl()));
 
   ///Dangerous Contacts
   sl.registerLazySingleton(() => PickDcCubit());
