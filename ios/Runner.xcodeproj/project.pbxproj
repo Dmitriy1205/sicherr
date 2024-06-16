@@ -10,7 +10,7 @@
 		0304F16EBF288DEA3370FAAC /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77DC3BE1FE9E2CED2FF1A7DD /* Pods_Runner.framework */; };
 		04315A2B2BCEFE1600F366AC /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04315A242BCEFB0100F366AC /* UserDefault.swift */; };
 		04315A2E2BCEFE3000F366AC /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04315A242BCEFB0100F366AC /* UserDefault.swift */; };
-		048D12EA2BD96BAE00ED2B7A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 048D12E92BD96B7A00ED2B7A /* GoogleService-Info.plist */; };
+		0456B00D2C18887000FBE3AE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0456B00C2C18887000FBE3AE /* GoogleService-Info.plist */; };
 		048D12F02BD9717F00ED2B7A /* IdentifiableNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D12EF2BD9717F00ED2B7A /* IdentifiableNumber.swift */; };
 		048D12F12BD9717F00ED2B7A /* IdentifiableNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D12EF2BD9717F00ED2B7A /* IdentifiableNumber.swift */; };
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
@@ -68,8 +68,8 @@
 
 /* Begin PBXFileReference section */
 		04315A242BCEFB0100F366AC /* UserDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
+		0456B00C2C18887000FBE3AE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		048D12E62BD967FF00ED2B7A /* CallerExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CallerExtension.entitlements; sourceTree = "<group>"; };
-		048D12E92BD96B7A00ED2B7A /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		048D12EF2BD9717F00ED2B7A /* IdentifiableNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifiableNumber.swift; sourceTree = "<group>"; };
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
@@ -191,8 +191,8 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				0456B00C2C18887000FBE3AE /* GoogleService-Info.plist */,
 				048D12EF2BD9717F00ED2B7A /* IdentifiableNumber.swift */,
-				048D12E92BD96B7A00ED2B7A /* GoogleService-Info.plist */,
 				04315A242BCEFB0100F366AC /* UserDefault.swift */,
 				3C9BF9CA2B9B4E9500D439FD /* Runner.entitlements */,
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
@@ -351,7 +351,7 @@
 			files = (
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
-				048D12EA2BD96BAE00ED2B7A /* GoogleService-Info.plist in Resources */,
+				0456B00D2C18887000FBE3AE /* GoogleService-Info.plist in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
 			);
@@ -644,6 +644,7 @@
 				DEVELOPMENT_TEAM = P9C22T92US;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -668,6 +669,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P9C22T92US;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pandascode.sicher.RunnerTests;
@@ -686,6 +688,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P9C22T92US;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pandascode.sicher.RunnerTests;
@@ -702,6 +705,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P9C22T92US;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pandascode.sicher.RunnerTests;
@@ -950,6 +954,7 @@
 				DEVELOPMENT_TEAM = P9C22T92US;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -980,6 +985,7 @@
 				DEVELOPMENT_TEAM = P9C22T92US;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

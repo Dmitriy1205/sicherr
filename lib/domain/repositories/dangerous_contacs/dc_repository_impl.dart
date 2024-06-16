@@ -157,7 +157,6 @@ class DCRepositoryImpl extends DCRepository {
 
       List<ContactEntity> dcList = querySnapshot.docs.map((doc) {
         final data = doc.data();
-
         ContactEntity contact = ContactEntity.fromJson(data, _encryptor.decrypt);
         return contact;
       }).toList();

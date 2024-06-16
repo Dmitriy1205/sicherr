@@ -1,6 +1,7 @@
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/timezone.dart' as tz;
 import 'package:url_launcher/url_launcher.dart';
 
 
@@ -39,6 +40,23 @@ class FCMService {
     );
     await localNotificationsPlugin.initialize(initializationSettings,
         onDidReceiveNotificationResponse: onDidReceiveNotificationResponse);
+  }
+
+  Future<void> showNotification({required String title, required String body, Duration? delay}) async {
+    if(delay == null){
+      await localNotificationsPlugin.show(
+        0, // Notification ID
+        title,
+        body,
+        platformChannelSpecifics,
+        //payload: 'Custom_Sound',
+      );
+    }else{
+      final location = tz.getLocation('America/Detroit');
+      tz.setLocalLocation(location);
+      var nowAmerica = tz.TZDateTime.now(location).add(delay);
+      await localNotificationsPlugin.zonedSchedule(0, title, body, nowAmerica, NotificationDetails(), uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime);
+    }
   }
 
   void onDidReceiveNotificationResponse(NotificationResponse response) async {

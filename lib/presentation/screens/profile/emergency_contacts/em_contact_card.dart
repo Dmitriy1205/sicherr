@@ -15,6 +15,7 @@ class EmContactCard extends StatelessWidget {
     return BlocBuilder<EmergencyContactBloc, EmergencyContactState>(
       builder: (context, state) {
         return SelectableContactCard(
+          canBeSelected: true,
           contact: contact,
           isSelected:
               state.emContacts.any((element) => element.id == contact.id),

@@ -36,6 +36,7 @@ final class AppDelegate: FlutterAppDelegate {
           UNUserNotificationCenter.current().delegate = self as UNUserNotificationCenterDelegate
         }
     GeneratedPluginRegistrant.register(with: self)
+      
     callKitPlugin.didAddIdentifiablePhoneNumbers = { [weak self] numbers in
                   guard let self = self else { return }
                   self.identifiedNumbers.append(

@@ -57,7 +57,7 @@ class ContactInfo extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child:isDanger != null?
+                    child: isDanger != null?
                     Text(
                       NameFormatter.formatName(
                         context: context,

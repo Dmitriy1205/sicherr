@@ -73,10 +73,9 @@ class ContactsRepositoryImpl implements ContactsRepository {
 
       for (var contact in sharedContacts) {
         final encryptedPhoneNumber = _encryptor.encrypt(contact.phoneNumber);
-        final encryptedId = _encryptor.encrypt(contact.id);
 
         contact = contact.copyWith(
-            phoneNumber: encryptedPhoneNumber, id: encryptedId);
+            phoneNumber: encryptedPhoneNumber, id: encryptedPhoneNumber);
         // Reference to the user selected contacts document
         DocumentReference docRefUserContacts = _firestore
             .collection(usersCollectionName)

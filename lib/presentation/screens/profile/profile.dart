@@ -6,6 +6,7 @@ import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
 import 'package:sicherr/presentation/bloc/auth/auth_bloc.dart';
 import 'package:sicherr/presentation/screens/alarm_tone/alarm_tone.dart';
 import 'package:sicherr/presentation/screens/contact_detail/widgets/contact_info.dart';
+import 'package:sicherr/presentation/screens/contacts/contacts.dart';
 import 'package:sicherr/presentation/screens/profile/model/models.dart';
 import 'package:sicherr/presentation/screens/profile/sos/sos_screen.dart';
 import 'package:sicherr/presentation/screens/profile/widgets/profile_category_item.dart';
@@ -67,15 +68,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             MaterialPageRoute(
                                 builder: (context) => const SosScreen())),
                       ),
-                      ProfileSectionItem(
-                        text: AppLocalizations.of(context)!.quickAlarm,
-                        action: () => print('Quick Warning'),
-                      ),
                     ],
                   ),
                   ProfileSectionModel(
                     category: AppLocalizations.of(context)!.account,
                     items: [
+                      ProfileSectionItem(
+                        text: AppLocalizations.of(context)!.contacts,
+                        action: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ContactsScreen())),
+                      ),
                       ProfileSectionItem(
                           text: AppLocalizations.of(context)!.logout,
                           action: () {
