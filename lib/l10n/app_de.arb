@@ -3,6 +3,12 @@
   "contacts": "Kontakte",
   "home": "Startseite",
   "map": "Karte",
+  "timer": "Timer",
+  "time": "Zeit",
+  "timer_hint": "Wenn Sie einen Timer einstellen, wird nach dessen Ablauf das SOS-Signal an Ihre Notfallkontakte gesendet",
+  "minutes_count": "{count} Min",
+  "hour_count": "{count} Stunde",
+  "hours_count": "{count} Stunden",
   "profile": "Profil",
   "singIn": "Anmelden",
   "begin": "Beginnen Sie mit der Nutzung der App, indem Sie sich anmelden.",
@@ -49,7 +55,7 @@
   "start": "STARTEN",
   "stop": "STOPPEN",
   "alarm": "Alarm",
-  
+
   "enjoy": "Genießen Sie die Nutzung dieser App und fühlen Sie sich auf jedem Schritt sicher!",
     "overview": "Überblick",
     "overviewDescription": "SOS sendet eine Push-Benachrichtigung an alle Ihre\nNotfallkontakte mit oder ohne Standortangabe\nin einer benutzerdefinierten Nachricht. Außerdem teilt es\nIhren Standort.",
@@ -155,5 +161,11 @@
       "selectFromContacts": "Aus Kontakten auswählen",
       "select": "Auswählen",
       "contactsSelected": "Kontakte ausgewählt",
-      "notSelected": "Nicht ausgewählt"
+      "notSelected": "Nicht ausgewählt",
+
+  "timer_started": "Timer gestartet",
+  "timer_has_been_set_to": "Timer wurde eingestellt auf",
+  "timer_will_expire_in_5_mins": "Timer läuft in 5 Minuten ab",
+  "timer_expired": "Timer abgelaufen",
+  "sos_sent": "SOS-Signal gesendet"
 }

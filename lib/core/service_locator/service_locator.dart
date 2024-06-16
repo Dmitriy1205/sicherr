@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sicherr/core/managers/alarm_manager.dart';
 import 'package:sicherr/core/managers/contacts_manager.dart';
 import 'package:sicherr/core/managers/quick_binding_handler.dart';
@@ -20,6 +21,7 @@ import 'package:sicherr/domain/repositories/navigation/navigation_repository.dar
 import 'package:sicherr/domain/repositories/navigation/navigation_repository_impl.dart';
 import 'package:sicherr/domain/repositories/notification/notification_repository.dart';
 import 'package:sicherr/domain/repositories/notification/notification_repository_impl.dart';
+import 'package:sicherr/domain/repositories/timer/timer_repository_contract.dart';
 import 'package:sicherr/domain/repositories/user/user_repository.dart';
 import 'package:sicherr/domain/repositories/user/user_repository_impl.dart';
 import 'package:sicherr/presentation/bloc/alarm/alarm_bloc.dart';
@@ -34,6 +36,7 @@ import 'package:sicherr/presentation/bloc/send_sos/send_sos_bloc.dart';
 import 'package:sicherr/presentation/bloc/shake_detector/shake_detector_bloc.dart';
 import 'package:sicherr/presentation/bloc/shared_contacts/sc_bloc.dart';
 import 'package:sicherr/presentation/bloc/sign_in/sign_in_bloc.dart';
+import 'package:sicherr/presentation/bloc/timer/timer_bloc.dart';
 import 'package:sicherr/presentation/bloc/users_length/users_lentgh_cubit.dart';
 
 import '../../domain/repositories/auth/auth_repository.dart';
@@ -43,6 +46,7 @@ import '../../domain/repositories/identification_contacts/id_contacts_repository
 import '../../domain/repositories/identification_contacts/id_contacts_repository_impl.dart';
 import '../../domain/repositories/shared_contacts/sc_repository.dart';
 import '../../domain/repositories/shared_contacts/sc_repository_impl.dart';
+import '../../domain/repositories/timer/timer_repository_service.dart';
 import '../../presentation/bloc/auth/auth_bloc.dart';
 import '../../presentation/bloc/contact_details/contact_details_bloc.dart';
 import '../../presentation/bloc/map/home_position/home_position_cubit.dart';
@@ -54,13 +58,14 @@ import '../utils/phone_encryptor.dart';
 final sl = GetIt.instance;
 
 Future<void> init() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   FirebaseMessaging messaging = FirebaseMessaging.instance;
   PhoneNumberEncryptor encryptor = PhoneNumberEncryptor();
 
   //Services
-  final httpClient = HttpClient(encryptor: encryptor);
+  final httpClient = HttpClient(encryptor: encryptor, auth: FirebaseAuth.instance);
   sl.registerLazySingleton(() => FCMService(messaging: messaging));
   sl.registerLazySingleton(() => CallerIdService());
   sl.registerLazySingleton(() => PhoneNumberEncryptor());
@@ -93,10 +98,12 @@ Future<void> init() async {
       SCRepositoryImpl(firestore: firestore, encryptor: encryptor);
   final navigationRepository =
       NavigationRepositoryImpl(homePositionPrefs: homePositionPrefs);
+  final timerRepository = TimerRepositoryImpl(db: firestore);
 
   //Repositories
   sl.registerSingleton<AuthRepository>(authRepository);
   sl.registerSingleton<UserRepository>(userRepository);
+  sl.registerSingleton<TimerRepository>(timerRepository);
   sl.registerSingleton<EmContactsRepository>(emContactRepository);
   sl.registerSingleton<ContactsRepository>(contactsRepository);
   sl.registerSingleton<AlarmManager>(alarmManager);
@@ -109,6 +116,7 @@ Future<void> init() async {
   sl.registerSingleton<SCRepository>(sharedContactsRepository);
   sl.registerSingleton<NavigationRepository>(navigationRepository);
 
+  sl.registerFactory(() => TimerBloc(httpClient: sl(), timerRepository: sl()));
   //Blocs
   sl.registerLazySingleton(() => AuthBloc(
         authRepository: sl(),
@@ -167,5 +175,6 @@ Future<void> initNotifications() async {
 
 @pragma('vm:entry-point')
 Future<void> fcmBackgroundHandler(RemoteMessage message) async {
+  print("received");
   await Firebase.initializeApp();
 }

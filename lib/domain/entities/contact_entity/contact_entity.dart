@@ -7,6 +7,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sicherr/core/utils/phone_formatter.dart';
 import 'package:sicherr/domain/entities/rating/rating.dart';
 
+typedef Decryption = String Function(String);
+
 class ContactEntity {
   ContactEntity({
     required this.id,
@@ -51,7 +53,7 @@ class ContactEntity {
     );
   }
 
-  factory ContactEntity.fromJson(Map<String, dynamic> json) {
+  factory ContactEntity.fromJson(Map<String, dynamic> json, Decryption decryption) {
     final String? base64Image = json['imageBase64'];
 
     final Timestamp? createdAtTimestamp = json['createdAt'] as Timestamp?;
@@ -59,15 +61,14 @@ class ContactEntity {
     DateTime? createdAt;
     if (createdAtTimestamp != null) {
       createdAt = createdAtTimestamp.toDate();
-
     }
 
     final ratings = List<Map<String, dynamic>>.from(json['ratings'] ?? []) ;
 
     return ContactEntity(
-      id: json['id'],
+      id: json['id'] ?? '',
       name: json['name'] ?? '',
-      phoneNumber: json['phone'] ?? '',
+      phoneNumber: json['phone'] != null ? decryption.call(json['phone']) : '',
       image: base64Image != null && base64Image.isNotEmpty
           ? base64.decode(base64Image)
           : null,
@@ -86,13 +87,14 @@ class ContactEntity {
 
   factory ContactEntity.combineContactsInfo(
       {required Map<String, dynamic> userContactJson,
-      required Map<String, dynamic> sharedContactJson}) {
+      required Map<String, dynamic> sharedContactJson,
+      required Decryption decryption}) {
     final json = <String, dynamic>{};
     json
       ..addAll(sharedContactJson)
       ..addAll(userContactJson);
 
-    return ContactEntity.fromJson(json);
+    return ContactEntity.fromJson(json, decryption);
   }
 
   Map<String, dynamic> toJsonSimplified() {

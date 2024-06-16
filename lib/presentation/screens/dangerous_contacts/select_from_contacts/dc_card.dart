@@ -4,6 +4,8 @@ import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
 import 'package:sicherr/presentation/bloc/pick_dc/pick_dc_cubit.dart';
 import 'package:sicherr/presentation/widgets/core_widgets.dart';
 
+import '../../../bloc/shared_contacts/sc_bloc.dart';
+
 class DCCard extends StatelessWidget {
   const DCCard({super.key, required this.contact});
 
@@ -14,10 +16,9 @@ class DCCard extends StatelessWidget {
     return BlocBuilder<PickDcCubit, PickDcState>(
       builder: (context, state) {
         return SelectableContactCard(
+          canBeSelected: context.watch<ScBloc>().state.sc?.any((element) => element.phoneNumber == contact.phoneNumber) ?? false,
           contact: contact,
-          isSelected: state.contacts != null
-              ? state.contacts!.any((element) => element.id == contact.id)
-              : false,
+          isSelected: state.contacts.any((element) => element.id == contact.id),
           onTap: () {
             context.read<PickDcCubit>().pickAsDanger(
                 pickedContact: contact,

@@ -19,6 +19,7 @@ import 'package:sicherr/presentation/screens/home/home.dart';
 import 'package:sicherr/presentation/screens/map/map_screen.dart';
 import 'package:sicherr/presentation/screens/profile/profile.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:sicherr/presentation/screens/timer/timer.dart';
 import 'package:sicherr/presentation/widgets/core_widgets.dart';
 
 import '../../core/service_locator/service_locator.dart';
@@ -64,8 +65,6 @@ class _InitialScreenState extends State<InitialScreen> {
     sl<QuickBindingListener>().initListeners();
     super.initState();
   }
-
-  final actions = {1: const _AddContactsBnt()};
 
   @override
   Widget build(BuildContext context) {
@@ -128,7 +127,6 @@ class _InitialScreenState extends State<InitialScreen> {
               ? AppLocalizations.of(context)!.dangerContacts
               : PrimaryPageEnum.values.elementAt(_selectedPage).getLabel(context),
           showBackButton: false,
-          icon: actions[_selectedPage],
         ),
         body: GestureDetector(
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -226,7 +224,7 @@ class _MyBottomNavigationBar extends StatelessWidget {
 
 enum PrimaryPageEnum {
   home,
-  contacts,
+  timer,
   add,
   map,
   profile;
@@ -234,7 +232,7 @@ enum PrimaryPageEnum {
   String getLabel(BuildContext context) {
     return switch (this) {
       PrimaryPageEnum.home => AppLocalizations.of(context)!.home,
-      PrimaryPageEnum.contacts => AppLocalizations.of(context)!.contacts,
+      PrimaryPageEnum.timer => AppLocalizations.of(context)!.timer,
       PrimaryPageEnum.add => AppLocalizations.of(context)!.add,
       PrimaryPageEnum.map => AppLocalizations.of(context)!.map,
       PrimaryPageEnum.profile => AppLocalizations.of(context)!.profile,
@@ -244,7 +242,7 @@ enum PrimaryPageEnum {
   String get getIconPath {
     return switch (this) {
       PrimaryPageEnum.home => AppIcons.home,
-      PrimaryPageEnum.contacts => AppIcons.contacts,
+      PrimaryPageEnum.timer => AppIcons.timer,
       PrimaryPageEnum.add => AppIcons.warning,
       PrimaryPageEnum.map => AppIcons.map,
       PrimaryPageEnum.profile => AppIcons.profile,
@@ -254,7 +252,7 @@ enum PrimaryPageEnum {
   Widget get getPage {
     return switch (this) {
       PrimaryPageEnum.home => const HomeScreen(),
-      PrimaryPageEnum.contacts => const ContactsScreen(),
+      PrimaryPageEnum.timer => TimerScreen(),
       PrimaryPageEnum.add =>  DCScreen(),
       PrimaryPageEnum.map => const MapScreen(),
       PrimaryPageEnum.profile => const ProfileScreen(),

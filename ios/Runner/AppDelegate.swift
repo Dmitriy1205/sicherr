@@ -38,6 +38,7 @@ final class AppDelegate: FlutterAppDelegate {
         }
     GMSServices.provideAPIKey("AIzaSyAbLBaDeytsTP5ih_W5DPzuJr84nR0Wo6E")
     GeneratedPluginRegistrant.register(with: self)
+      
     callKitPlugin.didAddIdentifiablePhoneNumbers = { [weak self] numbers in
                   guard let self = self else { return }
                   self.identifiedNumbers.append(

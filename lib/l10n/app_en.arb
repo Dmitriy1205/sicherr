@@ -3,6 +3,36 @@
   "contacts": "Contacts",
   "home": "Home",
   "map": "Map",
+  "timer": "Timer",
+  "time": "Timer",
+  "timer_hint": "If you set a timer, when it expires, the SOS signal will be sent to your emergency contacts",
+  "minutes_count": "{count} min",
+  "@minutes_count": {
+    "placeholders": {
+      "count": {
+        "type": "String",
+        "example": "30"
+      }
+    }
+  },
+  "hour_count": "{count} hour",
+  "@hour_count": {
+    "placeholders": {
+      "count": {
+        "type": "String",
+        "example": "1"
+      }
+    }
+  },
+  "hours_count": "{count} hours",
+  "@hours_count": {
+    "placeholders": {
+      "count": {
+        "type": "String",
+        "example": "2"
+      }
+    }
+  },
   "profile": "Profile",
   "singIn": "Sign in",
   "begin": "Begin using the app by logging in.",
@@ -150,6 +180,11 @@
     "selectFromContacts": "Select from contacts",
     "select": "Select",
     "contactsSelected": "contacts selected",
-    "notSelected": "Not selected"
+    "notSelected": "Not selected",
 
+    "timer_started": "Timer started",
+    "timer_has_been_set_to": "Timer has been set to",
+    "timer_will_expire_in_5_mins": "Timer will expire in 5 minutes",
+    "timer_expired": "Timer expired",
+    "sos_sent": "SOS signal sent"
 }

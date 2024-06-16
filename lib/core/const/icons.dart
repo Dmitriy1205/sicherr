@@ -21,4 +21,5 @@ class AppIcons {
   static const start = 'assets/icons/start.svg';
   static const eta = 'assets/icons/eta.svg';
   static const position = 'assets/icons/posistion.svg';
+  static const timer = 'assets/icons/timer.svg';
 }

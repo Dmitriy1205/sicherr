@@ -19,19 +19,31 @@ mixin _$PickDcState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<ContactEntity> contacts) picked,
+    required TResult Function(
+            List<ContactEntity> contacts,
+            Map<String, List<ContactEntity>> allContactsCategorized,
+            Map<String, List<ContactEntity>> searchedContactsCategorized)
+        picked,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<ContactEntity> contacts)? picked,
+    TResult? Function(
+            List<ContactEntity> contacts,
+            Map<String, List<ContactEntity>> allContactsCategorized,
+            Map<String, List<ContactEntity>> searchedContactsCategorized)?
+        picked,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<ContactEntity> contacts)? picked,
+    TResult Function(
+            List<ContactEntity> contacts,
+            Map<String, List<ContactEntity>> allContactsCategorized,
+            Map<String, List<ContactEntity>> searchedContactsCategorized)?
+        picked,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -113,7 +125,11 @@ class _$InitialImpl extends _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<ContactEntity> contacts) picked,
+    required TResult Function(
+            List<ContactEntity> contacts,
+            Map<String, List<ContactEntity>> allContactsCategorized,
+            Map<String, List<ContactEntity>> searchedContactsCategorized)
+        picked,
   }) {
     return initial();
   }
@@ -122,7 +138,11 @@ class _$InitialImpl extends _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<ContactEntity> contacts)? picked,
+    TResult? Function(
+            List<ContactEntity> contacts,
+            Map<String, List<ContactEntity>> allContactsCategorized,
+            Map<String, List<ContactEntity>> searchedContactsCategorized)?
+        picked,
   }) {
     return initial?.call();
   }
@@ -131,7 +151,11 @@ class _$InitialImpl extends _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<ContactEntity> contacts)? picked,
+    TResult Function(
+            List<ContactEntity> contacts,
+            Map<String, List<ContactEntity>> allContactsCategorized,
+            Map<String, List<ContactEntity>> searchedContactsCategorized)?
+        picked,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -183,7 +207,10 @@ abstract class _$$PickedImplCopyWith<$Res> {
           _$PickedImpl value, $Res Function(_$PickedImpl) then) =
       __$$PickedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<ContactEntity> contacts});
+  $Res call(
+      {List<ContactEntity> contacts,
+      Map<String, List<ContactEntity>> allContactsCategorized,
+      Map<String, List<ContactEntity>> searchedContactsCategorized});
 }
 
 /// @nodoc
@@ -198,12 +225,22 @@ class __$$PickedImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? contacts = null,
+    Object? allContactsCategorized = null,
+    Object? searchedContactsCategorized = null,
   }) {
     return _then(_$PickedImpl(
       contacts: null == contacts
           ? _value._contacts
           : contacts // ignore: cast_nullable_to_non_nullable
               as List<ContactEntity>,
+      allContactsCategorized: null == allContactsCategorized
+          ? _value._allContactsCategorized
+          : allContactsCategorized // ignore: cast_nullable_to_non_nullable
+              as Map<String, List<ContactEntity>>,
+      searchedContactsCategorized: null == searchedContactsCategorized
+          ? _value._searchedContactsCategorized
+          : searchedContactsCategorized // ignore: cast_nullable_to_non_nullable
+              as Map<String, List<ContactEntity>>,
     ));
   }
 }
@@ -211,8 +248,14 @@ class __$$PickedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$PickedImpl extends _Picked {
-  const _$PickedImpl({required final List<ContactEntity> contacts})
+  const _$PickedImpl(
+      {required final List<ContactEntity> contacts,
+      required final Map<String, List<ContactEntity>> allContactsCategorized,
+      required final Map<String, List<ContactEntity>>
+          searchedContactsCategorized})
       : _contacts = contacts,
+        _allContactsCategorized = allContactsCategorized,
+        _searchedContactsCategorized = searchedContactsCategorized,
         super._();
 
   final List<ContactEntity> _contacts;
@@ -223,9 +266,27 @@ class _$PickedImpl extends _Picked {
     return EqualUnmodifiableListView(_contacts);
   }
 
+  final Map<String, List<ContactEntity>> _allContactsCategorized;
+  @override
+  Map<String, List<ContactEntity>> get allContactsCategorized {
+    if (_allContactsCategorized is EqualUnmodifiableMapView)
+      return _allContactsCategorized;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_allContactsCategorized);
+  }
+
+  final Map<String, List<ContactEntity>> _searchedContactsCategorized;
+  @override
+  Map<String, List<ContactEntity>> get searchedContactsCategorized {
+    if (_searchedContactsCategorized is EqualUnmodifiableMapView)
+      return _searchedContactsCategorized;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_searchedContactsCategorized);
+  }
+
   @override
   String toString() {
-    return 'PickDcState.picked(contacts: $contacts)';
+    return 'PickDcState.picked(contacts: $contacts, allContactsCategorized: $allContactsCategorized, searchedContactsCategorized: $searchedContactsCategorized)';
   }
 
   @override
@@ -233,12 +294,20 @@ class _$PickedImpl extends _Picked {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PickedImpl &&
-            const DeepCollectionEquality().equals(other._contacts, _contacts));
+            const DeepCollectionEquality().equals(other._contacts, _contacts) &&
+            const DeepCollectionEquality().equals(
+                other._allContactsCategorized, _allContactsCategorized) &&
+            const DeepCollectionEquality().equals(
+                other._searchedContactsCategorized,
+                _searchedContactsCategorized));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_contacts));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_contacts),
+      const DeepCollectionEquality().hash(_allContactsCategorized),
+      const DeepCollectionEquality().hash(_searchedContactsCategorized));
 
   @JsonKey(ignore: true)
   @override
@@ -250,29 +319,44 @@ class _$PickedImpl extends _Picked {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<ContactEntity> contacts) picked,
+    required TResult Function(
+            List<ContactEntity> contacts,
+            Map<String, List<ContactEntity>> allContactsCategorized,
+            Map<String, List<ContactEntity>> searchedContactsCategorized)
+        picked,
   }) {
-    return picked(contacts);
+    return picked(
+        contacts, allContactsCategorized, searchedContactsCategorized);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<ContactEntity> contacts)? picked,
+    TResult? Function(
+            List<ContactEntity> contacts,
+            Map<String, List<ContactEntity>> allContactsCategorized,
+            Map<String, List<ContactEntity>> searchedContactsCategorized)?
+        picked,
   }) {
-    return picked?.call(contacts);
+    return picked?.call(
+        contacts, allContactsCategorized, searchedContactsCategorized);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<ContactEntity> contacts)? picked,
+    TResult Function(
+            List<ContactEntity> contacts,
+            Map<String, List<ContactEntity>> allContactsCategorized,
+            Map<String, List<ContactEntity>> searchedContactsCategorized)?
+        picked,
     required TResult orElse(),
   }) {
     if (picked != null) {
-      return picked(contacts);
+      return picked(
+          contacts, allContactsCategorized, searchedContactsCategorized);
     }
     return orElse();
   }
@@ -310,11 +394,16 @@ class _$PickedImpl extends _Picked {
 }
 
 abstract class _Picked extends PickDcState {
-  const factory _Picked({required final List<ContactEntity> contacts}) =
-      _$PickedImpl;
+  const factory _Picked(
+      {required final List<ContactEntity> contacts,
+      required final Map<String, List<ContactEntity>> allContactsCategorized,
+      required final Map<String, List<ContactEntity>>
+          searchedContactsCategorized}) = _$PickedImpl;
   const _Picked._() : super._();
 
   List<ContactEntity> get contacts;
+  Map<String, List<ContactEntity>> get allContactsCategorized;
+  Map<String, List<ContactEntity>> get searchedContactsCategorized;
   @JsonKey(ignore: true)
   _$$PickedImplCopyWith<_$PickedImpl> get copyWith =>
       throw _privateConstructorUsedError;

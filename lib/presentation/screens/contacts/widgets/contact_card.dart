@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sicherr/core/const/icons.dart';
 import 'package:sicherr/core/const/images.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
 import 'package:sicherr/core/managers/contacts_manager.dart';
+import 'package:sicherr/presentation/bloc/danger_contact/dc_bloc.dart';
 import 'package:sicherr/presentation/bloc/emergency_contact/emergency_contact_bloc.dart';
 import 'package:sicherr/presentation/screens/contact_detail/contact_detail.dart';
 import 'package:sicherr/presentation/screens/dangerous_contacts/details_screen/dc_details_screen.dart';
@@ -27,11 +30,10 @@ class ContactCard extends StatelessWidget {
         return GestureDetector(
           onTap: () {
             FocusManager.instance.primaryFocus?.unfocus();
-            final bool isContainInDangerous = context.read<ScBloc>().state.sc!.any((element) => element.id == contact.id);
-
+            final bool isContainInDangerous = context.read<DcBloc>().state.dc!.any((element) => element.id == contact.id);
             if (isContainInDangerous) {
 
-            final ContactEntity dangerContact = context.read<ScBloc>().state.sc!.where((element) => element.id == contact.id).first;
+            final ContactEntity dangerContact = context.read<DcBloc>().state.dc!.where((element) => element.id == contact.id).first;
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -87,7 +89,7 @@ class ContactCard extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                           ),
                           Text(
-                            sl<PhoneNumberEncryptor>().decrypt(contact.phoneNumber),
+                            contact.phoneNumber,
                             style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,
@@ -110,7 +112,7 @@ class ContactCard extends StatelessWidget {
                 const SizedBox(
                   width: 25,
                 ),
-                context.watch<ScBloc>().state.sc?.any((element) => element.id == contact.id) ?? false ? const SizedBox() :  GestureDetector(
+                context.watch<DcBloc>().state.dc?.any((element) => element.id == contact.id) ?? false ? const SizedBox() :  GestureDetector(
                   onTap: () {
                     ContactsManager.launchCall(
                         phoneNumber: contact.phoneNumber);
