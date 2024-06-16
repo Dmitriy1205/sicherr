@@ -18,7 +18,8 @@ class PhoneNumberEncryptor {
   String encrypt(String phoneNumber) {
     try {
       final encrypted = _encryptor.encrypt(phoneNumber, iv: _iv);
-      return encrypted.base64;
+      final base64 = encrypted.base64;
+      return _replaceSlash(base64);
     } catch (_) {
       return phoneNumber;
     }
@@ -26,10 +27,19 @@ class PhoneNumberEncryptor {
 
   String decrypt(String encryptedPhoneNumber) {
     try {
-      final decrypted = _encryptor.decrypt64(encryptedPhoneNumber, iv: _iv);
+      final formatted = _returnSlashBack(encryptedPhoneNumber);
+      final decrypted = _encryptor.decrypt64(formatted, iv: _iv);
       return decrypted;
     } catch (_) {
       return encryptedPhoneNumber;
     }
+  }
+
+  String _replaceSlash(String val){
+    return val.replaceAll("/", "\\");
+  }
+
+  String _returnSlashBack(String val){
+    return val.replaceAll("\\", "/");
   }
 }

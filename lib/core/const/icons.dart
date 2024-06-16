@@ -16,4 +16,5 @@ class AppIcons {
   static const warning = 'assets/icons/warning.svg';
   static const addressBook = 'assets/icons/address_book.svg';
   static const done = 'assets/icons/done.svg';
+  static const timer = 'assets/icons/timer.svg';
 }

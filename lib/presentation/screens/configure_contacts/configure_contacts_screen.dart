@@ -81,14 +81,7 @@ class DoneBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<ConfigureContactsBloc, ConfigureContactsState>(
       listener: (context, state) => state.whenOrNull(
-        assignedContacts: () => Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const InitialScreen(
-              initPage: PrimaryPageEnum.contacts,
-            ),
-          ),
-        ),
+        assignedContacts: () => Navigator.of(context).pop(),
       ),
       builder: (context, state) => state.maybeMap(
         loadInProgress: (_) => const SizedBox.shrink(),

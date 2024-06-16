@@ -9,8 +9,6 @@ import 'package:sicherr/core/exceptions/exceptions.dart';
 import 'package:sicherr/core/managers/contacts_manager.dart';
 import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
 import 'package:sicherr/domain/repositories/contacts/contacts_repository.dart';
-
-import '../../../core/utils/is_base64.dart';
 import '../../../core/utils/phone_encryptor.dart';
 
 class ContactsRepositoryImpl implements ContactsRepository {
@@ -37,7 +35,7 @@ class ContactsRepositoryImpl implements ContactsRepository {
         .map((querySnapshot) {
       return querySnapshot.docs.map((doc) {
         final data = doc.data();
-        return ContactEntity.fromJson(data);
+        return ContactEntity.fromJson(data, _encryptor.decrypt);
       }).toList();
     });
   }
@@ -54,7 +52,7 @@ class ContactsRepositoryImpl implements ContactsRepository {
 
       List<ContactEntity> contacts = querySnapshot.docs.map((doc) {
         final data = doc.data() as Map<String, dynamic>;
-        return ContactEntity.fromJson(data);
+        return ContactEntity.fromJson(data, _encryptor.decrypt);
       }).toList();
 
       return contacts;
@@ -74,18 +72,10 @@ class ContactsRepositoryImpl implements ContactsRepository {
           sharedContacts: sharedContacts);
 
       for (var contact in sharedContacts) {
-        final String encryptedPhoneNumber;
-        final String encryptedId;
-        if(isBase64(contact.phoneNumber)){
-          encryptedPhoneNumber = _encryptor.encrypt(contact.phoneNumber);
-          encryptedId = _encryptor.encrypt(contact.id);
-        }else{
-          encryptedPhoneNumber = contact.phoneNumber;
-          encryptedId = contact.id;
-        }
+        final encryptedPhoneNumber = _encryptor.encrypt(contact.phoneNumber);
 
         contact = contact.copyWith(
-            phoneNumber: encryptedPhoneNumber, id: encryptedId);
+            phoneNumber: encryptedPhoneNumber, id: encryptedPhoneNumber);
         // Reference to the user selected contacts document
         DocumentReference docRefUserContacts = _firestore
             .collection(usersCollectionName)
@@ -166,12 +156,14 @@ class ContactsRepositoryImpl implements ContactsRepository {
     return contacts;
   }
 
+
   @override
   Future<ContactEntity?> searchInSharedContacts(String number) async {
     if (number.isEmpty) {
       return null;
     }
 
+    ///TODO: REFACTOR, NOT EFFICIENT
     final sharedContactsSnap =
         await _firestore.collection(sharedCollectionName).get();
 
@@ -204,7 +196,7 @@ class ContactsRepositoryImpl implements ContactsRepository {
       return false;
     });
     final data = contactSnapshot?.data();
-    final contact = data != null ? ContactEntity.fromJson(data) : null;
+    final contact = data != null ? ContactEntity.fromJson(data, _encryptor.decrypt) : null;
     return contact;
   }
 
@@ -227,7 +219,7 @@ class ContactsRepositoryImpl implements ContactsRepository {
         await docRefSharedContacts.update({'tags': newTags});
         final updatedData = await docRefSharedContacts.get();
         if (updatedData.data() != null) {
-          return ContactEntity.fromJson(updatedData.data()!);
+          return ContactEntity.fromJson(updatedData.data()!, _encryptor.decrypt);
         }
       }
     } catch (e) {
@@ -254,7 +246,8 @@ class ContactsRepositoryImpl implements ContactsRepository {
     if (sharedContactJson != null || userContactJson != null) {
       return ContactEntity.combineContactsInfo(
           userContactJson: userContactJson ?? {},
-          sharedContactJson: sharedContactJson ?? {});
+          sharedContactJson: sharedContactJson ?? {},
+          decryption: _encryptor.decrypt);
     } else {
       return null;
     }
@@ -314,7 +307,7 @@ class ContactsRepositoryImpl implements ContactsRepository {
       final collectionReference =
           await _firestore.collection('shared_contacts').get();
       final List<ContactEntity> sharedContacts = collectionReference.docs
-          .map((doc) => ContactEntity.fromJson(doc.data()))
+          .map((doc) => ContactEntity.fromJson(doc.data(), _encryptor.decrypt))
           .toList();
       return sharedContacts;
     } on Exception catch (e) {

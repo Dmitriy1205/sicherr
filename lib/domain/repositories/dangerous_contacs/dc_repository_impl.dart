@@ -28,11 +28,8 @@ class DCRepositoryImpl extends DCRepository {
 
       ///Adding contact to dangerous_contacts sub collection
       if (dc is ContactEntity) {
-        ///encryption of contact
-        String decryptedPhoneNumber = _encryptor.decrypt(dc.phoneNumber);
-        String decryptedId = _encryptor.decrypt(dc.id);
-        String encryptedPhoneNumber = _encryptor.encrypt(decryptedPhoneNumber);
-        String encryptedId = _encryptor.encrypt(decryptedId);
+        String encryptedPhoneNumber = _encryptor.encrypt(dc.phoneNumber);
+        String encryptedId = _encryptor.encrypt(dc.id);
         dc = dc.copyWith(phoneNumber: encryptedPhoneNumber, id: encryptedId);
 
         QuerySnapshot allDangerous = await _firestore
@@ -106,7 +103,6 @@ class DCRepositoryImpl extends DCRepository {
               .doc(dc.id)
               .set(dc.toJson(), SetOptions(merge: true));
         }
-
       } else if (dc is List<ContactEntity>) {
         WriteBatch batch = _firestore.batch();
 
@@ -161,8 +157,7 @@ class DCRepositoryImpl extends DCRepository {
 
       List<ContactEntity> dcList = querySnapshot.docs.map((doc) {
         final data = doc.data();
-
-        ContactEntity contact = ContactEntity.fromJson(data);
+        ContactEntity contact = ContactEntity.fromJson(data, _encryptor.decrypt);
         return contact;
       }).toList();
 

@@ -8,6 +8,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../bloc/emergency_contact/emergency_contact_bloc.dart';
 import '../../bloc/shared_contacts/sc_bloc.dart';
+import '../configure_contacts/configure_contacts_screen.dart';
 
 class ContactsScreen extends StatefulWidget {
   final String? contactName;
@@ -39,56 +40,63 @@ class _ContactsScreenState extends State<ContactsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ContactsBloc, ContactsState>(
-      listener: (BuildContext context, ContactsState state) {
-        state.maybeMap(
-            notFoundContact: (_) {
-              AppToast.showError(
-                  context, AppLocalizations.of(context)!.noContacts);
-            },
-            openFoundedContact: (state) {
-              _searchTextController.text = '';
-              context
-                  .read<ContactsBloc>()
-                  .add(const ContactsEvent.searchContact(''));
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        ContactDetailScreen(contact: state.contact)),
-              );
-            },
-            orElse: () {});
-      },
-      builder: (context, state) {
-        return state.maybeMap(
-            loadInProgress: (_) => const Center(child: LoadingIndicator()),
-            orElse: () => const Center(child: LoadingIndicator()),
-            loaded: (state) => Column(
-                  children: [
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(left: 20, right: 20, top: 18),
-                      child: SearchPhoneField(
-                        controller: _searchTextController,
-                        hintText: AppLocalizations.of(context)!.search,
-                        onChanged: (text) {
-                          context.read<EmergencyContactBloc>().add(
-                              const EmergencyContactEvent.getAllEmContacts());
+    return Scaffold(
+      appBar: DefaultAppBar(
+        title: AppLocalizations.of(context)!.contacts,
+        showBackButton: true,
+        icon: _AddContactsBnt(),
+      ),
+      body: BlocConsumer<ContactsBloc, ContactsState>(
+        listener: (BuildContext context, ContactsState state) {
+          state.maybeMap(
+              notFoundContact: (_) {
+                AppToast.showError(
+                    context, AppLocalizations.of(context)!.noContacts);
+              },
+              openFoundedContact: (state) {
+                _searchTextController.text = '';
+                context
+                    .read<ContactsBloc>()
+                    .add(const ContactsEvent.searchContact(''));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          ContactDetailScreen(contact: state.contact)),
+                );
+              },
+              orElse: () {});
+        },
+        builder: (context, state) {
+          return state.maybeMap(
+              loadInProgress: (_) => const Center(child: LoadingIndicator()),
+              orElse: () => const Center(child: LoadingIndicator()),
+              loaded: (state) => Column(
+                    children: [
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(left: 20, right: 20, top: 18),
+                        child: SearchPhoneField(
+                          controller: _searchTextController,
+                          hintText: AppLocalizations.of(context)!.search,
+                          onChanged: (text) {
+                            context.read<EmergencyContactBloc>().add(
+                                const EmergencyContactEvent.getAllEmContacts());
 
-                          context
-                              .read<ContactsBloc>()
-                              .add(ContactsEvent.searchContact(text));
-                        },
+                            context
+                                .read<ContactsBloc>()
+                                .add(ContactsEvent.searchContact(text));
+                          },
+                        ),
                       ),
-                    ),
-                    ContactListDisplayed(
-                      groupedContacts: state.categorizedContacts,
-                      searchingNumber: _searchTextController.text,
-                    )
-                  ],
-                ));
-      },
+                      ContactListDisplayed(
+                        groupedContacts: state.categorizedContacts,
+                        searchingNumber: _searchTextController.text,
+                      )
+                    ],
+                  ));
+        },
+      ),
     );
   }
 }
@@ -142,5 +150,24 @@ class ContactListDisplayed extends StatelessWidget {
             groupedContacts: groupedContacts,
             contactFactory: ContactCardFactory(),
           );
+  }
+}
+
+class _AddContactsBnt extends StatelessWidget {
+  const _AddContactsBnt();
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: const Icon(Icons.add_rounded, size: 30),
+      onPressed: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const ConfigureContactsScreen()));
+      },
+      padding: const EdgeInsets.all(15),
+      color: Theme.of(context).primaryColor,
+    );
   }
 }

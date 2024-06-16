@@ -103,9 +103,8 @@ class _DCScreenState extends State<DCScreen> {
                                                       TextOverflow.ellipsis,
                                                 ),
                                                 Text(
-                                                  sl<PhoneNumberEncryptor>()
-                                                      .decrypt(state.dc![index]
-                                                          .phoneNumber),
+                                                  state.dc![index]
+                                                          .phoneNumber,
                                                   style: const TextStyle(
                                                       fontSize: 14,
                                                       fontWeight:

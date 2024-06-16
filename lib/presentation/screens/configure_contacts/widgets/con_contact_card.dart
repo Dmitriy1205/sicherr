@@ -14,6 +14,7 @@ class ConContactCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SelectableContactCard(
+      canBeSelected: true,
       contact: contact,
       isSelected: isSelected,
       onTap: () {

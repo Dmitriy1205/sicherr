@@ -11,6 +11,7 @@ import '../bloc/shared_contacts/sc_bloc.dart';
 
 class SelectableContactCard extends StatelessWidget {
   final bool isSelected;
+  final bool canBeSelected;
   final ContactEntity contact;
   final void Function()? onTap;
 
@@ -18,7 +19,7 @@ class SelectableContactCard extends StatelessWidget {
     super.key,
     required this.contact,
     required this.isSelected,
-    this.onTap,
+    this.onTap, required this.canBeSelected,
   });
 
   @override
@@ -53,13 +54,13 @@ class SelectableContactCard extends StatelessWidget {
                     Text(
                       contact.name.isNotEmpty
                           ? contact.name
-                          : sl<PhoneNumberEncryptor>().decrypt(contact.phoneNumber),
+                          : contact.phoneNumber,
                       style: const TextStyle(
                           fontSize: 14, fontWeight: FontWeight.w500),
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
-                     sl<PhoneNumberEncryptor>().decrypt(contact.phoneNumber) ,
+                     contact.phoneNumber ,
                       style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
@@ -74,7 +75,7 @@ class SelectableContactCard extends StatelessWidget {
           const SizedBox(
             width: 25,
           ),
-          context.watch<ScBloc>().state.sc?.any((element) => element.id == contact.id) ?? false
+          !canBeSelected
               ? const SizedBox()
               : isSelected
                   ? GestureDetector(
