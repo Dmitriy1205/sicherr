@@ -1,10 +1,94 @@
 
 // index.js
 const functions = require('firebase-functions');
+const { Timestamp } = require('firebase-admin/firestore');
 const admin = require('firebase-admin');
 const app = require('./app');
 
 exports.api = functions.https.onRequest(app);
+
+exports.deleteOldSOSTrackingEntries = functions.pubsub.schedule('every 3 hours').onRun(async (context) => {
+  const db = admin.firestore();
+  const trackingCollection = db.collectionGroup('tracking');
+  
+  const sixHoursAgo = Timestamp.now();
+  sixHoursAgo.seconds -= 6 * 60 * 60; // subtract 6 hours in seconds
+
+  const snapshot = await trackingCollection
+      .where('isSosSignal', '==', true)
+      .where('lastUpdated', '<', sixHoursAgo)
+      .get();
+
+  if (snapshot.empty) {
+      console.log('No matching documents found.');
+      return null;
+  }
+
+  const batch = db.batch();
+  snapshot.docs.forEach(doc => {
+      batch.delete(doc.ref);
+  });
+
+  await batch.commit();
+
+  console.log(`${snapshot.size} document(s) deleted.`);
+  return null;
+});
+
+exports.deleteOldNotificationsEntries = functions.pubsub.schedule('every 2 hours').onRun(async (context) => {
+  const db = admin.firestore();
+  const notificationsCollection = db.collectionGroup('notifications');
+  
+  const sixHoursAgo = Timestamp.now();
+  sixHoursAgo.seconds -= 6 * 60 * 60;
+
+  const snapshot = await notificationsCollection
+      .where('timestamp', '<', sixHoursAgo)
+      .get();
+
+  if (snapshot.empty) {
+      console.log('No matching documents found.');
+      return null;
+  }
+
+  const batch = db.batch();
+  snapshot.docs.forEach(doc => {
+      batch.delete(doc.ref);
+  });
+
+  await batch.commit();
+
+  console.log(`${snapshot.size} document(s) deleted.`);
+  return null;
+});
+
+exports.deleteOldTrackingEntries = functions.pubsub.schedule('every 5 minutes').onRun(async (context) => {
+  const db = admin.firestore();
+  const trackingCollection = db.collectionGroup('tracking');
+  
+  const threeMinutesAgo = Timestamp.now();
+  threeMinutesAgo.seconds -= 3 * 60; // subtract 3 minutes in seconds
+
+  const snapshot = await trackingCollection
+      .where('isSosSignal', '==', false)
+      .where('lastUpdated', '<', threeMinutesAgo)
+      .get();
+
+  if (snapshot.empty) {
+      console.log('No matching documents found.');
+      return null;
+  }
+
+  const batch = db.batch();
+  snapshot.docs.forEach(doc => {
+      batch.delete(doc.ref);
+  });
+
+  await batch.commit();
+
+  console.log(`${snapshot.size} document(s) deleted.`);
+  return null;
+});
 
 exports.checkTimers = functions.pubsub.schedule('every 2 minutes').onRun(async (context) => {
   const now = new Date();

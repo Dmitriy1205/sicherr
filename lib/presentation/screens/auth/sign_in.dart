@@ -10,8 +10,8 @@ import 'package:sicherr/core/functions/sort_country_codes.dart';
 import 'package:sicherr/core/theme/theme.dart';
 import 'package:sicherr/domain/entities/country_codes/country_codes.dart';
 import 'package:sicherr/presentation/screens/auth/verification.dart';
+import 'package:sicherr/presentation/screens/documents/terms.dart';
 import 'package:sicherr/presentation/screens/initial.dart';
-import 'package:sicherr/presentation/screens/terms_and_conditions.dart';
 import 'package:sicherr/presentation/widgets/app_country_code_picker/country_codes.dart';
 import 'package:sicherr/presentation/widgets/app_elevated_button.dart';
 import 'package:sicherr/presentation/widgets/loading_indicator.dart';
@@ -111,7 +111,6 @@ class _SigninScreenState extends State<SigninScreen> {
             phoneNumber: state.phoneNumber!,
           ),
           verified: (_) {
-
             return const InitialScreen();
           },
           orElse: () => Scaffold(
@@ -262,7 +261,7 @@ class _SigninScreenState extends State<SigninScreen> {
                                                 .labelMedium,
                                           )),
                                   text: AppLocalizations.of(context)!.singIn,
-                                  onPressed: countryCodes.isNotEmpty &&
+                                  onPressed: countryCodes.isEmpty || countryCodes.isNotEmpty &&
                                           !_isLengthValid(
                                             _phoneController.text,
                                             _getMinLengths(
@@ -302,7 +301,7 @@ class _SigninScreenState extends State<SigninScreen> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    const TermsAndConditions()));
+                                                    const TermsScreen()));
                                       },
                                       borderRadius: BorderRadius.circular(5),
                                       child: Text(

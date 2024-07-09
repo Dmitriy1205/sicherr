@@ -24,5 +24,5 @@ Map<String, dynamic> _$$RouteDetailsImplToJson(_$RouteDetailsImpl instance) =>
       'route': instance.route.map(const LatLngConverter().toJson).toList(),
       'distance': instance.distance,
       'radius': instance.radius,
-      'etaContacts': instance.etaContacts,
+      'etaContacts': instance.etaContacts.map((e) => e.toJson()).toList(),
     };

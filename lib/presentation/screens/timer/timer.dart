@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sicherr/core/const/colors.dart';
+import 'package:sicherr/core/utils/send_sos.dart';
 import 'package:sicherr/data/remote/fcm_service.dart';
 import 'package:sicherr/presentation/bloc/emergency_contact/emergency_contact_bloc.dart';
 import 'package:sicherr/presentation/bloc/profile/profile_bloc.dart';
+import 'package:sicherr/presentation/bloc/send_sos/send_sos_bloc.dart';
 import 'package:sicherr/presentation/bloc/timer/timer_bloc.dart';
 import 'package:sicherr/presentation/widgets/app_elevated_button.dart';
 
@@ -41,6 +43,14 @@ class TimerScreen extends StatelessWidget {
                   title: AppLocalizations.of(context)!.timer_started,
                   body:
                       "${AppLocalizations.of(context)!.timer_has_been_set_to} ${_secondsVariants(context).entries.where((e) => e.value == state.seconds).firstOrNull?.key ?? ""}");
+            },
+            timerEnded: (state){
+              if(state.sendSOS){
+                sendSos(context);
+              }
+              sl<FCMService>().showNotification(
+                  title: AppLocalizations.of(context)!.timer_expired,
+                  body: AppLocalizations.of(context)!.sos_sent);
             },
             orElse: () {});
       },

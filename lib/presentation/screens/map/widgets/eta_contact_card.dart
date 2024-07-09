@@ -15,10 +15,11 @@ class EtaContactCard extends StatelessWidget {
     return BlocBuilder<HomePositionCubit, HomePositionState>(
       builder: (context, state) {
         return SelectableContactCard(
+          canBeSelected: true,
           contact: contact,
           isSelected: state.routeDetails.etaContacts.isNotEmpty
               ? state.routeDetails.etaContacts
-                  .any((element) => element.id == contact.id)
+                  .any((element) => element.phoneNumber == contact.phoneNumber)
               : false,
           onTap: () {
             state.routeDetails.etaContacts.isNotEmpty

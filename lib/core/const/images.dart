@@ -7,4 +7,5 @@ class AppImages{
     static const homeMarker = 'assets/images/home_marker.png';
     static const check = 'assets/images/check.png';
     static const attention = 'assets/images/attention.png';
+    static const userMarker = 'assets/images/user_marker.png';
 }

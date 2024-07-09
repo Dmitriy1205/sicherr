@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
 class CircleActionButton extends StatelessWidget {
+  final double width;
+  final double height;
   const CircleActionButton({
     required this.text,
     required this.isSelected,
     super.key,
+    this.width = 200,
+    this.height = 200,
     this.onTap,
     this.gradientColors,
     this.activeTextColor = const Color(0xFFAB4185),
@@ -23,8 +27,8 @@ class CircleActionButton extends StatelessWidget {
       opacity: isSelected ? 1 : 0.4,
       duration: const Duration(milliseconds: 200),
       child: Container(
-        width: 200,
-        height: 200,
+        width: width,
+        height: height,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: gradientColors != null

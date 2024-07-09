@@ -22,7 +22,6 @@ class _AppSwitchState extends State<AppSwitch> {
     return GestureDetector(
       onTap: () {
         setState(() {
-          widget.value = !widget.value;
           widget.onChanged(widget.value);
         });
       },

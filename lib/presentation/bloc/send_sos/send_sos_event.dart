@@ -10,7 +10,9 @@ class SendSosEvent with _$SendSosEvent {
     required List<String> emContactPhone,
   }) = _SendSOS;
 
-  const factory SendSosEvent.openDialog() = _OpenDialog;
-  const factory SendSosEvent.closeDialog() = _CloseDialog;
+  const factory SendSosEvent.stopStreaming() = _StopStreaming;
+
+  const factory SendSosEvent.pushTracking(
+      {required Tracking tracking}) = _PushTracking;
   const factory SendSosEvent.triggerQuickBinding() = _TriggerQuickBinding;
 }

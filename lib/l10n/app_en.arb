@@ -186,5 +186,45 @@
     "timer_has_been_set_to": "Timer has been set to",
     "timer_will_expire_in_5_mins": "Timer will expire in 5 minutes",
     "timer_expired": "Timer expired",
-    "sos_sent": "SOS signal sent"
+    "sos_sent": "SOS signal sent",
+    "minutes_left": "{minutes} minutes left",
+    "@minutes_left": {
+      "placeholders": {
+        "minutes": {
+          "type": "String",
+          "example": "5"
+        }
+      }
+    },
+  "about_to_leave_route": "You are about to leave the route",
+  "left_route": "You left the route. Activating SOS",
+  "end_sos": "End SOS",
+  "contact_out_of_route": "Contact is out of route!",
+  "contact_successfully_arrived": "Contact successfully arrived!",
+  "contact_shared_route": "Contact shared route with you!",
+  "notification_started_sos": "{name} has sent you an SOS call for help! Click here to follow his live location.",
+  "@notification_started_sos": {
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Vlad"
+      }
+    }
+  },
+  "notification_started_navigation": "{name} has started navigation! Click here to follow his live location.",
+  "@notification_started_navigation": {
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Vlad"
+      }
+    }
+  },
+  "notifications": "Notifications",
+  "change_photo": "Change photo",
+  "change_phone_number": "Change phone number",
+  "enter_new_phone_number": "Enter a new phone number",
+  "save": "Save",
+  "license": "License",
+  "support": "Support"
 }

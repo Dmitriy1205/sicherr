@@ -8,7 +8,8 @@ const sendSos = async (req, res) => {
   try {
     await sendPushNotification(phones, `SOS | ${phone}`, message || "SOS", {
       type: 'sos',
-      link: lat && long ? `https://www.google.com/maps?q=${lat},${long}&z=15` : ""
+      link: lat && long ? `https://www.google.com/maps?q=${lat},${long}&z=15` : "",
+      user_name: phone
     });
     
     res.status(200).json({ status: 200 });

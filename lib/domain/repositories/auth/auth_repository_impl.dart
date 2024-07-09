@@ -12,7 +12,7 @@ class AuthRepositoryImpl extends AuthRepository {
   Stream<User?> get authStateChange => _auth.authStateChanges();
 
   @override
-  Future<void> loginWithPhone({
+  Future<void> verifyPhone({
     required String phoneNumber,
     required Function(PhoneAuthCredential) verificationCompleted,
     required Function(FirebaseAuthException) verificationFailed,
@@ -35,13 +35,28 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<void> verification(
+  Future<void> confirmPhoneSignIn(
       {required String verificationId, required String code}) async {
     try {
       PhoneAuthCredential credential = PhoneAuthProvider.credential(
           verificationId: verificationId, smsCode: code);
 
       await _auth.signInWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      throw BadRequestException(message: e.message!,code: e.code);
+    } catch (e) {
+      throw BadRequestException(message: e.toString(),code: e.toString());
+    }
+  }
+
+  @override
+  Future<void> confirmPhoneChange({required String verificationId, required String code, required String newPhoneNumber}) async{
+    try {
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(
+          verificationId: verificationId, smsCode: code);
+
+      await _auth.currentUser!.updatePhoneNumber(credential);
+      await _auth.currentUser!.reauthenticateWithCredential(credential);
     } on FirebaseAuthException catch (e) {
       throw BadRequestException(message: e.message!,code: e.code);
     } catch (e) {

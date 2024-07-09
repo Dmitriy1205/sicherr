@@ -1,15 +1,29 @@
+import 'dart:convert';
+
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:sicherr/core/const/colors.dart';
 import 'package:sicherr/core/service_locator/service_locator.dart';
+import 'package:sicherr/core/utils/replace_phone_with_name.dart';
+import 'package:sicherr/domain/entities/tracking/tracking.dart';
 import 'package:sicherr/presentation/bloc/alarm/alarm_bloc.dart';
-import 'package:sicherr/presentation/screens/contacts/contacts.dart';
+import 'package:sicherr/presentation/bloc/auth/auth_bloc.dart';
+import 'package:sicherr/presentation/bloc/map/map_focus_request/map_focus_request_cubit.dart';
+import 'package:sicherr/presentation/bloc/navbar_selected_page_index/navbar_selected_page_index_cubit.dart';
+import 'package:sicherr/presentation/bloc/tracking/tracking_cubit.dart';
+import 'package:sicherr/presentation/bloc/user_notifications/user_notifications_cubit.dart';
 import 'package:sicherr/presentation/screens/home/widgets/circle_action_button.dart';
+import 'package:sicherr/presentation/screens/initial.dart';
 import 'package:sicherr/presentation/widgets/core_widgets.dart';
 import 'package:sicherr/presentation/widgets/sos_confirmation_popup.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../core/utils/notifications_ontap_handler.dart';
+import '../../../data/remote/fcm_service.dart';
 import '../../../domain/entities/contact_entity/contact_entity.dart';
 import '../../bloc/contacts/contacts_bloc.dart';
 import '../../bloc/emergency_contact/emergency_contact_bloc.dart';
@@ -19,7 +33,6 @@ import '../../widgets/grouped_items/grouped_items.dart';
 import '../../widgets/grouped_items/grouped_items_factory.dart';
 import '../../widgets/loading_indicator.dart';
 import '../../widgets/search_phone_field.dart';
-import '../contact_detail/contact_detail.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -29,13 +42,47 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  void _handleMessage(Map<String, dynamic> data) {
+    NotificationsOnTapHandler({NotificationsOnTapEvents.sos: _handleSOS, NotificationsOnTapEvents.tracking: _handleSOS})
+        .handleInitialMessage(data);
+  }
+
+  void _handleSOS(Map<String, dynamic> data) {
+    final googleMapsLink = data['link'] as String;
+    if (googleMapsLink.isEmpty) return;
+    Future.delayed(const Duration(milliseconds: 10), () {
+      context
+          .read<NavbarSelectedPageIndexCubit>()
+          .changeIndex(PrimaryPageEnum.map.index);
+      final comaSeparatedLocationsList = googleMapsLink
+          .replaceAll("https://www.google.com/maps?q=", "")
+          .replaceAll("&z=15", "")
+          .split(",");
+      final lat = double.parse(comaSeparatedLocationsList.first);
+      final long = double.parse(comaSeparatedLocationsList.last);
+      context.read<MapFocusRequestCubit>().changeMapFocus(LatLng(lat, long));
+    });
+  }
+
   @override
   void initState() {
-    super.initState();
+    FirebaseMessaging.instance.getInitialMessage().then((e) {
+      if (e == null) return;
+      _handleMessage(e.data);
+    });
+    sl<FCMService>().initializeLocalNotifications((n) {
+      if (n.payload == null) return;
+      final payloadMap =
+          (jsonDecode(n.payload!) as Map).cast<String, dynamic>();
+      _handleMessage(payloadMap);
+    });
+    context.read<UserNotificationsCubit>().listenToNotifications(
+        userUid: context.read<AuthBloc>().state.user!.uid);
     context
         .read<EmergencyContactBloc>()
         .add(const EmergencyContactEvent.getAllEmContacts());
     context.read<ScBloc>().add(const ScEvent.getAllSC());
+    super.initState();
   }
 
   final _searchTextController = TextEditingController();
@@ -77,12 +124,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             context
                                 .read<ContactsBloc>()
                                 .add(ContactsEvent.searchContact(text));
-                            if(_searchTextController.text.isNotEmpty){
-                              context
-                                  .read<ContactsBloc>()
-                                  .add(ContactsEvent.searchSharedContact(_searchTextController.text));
+                            if (_searchTextController.text.isNotEmpty) {
+                              context.read<ContactsBloc>().add(
+                                  ContactsEvent.searchSharedContact(
+                                      _searchTextController.text));
                             }
-
                           },
                         ),
                       ),
@@ -197,20 +243,22 @@ class _HomeButtonsSliderState extends State<HomeButtonsSlider> {
         height: double.infinity,
         child: Column(
           children: [
-            Spacer(),
+            const Spacer(),
             _SOSWidget(
               position: position,
               isSelected: true,
               goToNextItem: _goToNextButton,
             ),
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
             _StartAlarm(
               isSelected: true,
               goToNextItem: _goToNextButton,
             ),
-            Spacer()
+            const Spacer(),
+            _Notifications(),
+            const Spacer()
           ],
         ));
     /*
@@ -253,6 +301,87 @@ class _HomeButtonsSliderState extends State<HomeButtonsSlider> {
   }
 }
 
+class _Notifications extends StatelessWidget {
+  const _Notifications();
+
+  void _showLocationOnMap(
+      {required BuildContext context, String? userName}) {
+    final tracking = context.read<TrackingCubit>().state.maybeMap(
+        loaded: (state) => state.tracking,
+        orElse: () => <Tracking>[]);
+    final trackingUserData = tracking.where((e) => e.userName == userName).firstOrNull;
+    if(trackingUserData == null) return;
+
+    context
+        .read<NavbarSelectedPageIndexCubit>()
+        .changeIndex(PrimaryPageEnum.map.index);
+    final lat = trackingUserData.lat;
+    final long = trackingUserData.long;
+    context.read<MapFocusRequestCubit>().changeMapFocus(LatLng(lat, long));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<UserNotificationsCubit, List<Map<String,dynamic>>>(
+      builder: (context, state) {
+        return SizedBox(
+          height: 120,
+          width: double.infinity,
+          child: CarouselSlider.builder(
+              itemCount: state.length,
+              options: CarouselOptions(
+                  viewportFraction: 0.7,
+                  scrollDirection: Axis.vertical,
+                  enableInfiniteScroll: false,
+                  enlargeCenterPage: true,
+                  enlargeFactor: 0.3,
+                  enlargeStrategy: CenterPageEnlargeStrategy.zoom),
+              itemBuilder: (context, i, j) {
+                return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 3),
+                    child: _element(
+                        context: context,
+                        notification: state[i],
+                        onTap: () => _showLocationOnMap(
+                            context: context, userName: state[i]["data"]["user_name"] ?? state[i]["title"])));
+              }),
+        );
+      },
+    );
+  }
+
+  Widget _element(
+      {required BuildContext context,
+        required Map<String,dynamic> notification,
+      required VoidCallback onTap}) {
+    final title = notification["title"];
+    final message = notification["message"];
+    final data = notification["data"];
+    final isSos = data["type"] == "sos";
+    final userName = data["user_name"];
+    final text = isSos ? AppLocalizations.of(context)!.notification_started_sos(userName) : title + "\n" + message;
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 30),
+        decoration: BoxDecoration(
+            color: AppColors.mainAccent.withOpacity(0.3),
+            borderRadius: BorderRadius.circular(16)),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 21, vertical: 10),
+          child: SizedBox(
+            width: double.infinity,
+              height: 72,
+              child: Text(
+            replacePhoneWithName(context: context, input: text),
+            style: const TextStyle(fontWeight: FontWeight.w500),
+          )),
+        ),
+      ),
+    );
+  }
+}
+
 class _StartAlarm extends StatelessWidget {
   const _StartAlarm({required this.isSelected, required this.goToNextItem});
 
@@ -264,6 +393,8 @@ class _StartAlarm extends StatelessWidget {
     return BlocBuilder<AlarmBloc, AlarmState>(
       builder: (context, state) => state.maybeMap(
         loaded: (loadedState) => CircleActionButton(
+          width: 180,
+          height: 180,
           text: loadedState.isAlarmPlaying
               ? '${AppLocalizations.of(context)!.stop.toUpperCase()} ${AppLocalizations.of(context)!.alarm.toUpperCase()}'
               : '${AppLocalizations.of(context)!.start.toUpperCase()} ${AppLocalizations.of(context)!.alarm.toUpperCase()}',
@@ -302,9 +433,9 @@ class _SOSWidget extends StatelessWidget {
         text: 'SOS',
         onTap: () {
           if (isSelected) {
-            sosConfirmationPopup(context,
-                latitude: position?.latitude.toString(),
-                longitude: position?.longitude.toString());
+            sosConfirmationPopup(
+              context,
+            );
           } else {
             goToNextItem(0);
           }

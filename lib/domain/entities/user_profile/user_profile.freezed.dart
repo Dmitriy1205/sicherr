@@ -24,6 +24,7 @@ mixin _$UserProfile {
   String get sosMessage => throw _privateConstructorUsedError;
   bool get sendSosGeolocation => throw _privateConstructorUsedError;
   bool get alarmToneQB => throw _privateConstructorUsedError;
+  String? get photoURL => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   String get phone => throw _privateConstructorUsedError;
   String get createdAt => throw _privateConstructorUsedError;
@@ -45,6 +46,7 @@ abstract class $UserProfileCopyWith<$Res> {
       String sosMessage,
       bool sendSosGeolocation,
       bool alarmToneQB,
+      String? photoURL,
       String id,
       String phone,
       String createdAt});
@@ -67,6 +69,7 @@ class _$UserProfileCopyWithImpl<$Res, $Val extends UserProfile>
     Object? sosMessage = null,
     Object? sendSosGeolocation = null,
     Object? alarmToneQB = null,
+    Object? photoURL = freezed,
     Object? id = null,
     Object? phone = null,
     Object? createdAt = null,
@@ -88,6 +91,10 @@ class _$UserProfileCopyWithImpl<$Res, $Val extends UserProfile>
           ? _value.alarmToneQB
           : alarmToneQB // ignore: cast_nullable_to_non_nullable
               as bool,
+      photoURL: freezed == photoURL
+          ? _value.photoURL
+          : photoURL // ignore: cast_nullable_to_non_nullable
+              as String?,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -117,6 +124,7 @@ abstract class _$$UserProfileImplCopyWith<$Res>
       String sosMessage,
       bool sendSosGeolocation,
       bool alarmToneQB,
+      String? photoURL,
       String id,
       String phone,
       String createdAt});
@@ -137,6 +145,7 @@ class __$$UserProfileImplCopyWithImpl<$Res>
     Object? sosMessage = null,
     Object? sendSosGeolocation = null,
     Object? alarmToneQB = null,
+    Object? photoURL = freezed,
     Object? id = null,
     Object? phone = null,
     Object? createdAt = null,
@@ -158,6 +167,10 @@ class __$$UserProfileImplCopyWithImpl<$Res>
           ? _value.alarmToneQB
           : alarmToneQB // ignore: cast_nullable_to_non_nullable
               as bool,
+      photoURL: freezed == photoURL
+          ? _value.photoURL
+          : photoURL // ignore: cast_nullable_to_non_nullable
+              as String?,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -182,6 +195,7 @@ class _$UserProfileImpl implements _UserProfile {
       required this.sosMessage,
       required this.sendSosGeolocation,
       required this.alarmToneQB,
+      this.photoURL,
       required this.id,
       required this.phone,
       required this.createdAt});
@@ -198,6 +212,8 @@ class _$UserProfileImpl implements _UserProfile {
   @override
   final bool alarmToneQB;
   @override
+  final String? photoURL;
+  @override
   final String id;
   @override
   final String phone;
@@ -206,7 +222,7 @@ class _$UserProfileImpl implements _UserProfile {
 
   @override
   String toString() {
-    return 'UserProfile(enabledSosQB: $enabledSosQB, sosMessage: $sosMessage, sendSosGeolocation: $sendSosGeolocation, alarmToneQB: $alarmToneQB, id: $id, phone: $phone, createdAt: $createdAt)';
+    return 'UserProfile(enabledSosQB: $enabledSosQB, sosMessage: $sosMessage, sendSosGeolocation: $sendSosGeolocation, alarmToneQB: $alarmToneQB, photoURL: $photoURL, id: $id, phone: $phone, createdAt: $createdAt)';
   }
 
   @override
@@ -222,6 +238,8 @@ class _$UserProfileImpl implements _UserProfile {
                 other.sendSosGeolocation == sendSosGeolocation) &&
             (identical(other.alarmToneQB, alarmToneQB) ||
                 other.alarmToneQB == alarmToneQB) &&
+            (identical(other.photoURL, photoURL) ||
+                other.photoURL == photoURL) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.phone, phone) || other.phone == phone) &&
             (identical(other.createdAt, createdAt) ||
@@ -231,7 +249,7 @@ class _$UserProfileImpl implements _UserProfile {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, enabledSosQB, sosMessage,
-      sendSosGeolocation, alarmToneQB, id, phone, createdAt);
+      sendSosGeolocation, alarmToneQB, photoURL, id, phone, createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -253,6 +271,7 @@ abstract class _UserProfile implements UserProfile {
       required final String sosMessage,
       required final bool sendSosGeolocation,
       required final bool alarmToneQB,
+      final String? photoURL,
       required final String id,
       required final String phone,
       required final String createdAt}) = _$UserProfileImpl;
@@ -268,6 +287,8 @@ abstract class _UserProfile implements UserProfile {
   bool get sendSosGeolocation;
   @override
   bool get alarmToneQB;
+  @override
+  String? get photoURL;
   @override
   String get id;
   @override

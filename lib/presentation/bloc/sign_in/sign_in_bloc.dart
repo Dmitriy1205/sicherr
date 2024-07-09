@@ -35,7 +35,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   Future<void> _login(_Login event, Emitter<SignInState> emit) async {
     emit(const SignInState.loading());
     try {
-      await _authRepository.loginWithPhone(
+      await _authRepository.verifyPhone(
         phoneNumber: event.phoneNumber,
         verificationCompleted: (credential) async {
           add(SignInEvent.phoneAuthVerificationComplete(

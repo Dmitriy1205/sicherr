@@ -167,5 +167,21 @@
   "timer_has_been_set_to": "Timer wurde eingestellt auf",
   "timer_will_expire_in_5_mins": "Timer läuft in 5 Minuten ab",
   "timer_expired": "Timer abgelaufen",
-  "sos_sent": "SOS-Signal gesendet"
+  "sos_sent": "SOS-Signal gesendet",
+  "minutes_left": "noch {minutes} Minuten",
+  "about_to_leave_route": "Sie sind dabei, die Route zu verlassen",
+  "left_route": "Du hast die Route verlassen. SOS wird aktiviert",
+  "end_sos": "SOS beenden",
+  "contact_out_of_route": "Kontakt ist außerhalb der Route!",
+  "contact_successfully_arrived": "Kontakt erfolgreich angekommen!",
+  "contact_shared_route": "Kontakt geteilte Route mit Ihnen!",
+  "notification_started_sos": "{name} hat Ihnen einen SOS-Hilferuf gesendet! Klicken Sie hier, um seinen Live-Standort zu verfolgen.",
+  "notification_started_navigation": "{name} hat mit der Navigation begonnen! Klicken Sie hier, um seinen Live-Standort zu verfolgen.",
+  "notifications": "Benachrichtigungen",
+  "change_photo": "Foto ändern",
+  "change_phone_number": "Telefonnummer ändern",
+  "enter_new_phone_number": "Neue Telefonnummer eingeben",
+  "save": "Speichern",
+  "license": "Lizenz",
+  "support": "Unterstützung"
 }

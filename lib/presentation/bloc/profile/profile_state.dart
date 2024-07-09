@@ -5,7 +5,9 @@ class ProfileState with _$ProfileState {
   const ProfileState._();
 
   UserProfile? get profileInfo =>
-      maybeMap(loaded: (state) => state.profileInfo, orElse: () => null);
+      maybeMap(loaded: (state) => state.profileInfo, updating: (state) => state.profileInfo, orElse: () => null);
+
+  const factory ProfileState.updating({required UserProfile? profileInfo}) = _Updating;
 
   const factory ProfileState.initial() = _Initial;
 

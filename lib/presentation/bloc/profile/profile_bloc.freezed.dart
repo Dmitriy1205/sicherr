@@ -22,6 +22,7 @@ mixin _$ProfileEvent {
     required TResult Function() getProfileFields,
     required TResult Function(Map<String, dynamic> data)
         updateSpecificProfileField,
+    required TResult Function(String filePath) setPhoto,
     required TResult Function(UserProfile profileFields) loadProfileFields,
     required TResult Function(String error) catchError,
   }) =>
@@ -31,6 +32,7 @@ mixin _$ProfileEvent {
     TResult? Function(String currentUserId)? setProfileFields,
     TResult? Function()? getProfileFields,
     TResult? Function(Map<String, dynamic> data)? updateSpecificProfileField,
+    TResult? Function(String filePath)? setPhoto,
     TResult? Function(UserProfile profileFields)? loadProfileFields,
     TResult? Function(String error)? catchError,
   }) =>
@@ -40,6 +42,7 @@ mixin _$ProfileEvent {
     TResult Function(String currentUserId)? setProfileFields,
     TResult Function()? getProfileFields,
     TResult Function(Map<String, dynamic> data)? updateSpecificProfileField,
+    TResult Function(String filePath)? setPhoto,
     TResult Function(UserProfile profileFields)? loadProfileFields,
     TResult Function(String error)? catchError,
     required TResult orElse(),
@@ -51,6 +54,7 @@ mixin _$ProfileEvent {
     required TResult Function(_GetProfileFields value) getProfileFields,
     required TResult Function(_UpdateSpecificProfileField value)
         updateSpecificProfileField,
+    required TResult Function(_SetPhoto value) setPhoto,
     required TResult Function(_LoadProfileFields value) loadProfileFields,
     required TResult Function(_CatchError value) catchError,
   }) =>
@@ -61,6 +65,7 @@ mixin _$ProfileEvent {
     TResult? Function(_GetProfileFields value)? getProfileFields,
     TResult? Function(_UpdateSpecificProfileField value)?
         updateSpecificProfileField,
+    TResult? Function(_SetPhoto value)? setPhoto,
     TResult? Function(_LoadProfileFields value)? loadProfileFields,
     TResult? Function(_CatchError value)? catchError,
   }) =>
@@ -71,6 +76,7 @@ mixin _$ProfileEvent {
     TResult Function(_GetProfileFields value)? getProfileFields,
     TResult Function(_UpdateSpecificProfileField value)?
         updateSpecificProfileField,
+    TResult Function(_SetPhoto value)? setPhoto,
     TResult Function(_LoadProfileFields value)? loadProfileFields,
     TResult Function(_CatchError value)? catchError,
     required TResult orElse(),
@@ -166,6 +172,7 @@ class _$SetProfileFieldsImpl implements _SetProfileFields {
     required TResult Function() getProfileFields,
     required TResult Function(Map<String, dynamic> data)
         updateSpecificProfileField,
+    required TResult Function(String filePath) setPhoto,
     required TResult Function(UserProfile profileFields) loadProfileFields,
     required TResult Function(String error) catchError,
   }) {
@@ -178,6 +185,7 @@ class _$SetProfileFieldsImpl implements _SetProfileFields {
     TResult? Function(String currentUserId)? setProfileFields,
     TResult? Function()? getProfileFields,
     TResult? Function(Map<String, dynamic> data)? updateSpecificProfileField,
+    TResult? Function(String filePath)? setPhoto,
     TResult? Function(UserProfile profileFields)? loadProfileFields,
     TResult? Function(String error)? catchError,
   }) {
@@ -190,6 +198,7 @@ class _$SetProfileFieldsImpl implements _SetProfileFields {
     TResult Function(String currentUserId)? setProfileFields,
     TResult Function()? getProfileFields,
     TResult Function(Map<String, dynamic> data)? updateSpecificProfileField,
+    TResult Function(String filePath)? setPhoto,
     TResult Function(UserProfile profileFields)? loadProfileFields,
     TResult Function(String error)? catchError,
     required TResult orElse(),
@@ -207,6 +216,7 @@ class _$SetProfileFieldsImpl implements _SetProfileFields {
     required TResult Function(_GetProfileFields value) getProfileFields,
     required TResult Function(_UpdateSpecificProfileField value)
         updateSpecificProfileField,
+    required TResult Function(_SetPhoto value) setPhoto,
     required TResult Function(_LoadProfileFields value) loadProfileFields,
     required TResult Function(_CatchError value) catchError,
   }) {
@@ -220,6 +230,7 @@ class _$SetProfileFieldsImpl implements _SetProfileFields {
     TResult? Function(_GetProfileFields value)? getProfileFields,
     TResult? Function(_UpdateSpecificProfileField value)?
         updateSpecificProfileField,
+    TResult? Function(_SetPhoto value)? setPhoto,
     TResult? Function(_LoadProfileFields value)? loadProfileFields,
     TResult? Function(_CatchError value)? catchError,
   }) {
@@ -233,6 +244,7 @@ class _$SetProfileFieldsImpl implements _SetProfileFields {
     TResult Function(_GetProfileFields value)? getProfileFields,
     TResult Function(_UpdateSpecificProfileField value)?
         updateSpecificProfileField,
+    TResult Function(_SetPhoto value)? setPhoto,
     TResult Function(_LoadProfileFields value)? loadProfileFields,
     TResult Function(_CatchError value)? catchError,
     required TResult orElse(),
@@ -296,6 +308,7 @@ class _$GetProfileFieldsImpl implements _GetProfileFields {
     required TResult Function() getProfileFields,
     required TResult Function(Map<String, dynamic> data)
         updateSpecificProfileField,
+    required TResult Function(String filePath) setPhoto,
     required TResult Function(UserProfile profileFields) loadProfileFields,
     required TResult Function(String error) catchError,
   }) {
@@ -308,6 +321,7 @@ class _$GetProfileFieldsImpl implements _GetProfileFields {
     TResult? Function(String currentUserId)? setProfileFields,
     TResult? Function()? getProfileFields,
     TResult? Function(Map<String, dynamic> data)? updateSpecificProfileField,
+    TResult? Function(String filePath)? setPhoto,
     TResult? Function(UserProfile profileFields)? loadProfileFields,
     TResult? Function(String error)? catchError,
   }) {
@@ -320,6 +334,7 @@ class _$GetProfileFieldsImpl implements _GetProfileFields {
     TResult Function(String currentUserId)? setProfileFields,
     TResult Function()? getProfileFields,
     TResult Function(Map<String, dynamic> data)? updateSpecificProfileField,
+    TResult Function(String filePath)? setPhoto,
     TResult Function(UserProfile profileFields)? loadProfileFields,
     TResult Function(String error)? catchError,
     required TResult orElse(),
@@ -337,6 +352,7 @@ class _$GetProfileFieldsImpl implements _GetProfileFields {
     required TResult Function(_GetProfileFields value) getProfileFields,
     required TResult Function(_UpdateSpecificProfileField value)
         updateSpecificProfileField,
+    required TResult Function(_SetPhoto value) setPhoto,
     required TResult Function(_LoadProfileFields value) loadProfileFields,
     required TResult Function(_CatchError value) catchError,
   }) {
@@ -350,6 +366,7 @@ class _$GetProfileFieldsImpl implements _GetProfileFields {
     TResult? Function(_GetProfileFields value)? getProfileFields,
     TResult? Function(_UpdateSpecificProfileField value)?
         updateSpecificProfileField,
+    TResult? Function(_SetPhoto value)? setPhoto,
     TResult? Function(_LoadProfileFields value)? loadProfileFields,
     TResult? Function(_CatchError value)? catchError,
   }) {
@@ -363,6 +380,7 @@ class _$GetProfileFieldsImpl implements _GetProfileFields {
     TResult Function(_GetProfileFields value)? getProfileFields,
     TResult Function(_UpdateSpecificProfileField value)?
         updateSpecificProfileField,
+    TResult Function(_SetPhoto value)? setPhoto,
     TResult Function(_LoadProfileFields value)? loadProfileFields,
     TResult Function(_CatchError value)? catchError,
     required TResult orElse(),
@@ -457,6 +475,7 @@ class _$UpdateSpecificProfileFieldImpl implements _UpdateSpecificProfileField {
     required TResult Function() getProfileFields,
     required TResult Function(Map<String, dynamic> data)
         updateSpecificProfileField,
+    required TResult Function(String filePath) setPhoto,
     required TResult Function(UserProfile profileFields) loadProfileFields,
     required TResult Function(String error) catchError,
   }) {
@@ -469,6 +488,7 @@ class _$UpdateSpecificProfileFieldImpl implements _UpdateSpecificProfileField {
     TResult? Function(String currentUserId)? setProfileFields,
     TResult? Function()? getProfileFields,
     TResult? Function(Map<String, dynamic> data)? updateSpecificProfileField,
+    TResult? Function(String filePath)? setPhoto,
     TResult? Function(UserProfile profileFields)? loadProfileFields,
     TResult? Function(String error)? catchError,
   }) {
@@ -481,6 +501,7 @@ class _$UpdateSpecificProfileFieldImpl implements _UpdateSpecificProfileField {
     TResult Function(String currentUserId)? setProfileFields,
     TResult Function()? getProfileFields,
     TResult Function(Map<String, dynamic> data)? updateSpecificProfileField,
+    TResult Function(String filePath)? setPhoto,
     TResult Function(UserProfile profileFields)? loadProfileFields,
     TResult Function(String error)? catchError,
     required TResult orElse(),
@@ -498,6 +519,7 @@ class _$UpdateSpecificProfileFieldImpl implements _UpdateSpecificProfileField {
     required TResult Function(_GetProfileFields value) getProfileFields,
     required TResult Function(_UpdateSpecificProfileField value)
         updateSpecificProfileField,
+    required TResult Function(_SetPhoto value) setPhoto,
     required TResult Function(_LoadProfileFields value) loadProfileFields,
     required TResult Function(_CatchError value) catchError,
   }) {
@@ -511,6 +533,7 @@ class _$UpdateSpecificProfileFieldImpl implements _UpdateSpecificProfileField {
     TResult? Function(_GetProfileFields value)? getProfileFields,
     TResult? Function(_UpdateSpecificProfileField value)?
         updateSpecificProfileField,
+    TResult? Function(_SetPhoto value)? setPhoto,
     TResult? Function(_LoadProfileFields value)? loadProfileFields,
     TResult? Function(_CatchError value)? catchError,
   }) {
@@ -524,6 +547,7 @@ class _$UpdateSpecificProfileFieldImpl implements _UpdateSpecificProfileField {
     TResult Function(_GetProfileFields value)? getProfileFields,
     TResult Function(_UpdateSpecificProfileField value)?
         updateSpecificProfileField,
+    TResult Function(_SetPhoto value)? setPhoto,
     TResult Function(_LoadProfileFields value)? loadProfileFields,
     TResult Function(_CatchError value)? catchError,
     required TResult orElse(),
@@ -544,6 +568,168 @@ abstract class _UpdateSpecificProfileField implements ProfileEvent {
   @JsonKey(ignore: true)
   _$$UpdateSpecificProfileFieldImplCopyWith<_$UpdateSpecificProfileFieldImpl>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SetPhotoImplCopyWith<$Res> {
+  factory _$$SetPhotoImplCopyWith(
+          _$SetPhotoImpl value, $Res Function(_$SetPhotoImpl) then) =
+      __$$SetPhotoImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String filePath});
+}
+
+/// @nodoc
+class __$$SetPhotoImplCopyWithImpl<$Res>
+    extends _$ProfileEventCopyWithImpl<$Res, _$SetPhotoImpl>
+    implements _$$SetPhotoImplCopyWith<$Res> {
+  __$$SetPhotoImplCopyWithImpl(
+      _$SetPhotoImpl _value, $Res Function(_$SetPhotoImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? filePath = null,
+  }) {
+    return _then(_$SetPhotoImpl(
+      filePath: null == filePath
+          ? _value.filePath
+          : filePath // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SetPhotoImpl implements _SetPhoto {
+  const _$SetPhotoImpl({required this.filePath});
+
+  @override
+  final String filePath;
+
+  @override
+  String toString() {
+    return 'ProfileEvent.setPhoto(filePath: $filePath)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SetPhotoImpl &&
+            (identical(other.filePath, filePath) ||
+                other.filePath == filePath));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, filePath);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SetPhotoImplCopyWith<_$SetPhotoImpl> get copyWith =>
+      __$$SetPhotoImplCopyWithImpl<_$SetPhotoImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String currentUserId) setProfileFields,
+    required TResult Function() getProfileFields,
+    required TResult Function(Map<String, dynamic> data)
+        updateSpecificProfileField,
+    required TResult Function(String filePath) setPhoto,
+    required TResult Function(UserProfile profileFields) loadProfileFields,
+    required TResult Function(String error) catchError,
+  }) {
+    return setPhoto(filePath);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String currentUserId)? setProfileFields,
+    TResult? Function()? getProfileFields,
+    TResult? Function(Map<String, dynamic> data)? updateSpecificProfileField,
+    TResult? Function(String filePath)? setPhoto,
+    TResult? Function(UserProfile profileFields)? loadProfileFields,
+    TResult? Function(String error)? catchError,
+  }) {
+    return setPhoto?.call(filePath);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String currentUserId)? setProfileFields,
+    TResult Function()? getProfileFields,
+    TResult Function(Map<String, dynamic> data)? updateSpecificProfileField,
+    TResult Function(String filePath)? setPhoto,
+    TResult Function(UserProfile profileFields)? loadProfileFields,
+    TResult Function(String error)? catchError,
+    required TResult orElse(),
+  }) {
+    if (setPhoto != null) {
+      return setPhoto(filePath);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_SetProfileFields value) setProfileFields,
+    required TResult Function(_GetProfileFields value) getProfileFields,
+    required TResult Function(_UpdateSpecificProfileField value)
+        updateSpecificProfileField,
+    required TResult Function(_SetPhoto value) setPhoto,
+    required TResult Function(_LoadProfileFields value) loadProfileFields,
+    required TResult Function(_CatchError value) catchError,
+  }) {
+    return setPhoto(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_SetProfileFields value)? setProfileFields,
+    TResult? Function(_GetProfileFields value)? getProfileFields,
+    TResult? Function(_UpdateSpecificProfileField value)?
+        updateSpecificProfileField,
+    TResult? Function(_SetPhoto value)? setPhoto,
+    TResult? Function(_LoadProfileFields value)? loadProfileFields,
+    TResult? Function(_CatchError value)? catchError,
+  }) {
+    return setPhoto?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SetProfileFields value)? setProfileFields,
+    TResult Function(_GetProfileFields value)? getProfileFields,
+    TResult Function(_UpdateSpecificProfileField value)?
+        updateSpecificProfileField,
+    TResult Function(_SetPhoto value)? setPhoto,
+    TResult Function(_LoadProfileFields value)? loadProfileFields,
+    TResult Function(_CatchError value)? catchError,
+    required TResult orElse(),
+  }) {
+    if (setPhoto != null) {
+      return setPhoto(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetPhoto implements ProfileEvent {
+  const factory _SetPhoto({required final String filePath}) = _$SetPhotoImpl;
+
+  String get filePath;
+  @JsonKey(ignore: true)
+  _$$SetPhotoImplCopyWith<_$SetPhotoImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -626,6 +812,7 @@ class _$LoadProfileFieldsImpl implements _LoadProfileFields {
     required TResult Function() getProfileFields,
     required TResult Function(Map<String, dynamic> data)
         updateSpecificProfileField,
+    required TResult Function(String filePath) setPhoto,
     required TResult Function(UserProfile profileFields) loadProfileFields,
     required TResult Function(String error) catchError,
   }) {
@@ -638,6 +825,7 @@ class _$LoadProfileFieldsImpl implements _LoadProfileFields {
     TResult? Function(String currentUserId)? setProfileFields,
     TResult? Function()? getProfileFields,
     TResult? Function(Map<String, dynamic> data)? updateSpecificProfileField,
+    TResult? Function(String filePath)? setPhoto,
     TResult? Function(UserProfile profileFields)? loadProfileFields,
     TResult? Function(String error)? catchError,
   }) {
@@ -650,6 +838,7 @@ class _$LoadProfileFieldsImpl implements _LoadProfileFields {
     TResult Function(String currentUserId)? setProfileFields,
     TResult Function()? getProfileFields,
     TResult Function(Map<String, dynamic> data)? updateSpecificProfileField,
+    TResult Function(String filePath)? setPhoto,
     TResult Function(UserProfile profileFields)? loadProfileFields,
     TResult Function(String error)? catchError,
     required TResult orElse(),
@@ -667,6 +856,7 @@ class _$LoadProfileFieldsImpl implements _LoadProfileFields {
     required TResult Function(_GetProfileFields value) getProfileFields,
     required TResult Function(_UpdateSpecificProfileField value)
         updateSpecificProfileField,
+    required TResult Function(_SetPhoto value) setPhoto,
     required TResult Function(_LoadProfileFields value) loadProfileFields,
     required TResult Function(_CatchError value) catchError,
   }) {
@@ -680,6 +870,7 @@ class _$LoadProfileFieldsImpl implements _LoadProfileFields {
     TResult? Function(_GetProfileFields value)? getProfileFields,
     TResult? Function(_UpdateSpecificProfileField value)?
         updateSpecificProfileField,
+    TResult? Function(_SetPhoto value)? setPhoto,
     TResult? Function(_LoadProfileFields value)? loadProfileFields,
     TResult? Function(_CatchError value)? catchError,
   }) {
@@ -693,6 +884,7 @@ class _$LoadProfileFieldsImpl implements _LoadProfileFields {
     TResult Function(_GetProfileFields value)? getProfileFields,
     TResult Function(_UpdateSpecificProfileField value)?
         updateSpecificProfileField,
+    TResult Function(_SetPhoto value)? setPhoto,
     TResult Function(_LoadProfileFields value)? loadProfileFields,
     TResult Function(_CatchError value)? catchError,
     required TResult orElse(),
@@ -782,6 +974,7 @@ class _$CatchErrorImpl implements _CatchError {
     required TResult Function() getProfileFields,
     required TResult Function(Map<String, dynamic> data)
         updateSpecificProfileField,
+    required TResult Function(String filePath) setPhoto,
     required TResult Function(UserProfile profileFields) loadProfileFields,
     required TResult Function(String error) catchError,
   }) {
@@ -794,6 +987,7 @@ class _$CatchErrorImpl implements _CatchError {
     TResult? Function(String currentUserId)? setProfileFields,
     TResult? Function()? getProfileFields,
     TResult? Function(Map<String, dynamic> data)? updateSpecificProfileField,
+    TResult? Function(String filePath)? setPhoto,
     TResult? Function(UserProfile profileFields)? loadProfileFields,
     TResult? Function(String error)? catchError,
   }) {
@@ -806,6 +1000,7 @@ class _$CatchErrorImpl implements _CatchError {
     TResult Function(String currentUserId)? setProfileFields,
     TResult Function()? getProfileFields,
     TResult Function(Map<String, dynamic> data)? updateSpecificProfileField,
+    TResult Function(String filePath)? setPhoto,
     TResult Function(UserProfile profileFields)? loadProfileFields,
     TResult Function(String error)? catchError,
     required TResult orElse(),
@@ -823,6 +1018,7 @@ class _$CatchErrorImpl implements _CatchError {
     required TResult Function(_GetProfileFields value) getProfileFields,
     required TResult Function(_UpdateSpecificProfileField value)
         updateSpecificProfileField,
+    required TResult Function(_SetPhoto value) setPhoto,
     required TResult Function(_LoadProfileFields value) loadProfileFields,
     required TResult Function(_CatchError value) catchError,
   }) {
@@ -836,6 +1032,7 @@ class _$CatchErrorImpl implements _CatchError {
     TResult? Function(_GetProfileFields value)? getProfileFields,
     TResult? Function(_UpdateSpecificProfileField value)?
         updateSpecificProfileField,
+    TResult? Function(_SetPhoto value)? setPhoto,
     TResult? Function(_LoadProfileFields value)? loadProfileFields,
     TResult? Function(_CatchError value)? catchError,
   }) {
@@ -849,6 +1046,7 @@ class _$CatchErrorImpl implements _CatchError {
     TResult Function(_GetProfileFields value)? getProfileFields,
     TResult Function(_UpdateSpecificProfileField value)?
         updateSpecificProfileField,
+    TResult Function(_SetPhoto value)? setPhoto,
     TResult Function(_LoadProfileFields value)? loadProfileFields,
     TResult Function(_CatchError value)? catchError,
     required TResult orElse(),
@@ -873,6 +1071,7 @@ abstract class _CatchError implements ProfileEvent {
 mixin _$ProfileState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(UserProfile? profileInfo) updating,
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(UserProfile? profileInfo) loaded,
@@ -881,6 +1080,7 @@ mixin _$ProfileState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(UserProfile? profileInfo)? updating,
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(UserProfile? profileInfo)? loaded,
@@ -889,6 +1089,7 @@ mixin _$ProfileState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(UserProfile? profileInfo)? updating,
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(UserProfile? profileInfo)? loaded,
@@ -898,6 +1099,7 @@ mixin _$ProfileState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Updating value) updating,
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
@@ -906,6 +1108,7 @@ mixin _$ProfileState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Updating value)? updating,
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
@@ -914,6 +1117,7 @@ mixin _$ProfileState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Updating value)? updating,
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
@@ -939,6 +1143,174 @@ class _$ProfileStateCopyWithImpl<$Res, $Val extends ProfileState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+}
+
+/// @nodoc
+abstract class _$$UpdatingImplCopyWith<$Res> {
+  factory _$$UpdatingImplCopyWith(
+          _$UpdatingImpl value, $Res Function(_$UpdatingImpl) then) =
+      __$$UpdatingImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({UserProfile? profileInfo});
+
+  $UserProfileCopyWith<$Res>? get profileInfo;
+}
+
+/// @nodoc
+class __$$UpdatingImplCopyWithImpl<$Res>
+    extends _$ProfileStateCopyWithImpl<$Res, _$UpdatingImpl>
+    implements _$$UpdatingImplCopyWith<$Res> {
+  __$$UpdatingImplCopyWithImpl(
+      _$UpdatingImpl _value, $Res Function(_$UpdatingImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? profileInfo = freezed,
+  }) {
+    return _then(_$UpdatingImpl(
+      profileInfo: freezed == profileInfo
+          ? _value.profileInfo
+          : profileInfo // ignore: cast_nullable_to_non_nullable
+              as UserProfile?,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserProfileCopyWith<$Res>? get profileInfo {
+    if (_value.profileInfo == null) {
+      return null;
+    }
+
+    return $UserProfileCopyWith<$Res>(_value.profileInfo!, (value) {
+      return _then(_value.copyWith(profileInfo: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$UpdatingImpl extends _Updating {
+  const _$UpdatingImpl({required this.profileInfo}) : super._();
+
+  @override
+  final UserProfile? profileInfo;
+
+  @override
+  String toString() {
+    return 'ProfileState.updating(profileInfo: $profileInfo)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdatingImpl &&
+            (identical(other.profileInfo, profileInfo) ||
+                other.profileInfo == profileInfo));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, profileInfo);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdatingImplCopyWith<_$UpdatingImpl> get copyWith =>
+      __$$UpdatingImplCopyWithImpl<_$UpdatingImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(UserProfile? profileInfo) updating,
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(UserProfile? profileInfo) loaded,
+    required TResult Function(String error) error,
+  }) {
+    return updating(profileInfo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(UserProfile? profileInfo)? updating,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(UserProfile? profileInfo)? loaded,
+    TResult? Function(String error)? error,
+  }) {
+    return updating?.call(profileInfo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(UserProfile? profileInfo)? updating,
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(UserProfile? profileInfo)? loaded,
+    TResult Function(String error)? error,
+    required TResult orElse(),
+  }) {
+    if (updating != null) {
+      return updating(profileInfo);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Updating value) updating,
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Error value) error,
+  }) {
+    return updating(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Updating value)? updating,
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Error value)? error,
+  }) {
+    return updating?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Updating value)? updating,
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (updating != null) {
+      return updating(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Updating extends ProfileState {
+  const factory _Updating({required final UserProfile? profileInfo}) =
+      _$UpdatingImpl;
+  const _Updating._() : super._();
+
+  UserProfile? get profileInfo;
+  @JsonKey(ignore: true)
+  _$$UpdatingImplCopyWith<_$UpdatingImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -979,6 +1351,7 @@ class _$InitialImpl extends _Initial {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(UserProfile? profileInfo) updating,
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(UserProfile? profileInfo) loaded,
@@ -990,6 +1363,7 @@ class _$InitialImpl extends _Initial {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(UserProfile? profileInfo)? updating,
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(UserProfile? profileInfo)? loaded,
@@ -1001,6 +1375,7 @@ class _$InitialImpl extends _Initial {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(UserProfile? profileInfo)? updating,
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(UserProfile? profileInfo)? loaded,
@@ -1016,6 +1391,7 @@ class _$InitialImpl extends _Initial {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Updating value) updating,
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
@@ -1027,6 +1403,7 @@ class _$InitialImpl extends _Initial {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Updating value)? updating,
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
@@ -1038,6 +1415,7 @@ class _$InitialImpl extends _Initial {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Updating value)? updating,
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
@@ -1094,6 +1472,7 @@ class _$LoadingImpl extends _Loading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(UserProfile? profileInfo) updating,
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(UserProfile? profileInfo) loaded,
@@ -1105,6 +1484,7 @@ class _$LoadingImpl extends _Loading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(UserProfile? profileInfo)? updating,
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(UserProfile? profileInfo)? loaded,
@@ -1116,6 +1496,7 @@ class _$LoadingImpl extends _Loading {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(UserProfile? profileInfo)? updating,
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(UserProfile? profileInfo)? loaded,
@@ -1131,6 +1512,7 @@ class _$LoadingImpl extends _Loading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Updating value) updating,
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
@@ -1142,6 +1524,7 @@ class _$LoadingImpl extends _Loading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Updating value)? updating,
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
@@ -1153,6 +1536,7 @@ class _$LoadingImpl extends _Loading {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Updating value)? updating,
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
@@ -1250,6 +1634,7 @@ class _$LoadedImpl extends _Loaded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(UserProfile? profileInfo) updating,
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(UserProfile? profileInfo) loaded,
@@ -1261,6 +1646,7 @@ class _$LoadedImpl extends _Loaded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(UserProfile? profileInfo)? updating,
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(UserProfile? profileInfo)? loaded,
@@ -1272,6 +1658,7 @@ class _$LoadedImpl extends _Loaded {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(UserProfile? profileInfo)? updating,
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(UserProfile? profileInfo)? loaded,
@@ -1287,6 +1674,7 @@ class _$LoadedImpl extends _Loaded {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Updating value) updating,
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
@@ -1298,6 +1686,7 @@ class _$LoadedImpl extends _Loaded {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Updating value)? updating,
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
@@ -1309,6 +1698,7 @@ class _$LoadedImpl extends _Loaded {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Updating value)? updating,
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
@@ -1397,6 +1787,7 @@ class _$ErrorImpl extends _Error {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(UserProfile? profileInfo) updating,
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(UserProfile? profileInfo) loaded,
@@ -1408,6 +1799,7 @@ class _$ErrorImpl extends _Error {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(UserProfile? profileInfo)? updating,
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(UserProfile? profileInfo)? loaded,
@@ -1419,6 +1811,7 @@ class _$ErrorImpl extends _Error {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(UserProfile? profileInfo)? updating,
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(UserProfile? profileInfo)? loaded,
@@ -1434,6 +1827,7 @@ class _$ErrorImpl extends _Error {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Updating value) updating,
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
@@ -1445,6 +1839,7 @@ class _$ErrorImpl extends _Error {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Updating value)? updating,
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
@@ -1456,6 +1851,7 @@ class _$ErrorImpl extends _Error {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Updating value)? updating,
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,

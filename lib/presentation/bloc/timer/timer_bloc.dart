@@ -39,8 +39,8 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
   void _fetchStatus(_FetchStatus event, Emitter<TimerState> emit) async{
     final timer = await _timerRepository.fetchTimerDate();
     if(timer == null) return;
-    _streamSubscription = Stream.periodic(Duration(seconds: 1)).listen((event) {
-      add(TimerEvent.tick());
+    _streamSubscription = Stream.periodic(const Duration(seconds: 1)).listen((event) {
+      add(const TimerEvent.tick());
     });
     final secondsLeft = timer.date.difference(DateTime.now()).inSeconds;
     emit(TimerState.ticking(
@@ -50,8 +50,8 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
   }
 
   void _startTimer(_StartTimer event, Emitter<TimerState> emit) async{
-    _streamSubscription = Stream.periodic(Duration(seconds: 1)).listen((event) {
-      add(TimerEvent.tick());
+    _streamSubscription = Stream.periodic(const Duration(seconds: 1)).listen((event) {
+      add(const TimerEvent.tick());
     });
     final startTime = DateTime.now();
     final targetTime = startTime.add(Duration(seconds: state.seconds));
@@ -78,7 +78,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
           final now = DateTime.now();
           final seconds = state.targetSeconds.difference(now).inSeconds;
           if (seconds <= 0) {
-            add(TimerEvent.stopTimer(sendSOS: false));
+            add(const TimerEvent.stopTimer(sendSOS: true));
           } else {
             emit(TimerState.ticking(
                 targetSeconds: state.targetSeconds,
@@ -92,11 +92,9 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
 
   void _stopTimer(_StopTimer event, Emitter<TimerState> emit) async{
     _streamSubscription?.cancel();
-    if(event.sendSOS){
-      await _httpClient.stopTimer();
-    }
+    await _httpClient.stopTimer();
     emit(TimerState.timerEnded(event.sendSOS));
-    emit(TimerState.initial());
+    emit(const TimerState.initial());
   }
 
   @override

@@ -11,6 +11,7 @@ abstract class UserProfile with _$UserProfile {
     required String sosMessage,
     required bool sendSosGeolocation,
     required bool alarmToneQB,
+    String? photoURL,
     required String id,
     required String phone,
     required String createdAt,

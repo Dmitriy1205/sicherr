@@ -6,6 +6,7 @@ const { validateSosBody, validateNotificationBody } = require('./middlewares/val
 const { sendSos } = require('./controllers/sosController');
 const { sendNotification } = require('./controllers/notificationController');
 const { startTimer, stopTimer } = require('./controllers/timerController');
+const { changePhoneNumber } = require('./controllers/changePhoneNumberController');
 
 const app = express();
 app.use(bodyParser.json());
@@ -21,5 +22,7 @@ app.post('/start_timer', verifyToken, startTimer);
 
 // Route for stopping timer
 app.post('/stop_timer', verifyToken, stopTimer);
+
+app.post('/change_phone_number', verifyToken, changePhoneNumber);
 
 module.exports = app;

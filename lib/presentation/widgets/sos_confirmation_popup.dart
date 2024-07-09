@@ -1,9 +1,14 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sicherr/core/const/icons.dart';
+import 'package:sicherr/core/utils/send_sos.dart';
 import 'package:sicherr/presentation/bloc/send_sos/send_sos_bloc.dart';
+import 'package:sicherr/presentation/bloc/sos_window/sos_window_cubit.dart';
 import 'package:sicherr/presentation/widgets/app_elevated_button.dart';
 import 'package:sicherr/presentation/widgets/scrollable_contacts_list.dart';
 
@@ -14,12 +19,12 @@ import '../bloc/profile/profile_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
-Future<void> sosConfirmationPopup(BuildContext context,{ String? latitude, String? longitude, bool showPopup = true}) async {
-  if(context.read<SendSosBloc>().state.isDialogOpened) return;
+Future<void> sosConfirmationPopup(BuildContext context,{ bool showPopup = true}) async {
+  if(context.read<SosWindowCubit>().state) return;
   await Permission.sms.request();
   if(!context.mounted) return;
 
-  context.read<SendSosBloc>().add(const SendSosEvent.openDialog());
+  context.read<SosWindowCubit>().openWindow();
   final confirmed = !showPopup ? true : await showDialog<bool?>(
     context: context,
     builder: (BuildContext context) =>
@@ -46,14 +51,10 @@ Future<void> sosConfirmationPopup(BuildContext context,{ String? latitude, Strin
                   style: AppTheme.themeData.textTheme.titleMedium!
                       .copyWith(color: AppColors.greyDark),
                 ),
-                context
-                    .read<EmergencyContactBloc>()
-                    .state
-                    .emContacts == null ||
                     context
                         .read<EmergencyContactBloc>()
                         .state
-                        .emContacts!
+                        .emContacts
                         .isEmpty
                     ? Padding(
                   padding: const EdgeInsets.symmetric(vertical: 12.0),
@@ -171,13 +172,9 @@ Future<void> sosConfirmationPopup(BuildContext context,{ String? latitude, Strin
                 text: '${AppLocalizations.of(context)!.send} SOS',
                 style: AppTheme.themeData.textTheme.labelSmall,
                 onPressed: context
-                    .read<EmergencyContactBloc>()
-                    .state
-                    .emContacts == null ||
-                    context
                         .read<EmergencyContactBloc>()
                         .state
-                        .emContacts!
+                        .emContacts
                         .isEmpty
                     ? null : () {
                   Navigator.of(context).pop(true);
@@ -186,16 +183,7 @@ Future<void> sosConfirmationPopup(BuildContext context,{ String? latitude, Strin
         ),
   );
   if(!context.mounted) return;
-  context.read<SendSosBloc>().add(const SendSosEvent.closeDialog());
+  context.read<SosWindowCubit>().closeWindow();
   if(confirmed != true) return;
-
-  var profileInfo = context.read<ProfileBloc>().state.profileInfo;
-  var sosMessage = profileInfo?.sosMessage;
-  var currentUserPhone = profileInfo?.phone;
-  List<String> emContactPhoneList = context.read<EmergencyContactBloc>().state.emContacts!.map((contact) => contact.phoneNumber).toList();
-  context.read<SendSosBloc>().add(SendSosEvent.sendSOS(
-    message: sosMessage == null || sosMessage.isEmpty ? 'SOS' : sosMessage,
-    currentUserPhone: currentUserPhone!,
-    emContactPhone: emContactPhoneList, lat: latitude, long: longitude ,
-  ));
+  sendSos(context);
 }

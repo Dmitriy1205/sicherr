@@ -18,39 +18,39 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$NotificationEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() saveToken,
-    required TResult Function() removeToken,
+    required TResult Function() addToken,
+    required TResult Function() deleteToken,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? saveToken,
-    TResult? Function()? removeToken,
+    TResult? Function()? addToken,
+    TResult? Function()? deleteToken,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? saveToken,
-    TResult Function()? removeToken,
+    TResult Function()? addToken,
+    TResult Function()? deleteToken,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_SaveToken value) saveToken,
-    required TResult Function(_RemoveToken value) removeToken,
+    required TResult Function(_AddToken value) addToken,
+    required TResult Function(_DeleteToken value) deleteToken,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_SaveToken value)? saveToken,
-    TResult? Function(_RemoveToken value)? removeToken,
+    TResult? Function(_AddToken value)? addToken,
+    TResult? Function(_DeleteToken value)? deleteToken,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_SaveToken value)? saveToken,
-    TResult Function(_RemoveToken value)? removeToken,
+    TResult Function(_AddToken value)? addToken,
+    TResult Function(_DeleteToken value)? deleteToken,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -75,35 +75,35 @@ class _$NotificationEventCopyWithImpl<$Res, $Val extends NotificationEvent>
 }
 
 /// @nodoc
-abstract class _$$SaveTokenImplCopyWith<$Res> {
-  factory _$$SaveTokenImplCopyWith(
-          _$SaveTokenImpl value, $Res Function(_$SaveTokenImpl) then) =
-      __$$SaveTokenImplCopyWithImpl<$Res>;
+abstract class _$$AddTokenImplCopyWith<$Res> {
+  factory _$$AddTokenImplCopyWith(
+          _$AddTokenImpl value, $Res Function(_$AddTokenImpl) then) =
+      __$$AddTokenImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$SaveTokenImplCopyWithImpl<$Res>
-    extends _$NotificationEventCopyWithImpl<$Res, _$SaveTokenImpl>
-    implements _$$SaveTokenImplCopyWith<$Res> {
-  __$$SaveTokenImplCopyWithImpl(
-      _$SaveTokenImpl _value, $Res Function(_$SaveTokenImpl) _then)
+class __$$AddTokenImplCopyWithImpl<$Res>
+    extends _$NotificationEventCopyWithImpl<$Res, _$AddTokenImpl>
+    implements _$$AddTokenImplCopyWith<$Res> {
+  __$$AddTokenImplCopyWithImpl(
+      _$AddTokenImpl _value, $Res Function(_$AddTokenImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$SaveTokenImpl implements _SaveToken {
-  const _$SaveTokenImpl();
+class _$AddTokenImpl implements _AddToken {
+  const _$AddTokenImpl();
 
   @override
   String toString() {
-    return 'NotificationEvent.saveToken()';
+    return 'NotificationEvent.addToken()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$SaveTokenImpl);
+        (other.runtimeType == runtimeType && other is _$AddTokenImpl);
   }
 
   @override
@@ -112,30 +112,30 @@ class _$SaveTokenImpl implements _SaveToken {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() saveToken,
-    required TResult Function() removeToken,
+    required TResult Function() addToken,
+    required TResult Function() deleteToken,
   }) {
-    return saveToken();
+    return addToken();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? saveToken,
-    TResult? Function()? removeToken,
+    TResult? Function()? addToken,
+    TResult? Function()? deleteToken,
   }) {
-    return saveToken?.call();
+    return addToken?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? saveToken,
-    TResult Function()? removeToken,
+    TResult Function()? addToken,
+    TResult Function()? deleteToken,
     required TResult orElse(),
   }) {
-    if (saveToken != null) {
-      return saveToken();
+    if (addToken != null) {
+      return addToken();
     }
     return orElse();
   }
@@ -143,69 +143,69 @@ class _$SaveTokenImpl implements _SaveToken {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_SaveToken value) saveToken,
-    required TResult Function(_RemoveToken value) removeToken,
+    required TResult Function(_AddToken value) addToken,
+    required TResult Function(_DeleteToken value) deleteToken,
   }) {
-    return saveToken(this);
+    return addToken(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_SaveToken value)? saveToken,
-    TResult? Function(_RemoveToken value)? removeToken,
+    TResult? Function(_AddToken value)? addToken,
+    TResult? Function(_DeleteToken value)? deleteToken,
   }) {
-    return saveToken?.call(this);
+    return addToken?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_SaveToken value)? saveToken,
-    TResult Function(_RemoveToken value)? removeToken,
+    TResult Function(_AddToken value)? addToken,
+    TResult Function(_DeleteToken value)? deleteToken,
     required TResult orElse(),
   }) {
-    if (saveToken != null) {
-      return saveToken(this);
+    if (addToken != null) {
+      return addToken(this);
     }
     return orElse();
   }
 }
 
-abstract class _SaveToken implements NotificationEvent {
-  const factory _SaveToken() = _$SaveTokenImpl;
+abstract class _AddToken implements NotificationEvent {
+  const factory _AddToken() = _$AddTokenImpl;
 }
 
 /// @nodoc
-abstract class _$$RemoveTokenImplCopyWith<$Res> {
-  factory _$$RemoveTokenImplCopyWith(
-          _$RemoveTokenImpl value, $Res Function(_$RemoveTokenImpl) then) =
-      __$$RemoveTokenImplCopyWithImpl<$Res>;
+abstract class _$$DeleteTokenImplCopyWith<$Res> {
+  factory _$$DeleteTokenImplCopyWith(
+          _$DeleteTokenImpl value, $Res Function(_$DeleteTokenImpl) then) =
+      __$$DeleteTokenImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$RemoveTokenImplCopyWithImpl<$Res>
-    extends _$NotificationEventCopyWithImpl<$Res, _$RemoveTokenImpl>
-    implements _$$RemoveTokenImplCopyWith<$Res> {
-  __$$RemoveTokenImplCopyWithImpl(
-      _$RemoveTokenImpl _value, $Res Function(_$RemoveTokenImpl) _then)
+class __$$DeleteTokenImplCopyWithImpl<$Res>
+    extends _$NotificationEventCopyWithImpl<$Res, _$DeleteTokenImpl>
+    implements _$$DeleteTokenImplCopyWith<$Res> {
+  __$$DeleteTokenImplCopyWithImpl(
+      _$DeleteTokenImpl _value, $Res Function(_$DeleteTokenImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$RemoveTokenImpl implements _RemoveToken {
-  const _$RemoveTokenImpl();
+class _$DeleteTokenImpl implements _DeleteToken {
+  const _$DeleteTokenImpl();
 
   @override
   String toString() {
-    return 'NotificationEvent.removeToken()';
+    return 'NotificationEvent.deleteToken()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$RemoveTokenImpl);
+        (other.runtimeType == runtimeType && other is _$DeleteTokenImpl);
   }
 
   @override
@@ -214,30 +214,30 @@ class _$RemoveTokenImpl implements _RemoveToken {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() saveToken,
-    required TResult Function() removeToken,
+    required TResult Function() addToken,
+    required TResult Function() deleteToken,
   }) {
-    return removeToken();
+    return deleteToken();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? saveToken,
-    TResult? Function()? removeToken,
+    TResult? Function()? addToken,
+    TResult? Function()? deleteToken,
   }) {
-    return removeToken?.call();
+    return deleteToken?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? saveToken,
-    TResult Function()? removeToken,
+    TResult Function()? addToken,
+    TResult Function()? deleteToken,
     required TResult orElse(),
   }) {
-    if (removeToken != null) {
-      return removeToken();
+    if (deleteToken != null) {
+      return deleteToken();
     }
     return orElse();
   }
@@ -245,37 +245,37 @@ class _$RemoveTokenImpl implements _RemoveToken {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_SaveToken value) saveToken,
-    required TResult Function(_RemoveToken value) removeToken,
+    required TResult Function(_AddToken value) addToken,
+    required TResult Function(_DeleteToken value) deleteToken,
   }) {
-    return removeToken(this);
+    return deleteToken(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_SaveToken value)? saveToken,
-    TResult? Function(_RemoveToken value)? removeToken,
+    TResult? Function(_AddToken value)? addToken,
+    TResult? Function(_DeleteToken value)? deleteToken,
   }) {
-    return removeToken?.call(this);
+    return deleteToken?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_SaveToken value)? saveToken,
-    TResult Function(_RemoveToken value)? removeToken,
+    TResult Function(_AddToken value)? addToken,
+    TResult Function(_DeleteToken value)? deleteToken,
     required TResult orElse(),
   }) {
-    if (removeToken != null) {
-      return removeToken(this);
+    if (deleteToken != null) {
+      return deleteToken(this);
     }
     return orElse();
   }
 }
 
-abstract class _RemoveToken implements NotificationEvent {
-  const factory _RemoveToken() = _$RemoveTokenImpl;
+abstract class _DeleteToken implements NotificationEvent {
+  const factory _DeleteToken() = _$DeleteTokenImpl;
 }
 
 /// @nodoc

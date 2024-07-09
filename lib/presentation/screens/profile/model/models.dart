@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class ProfileSectionModel {
   final String category;
   final List<ProfileSectionItem> items;
@@ -7,7 +9,8 @@ class ProfileSectionModel {
 
 class ProfileSectionItem {
   final String text;
+  final Widget? icon;
   final void Function()? action;
 
-  ProfileSectionItem({required this.text, this.action});
+  ProfileSectionItem({required this.text, this.icon, this.action});
 }

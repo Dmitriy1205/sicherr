@@ -1,4 +1,9 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:sicherr/domain/entities/onboarding/onboarding.dart';
 import 'package:sicherr/domain/repositories/user/user_repository.dart';
 
@@ -8,6 +13,7 @@ import '../../entities/user_profile/user_profile.dart';
 
 class UserRepositoryImpl extends UserRepository {
   final FirebaseFirestore _firestore;
+  final FirebaseStorage _storage;
   final String collectionName = 'users';
   final String subCollectionName = 'onboarding';
   final PhoneNumberEncryptor _encryptor;
@@ -15,7 +21,9 @@ class UserRepositoryImpl extends UserRepository {
   UserRepositoryImpl({
     required FirebaseFirestore firestore,
     required PhoneNumberEncryptor encryptor,
+    required FirebaseStorage storage,
   })  : _firestore = firestore,
+        _storage = storage,
         _encryptor = encryptor;
 
   @override
@@ -134,5 +142,33 @@ class UserRepositoryImpl extends UserRepository {
       // Handle any errors, such as permission denied or network issues
       return false;
     }
+  }
+
+  @override
+  Future<String?> getUserIdByPhoneNumber(String phoneNumber) async{
+    try {
+      final collectionRef = await _firestore
+          .collection(collectionName)
+          .where('phone', isEqualTo: phoneNumber)
+          .get();
+      if(collectionRef.size == 0) return null;
+      return collectionRef.docs.first.id;
+    } catch (e) {
+      // Handle any errors, such as permission denied or network issues
+      return null;
+    }
+  }
+
+  @override
+  Future<void> setPhoto({required String currentUserId, required String filePath}) async {
+    final extension = _extractExtension(filePath);
+    final photoURL = 'users/$currentUserId/profile_photo.$extension';
+    final file = File(filePath);
+    await _storage.ref(photoURL).putFile(file);
+    return updateUserFields(currentUserId: currentUserId, data: {"photoURL": photoURL});
+  }
+
+  String _extractExtension(String input){
+    return input.split(".").last;
   }
 }

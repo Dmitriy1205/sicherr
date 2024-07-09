@@ -11,6 +11,9 @@ import 'package:sicherr/domain/entities/country_codes/country_codes.dart';
 
 abstract interface class ContactsInterface {
   Future<List<ContactEntity>> getLocalContacts();
+
+  Future<ContactEntity?> findLocalContactByPhoneNumber(
+      {required String phoneNumber});
 }
 
 class ContactsManager implements ContactsInterface {
@@ -26,6 +29,33 @@ class ContactsManager implements ContactsInterface {
         await rootBundle.loadString('assets/country_codes/country_codes.json');
     final data = await json.decode(countryCodesJson);
     countryCodes = (data as List).map((e) => CountryCodes.fromJson(e)).toList();
+  }
+
+  @override
+  Future<ContactEntity?> findLocalContactByPhoneNumber(
+      {required String phoneNumber}) async {
+    final List<ContactEntity> contacts = [];
+
+    final permission = await Permission.contacts.request();
+    if (permission.isGranted) {
+      final localContacts = await ContactsService.getContactsForPhone(
+          phoneNumber,
+          withThumbnails: false,
+          photoHighResolution: false);
+
+      for (var element in localContacts) {
+        try {
+          final contact = ContactEntity.fromLocalContact(element);
+          if (contact.phoneNumber.isNotEmpty) {
+            contacts.add(contact);
+          }
+        } catch (_) {}
+      }
+    } else if (permission.isPermanentlyDenied) {
+      log('Contacts Permission Denied');
+    }
+
+    return contacts.firstOrNull;
   }
 
   @override
@@ -140,11 +170,11 @@ class ContactsManager implements ContactsInterface {
     }
   }
 
-  // static  double calculateContactRate(List<Rating> ratings) {
-  //   final ratingsNumbers =
-  //       ratings.where((e) => e.rating != null).map((e) => e.rating).toList();
-  //   final sum = ratingsNumbers.fold(
-  //       0, (num previousValue, element) => previousValue + element!);
-  //   return double.parse((sum / ratingsNumbers.length).toStringAsFixed(1));
-  // }
+// static  double calculateContactRate(List<Rating> ratings) {
+//   final ratingsNumbers =
+//       ratings.where((e) => e.rating != null).map((e) => e.rating).toList();
+//   final sum = ratingsNumbers.fold(
+//       0, (num previousValue, element) => previousValue + element!);
+//   return double.parse((sum / ratingsNumbers.length).toStringAsFixed(1));
+// }
 }

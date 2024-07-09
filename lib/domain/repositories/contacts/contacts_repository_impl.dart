@@ -35,7 +35,7 @@ class ContactsRepositoryImpl implements ContactsRepository {
         .map((querySnapshot) {
       return querySnapshot.docs.map((doc) {
         final data = doc.data();
-        return ContactEntity.fromJson(data, _encryptor.decrypt);
+        return ContactEntity.fromJsonDecrypted(data, _encryptor.decrypt);
       }).toList();
     });
   }
@@ -52,7 +52,7 @@ class ContactsRepositoryImpl implements ContactsRepository {
 
       List<ContactEntity> contacts = querySnapshot.docs.map((doc) {
         final data = doc.data() as Map<String, dynamic>;
-        return ContactEntity.fromJson(data, _encryptor.decrypt);
+        return ContactEntity.fromJsonDecrypted(data, _encryptor.decrypt);
       }).toList();
 
       return contacts;
@@ -76,7 +76,7 @@ class ContactsRepositoryImpl implements ContactsRepository {
 
         contact = contact.copyWith(
             phoneNumber: encryptedPhoneNumber, id: encryptedPhoneNumber);
-        // Reference to the user selected contacts document
+        // Reference to the user selected contacts documents
         DocumentReference docRefUserContacts = _firestore
             .collection(usersCollectionName)
             .doc(currentUserId)
@@ -88,7 +88,7 @@ class ContactsRepositoryImpl implements ContactsRepository {
         //Shared contacts
         // final docRefSharedContacts = _getSharedContactDocRef(contact.id);
         //
-        // Check if the document already exists
+        // Check if the documents already exists
         // final sharedDocSnapshot = await docRefSharedContacts.get();
         // if (sharedDocSnapshot.exists) {
         //   // Document already exists, update the "tags" field
@@ -103,11 +103,11 @@ class ContactsRepositoryImpl implements ContactsRepository {
         //     batch.update(docRefSharedContacts, {'tags': newTags});
         //   }
         // } else {
-        //   // Document does not exist, set the data for the new document
+        //   // Document does not exist, set the data for the new documents
         //   batch.set(docRefSharedContacts, contact.toJson());
         // }
 
-        // Set the data for each document in the batch
+        // Set the data for each documents in the batch
         batch.set(docRefUserContacts, contact.toJson());
       }
 
@@ -196,7 +196,7 @@ class ContactsRepositoryImpl implements ContactsRepository {
       return false;
     });
     final data = contactSnapshot?.data();
-    final contact = data != null ? ContactEntity.fromJson(data, _encryptor.decrypt) : null;
+    final contact = data != null ? ContactEntity.fromJsonDecrypted(data, _encryptor.decrypt) : null;
     return contact;
   }
 
@@ -209,7 +209,7 @@ class ContactsRepositoryImpl implements ContactsRepository {
       //Shared contacts
       final docRefSharedContacts = _getSharedContactDocRef(contactId);
 
-      // Check if the document already exists
+      // Check if the documents already exists
       final sharedDocSnapshot = await docRefSharedContacts.get();
       if (sharedDocSnapshot.exists) {
         // Document already exists, update the "tags" field
@@ -219,7 +219,7 @@ class ContactsRepositoryImpl implements ContactsRepository {
         await docRefSharedContacts.update({'tags': newTags});
         final updatedData = await docRefSharedContacts.get();
         if (updatedData.data() != null) {
-          return ContactEntity.fromJson(updatedData.data()!, _encryptor.decrypt);
+          return ContactEntity.fromJsonDecrypted(updatedData.data()!, _encryptor.decrypt);
         }
       }
     } catch (e) {
@@ -307,7 +307,7 @@ class ContactsRepositoryImpl implements ContactsRepository {
       final collectionReference =
           await _firestore.collection('shared_contacts').get();
       final List<ContactEntity> sharedContacts = collectionReference.docs
-          .map((doc) => ContactEntity.fromJson(doc.data(), _encryptor.decrypt))
+          .map((doc) => ContactEntity.fromJsonDecrypted(doc.data(), _encryptor.decrypt))
           .toList();
       return sharedContacts;
     } on Exception catch (e) {

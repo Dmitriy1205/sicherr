@@ -33,7 +33,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
   Future<void> _verify(_Verify event, Emitter<OtpState> emit) async {
     try {
       emit(const OtpState.verification());
-      await _authRepository.verification(
+      await _authRepository.confirmPhoneSignIn(
           verificationId: event.verificationId, code: event.smsCode);
 
       emit(const OtpState.loaded());
@@ -45,7 +45,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
   Future<void> _resendCode(_ResendCode event, Emitter<OtpState> emit) async {
     try {
       emit(const OtpState.verification());
-      await _authRepository.loginWithPhone(
+      await _authRepository.verifyPhone(
         phoneNumber: event.phoneNumber,
         verificationCompleted: (credential) async {},
         verificationFailed: (exception) {

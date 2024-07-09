@@ -27,13 +27,12 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
   Future<void> _mapToState(
           NotificationEvent event, Emitter<NotificationState> emit) async =>
       event.map(
-          saveToken: (e) => _saveToken(e, emit),
-          removeToken: (e) => _removeToken(e, emit));
+          addToken: (e) => _addToken(e, emit),
+          deleteToken: (e) => _deleteToken(e, emit));
 
-  Future<void> _saveToken(
-      _SaveToken event, Emitter<NotificationState> emit) async {
+  Future<void> _deleteToken(_DeleteToken event, Emitter<NotificationState> emit) async{
     try {
-      await _notificationRepository.saveToken(
+      await _notificationRepository.deleteToken(
           currentUserId: _authBloc.state.user!.uid);
 
       emit(const NotificationState.success());
@@ -42,10 +41,10 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     }
   }
 
-  Future<void> _removeToken(
-      _RemoveToken event, Emitter<NotificationState> emit) async {
+  Future<void> _addToken(
+      _AddToken event, Emitter<NotificationState> emit) async {
     try {
-      await _notificationRepository.removeToken(
+      await _notificationRepository.addToken(
           currentUserId: _authBloc.state.user!.uid);
 
       emit(const NotificationState.success());

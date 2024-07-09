@@ -37,8 +37,32 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         updateSpecificProfileField: (e) => _updateSpecificProfileField(e, emit),
         loadProfileFields: (e) =>
             emit(ProfileState.loaded(profileInfo: e.profileFields)),
+        setPhoto: (e) => _setPhoto(e, emit),
         catchError: (e) => emit(ProfileState.error(error: e.error.toString())),
       );
+
+  Future<void> _setPhoto(_SetPhoto event, Emitter<ProfileState> emit) async{
+    try {
+      await _userRepository.setPhoto(
+          currentUserId: _authBloc.state.user!.uid, filePath: event.filePath);
+
+      emit(ProfileState.updating(profileInfo: state.profileInfo));
+      _profileStreamSubscription = _userRepository
+          .getUserFieldsStream(currentUserId: _authBloc.state.user!.uid)
+          .listen((profileFields) {
+        if (profileFields == null) {
+          add(ProfileEvent.setProfileFields(
+              currentUserId: _authBloc.state.user!.uid));
+        } else {
+          add(ProfileEvent.loadProfileFields(profileFields: profileFields));
+        }
+      }, onError: (error) {
+        add(ProfileEvent.catchError(error: error));
+      });
+    } on BadRequestException catch (e) {
+      emit(ProfileState.error(error: e.message));
+    }
+  }
 
   Future<void> _getProfileFields(
       _GetProfileFields event, Emitter<ProfileState> emit) async {

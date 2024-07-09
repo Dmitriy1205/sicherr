@@ -53,7 +53,7 @@ class ContactEntity {
     );
   }
 
-  factory ContactEntity.fromJson(Map<String, dynamic> json, Decryption decryption) {
+  factory ContactEntity.fromJson(Map<String, dynamic> json) {
     final String? base64Image = json['imageBase64'];
 
     final Timestamp? createdAtTimestamp = json['createdAt'] as Timestamp?;
@@ -68,7 +68,7 @@ class ContactEntity {
     return ContactEntity(
       id: json['id'] ?? '',
       name: json['name'] ?? '',
-      phoneNumber: json['phone'] != null ? decryption.call(json['phone']) : '',
+      phoneNumber: json['phone'] ?? '',
       image: base64Image != null && base64Image.isNotEmpty
           ? base64.decode(base64Image)
           : null,
@@ -77,11 +77,37 @@ class ContactEntity {
       rating: json['rating'] != null
           ? double.parse(json['rating'].toString())
           : null,
-
       createdAt: createdAt,
-
       ratings: ratings.map((e) => Rating.fromJson(e)).toList(),
+    );
+  }
 
+  factory ContactEntity.fromJsonDecrypted(Map<String, dynamic> json, Decryption decryption) {
+    final String? base64Image = json['imageBase64'];
+
+    final Timestamp? createdAtTimestamp = json['createdAt'] as Timestamp?;
+
+    DateTime? createdAt;
+    if (createdAtTimestamp != null) {
+      createdAt = createdAtTimestamp.toDate();
+    }
+
+    final ratings = List<Map<String, dynamic>>.from(json['ratings'] ?? []) ;
+
+    return ContactEntity(
+      id: json['id'] ?? '',
+      name: json['name'] ?? '',
+      phoneNumber: json['phone'] != null ? (decryption?.call(json['phone']) ?? json['phone']) : '',
+      image: base64Image != null && base64Image.isNotEmpty
+          ? base64.decode(base64Image)
+          : null,
+      isEmergency: json['isEmergencyContact'] ?? false,
+      tags: List<String>.from(json['tags'] ?? []),
+      rating: json['rating'] != null
+          ? double.parse(json['rating'].toString())
+          : null,
+      createdAt: createdAt,
+      ratings: ratings.map((e) => Rating.fromJson(e)).toList(),
     );
   }
 
@@ -94,7 +120,7 @@ class ContactEntity {
       ..addAll(sharedContactJson)
       ..addAll(userContactJson);
 
-    return ContactEntity.fromJson(json, decryption);
+    return ContactEntity.fromJsonDecrypted(json, decryption);
   }
 
   Map<String, dynamic> toJsonSimplified() {

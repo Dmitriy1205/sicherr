@@ -10,6 +10,7 @@
 		0304F16EBF288DEA3370FAAC /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77DC3BE1FE9E2CED2FF1A7DD /* Pods_Runner.framework */; };
 		04315A2B2BCEFE1600F366AC /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04315A242BCEFB0100F366AC /* UserDefault.swift */; };
 		04315A2E2BCEFE3000F366AC /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04315A242BCEFB0100F366AC /* UserDefault.swift */; };
+		044CBD472C255D60009E48FC /* syren.wav in Resources */ = {isa = PBXBuildFile; fileRef = 044CBD462C255D60009E48FC /* syren.wav */; };
 		0456B00D2C18887000FBE3AE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0456B00C2C18887000FBE3AE /* GoogleService-Info.plist */; };
 		048D12F02BD9717F00ED2B7A /* IdentifiableNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D12EF2BD9717F00ED2B7A /* IdentifiableNumber.swift */; };
 		048D12F12BD9717F00ED2B7A /* IdentifiableNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D12EF2BD9717F00ED2B7A /* IdentifiableNumber.swift */; };
@@ -68,6 +69,7 @@
 
 /* Begin PBXFileReference section */
 		04315A242BCEFB0100F366AC /* UserDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
+		044CBD462C255D60009E48FC /* syren.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = syren.wav; sourceTree = "<group>"; };
 		0456B00C2C18887000FBE3AE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		048D12E62BD967FF00ED2B7A /* CallerExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CallerExtension.entitlements; sourceTree = "<group>"; };
 		048D12EF2BD9717F00ED2B7A /* IdentifiableNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifiableNumber.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 		97C146E51CF9000F007C117D = {
 			isa = PBXGroup;
 			children = (
+				044CBD462C255D60009E48FC /* syren.wav */,
 				9740EEB11CF90186004384FC /* Flutter */,
 				97C146F01CF9000F007C117D /* Runner */,
 				3C01EF7B2BCBDCE70020D279 /* CallerExtension */,
@@ -353,6 +356,7 @@
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
 				0456B00D2C18887000FBE3AE /* GoogleService-Info.plist in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
+				044CBD472C255D60009E48FC /* syren.wav in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -5,13 +5,20 @@ import 'package:sicherr/presentation/bloc/alarm/alarm_bloc.dart';
 import 'package:sicherr/presentation/bloc/contact_dentification/contact_identification_bloc.dart';
 import 'package:sicherr/presentation/bloc/contact_details/contact_details_bloc.dart';
 import 'package:sicherr/presentation/bloc/danger_contact/dc_bloc.dart';
+import 'package:sicherr/presentation/bloc/documents/documents_cubit.dart';
 import 'package:sicherr/presentation/bloc/emergency_contact/emergency_contact_bloc.dart';
+import 'package:sicherr/presentation/bloc/map/map_focus_request/map_focus_request_cubit.dart';
+import 'package:sicherr/presentation/bloc/navbar_selected_page_index/navbar_selected_page_index_cubit.dart';
 import 'package:sicherr/presentation/bloc/notification/notification_bloc.dart';
+import 'package:sicherr/presentation/bloc/notifications_enabled/notifications_enabled_cubit.dart';
 import 'package:sicherr/presentation/bloc/onboarding/onboarding_bloc.dart';
 import 'package:sicherr/presentation/bloc/pick_dc/pick_dc_cubit.dart';
 import 'package:sicherr/presentation/bloc/profile/profile_bloc.dart';
 import 'package:sicherr/presentation/bloc/send_sos/send_sos_bloc.dart';
 import 'package:sicherr/presentation/bloc/shake_detector/shake_detector_bloc.dart';
+import 'package:sicherr/presentation/bloc/sos_window/sos_window_cubit.dart';
+import 'package:sicherr/presentation/bloc/tracking/tracking_cubit.dart';
+import 'package:sicherr/presentation/bloc/user_notifications/user_notifications_cubit.dart';
 import 'package:sicherr/presentation/bloc/users_length/users_lentgh_cubit.dart';
 
 import '../presentation/bloc/auth/auth_bloc.dart';
@@ -96,7 +103,13 @@ class Providers extends StatelessWidget {
         BlocProvider(
           create: (context) => sl<SearchPositionCubit>(),
         ),
-
+        BlocProvider(create: (context) => sl<NavbarSelectedPageIndexCubit>()),
+        BlocProvider(create: (context) => sl<MapFocusRequestCubit>()),
+        BlocProvider(create: (context) => sl<SosWindowCubit>()),
+        BlocProvider(create: (context) => sl<TrackingCubit>()),
+        BlocProvider(create: (context) => sl<UserNotificationsCubit>()),
+        BlocProvider(create: (context) => sl<NotificationsEnabledCubit>()),
+        BlocProvider(create: (context) => sl<DocumentsCubit>())
       ],
       child: child,
     );

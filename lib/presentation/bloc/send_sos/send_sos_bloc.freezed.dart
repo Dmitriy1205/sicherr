@@ -21,8 +21,8 @@ mixin _$SendSosEvent {
     required TResult Function(String? lat, String? long, String message,
             String currentUserPhone, List<String> emContactPhone)
         sendSOS,
-    required TResult Function() openDialog,
-    required TResult Function() closeDialog,
+    required TResult Function() stopStreaming,
+    required TResult Function(Tracking tracking) pushTracking,
     required TResult Function() triggerQuickBinding,
   }) =>
       throw _privateConstructorUsedError;
@@ -31,8 +31,8 @@ mixin _$SendSosEvent {
     TResult? Function(String? lat, String? long, String message,
             String currentUserPhone, List<String> emContactPhone)?
         sendSOS,
-    TResult? Function()? openDialog,
-    TResult? Function()? closeDialog,
+    TResult? Function()? stopStreaming,
+    TResult? Function(Tracking tracking)? pushTracking,
     TResult? Function()? triggerQuickBinding,
   }) =>
       throw _privateConstructorUsedError;
@@ -41,8 +41,8 @@ mixin _$SendSosEvent {
     TResult Function(String? lat, String? long, String message,
             String currentUserPhone, List<String> emContactPhone)?
         sendSOS,
-    TResult Function()? openDialog,
-    TResult Function()? closeDialog,
+    TResult Function()? stopStreaming,
+    TResult Function(Tracking tracking)? pushTracking,
     TResult Function()? triggerQuickBinding,
     required TResult orElse(),
   }) =>
@@ -50,24 +50,24 @@ mixin _$SendSosEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_SendSOS value) sendSOS,
-    required TResult Function(_OpenDialog value) openDialog,
-    required TResult Function(_CloseDialog value) closeDialog,
+    required TResult Function(_StopStreaming value) stopStreaming,
+    required TResult Function(_PushTracking value) pushTracking,
     required TResult Function(_TriggerQuickBinding value) triggerQuickBinding,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_SendSOS value)? sendSOS,
-    TResult? Function(_OpenDialog value)? openDialog,
-    TResult? Function(_CloseDialog value)? closeDialog,
+    TResult? Function(_StopStreaming value)? stopStreaming,
+    TResult? Function(_PushTracking value)? pushTracking,
     TResult? Function(_TriggerQuickBinding value)? triggerQuickBinding,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SendSOS value)? sendSOS,
-    TResult Function(_OpenDialog value)? openDialog,
-    TResult Function(_CloseDialog value)? closeDialog,
+    TResult Function(_StopStreaming value)? stopStreaming,
+    TResult Function(_PushTracking value)? pushTracking,
     TResult Function(_TriggerQuickBinding value)? triggerQuickBinding,
     required TResult orElse(),
   }) =>
@@ -210,8 +210,8 @@ class _$SendSOSImpl implements _SendSOS {
     required TResult Function(String? lat, String? long, String message,
             String currentUserPhone, List<String> emContactPhone)
         sendSOS,
-    required TResult Function() openDialog,
-    required TResult Function() closeDialog,
+    required TResult Function() stopStreaming,
+    required TResult Function(Tracking tracking) pushTracking,
     required TResult Function() triggerQuickBinding,
   }) {
     return sendSOS(lat, long, message, currentUserPhone, emContactPhone);
@@ -223,8 +223,8 @@ class _$SendSOSImpl implements _SendSOS {
     TResult? Function(String? lat, String? long, String message,
             String currentUserPhone, List<String> emContactPhone)?
         sendSOS,
-    TResult? Function()? openDialog,
-    TResult? Function()? closeDialog,
+    TResult? Function()? stopStreaming,
+    TResult? Function(Tracking tracking)? pushTracking,
     TResult? Function()? triggerQuickBinding,
   }) {
     return sendSOS?.call(lat, long, message, currentUserPhone, emContactPhone);
@@ -236,8 +236,8 @@ class _$SendSOSImpl implements _SendSOS {
     TResult Function(String? lat, String? long, String message,
             String currentUserPhone, List<String> emContactPhone)?
         sendSOS,
-    TResult Function()? openDialog,
-    TResult Function()? closeDialog,
+    TResult Function()? stopStreaming,
+    TResult Function(Tracking tracking)? pushTracking,
     TResult Function()? triggerQuickBinding,
     required TResult orElse(),
   }) {
@@ -251,8 +251,8 @@ class _$SendSOSImpl implements _SendSOS {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_SendSOS value) sendSOS,
-    required TResult Function(_OpenDialog value) openDialog,
-    required TResult Function(_CloseDialog value) closeDialog,
+    required TResult Function(_StopStreaming value) stopStreaming,
+    required TResult Function(_PushTracking value) pushTracking,
     required TResult Function(_TriggerQuickBinding value) triggerQuickBinding,
   }) {
     return sendSOS(this);
@@ -262,8 +262,8 @@ class _$SendSOSImpl implements _SendSOS {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_SendSOS value)? sendSOS,
-    TResult? Function(_OpenDialog value)? openDialog,
-    TResult? Function(_CloseDialog value)? closeDialog,
+    TResult? Function(_StopStreaming value)? stopStreaming,
+    TResult? Function(_PushTracking value)? pushTracking,
     TResult? Function(_TriggerQuickBinding value)? triggerQuickBinding,
   }) {
     return sendSOS?.call(this);
@@ -273,8 +273,8 @@ class _$SendSOSImpl implements _SendSOS {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SendSOS value)? sendSOS,
-    TResult Function(_OpenDialog value)? openDialog,
-    TResult Function(_CloseDialog value)? closeDialog,
+    TResult Function(_StopStreaming value)? stopStreaming,
+    TResult Function(_PushTracking value)? pushTracking,
     TResult Function(_TriggerQuickBinding value)? triggerQuickBinding,
     required TResult orElse(),
   }) {
@@ -304,35 +304,35 @@ abstract class _SendSOS implements SendSosEvent {
 }
 
 /// @nodoc
-abstract class _$$OpenDialogImplCopyWith<$Res> {
-  factory _$$OpenDialogImplCopyWith(
-          _$OpenDialogImpl value, $Res Function(_$OpenDialogImpl) then) =
-      __$$OpenDialogImplCopyWithImpl<$Res>;
+abstract class _$$StopStreamingImplCopyWith<$Res> {
+  factory _$$StopStreamingImplCopyWith(
+          _$StopStreamingImpl value, $Res Function(_$StopStreamingImpl) then) =
+      __$$StopStreamingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$OpenDialogImplCopyWithImpl<$Res>
-    extends _$SendSosEventCopyWithImpl<$Res, _$OpenDialogImpl>
-    implements _$$OpenDialogImplCopyWith<$Res> {
-  __$$OpenDialogImplCopyWithImpl(
-      _$OpenDialogImpl _value, $Res Function(_$OpenDialogImpl) _then)
+class __$$StopStreamingImplCopyWithImpl<$Res>
+    extends _$SendSosEventCopyWithImpl<$Res, _$StopStreamingImpl>
+    implements _$$StopStreamingImplCopyWith<$Res> {
+  __$$StopStreamingImplCopyWithImpl(
+      _$StopStreamingImpl _value, $Res Function(_$StopStreamingImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$OpenDialogImpl implements _OpenDialog {
-  const _$OpenDialogImpl();
+class _$StopStreamingImpl implements _StopStreaming {
+  const _$StopStreamingImpl();
 
   @override
   String toString() {
-    return 'SendSosEvent.openDialog()';
+    return 'SendSosEvent.stopStreaming()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$OpenDialogImpl);
+        (other.runtimeType == runtimeType && other is _$StopStreamingImpl);
   }
 
   @override
@@ -344,11 +344,11 @@ class _$OpenDialogImpl implements _OpenDialog {
     required TResult Function(String? lat, String? long, String message,
             String currentUserPhone, List<String> emContactPhone)
         sendSOS,
-    required TResult Function() openDialog,
-    required TResult Function() closeDialog,
+    required TResult Function() stopStreaming,
+    required TResult Function(Tracking tracking) pushTracking,
     required TResult Function() triggerQuickBinding,
   }) {
-    return openDialog();
+    return stopStreaming();
   }
 
   @override
@@ -357,11 +357,11 @@ class _$OpenDialogImpl implements _OpenDialog {
     TResult? Function(String? lat, String? long, String message,
             String currentUserPhone, List<String> emContactPhone)?
         sendSOS,
-    TResult? Function()? openDialog,
-    TResult? Function()? closeDialog,
+    TResult? Function()? stopStreaming,
+    TResult? Function(Tracking tracking)? pushTracking,
     TResult? Function()? triggerQuickBinding,
   }) {
-    return openDialog?.call();
+    return stopStreaming?.call();
   }
 
   @override
@@ -370,13 +370,13 @@ class _$OpenDialogImpl implements _OpenDialog {
     TResult Function(String? lat, String? long, String message,
             String currentUserPhone, List<String> emContactPhone)?
         sendSOS,
-    TResult Function()? openDialog,
-    TResult Function()? closeDialog,
+    TResult Function()? stopStreaming,
+    TResult Function(Tracking tracking)? pushTracking,
     TResult Function()? triggerQuickBinding,
     required TResult orElse(),
   }) {
-    if (openDialog != null) {
-      return openDialog();
+    if (stopStreaming != null) {
+      return stopStreaming();
     }
     return orElse();
   }
@@ -385,78 +385,115 @@ class _$OpenDialogImpl implements _OpenDialog {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_SendSOS value) sendSOS,
-    required TResult Function(_OpenDialog value) openDialog,
-    required TResult Function(_CloseDialog value) closeDialog,
+    required TResult Function(_StopStreaming value) stopStreaming,
+    required TResult Function(_PushTracking value) pushTracking,
     required TResult Function(_TriggerQuickBinding value) triggerQuickBinding,
   }) {
-    return openDialog(this);
+    return stopStreaming(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_SendSOS value)? sendSOS,
-    TResult? Function(_OpenDialog value)? openDialog,
-    TResult? Function(_CloseDialog value)? closeDialog,
+    TResult? Function(_StopStreaming value)? stopStreaming,
+    TResult? Function(_PushTracking value)? pushTracking,
     TResult? Function(_TriggerQuickBinding value)? triggerQuickBinding,
   }) {
-    return openDialog?.call(this);
+    return stopStreaming?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SendSOS value)? sendSOS,
-    TResult Function(_OpenDialog value)? openDialog,
-    TResult Function(_CloseDialog value)? closeDialog,
+    TResult Function(_StopStreaming value)? stopStreaming,
+    TResult Function(_PushTracking value)? pushTracking,
     TResult Function(_TriggerQuickBinding value)? triggerQuickBinding,
     required TResult orElse(),
   }) {
-    if (openDialog != null) {
-      return openDialog(this);
+    if (stopStreaming != null) {
+      return stopStreaming(this);
     }
     return orElse();
   }
 }
 
-abstract class _OpenDialog implements SendSosEvent {
-  const factory _OpenDialog() = _$OpenDialogImpl;
+abstract class _StopStreaming implements SendSosEvent {
+  const factory _StopStreaming() = _$StopStreamingImpl;
 }
 
 /// @nodoc
-abstract class _$$CloseDialogImplCopyWith<$Res> {
-  factory _$$CloseDialogImplCopyWith(
-          _$CloseDialogImpl value, $Res Function(_$CloseDialogImpl) then) =
-      __$$CloseDialogImplCopyWithImpl<$Res>;
+abstract class _$$PushTrackingImplCopyWith<$Res> {
+  factory _$$PushTrackingImplCopyWith(
+          _$PushTrackingImpl value, $Res Function(_$PushTrackingImpl) then) =
+      __$$PushTrackingImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Tracking tracking});
+
+  $TrackingCopyWith<$Res> get tracking;
 }
 
 /// @nodoc
-class __$$CloseDialogImplCopyWithImpl<$Res>
-    extends _$SendSosEventCopyWithImpl<$Res, _$CloseDialogImpl>
-    implements _$$CloseDialogImplCopyWith<$Res> {
-  __$$CloseDialogImplCopyWithImpl(
-      _$CloseDialogImpl _value, $Res Function(_$CloseDialogImpl) _then)
+class __$$PushTrackingImplCopyWithImpl<$Res>
+    extends _$SendSosEventCopyWithImpl<$Res, _$PushTrackingImpl>
+    implements _$$PushTrackingImplCopyWith<$Res> {
+  __$$PushTrackingImplCopyWithImpl(
+      _$PushTrackingImpl _value, $Res Function(_$PushTrackingImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? tracking = null,
+  }) {
+    return _then(_$PushTrackingImpl(
+      tracking: null == tracking
+          ? _value.tracking
+          : tracking // ignore: cast_nullable_to_non_nullable
+              as Tracking,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TrackingCopyWith<$Res> get tracking {
+    return $TrackingCopyWith<$Res>(_value.tracking, (value) {
+      return _then(_value.copyWith(tracking: value));
+    });
+  }
 }
 
 /// @nodoc
 
-class _$CloseDialogImpl implements _CloseDialog {
-  const _$CloseDialogImpl();
+class _$PushTrackingImpl implements _PushTracking {
+  const _$PushTrackingImpl({required this.tracking});
+
+  @override
+  final Tracking tracking;
 
   @override
   String toString() {
-    return 'SendSosEvent.closeDialog()';
+    return 'SendSosEvent.pushTracking(tracking: $tracking)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$CloseDialogImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$PushTrackingImpl &&
+            (identical(other.tracking, tracking) ||
+                other.tracking == tracking));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, tracking);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PushTrackingImplCopyWith<_$PushTrackingImpl> get copyWith =>
+      __$$PushTrackingImplCopyWithImpl<_$PushTrackingImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -464,11 +501,11 @@ class _$CloseDialogImpl implements _CloseDialog {
     required TResult Function(String? lat, String? long, String message,
             String currentUserPhone, List<String> emContactPhone)
         sendSOS,
-    required TResult Function() openDialog,
-    required TResult Function() closeDialog,
+    required TResult Function() stopStreaming,
+    required TResult Function(Tracking tracking) pushTracking,
     required TResult Function() triggerQuickBinding,
   }) {
-    return closeDialog();
+    return pushTracking(tracking);
   }
 
   @override
@@ -477,11 +514,11 @@ class _$CloseDialogImpl implements _CloseDialog {
     TResult? Function(String? lat, String? long, String message,
             String currentUserPhone, List<String> emContactPhone)?
         sendSOS,
-    TResult? Function()? openDialog,
-    TResult? Function()? closeDialog,
+    TResult? Function()? stopStreaming,
+    TResult? Function(Tracking tracking)? pushTracking,
     TResult? Function()? triggerQuickBinding,
   }) {
-    return closeDialog?.call();
+    return pushTracking?.call(tracking);
   }
 
   @override
@@ -490,13 +527,13 @@ class _$CloseDialogImpl implements _CloseDialog {
     TResult Function(String? lat, String? long, String message,
             String currentUserPhone, List<String> emContactPhone)?
         sendSOS,
-    TResult Function()? openDialog,
-    TResult Function()? closeDialog,
+    TResult Function()? stopStreaming,
+    TResult Function(Tracking tracking)? pushTracking,
     TResult Function()? triggerQuickBinding,
     required TResult orElse(),
   }) {
-    if (closeDialog != null) {
-      return closeDialog();
+    if (pushTracking != null) {
+      return pushTracking(tracking);
     }
     return orElse();
   }
@@ -505,42 +542,48 @@ class _$CloseDialogImpl implements _CloseDialog {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_SendSOS value) sendSOS,
-    required TResult Function(_OpenDialog value) openDialog,
-    required TResult Function(_CloseDialog value) closeDialog,
+    required TResult Function(_StopStreaming value) stopStreaming,
+    required TResult Function(_PushTracking value) pushTracking,
     required TResult Function(_TriggerQuickBinding value) triggerQuickBinding,
   }) {
-    return closeDialog(this);
+    return pushTracking(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_SendSOS value)? sendSOS,
-    TResult? Function(_OpenDialog value)? openDialog,
-    TResult? Function(_CloseDialog value)? closeDialog,
+    TResult? Function(_StopStreaming value)? stopStreaming,
+    TResult? Function(_PushTracking value)? pushTracking,
     TResult? Function(_TriggerQuickBinding value)? triggerQuickBinding,
   }) {
-    return closeDialog?.call(this);
+    return pushTracking?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SendSOS value)? sendSOS,
-    TResult Function(_OpenDialog value)? openDialog,
-    TResult Function(_CloseDialog value)? closeDialog,
+    TResult Function(_StopStreaming value)? stopStreaming,
+    TResult Function(_PushTracking value)? pushTracking,
     TResult Function(_TriggerQuickBinding value)? triggerQuickBinding,
     required TResult orElse(),
   }) {
-    if (closeDialog != null) {
-      return closeDialog(this);
+    if (pushTracking != null) {
+      return pushTracking(this);
     }
     return orElse();
   }
 }
 
-abstract class _CloseDialog implements SendSosEvent {
-  const factory _CloseDialog() = _$CloseDialogImpl;
+abstract class _PushTracking implements SendSosEvent {
+  const factory _PushTracking({required final Tracking tracking}) =
+      _$PushTrackingImpl;
+
+  Tracking get tracking;
+  @JsonKey(ignore: true)
+  _$$PushTrackingImplCopyWith<_$PushTrackingImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -585,8 +628,8 @@ class _$TriggerQuickBindingImpl implements _TriggerQuickBinding {
     required TResult Function(String? lat, String? long, String message,
             String currentUserPhone, List<String> emContactPhone)
         sendSOS,
-    required TResult Function() openDialog,
-    required TResult Function() closeDialog,
+    required TResult Function() stopStreaming,
+    required TResult Function(Tracking tracking) pushTracking,
     required TResult Function() triggerQuickBinding,
   }) {
     return triggerQuickBinding();
@@ -598,8 +641,8 @@ class _$TriggerQuickBindingImpl implements _TriggerQuickBinding {
     TResult? Function(String? lat, String? long, String message,
             String currentUserPhone, List<String> emContactPhone)?
         sendSOS,
-    TResult? Function()? openDialog,
-    TResult? Function()? closeDialog,
+    TResult? Function()? stopStreaming,
+    TResult? Function(Tracking tracking)? pushTracking,
     TResult? Function()? triggerQuickBinding,
   }) {
     return triggerQuickBinding?.call();
@@ -611,8 +654,8 @@ class _$TriggerQuickBindingImpl implements _TriggerQuickBinding {
     TResult Function(String? lat, String? long, String message,
             String currentUserPhone, List<String> emContactPhone)?
         sendSOS,
-    TResult Function()? openDialog,
-    TResult Function()? closeDialog,
+    TResult Function()? stopStreaming,
+    TResult Function(Tracking tracking)? pushTracking,
     TResult Function()? triggerQuickBinding,
     required TResult orElse(),
   }) {
@@ -626,8 +669,8 @@ class _$TriggerQuickBindingImpl implements _TriggerQuickBinding {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_SendSOS value) sendSOS,
-    required TResult Function(_OpenDialog value) openDialog,
-    required TResult Function(_CloseDialog value) closeDialog,
+    required TResult Function(_StopStreaming value) stopStreaming,
+    required TResult Function(_PushTracking value) pushTracking,
     required TResult Function(_TriggerQuickBinding value) triggerQuickBinding,
   }) {
     return triggerQuickBinding(this);
@@ -637,8 +680,8 @@ class _$TriggerQuickBindingImpl implements _TriggerQuickBinding {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_SendSOS value)? sendSOS,
-    TResult? Function(_OpenDialog value)? openDialog,
-    TResult? Function(_CloseDialog value)? closeDialog,
+    TResult? Function(_StopStreaming value)? stopStreaming,
+    TResult? Function(_PushTracking value)? pushTracking,
     TResult? Function(_TriggerQuickBinding value)? triggerQuickBinding,
   }) {
     return triggerQuickBinding?.call(this);
@@ -648,8 +691,8 @@ class _$TriggerQuickBindingImpl implements _TriggerQuickBinding {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SendSOS value)? sendSOS,
-    TResult Function(_OpenDialog value)? openDialog,
-    TResult Function(_CloseDialog value)? closeDialog,
+    TResult Function(_StopStreaming value)? stopStreaming,
+    TResult Function(_PushTracking value)? pushTracking,
     TResult Function(_TriggerQuickBinding value)? triggerQuickBinding,
     required TResult orElse(),
   }) {
@@ -670,9 +713,9 @@ mixin _$SendSosState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() quickBindingTriggered,
-    required TResult Function() dialogOpened,
     required TResult Function() loading,
     required TResult Function() success,
+    required TResult Function(List<String> emUsersUids) streaming,
     required TResult Function(String message, String? code) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -680,9 +723,9 @@ mixin _$SendSosState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? quickBindingTriggered,
-    TResult? Function()? dialogOpened,
     TResult? Function()? loading,
     TResult? Function()? success,
+    TResult? Function(List<String> emUsersUids)? streaming,
     TResult? Function(String message, String? code)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -690,9 +733,9 @@ mixin _$SendSosState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? quickBindingTriggered,
-    TResult Function()? dialogOpened,
     TResult Function()? loading,
     TResult Function()? success,
+    TResult Function(List<String> emUsersUids)? streaming,
     TResult Function(String message, String? code)? error,
     required TResult orElse(),
   }) =>
@@ -702,9 +745,9 @@ mixin _$SendSosState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_QuickBindingTriggered value)
         quickBindingTriggered,
-    required TResult Function(_DialogOpened value) dialogOpened,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_Streaming value) streaming,
     required TResult Function(_Error value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -712,9 +755,9 @@ mixin _$SendSosState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_QuickBindingTriggered value)? quickBindingTriggered,
-    TResult? Function(_DialogOpened value)? dialogOpened,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_Streaming value)? streaming,
     TResult? Function(_Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -722,9 +765,9 @@ mixin _$SendSosState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_QuickBindingTriggered value)? quickBindingTriggered,
-    TResult Function(_DialogOpened value)? dialogOpened,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_Streaming value)? streaming,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) =>
@@ -789,9 +832,9 @@ class _$InitialImpl extends _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() quickBindingTriggered,
-    required TResult Function() dialogOpened,
     required TResult Function() loading,
     required TResult Function() success,
+    required TResult Function(List<String> emUsersUids) streaming,
     required TResult Function(String message, String? code) error,
   }) {
     return initial();
@@ -802,9 +845,9 @@ class _$InitialImpl extends _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? quickBindingTriggered,
-    TResult? Function()? dialogOpened,
     TResult? Function()? loading,
     TResult? Function()? success,
+    TResult? Function(List<String> emUsersUids)? streaming,
     TResult? Function(String message, String? code)? error,
   }) {
     return initial?.call();
@@ -815,9 +858,9 @@ class _$InitialImpl extends _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? quickBindingTriggered,
-    TResult Function()? dialogOpened,
     TResult Function()? loading,
     TResult Function()? success,
+    TResult Function(List<String> emUsersUids)? streaming,
     TResult Function(String message, String? code)? error,
     required TResult orElse(),
   }) {
@@ -833,9 +876,9 @@ class _$InitialImpl extends _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_QuickBindingTriggered value)
         quickBindingTriggered,
-    required TResult Function(_DialogOpened value) dialogOpened,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_Streaming value) streaming,
     required TResult Function(_Error value) error,
   }) {
     return initial(this);
@@ -846,9 +889,9 @@ class _$InitialImpl extends _Initial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_QuickBindingTriggered value)? quickBindingTriggered,
-    TResult? Function(_DialogOpened value)? dialogOpened,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_Streaming value)? streaming,
     TResult? Function(_Error value)? error,
   }) {
     return initial?.call(this);
@@ -859,9 +902,9 @@ class _$InitialImpl extends _Initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_QuickBindingTriggered value)? quickBindingTriggered,
-    TResult Function(_DialogOpened value)? dialogOpened,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_Streaming value)? streaming,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -919,9 +962,9 @@ class _$QuickBindingTriggeredImpl extends _QuickBindingTriggered {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() quickBindingTriggered,
-    required TResult Function() dialogOpened,
     required TResult Function() loading,
     required TResult Function() success,
+    required TResult Function(List<String> emUsersUids) streaming,
     required TResult Function(String message, String? code) error,
   }) {
     return quickBindingTriggered();
@@ -932,9 +975,9 @@ class _$QuickBindingTriggeredImpl extends _QuickBindingTriggered {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? quickBindingTriggered,
-    TResult? Function()? dialogOpened,
     TResult? Function()? loading,
     TResult? Function()? success,
+    TResult? Function(List<String> emUsersUids)? streaming,
     TResult? Function(String message, String? code)? error,
   }) {
     return quickBindingTriggered?.call();
@@ -945,9 +988,9 @@ class _$QuickBindingTriggeredImpl extends _QuickBindingTriggered {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? quickBindingTriggered,
-    TResult Function()? dialogOpened,
     TResult Function()? loading,
     TResult Function()? success,
+    TResult Function(List<String> emUsersUids)? streaming,
     TResult Function(String message, String? code)? error,
     required TResult orElse(),
   }) {
@@ -963,9 +1006,9 @@ class _$QuickBindingTriggeredImpl extends _QuickBindingTriggered {
     required TResult Function(_Initial value) initial,
     required TResult Function(_QuickBindingTriggered value)
         quickBindingTriggered,
-    required TResult Function(_DialogOpened value) dialogOpened,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_Streaming value) streaming,
     required TResult Function(_Error value) error,
   }) {
     return quickBindingTriggered(this);
@@ -976,9 +1019,9 @@ class _$QuickBindingTriggeredImpl extends _QuickBindingTriggered {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_QuickBindingTriggered value)? quickBindingTriggered,
-    TResult? Function(_DialogOpened value)? dialogOpened,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_Streaming value)? streaming,
     TResult? Function(_Error value)? error,
   }) {
     return quickBindingTriggered?.call(this);
@@ -989,9 +1032,9 @@ class _$QuickBindingTriggeredImpl extends _QuickBindingTriggered {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_QuickBindingTriggered value)? quickBindingTriggered,
-    TResult Function(_DialogOpened value)? dialogOpened,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_Streaming value)? streaming,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -1005,134 +1048,6 @@ class _$QuickBindingTriggeredImpl extends _QuickBindingTriggered {
 abstract class _QuickBindingTriggered extends SendSosState {
   const factory _QuickBindingTriggered() = _$QuickBindingTriggeredImpl;
   const _QuickBindingTriggered._() : super._();
-}
-
-/// @nodoc
-abstract class _$$DialogOpenedImplCopyWith<$Res> {
-  factory _$$DialogOpenedImplCopyWith(
-          _$DialogOpenedImpl value, $Res Function(_$DialogOpenedImpl) then) =
-      __$$DialogOpenedImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$DialogOpenedImplCopyWithImpl<$Res>
-    extends _$SendSosStateCopyWithImpl<$Res, _$DialogOpenedImpl>
-    implements _$$DialogOpenedImplCopyWith<$Res> {
-  __$$DialogOpenedImplCopyWithImpl(
-      _$DialogOpenedImpl _value, $Res Function(_$DialogOpenedImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$DialogOpenedImpl extends _DialogOpened {
-  const _$DialogOpenedImpl() : super._();
-
-  @override
-  String toString() {
-    return 'SendSosState.dialogOpened()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$DialogOpenedImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() quickBindingTriggered,
-    required TResult Function() dialogOpened,
-    required TResult Function() loading,
-    required TResult Function() success,
-    required TResult Function(String message, String? code) error,
-  }) {
-    return dialogOpened();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? quickBindingTriggered,
-    TResult? Function()? dialogOpened,
-    TResult? Function()? loading,
-    TResult? Function()? success,
-    TResult? Function(String message, String? code)? error,
-  }) {
-    return dialogOpened?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? quickBindingTriggered,
-    TResult Function()? dialogOpened,
-    TResult Function()? loading,
-    TResult Function()? success,
-    TResult Function(String message, String? code)? error,
-    required TResult orElse(),
-  }) {
-    if (dialogOpened != null) {
-      return dialogOpened();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_QuickBindingTriggered value)
-        quickBindingTriggered,
-    required TResult Function(_DialogOpened value) dialogOpened,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Success value) success,
-    required TResult Function(_Error value) error,
-  }) {
-    return dialogOpened(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_QuickBindingTriggered value)? quickBindingTriggered,
-    TResult? Function(_DialogOpened value)? dialogOpened,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Success value)? success,
-    TResult? Function(_Error value)? error,
-  }) {
-    return dialogOpened?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_QuickBindingTriggered value)? quickBindingTriggered,
-    TResult Function(_DialogOpened value)? dialogOpened,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (dialogOpened != null) {
-      return dialogOpened(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _DialogOpened extends SendSosState {
-  const factory _DialogOpened() = _$DialogOpenedImpl;
-  const _DialogOpened._() : super._();
 }
 
 /// @nodoc
@@ -1175,9 +1090,9 @@ class _$LoadingImpl extends _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() quickBindingTriggered,
-    required TResult Function() dialogOpened,
     required TResult Function() loading,
     required TResult Function() success,
+    required TResult Function(List<String> emUsersUids) streaming,
     required TResult Function(String message, String? code) error,
   }) {
     return loading();
@@ -1188,9 +1103,9 @@ class _$LoadingImpl extends _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? quickBindingTriggered,
-    TResult? Function()? dialogOpened,
     TResult? Function()? loading,
     TResult? Function()? success,
+    TResult? Function(List<String> emUsersUids)? streaming,
     TResult? Function(String message, String? code)? error,
   }) {
     return loading?.call();
@@ -1201,9 +1116,9 @@ class _$LoadingImpl extends _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? quickBindingTriggered,
-    TResult Function()? dialogOpened,
     TResult Function()? loading,
     TResult Function()? success,
+    TResult Function(List<String> emUsersUids)? streaming,
     TResult Function(String message, String? code)? error,
     required TResult orElse(),
   }) {
@@ -1219,9 +1134,9 @@ class _$LoadingImpl extends _Loading {
     required TResult Function(_Initial value) initial,
     required TResult Function(_QuickBindingTriggered value)
         quickBindingTriggered,
-    required TResult Function(_DialogOpened value) dialogOpened,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_Streaming value) streaming,
     required TResult Function(_Error value) error,
   }) {
     return loading(this);
@@ -1232,9 +1147,9 @@ class _$LoadingImpl extends _Loading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_QuickBindingTriggered value)? quickBindingTriggered,
-    TResult? Function(_DialogOpened value)? dialogOpened,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_Streaming value)? streaming,
     TResult? Function(_Error value)? error,
   }) {
     return loading?.call(this);
@@ -1245,9 +1160,9 @@ class _$LoadingImpl extends _Loading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_QuickBindingTriggered value)? quickBindingTriggered,
-    TResult Function(_DialogOpened value)? dialogOpened,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_Streaming value)? streaming,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -1303,9 +1218,9 @@ class _$SuccessImpl extends _Success {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() quickBindingTriggered,
-    required TResult Function() dialogOpened,
     required TResult Function() loading,
     required TResult Function() success,
+    required TResult Function(List<String> emUsersUids) streaming,
     required TResult Function(String message, String? code) error,
   }) {
     return success();
@@ -1316,9 +1231,9 @@ class _$SuccessImpl extends _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? quickBindingTriggered,
-    TResult? Function()? dialogOpened,
     TResult? Function()? loading,
     TResult? Function()? success,
+    TResult? Function(List<String> emUsersUids)? streaming,
     TResult? Function(String message, String? code)? error,
   }) {
     return success?.call();
@@ -1329,9 +1244,9 @@ class _$SuccessImpl extends _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? quickBindingTriggered,
-    TResult Function()? dialogOpened,
     TResult Function()? loading,
     TResult Function()? success,
+    TResult Function(List<String> emUsersUids)? streaming,
     TResult Function(String message, String? code)? error,
     required TResult orElse(),
   }) {
@@ -1347,9 +1262,9 @@ class _$SuccessImpl extends _Success {
     required TResult Function(_Initial value) initial,
     required TResult Function(_QuickBindingTriggered value)
         quickBindingTriggered,
-    required TResult Function(_DialogOpened value) dialogOpened,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_Streaming value) streaming,
     required TResult Function(_Error value) error,
   }) {
     return success(this);
@@ -1360,9 +1275,9 @@ class _$SuccessImpl extends _Success {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_QuickBindingTriggered value)? quickBindingTriggered,
-    TResult? Function(_DialogOpened value)? dialogOpened,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_Streaming value)? streaming,
     TResult? Function(_Error value)? error,
   }) {
     return success?.call(this);
@@ -1373,9 +1288,9 @@ class _$SuccessImpl extends _Success {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_QuickBindingTriggered value)? quickBindingTriggered,
-    TResult Function(_DialogOpened value)? dialogOpened,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_Streaming value)? streaming,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -1389,6 +1304,175 @@ class _$SuccessImpl extends _Success {
 abstract class _Success extends SendSosState {
   const factory _Success() = _$SuccessImpl;
   const _Success._() : super._();
+}
+
+/// @nodoc
+abstract class _$$StreamingImplCopyWith<$Res> {
+  factory _$$StreamingImplCopyWith(
+          _$StreamingImpl value, $Res Function(_$StreamingImpl) then) =
+      __$$StreamingImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<String> emUsersUids});
+}
+
+/// @nodoc
+class __$$StreamingImplCopyWithImpl<$Res>
+    extends _$SendSosStateCopyWithImpl<$Res, _$StreamingImpl>
+    implements _$$StreamingImplCopyWith<$Res> {
+  __$$StreamingImplCopyWithImpl(
+      _$StreamingImpl _value, $Res Function(_$StreamingImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? emUsersUids = null,
+  }) {
+    return _then(_$StreamingImpl(
+      emUsersUids: null == emUsersUids
+          ? _value._emUsersUids
+          : emUsersUids // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$StreamingImpl extends _Streaming {
+  const _$StreamingImpl({required final List<String> emUsersUids})
+      : _emUsersUids = emUsersUids,
+        super._();
+
+  final List<String> _emUsersUids;
+  @override
+  List<String> get emUsersUids {
+    if (_emUsersUids is EqualUnmodifiableListView) return _emUsersUids;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_emUsersUids);
+  }
+
+  @override
+  String toString() {
+    return 'SendSosState.streaming(emUsersUids: $emUsersUids)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$StreamingImpl &&
+            const DeepCollectionEquality()
+                .equals(other._emUsersUids, _emUsersUids));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_emUsersUids));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$StreamingImplCopyWith<_$StreamingImpl> get copyWith =>
+      __$$StreamingImplCopyWithImpl<_$StreamingImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() quickBindingTriggered,
+    required TResult Function() loading,
+    required TResult Function() success,
+    required TResult Function(List<String> emUsersUids) streaming,
+    required TResult Function(String message, String? code) error,
+  }) {
+    return streaming(emUsersUids);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? quickBindingTriggered,
+    TResult? Function()? loading,
+    TResult? Function()? success,
+    TResult? Function(List<String> emUsersUids)? streaming,
+    TResult? Function(String message, String? code)? error,
+  }) {
+    return streaming?.call(emUsersUids);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? quickBindingTriggered,
+    TResult Function()? loading,
+    TResult Function()? success,
+    TResult Function(List<String> emUsersUids)? streaming,
+    TResult Function(String message, String? code)? error,
+    required TResult orElse(),
+  }) {
+    if (streaming != null) {
+      return streaming(emUsersUids);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_QuickBindingTriggered value)
+        quickBindingTriggered,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Streaming value) streaming,
+    required TResult Function(_Error value) error,
+  }) {
+    return streaming(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_QuickBindingTriggered value)? quickBindingTriggered,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Streaming value)? streaming,
+    TResult? Function(_Error value)? error,
+  }) {
+    return streaming?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_QuickBindingTriggered value)? quickBindingTriggered,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_Streaming value)? streaming,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (streaming != null) {
+      return streaming(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Streaming extends SendSosState {
+  const factory _Streaming({required final List<String> emUsersUids}) =
+      _$StreamingImpl;
+  const _Streaming._() : super._();
+
+  List<String> get emUsersUids;
+  @JsonKey(ignore: true)
+  _$$StreamingImplCopyWith<_$StreamingImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1465,9 +1549,9 @@ class _$ErrorImpl extends _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() quickBindingTriggered,
-    required TResult Function() dialogOpened,
     required TResult Function() loading,
     required TResult Function() success,
+    required TResult Function(List<String> emUsersUids) streaming,
     required TResult Function(String message, String? code) error,
   }) {
     return error(message, code);
@@ -1478,9 +1562,9 @@ class _$ErrorImpl extends _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? quickBindingTriggered,
-    TResult? Function()? dialogOpened,
     TResult? Function()? loading,
     TResult? Function()? success,
+    TResult? Function(List<String> emUsersUids)? streaming,
     TResult? Function(String message, String? code)? error,
   }) {
     return error?.call(message, code);
@@ -1491,9 +1575,9 @@ class _$ErrorImpl extends _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? quickBindingTriggered,
-    TResult Function()? dialogOpened,
     TResult Function()? loading,
     TResult Function()? success,
+    TResult Function(List<String> emUsersUids)? streaming,
     TResult Function(String message, String? code)? error,
     required TResult orElse(),
   }) {
@@ -1509,9 +1593,9 @@ class _$ErrorImpl extends _Error {
     required TResult Function(_Initial value) initial,
     required TResult Function(_QuickBindingTriggered value)
         quickBindingTriggered,
-    required TResult Function(_DialogOpened value) dialogOpened,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_Streaming value) streaming,
     required TResult Function(_Error value) error,
   }) {
     return error(this);
@@ -1522,9 +1606,9 @@ class _$ErrorImpl extends _Error {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_QuickBindingTriggered value)? quickBindingTriggered,
-    TResult? Function(_DialogOpened value)? dialogOpened,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_Streaming value)? streaming,
     TResult? Function(_Error value)? error,
   }) {
     return error?.call(this);
@@ -1535,9 +1619,9 @@ class _$ErrorImpl extends _Error {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_QuickBindingTriggered value)? quickBindingTriggered,
-    TResult Function(_DialogOpened value)? dialogOpened,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_Streaming value)? streaming,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {

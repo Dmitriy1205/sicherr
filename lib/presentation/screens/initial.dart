@@ -8,12 +8,12 @@ import 'package:sicherr/core/managers/quick_binding_handler.dart';
 import 'package:sicherr/core/theme/theme.dart';
 import 'package:sicherr/presentation/bloc/contact_dentification/contact_identification_bloc.dart';
 import 'package:sicherr/presentation/bloc/danger_contact/dc_bloc.dart';
+import 'package:sicherr/presentation/bloc/navbar_selected_page_index/navbar_selected_page_index_cubit.dart';
 import 'package:sicherr/presentation/bloc/profile/profile_bloc.dart';
 import 'package:sicherr/presentation/bloc/send_sos/send_sos_bloc.dart';
 
 import 'package:sicherr/presentation/screens/configure_contacts/configure_contacts_screen.dart';
 
-import 'package:sicherr/presentation/screens/contacts/contacts.dart';
 import 'package:sicherr/presentation/screens/dangerous_contacts/dc_screen.dart';
 import 'package:sicherr/presentation/screens/home/home.dart';
 import 'package:sicherr/presentation/screens/map/map_screen.dart';
@@ -37,16 +37,15 @@ class InitialScreen extends StatefulWidget {
 }
 
 class _InitialScreenState extends State<InitialScreen> {
-  int _selectedPage = 0;
 
   final screens = PrimaryPageEnum.values.map((e) => e.getPage).toList();
 
   @override
   void initState() {
     if (widget.initPage != null) {
-      _selectedPage = PrimaryPageEnum.values.indexWhere(
-        (element) => element == widget.initPage,
-      );
+      context.read<NavbarSelectedPageIndexCubit>().changeIndex(PrimaryPageEnum.values.indexWhere(
+            (element) => element == widget.initPage,
+      ));
     }
     context.read<ProfileBloc>().add(const ProfileEvent.getProfileFields());
 
@@ -68,6 +67,7 @@ class _InitialScreenState extends State<InitialScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final selectedPage = context.watch<NavbarSelectedPageIndexCubit>().state;
     return MultiBlocListener(
       listeners: [
         BlocListener<ContactIdentificationBloc, ContactIdentificationState>(
@@ -121,47 +121,28 @@ class _InitialScreenState extends State<InitialScreen> {
         ),
       ],
       child: Scaffold(
-        appBar:_selectedPage == 3 ? null: DefaultAppBar(
+        appBar:selectedPage == 3 ? null: DefaultAppBar(
           title:
-          PrimaryPageEnum.values[_selectedPage] == PrimaryPageEnum.add
+          PrimaryPageEnum.values[selectedPage] == PrimaryPageEnum.add
               ? AppLocalizations.of(context)!.dangerContacts
-              : PrimaryPageEnum.values.elementAt(_selectedPage).getLabel(context),
+              : PrimaryPageEnum.values.elementAt(selectedPage).getLabel(context),
           showBackButton: false,
         ),
         body: GestureDetector(
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
           behavior: HitTestBehavior.opaque,
           child: IndexedStack(
-            index: _selectedPage,
+            index: selectedPage,
             children: screens,
           ),
         ),
         bottomNavigationBar: _MyBottomNavigationBar(
-          selectedIndex: _selectedPage,
+          selectedIndex: selectedPage,
           onItemTapped: (index) {
-            setState(() => _selectedPage = index);
+            context.read<NavbarSelectedPageIndexCubit>().changeIndex(index);
           },
         ),
       ),
-    );
-  }
-}
-
-class _AddContactsBnt extends StatelessWidget {
-  const _AddContactsBnt();
-
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      icon: const Icon(Icons.add_rounded, size: 30),
-      onPressed: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const ConfigureContactsScreen()));
-      },
-      padding: const EdgeInsets.all(15),
-      color: Theme.of(context).primaryColor,
     );
   }
 }

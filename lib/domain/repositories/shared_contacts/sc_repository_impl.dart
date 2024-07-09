@@ -30,7 +30,7 @@ class SCRepositoryImpl extends SCRepository {
       await docRef.update({'tags': newTags});
       final updatedDocSnapshot = await docRef.get();
       if (updatedDocSnapshot.data() != null) {
-        return ContactEntity.fromJson(updatedDocSnapshot.data()!, _encryptor.decrypt);
+        return ContactEntity.fromJsonDecrypted(updatedDocSnapshot.data()!, _encryptor.decrypt);
       }
     } on FirebaseException catch (e) {
       throw BadRequestException(message: e.message!);
@@ -44,7 +44,7 @@ class SCRepositoryImpl extends SCRepository {
 
       List<ContactEntity> scList = querySnapshot.docs.map((doc) {
         final data = doc.data();
-        ContactEntity contact = ContactEntity.fromJson(data, _encryptor.decrypt);
+        ContactEntity contact = ContactEntity.fromJsonDecrypted(data, _encryptor.decrypt);
 
         ///decryption of every contact
         // String decryptedPhoneNumber = _encryptor.decrypt(contact.phoneNumber);

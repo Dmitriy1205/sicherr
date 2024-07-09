@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -295,7 +297,7 @@ class _SosScreenState extends State<SosScreen> {
                             await Geolocator.requestPermission();
                           } else {
                             position = await Geolocator.getCurrentPosition(
-                              desiredAccuracy: LocationAccuracy.high,
+                              desiredAccuracy: LocationAccuracy.low
                             );
                             setState(() {
                               isSendLocation = v;
@@ -339,9 +341,7 @@ class _SosScreenState extends State<SosScreen> {
                 AppElevatedButton(
                     text: AppLocalizations.of(context)!.send,
                     onPressed: () {
-                      sosConfirmationPopup(context,
-                          latitude: position?.latitude.toString(),
-                          longitude: position?.longitude.toString());
+                      sosConfirmationPopup(context);
                     }),
                 const SizedBox(
                   height: 40,
