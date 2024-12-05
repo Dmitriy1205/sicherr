@@ -5,9 +5,11 @@ import '../../entities/user_profile/user_profile.dart';
 abstract class UserRepository {
   Stream<UserProfile?> getUserFieldsStream({required String currentUserId});
 
-  Future<void> setUserFields({required String currentUserId,required String phoneNumber});
+  Future<void> setUserFields(
+      {required String currentUserId, required String phoneNumber});
 
-  Future<void> updateUserFields({required String currentUserId,required Map<String, dynamic> data});
+  Future<void> updateUserFields(
+      {required String currentUserId, required Map<String, dynamic> data});
 
   Future<void> writeOnboarding({required String currentUserId});
 
@@ -15,4 +17,5 @@ abstract class UserRepository {
       {required String currentUserId, required Map<String, dynamic> data});
 
   Future<Onboarding?> getOnboarding({required String currentUserId});
+  Future<bool> collectionExists(String userId, String collectionName);
 }

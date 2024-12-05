@@ -75,5 +75,71 @@
     "features": "Funktionen",
     "quickAlarm": "Schnelle Warnung",
     "startAlarm": "ALARM STARTEN",
-    "account": "Konto"
+    "account": "Konto",
+
+    "selectContacts": "Wählen Sie Kontakte aus, die in der App verwendet werden sollen.",
+    "configureContacts": "Kontakte konfigurieren",
+    "searchForContact": "Suche nach Kontakt",
+
+  "addTag": "Tag hinzufügen",
+  "addTagDesc": "Schreiben Sie einen Tag, der für die Öffentlichkeit sichtbar sein wird.",
+  "enterTag": "Tag eingeben",
+  "tag": "Tag",
+  "add":"Hinzufügen",
+  "dangerContacts":"Gefährliche kontakte",
+  "showNumTags": "{count} Tags anzeigen",
+  "@showNumTags": {
+  "placeholders": {
+    "count": {
+      "type": "String",
+      "example": "5"
+    }
+   }
+  },
+  "rateThisContact": "Kontakt bewerten",
+  "inappropriateBehavior": "Unangebrachtes Verhalten",
+    "harassment": "Belästigung",
+    "stalking": "Stalking",
+    "theft": "Diebstahl",
+    "insults": "Beleidigungen",
+    "didNotShowUp": "Nicht zum vereinbarten Ort/Date erschienen",
+    "physicalViolence": "Körperliche Gewalt",
+    "psychologicalViolence": "Psychische Gewalt",
+    "becameNegativelyNoticeable": "Negativ Auffällig geworden",
+    "attack": "Angriff",
+    "intimidation": "Einschüchterung",
+    "cyberbullying": "Cybermobbing",
+    "discrimination": "Diskriminierung",
+    "safetyConcerns": "Sicherheitsbedenken",
+    "threat": "Bedrohung",
+    "abuse": "Missbrauch",
+    "touchedInappropriately": "Unsittlich angefasst",
+    "fakeCall": "Fakeanruf",
+    "swindler": "Schwindler",
+    "notPaid": "Nicht bezahlt",
+    "exploitation": "Ausbeutung",
+
+    "good": "Gut",
+        "bad": "Schlecht",
+        "delete": "Löschen",
+        "warning": "Warnung",
+        "youSureWantDelete": "Sind Sie sicher, dass Sie löschen möchten?",
+        "suspiciousContact": "Verdächtiger Kontakt",
+
+    "remove": "entfernen",
+      "selectFromContacts": "Aus Kontakten auswählen",
+      "addNumber": "Nummer hinzufügen",
+      "enterTheNumber": "Geben Sie die Nummer ein",
+      "nameIsUnknown": "Name ist unbekannt",
+      "enterTheFirstName": "Geben Sie den Vornamen ein",
+      "firstName": "Vorname",
+      "enterTheLastName": "Geben Sie den Nachnamen ein",
+      "lastName": "Nachname",
+      "chooseTag": "Wählen Sie ein Tag",
+      "selectContactsScreen": "Kontakte auswählen",
+      "selectContactsToDangerous": "Wählen Sie Kontakte aus, die zu Gefährlichen hinzugefügt werden",
+      "selectFromContacts": "Aus Kontakten auswählen",
+      "select": "Auswählen",
+      "contactsSelected": "Kontakte ausgewählt",
+      "notSelected": "Nicht ausgewählt"
 }

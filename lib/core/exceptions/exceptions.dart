@@ -6,4 +6,5 @@ class BadRequestException implements Exception {
     required this.message,
     this.code,
   });
+
 }

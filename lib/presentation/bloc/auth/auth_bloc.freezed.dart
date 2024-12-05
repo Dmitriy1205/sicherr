@@ -315,7 +315,8 @@ mixin _$AuthState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() unauthenticated,
-    required TResult Function(User user) authenticated,
+    required TResult Function(User user, bool isConfiguredContacts)
+        authenticated,
     required TResult Function() undefined,
   }) =>
       throw _privateConstructorUsedError;
@@ -323,7 +324,7 @@ mixin _$AuthState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? unauthenticated,
-    TResult? Function(User user)? authenticated,
+    TResult? Function(User user, bool isConfiguredContacts)? authenticated,
     TResult? Function()? undefined,
   }) =>
       throw _privateConstructorUsedError;
@@ -331,7 +332,7 @@ mixin _$AuthState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? unauthenticated,
-    TResult Function(User user)? authenticated,
+    TResult Function(User user, bool isConfiguredContacts)? authenticated,
     TResult Function()? undefined,
     required TResult orElse(),
   }) =>
@@ -420,7 +421,8 @@ class _$InitialImpl extends _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() unauthenticated,
-    required TResult Function(User user) authenticated,
+    required TResult Function(User user, bool isConfiguredContacts)
+        authenticated,
     required TResult Function() undefined,
   }) {
     return initial();
@@ -431,7 +433,7 @@ class _$InitialImpl extends _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? unauthenticated,
-    TResult? Function(User user)? authenticated,
+    TResult? Function(User user, bool isConfiguredContacts)? authenticated,
     TResult? Function()? undefined,
   }) {
     return initial?.call();
@@ -442,7 +444,7 @@ class _$InitialImpl extends _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? unauthenticated,
-    TResult Function(User user)? authenticated,
+    TResult Function(User user, bool isConfiguredContacts)? authenticated,
     TResult Function()? undefined,
     required TResult orElse(),
   }) {
@@ -536,7 +538,8 @@ class _$UnauthenticaredStateImpl extends _UnauthenticaredState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() unauthenticated,
-    required TResult Function(User user) authenticated,
+    required TResult Function(User user, bool isConfiguredContacts)
+        authenticated,
     required TResult Function() undefined,
   }) {
     return unauthenticated();
@@ -547,7 +550,7 @@ class _$UnauthenticaredStateImpl extends _UnauthenticaredState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? unauthenticated,
-    TResult? Function(User user)? authenticated,
+    TResult? Function(User user, bool isConfiguredContacts)? authenticated,
     TResult? Function()? undefined,
   }) {
     return unauthenticated?.call();
@@ -558,7 +561,7 @@ class _$UnauthenticaredStateImpl extends _UnauthenticaredState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? unauthenticated,
-    TResult Function(User user)? authenticated,
+    TResult Function(User user, bool isConfiguredContacts)? authenticated,
     TResult Function()? undefined,
     required TResult orElse(),
   }) {
@@ -617,7 +620,7 @@ abstract class _$$AuthenticatedStateImplCopyWith<$Res> {
           $Res Function(_$AuthenticatedStateImpl) then) =
       __$$AuthenticatedStateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({User user});
+  $Res call({User user, bool isConfiguredContacts});
 }
 
 /// @nodoc
@@ -632,12 +635,17 @@ class __$$AuthenticatedStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? user = null,
+    Object? isConfiguredContacts = null,
   }) {
     return _then(_$AuthenticatedStateImpl(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
+      isConfiguredContacts: null == isConfiguredContacts
+          ? _value.isConfiguredContacts
+          : isConfiguredContacts // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -645,14 +653,18 @@ class __$$AuthenticatedStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AuthenticatedStateImpl extends _AuthenticatedState {
-  const _$AuthenticatedStateImpl({required this.user}) : super._();
+  const _$AuthenticatedStateImpl(
+      {required this.user, required this.isConfiguredContacts})
+      : super._();
 
   @override
   final User user;
+  @override
+  final bool isConfiguredContacts;
 
   @override
   String toString() {
-    return 'AuthState.authenticated(user: $user)';
+    return 'AuthState.authenticated(user: $user, isConfiguredContacts: $isConfiguredContacts)';
   }
 
   @override
@@ -660,11 +672,13 @@ class _$AuthenticatedStateImpl extends _AuthenticatedState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AuthenticatedStateImpl &&
-            (identical(other.user, user) || other.user == user));
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.isConfiguredContacts, isConfiguredContacts) ||
+                other.isConfiguredContacts == isConfiguredContacts));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user);
+  int get hashCode => Object.hash(runtimeType, user, isConfiguredContacts);
 
   @JsonKey(ignore: true)
   @override
@@ -678,10 +692,11 @@ class _$AuthenticatedStateImpl extends _AuthenticatedState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() unauthenticated,
-    required TResult Function(User user) authenticated,
+    required TResult Function(User user, bool isConfiguredContacts)
+        authenticated,
     required TResult Function() undefined,
   }) {
-    return authenticated(user);
+    return authenticated(user, isConfiguredContacts);
   }
 
   @override
@@ -689,10 +704,10 @@ class _$AuthenticatedStateImpl extends _AuthenticatedState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? unauthenticated,
-    TResult? Function(User user)? authenticated,
+    TResult? Function(User user, bool isConfiguredContacts)? authenticated,
     TResult? Function()? undefined,
   }) {
-    return authenticated?.call(user);
+    return authenticated?.call(user, isConfiguredContacts);
   }
 
   @override
@@ -700,12 +715,12 @@ class _$AuthenticatedStateImpl extends _AuthenticatedState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? unauthenticated,
-    TResult Function(User user)? authenticated,
+    TResult Function(User user, bool isConfiguredContacts)? authenticated,
     TResult Function()? undefined,
     required TResult orElse(),
   }) {
     if (authenticated != null) {
-      return authenticated(user);
+      return authenticated(user, isConfiguredContacts);
     }
     return orElse();
   }
@@ -749,11 +764,13 @@ class _$AuthenticatedStateImpl extends _AuthenticatedState {
 }
 
 abstract class _AuthenticatedState extends AuthState {
-  const factory _AuthenticatedState({required final User user}) =
-      _$AuthenticatedStateImpl;
+  const factory _AuthenticatedState(
+      {required final User user,
+      required final bool isConfiguredContacts}) = _$AuthenticatedStateImpl;
   const _AuthenticatedState._() : super._();
 
   User get user;
+  bool get isConfiguredContacts;
   @JsonKey(ignore: true)
   _$$AuthenticatedStateImplCopyWith<_$AuthenticatedStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -799,7 +816,8 @@ class _$UndefinedStateImpl extends _UndefinedState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() unauthenticated,
-    required TResult Function(User user) authenticated,
+    required TResult Function(User user, bool isConfiguredContacts)
+        authenticated,
     required TResult Function() undefined,
   }) {
     return undefined();
@@ -810,7 +828,7 @@ class _$UndefinedStateImpl extends _UndefinedState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? unauthenticated,
-    TResult? Function(User user)? authenticated,
+    TResult? Function(User user, bool isConfiguredContacts)? authenticated,
     TResult? Function()? undefined,
   }) {
     return undefined?.call();
@@ -821,7 +839,7 @@ class _$UndefinedStateImpl extends _UndefinedState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? unauthenticated,
-    TResult Function(User user)? authenticated,
+    TResult Function(User user, bool isConfiguredContacts)? authenticated,
     TResult Function()? undefined,
     required TResult orElse(),
   }) {

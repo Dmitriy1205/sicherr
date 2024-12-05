@@ -71,7 +71,74 @@
   "logout": "Logout",
   "account": "Account",
   "features": "Features",
-  "quickAlarm": "Schnelle Warnung",
+  "quickAlarm": "Quick warning",
   "startAlarm": "START ALARM",
-  "account": "Account"
+
+  "selectContacts": "Select contacts that will be used in the app.",
+  "configureContacts": "Configure contacts",
+  "searchForContact": "Search for contact",
+
+  "addTag": "Add Tag",
+  "addTagDesc": "Write a tag that will be visible to the public.",
+  "enterTag": "Enter tag",
+  "tag": "Tag",
+  "add":"Add",
+  "dangerContacts":"Dangerous contacts",
+  "showNumTags": "Show {count} tags",
+  "@showNumTags": {
+  "placeholders": {
+    "count": {
+      "type": "String",
+      "example": "5"
+    }
+   }
+  },
+  "rateThisContact": "Rate this contact",
+
+  "inappropriateBehavior": "Inappropriate behavior",
+    "harassment": "Harassment",
+    "stalking": "Stalking",
+    "theft": "Theft",
+    "insults": "Insults",
+    "didNotShowUp": "Did not show up at the agreed location/date",
+    "physicalViolence": "Physical violence",
+    "psychologicalViolence": "Psychological violence",
+    "becameNegativelyNoticeable": "Became negatively noticeable",
+    "attack": "Attack",
+    "intimidation": "Intimidation",
+    "cyberbullying": "Cyberbullying",
+    "discrimination": "Discrimination",
+    "safetyConcerns": "Safety concerns",
+    "threat": "Threat",
+    "abuse": "Abuse",
+    "touchedInappropriately": "Touched inappropriately",
+    "fakeCall": "Fake call",
+    "swindler": "Swindler",
+    "notPaid": "Not paid",
+    "exploitation": "Exploitation",
+
+    "good": "Good",
+    "bad": "Bad",
+    "delete": "Delete",
+    "warning": "Warning",
+    "youSureWantDelete": "Are you sure you want to delete ?",
+    "suspiciousContact": "Suspicious contact",
+
+    "remove": "remove",
+    "selectFromContacts": "select from contacts",
+    "addNumber": "Add number",
+    "enterTheNumber": "Enter the number",
+    "nameIsUnknown": "Name is unknown",
+    "enterTheFirstName": "Enter the first name",
+    "firstName": "First name",
+    "enterTheLastName": "Enter the last name",
+    "lastName": "Last name",
+    "chooseTag": "Choose a tag",
+    "selectContactsScreen": "Select contacts",
+    "selectContactsToDangerous": "Select contacts that will be added to dangerous",
+    "selectFromContacts": "Select from contacts",
+    "select": "Select",
+    "contactsSelected": "contacts selected",
+    "notSelected": "Not selected"
+
 }

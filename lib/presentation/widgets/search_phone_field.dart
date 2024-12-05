@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sicherr/core/const/colors.dart';
 import 'package:sicherr/core/const/icons.dart';
@@ -11,12 +12,14 @@ class SearchPhoneField extends StatefulWidget {
     this.hintText = '',
     this.onChanged,
     this.onSubmitted,
+    this.controller,
   });
 
   final double height;
   final String hintText;
   final Function(String)? onChanged;
   final Function(String)? onSubmitted;
+  final TextEditingController? controller;
 
   @override
   State<SearchPhoneField> createState() => _SearchPhoneFieldState();
@@ -27,13 +30,17 @@ class _SearchPhoneFieldState extends State<SearchPhoneField> {
     borderRadius: BorderRadius.all(Radius.circular(8)),
     borderSide: BorderSide.none,
   );
-
+  late final TextEditingController _controller;
   final _focus = FocusNode();
-  final _controller = TextEditingController();
+
+  bool _showCancel = false;
+
+  final _defaultController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+    _controller = widget.controller ?? _defaultController;
     _focus.addListener(_onFocusChange);
     _controller.addListener(_onTextChange);
   }
@@ -41,19 +48,25 @@ class _SearchPhoneFieldState extends State<SearchPhoneField> {
   @override
   void dispose() {
     _focus.dispose();
-    _controller.dispose();
-
+    _defaultController.dispose();
     super.dispose();
   }
 
   void _onFocusChange() {
-    setState(() {});
+    setState(() {
+      _showCancel = _focus.hasFocus;
+    });
   }
 
   void _onTextChange() {
     if (widget.onChanged != null) {
       widget.onChanged!(_controller.text);
     }
+  }
+
+  void _clearText() {
+    _controller.clear();
+    _focus.unfocus();
   }
 
   @override
@@ -67,6 +80,9 @@ class _SearchPhoneFieldState extends State<SearchPhoneField> {
               keyboardType: TextInputType.text,
               controller: _controller,
               focusNode: _focus,
+              inputFormatters: [
+                FilteringTextInputFormatter.deny(RegExp(r'[ ()-]')),
+              ],
               decoration: InputDecoration(
                 hintText: widget.hintText,
                 hintStyle: const TextStyle(color: AppColors.grey),
@@ -87,21 +103,20 @@ class _SearchPhoneFieldState extends State<SearchPhoneField> {
                 enabledBorder: _border,
                 disabledBorder: _border,
               ),
-              onSubmitted: widget.onSubmitted,
+              onSubmitted: widget.onChanged,
             ),
           ),
-          if (_focus.hasFocus)
+          if (_showCancel)
             GestureDetector(
-              onTap: () {
-                FocusManager.instance.primaryFocus?.unfocus();
-                _controller.text = '';
-              },
+              onTap: _clearText,
               child: Padding(
                 padding: const EdgeInsets.only(left: 15),
                 child: Text(
                   AppLocalizations.of(context)!.cancel,
                   style: TextStyle(
-                      color: Theme.of(context).primaryColor, fontSize: 16),
+                    color: Theme.of(context).primaryColor,
+                    fontSize: 16,
+                  ),
                 ),
               ),
             ),

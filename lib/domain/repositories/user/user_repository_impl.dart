@@ -3,15 +3,20 @@ import 'package:sicherr/domain/entities/onboarding/onboarding.dart';
 import 'package:sicherr/domain/repositories/user/user_repository.dart';
 
 import '../../../core/exceptions/exceptions.dart';
+import '../../../core/utils/phone_encryptor.dart';
 import '../../entities/user_profile/user_profile.dart';
 
 class UserRepositoryImpl extends UserRepository {
   final FirebaseFirestore _firestore;
   final String collectionName = 'users';
   final String subCollectionName = 'onboarding';
+  final PhoneNumberEncryptor _encryptor;
 
-  UserRepositoryImpl({required FirebaseFirestore firestore})
-      : _firestore = firestore;
+  UserRepositoryImpl({
+    required FirebaseFirestore firestore,
+    required PhoneNumberEncryptor encryptor,
+  })  : _firestore = firestore,
+        _encryptor = encryptor;
 
   @override
   Stream<UserProfile?> getUserFieldsStream({required String currentUserId}) {
@@ -34,6 +39,7 @@ class UserRepositoryImpl extends UserRepository {
     required String phoneNumber,
   }) async {
     try {
+      final encryptedPhoneNumber = _encryptor.encrypt(phoneNumber);
       await _firestore.collection(collectionName).doc(currentUserId).set(
           UserProfile(
             enabledSosQB: false,
@@ -41,7 +47,7 @@ class UserRepositoryImpl extends UserRepository {
             sendSosGeolocation: false,
             alarmToneQB: false,
             id: currentUserId,
-            phone: phoneNumber,
+            phone: encryptedPhoneNumber,
             createdAt: DateTime.now().toString(),
           ).toJson(),
           SetOptions(merge: true));
@@ -111,6 +117,22 @@ class UserRepositoryImpl extends UserRepository {
           .update(data);
     } on FirebaseException catch (e) {
       throw BadRequestException(message: e.message!);
+    }
+  }
+
+  @override
+  Future<bool> collectionExists(String userId, String collectionName) async {
+    try {
+      final collectionRef = await _firestore
+          .collection(this.collectionName)
+          .doc(userId)
+          .collection(collectionName)
+          .get();
+
+      return collectionRef.docs.isNotEmpty;
+    } catch (e) {
+      // Handle any errors, such as permission denied or network issues
+      return false;
     }
   }
 }

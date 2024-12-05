@@ -6,14 +6,17 @@ import 'package:sicherr/domain/entities/contact_entity/contact_entity.dart';
 import 'package:sicherr/core/managers/contacts_manager.dart';
 import 'package:sicherr/presentation/bloc/emergency_contact/emergency_contact_bloc.dart';
 import 'package:sicherr/presentation/screens/contact_detail/contact_detail.dart';
+import 'package:sicherr/presentation/screens/dangerous_contacts/details_screen/dc_details_screen.dart';
 import 'package:sicherr/presentation/widgets/round_sos_icon.dart';
-import 'package:sicherr/presentation/widgets/round_wrapper_icon.dart';
+import 'package:sicherr/presentation/widgets/svg_round_wrapper_icon.dart';
+
+import '../../../../core/service_locator/service_locator.dart';
+import '../../../../core/utils/phone_encryptor.dart';
+import '../../../bloc/shared_contacts/sc_bloc.dart';
+
 
 class ContactCard extends StatelessWidget {
-  final bool isEmergency;
-
-  const ContactCard(
-      {super.key, required this.contact, required this.isEmergency});
+  const ContactCard({super.key, required this.contact});
 
   final ContactEntity contact;
 
@@ -24,13 +27,28 @@ class ContactCard extends StatelessWidget {
         return GestureDetector(
           onTap: () {
             FocusManager.instance.primaryFocus?.unfocus();
-            Navigator.push(
+            final bool isContainInDangerous = context.read<ScBloc>().state.sc!.any((element) => element.id == contact.id);
+
+            if (isContainInDangerous) {
+
+            final ContactEntity dangerContact = context.read<ScBloc>().state.sc!.where((element) => element.id == contact.id).first;
+              Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ContactDetailScreen(
-                    contact: contact,
-                  ),
-                ));
+                    builder: (context) => DCDetailScreen(
+                      contact: dangerContact,
+                    )),
+              );
+            } else {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ContactDetailScreen(
+                      contact: contact,
+                    )),
+              );
+            }
+
           },
           behavior: HitTestBehavior.opaque,
           child: Padding(
@@ -63,13 +81,13 @@ class ContactCard extends StatelessWidget {
                           Text(
                             contact.name.isNotEmpty
                                 ? contact.name
-                                : contact.getMainPhoneNumber,
+                                : contact.phoneNumber,
                             style: const TextStyle(
                                 fontSize: 14, fontWeight: FontWeight.w500),
                             overflow: TextOverflow.ellipsis,
                           ),
                           Text(
-                            contact.getMainPhoneNumber,
+                            sl<PhoneNumberEncryptor>().decrypt(contact.phoneNumber),
                             style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,
@@ -78,7 +96,8 @@ class ContactCard extends StatelessWidget {
                           ),
                         ],
                       ),
-                     !state.emContacts!.any((element) => element.id == contact.id)
+                      !state.emContacts
+                              .any((element) => element.id == contact.id)
                           ? const SizedBox()
                           : const RoundSosIcon(
                               height: 20,
@@ -91,12 +110,12 @@ class ContactCard extends StatelessWidget {
                 const SizedBox(
                   width: 25,
                 ),
-                GestureDetector(
+                context.watch<ScBloc>().state.sc?.any((element) => element.id == contact.id) ?? false ? const SizedBox() :  GestureDetector(
                   onTap: () {
                     ContactsManager.launchCall(
-                        phoneNumber: contact.getMainPhoneNumber);
+                        phoneNumber: contact.phoneNumber);
                   },
-                  child: const RoundWrapperIcon(svgPath: AppIcons.phone),
+                  child: const SvgRoundWrapperIcon(svgPath: AppIcons.phone),
                 ),
               ],
             ),

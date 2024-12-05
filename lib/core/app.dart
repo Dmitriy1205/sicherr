@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sicherr/core/providers.dart';
 import 'package:sicherr/core/theme/theme.dart';
 import 'package:sicherr/presentation/screens/auth/sign_in.dart';
+import 'package:sicherr/presentation/screens/configure_contacts/configure_contacts_screen.dart';
 import 'package:sicherr/presentation/screens/initial.dart';
 import 'package:sicherr/presentation/widgets/loading_indicator.dart';
 
@@ -14,7 +15,6 @@ import '../presentation/bloc/notification/notification_bloc.dart';
 import 'const/images.dart';
 
 class App extends StatefulWidget {
-
   const App({super.key});
 
   @override
@@ -22,14 +22,12 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-
   @override
   void didChangeDependencies() {
     precacheImage(const AssetImage(AppImages.background), context);
     precacheImage(const AssetImage(AppImages.logo), context);
     super.didChangeDependencies();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -39,16 +37,22 @@ class _AppState extends State<App> {
         supportedLocales: L10n.locales,
         debugShowCheckedModeBanner: false,
         theme: AppTheme.themeData,
-        scrollBehavior:Platform.isAndroid ? ScrollConfiguration.of(context).copyWith(
-          physics: const BouncingScrollPhysics(
-            parent: AlwaysScrollableScrollPhysics(),
-          ),
-        ): null,
+        scrollBehavior: Platform.isAndroid
+            ? ScrollConfiguration.of(context).copyWith(
+                physics: const BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics(),
+                ),
+              )
+            : null,
         home: BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
           return state.maybeMap(
-              authenticated: (_) {
-                context.read<NotificationBloc>().add(const NotificationEvent.saveToken());
-               return const InitialScreen();
+              authenticated: (state) {
+                context
+                    .read<NotificationBloc>()
+                    .add(const NotificationEvent.saveToken());
+                return state.isConfiguredContacts
+                    ? const InitialScreen()
+                    : const ConfigureContactsScreen();
               },
               unauthenticated: (_) => const SigninScreen(),
               orElse: () => const Material(child: LoadingIndicator()));
